@@ -27,7 +27,8 @@
     "db:pull": "prisma db pull",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "start:migrate:prod": "prisma migrate deploy && npm run start:prod"
   },
   "dependencies": {
     "@apollo/gateway": "^2.10.2",
