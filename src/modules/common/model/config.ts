@@ -6,6 +6,7 @@ export interface Config {
     readonly SWAGGER_ENABLE: number;
 
     readonly JWT_SECRET: string;
+    readonly JWT_EXPIRES_IN: string;
 
     readonly JWT_ISSUER: string;
 
@@ -15,5 +16,9 @@ export interface Config {
     readonly PRIVY_APP_ID: string;
     readonly PRIVY_APP_SECRET: string;
     readonly PRIVY_AUTH_KEY: string;
+    readonly RELOADLY_CLIENT_ID: string;
+    readonly RELOADLY_CLIENT_SECRET: string;
+    readonly NODE_ENV: string;
+    readonly EXCHANGE_RATE_KEY: string;
+    readonly JWT_TELEGRAM_PUBLIC: string;
 }
-

@@ -9,7 +9,7 @@ export class HealthController {
     public constructor(
         private readonly health: HealthCheckService,
         private readonly database: PrismaHealthIndicator,
-        private readonly prisma: PrismaService,
+        private readonly prisma: PrismaService
     ) {}
 
     @Get()

@@ -2,6 +2,7 @@
 import { Injectable } from "@nestjs/common";
 // import * as fs from "fs";
 import * as jose from "node-jose";
+import { secrets } from "../common";
 
 @Injectable()
 export class JwksService {
@@ -16,7 +17,7 @@ export class JwksService {
        
         // const publicKeyPem = fs.readFileSync("public.key", "utf8");
         //  const rawKey = process.env.JWT_TELEGRAM_PUBLIC!.replace(/\\n/g, '\n');
-        const rawKey = process.env.JWT_TELEGRAM_PUBLIC!
+        const rawKey = secrets.JWT_TELEGRAM_PUBLIC!;
         await this.keystore.add(rawKey, "pem");
     }
 

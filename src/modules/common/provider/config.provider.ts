@@ -1,13 +1,11 @@
-import * as Joi from 'joi';
+import * as Joi from "joi";
 
-import { Service } from '../../tokens';
-import { Config } from '../model';
+import { Service } from "../../tokens";
+import { Config } from "../model";
 
 export const configProvider = {
-
     provide: Service.CONFIG,
     useFactory: (): Config => {
-
         const env = process.env;
         const validationSchema = Joi.object<Config>()
             .unknown()
@@ -22,6 +20,12 @@ export const configProvider = {
                 PRIVY_AUTH_KEY: Joi.string().required(),
                 PRIVY_APP_SECRET: Joi.string().required(),
                 PRIVY_APP_ID: Joi.string().required(),
+                JWT_EXPIRES_IN: Joi.string().required(),
+                RELOADLY_CLIENT_ID: Joi.string().required(),
+                RELOADLY_CLIENT_SECRET: Joi.string().required(),
+                NODE_ENV: Joi.string().required(),
+                EXCHANGE_RATE_KEY: Joi.string().required(),
+                JWT_TELEGRAM_PUBLIC: Joi.string().required(),
             });
 
         const result = validationSchema.validate(env);
@@ -30,6 +34,5 @@ export const configProvider = {
         }
 
         return result.value;
-    }
-
+    },
 };

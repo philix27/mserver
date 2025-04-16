@@ -26,7 +26,8 @@ private reloadly: ReloadlyTopUpService
         if (!res) {
             throw GqlErr("No access token found")
         }
-        this.reloadly = new ReloadlyTopUpService(res!.token)
+        this.reloadly = new ReloadlyTopUpService("some-access-token")
+        // this.reloadly = new ReloadlyTopUpService(res!.token)
     }
 
     public  async purchaseAirtime(input: Utilities_PurchaseAirtimeInput & UserInput): Promise<Utilities_PurchaseAirtimeResponse> {

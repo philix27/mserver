@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { LoggerService, PrismaService } from "../common";
+import { LoggerService, PrismaService, secrets } from "../common";
 import axios from "axios";
 import { IRates } from "./types";
 import { ExchangeRate_Response } from "./rates.dto";
@@ -47,7 +47,7 @@ export class ExchangeRateService {
 
     private async getFx() {
         this.logger.info("Pulling fx data")
-        const res = await axios.get(`https://v6.exchangerate-api.com/v6/${process.env.EXCHANGE_RATE_KEY}/latest/USD`)
+        const res = await axios.get(`https://v6.exchangerate-api.com/v6/${secrets.EXCHANGE_RATE_KEY}/latest/USD`)
         const formatted = res.data as IRates
         const curr = formatted.conversion_rates
 
