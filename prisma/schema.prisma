@@ -274,14 +274,14 @@ enum TransactionStatus {
 }
 
 model Transactions {
-  id         Int                  @id @default(autoincrement())
+  id         Int                 @id @default(autoincrement())
   amount     Float
   note       String
   category   TransactionCategory
   mode       TransactionsMode
   status     TransactionStatus
-  created_at DateTime?            @default(now())
-  updated_at DateTime?            @updatedAt
+  created_at DateTime?           @default(now())
+  updated_at DateTime?           @updatedAt
   user_id    Int?
-  user       User?                @relation(fields: [user_id], references: [id])
+  user       User?               @relation(fields: [user_id], references: [id])
 }

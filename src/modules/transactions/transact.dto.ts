@@ -9,8 +9,8 @@ export class TransactionDto  {
     @Field((type) => Float)
     amount: number;
     
-    @Field((type) => $Enums.TransactionsCategory)
-    category: $Enums.TransactionsCategory;
+    @Field((type) => $Enums.TransactionCategory)
+    category: $Enums.TransactionCategory;
     
     @Field((type) => $Enums.TransactionsMode)
     mode: $Enums.TransactionsMode
@@ -38,8 +38,8 @@ export class Transaction_GetResponse  {
     @Field((type) => Float)
     amount: number;
     
-    @Field((type) => $Enums.TransactionsCategory)
-    category: $Enums.TransactionsCategory;
+    @Field((type) => $Enums.TransactionCategory)
+    category: $Enums.TransactionCategory;
     
     @Field((type) => $Enums.TransactionsMode)
     mode: $Enums.TransactionsMode

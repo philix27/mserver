@@ -32,7 +32,7 @@ export class TransactionsService {
     public async create(
         input: {
         amount: number;
-        category: $Enums.TransactionsCategory;
+        category: $Enums.TransactionCategory;
         mode: $Enums.TransactionsMode
         status: $Enums.TransactionStatus;
         user_id: number;
