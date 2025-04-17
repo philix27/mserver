@@ -41,4 +41,4 @@ USER node
 EXPOSE 3000
 
 # Start the app
-CMD ["node", "dist/server.js"]
+CMD ["node", "dist/main.js"]
