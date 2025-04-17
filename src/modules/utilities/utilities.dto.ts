@@ -1,29 +1,39 @@
-import { Field,  Float,  InputType, ObjectType, registerEnumType, } from "@nestjs/graphql";
+import {
+    Field,
+    Float,
+    InputType,
+    ObjectType,
+    registerEnumType,
+} from '@nestjs/graphql';
+import { $Enums } from '@prisma/client';
 
 export enum AirtimeCountryCode {
-  NIGERIA = "NG",
-  GHANA = "GH",
-  KENYA = "KE"
+    NIGERIA = 'NG',
+    GHANA = 'GH',
+    KENYA = 'KE',
 }
 
 export enum Operator {
-  MTN = "MTN",
-  AIRTEL = "AIRTEL",
-  GLO = "GLO",
-  ETISALAT = "ETISALAT",
+    MTN = 'MTN',
+    AIRTEL = 'AIRTEL',
+    GLO = 'GLO',
+    ETISALAT = 'ETISALAT',
 }
 
 registerEnumType(Operator, {
-    name: "Operator",
+    name: 'Operator',
 });
 
 registerEnumType(AirtimeCountryCode, {
-    name: "AirtimeCountryCode",
+    name: 'AirtimeCountryCode',
+});
+registerEnumType($Enums.Currencies, {
+    name: 'Currencies',
 });
 
 @InputType()
 export class Utilities_PurchaseAirtimeInput {
-    @Field({nullable: false})
+    @Field({ nullable: false })
     phoneNo: string;
 
     @Field((returns) => Float)
@@ -32,18 +42,18 @@ export class Utilities_PurchaseAirtimeInput {
     @Field()
     transaction_hash: string;
 
-    @Field()
-    network: string;
+    @Field((type) => AirtimeCountryCode)
+    countryCode: AirtimeCountryCode;
 
-     @Field((type) => AirtimeCountryCode)
-     countryCode: AirtimeCountryCode;
-    
-     @Field((type) => Operator)
+    @Field((type) => Operator)
     operator: Operator;
+
+    @Field((type) => $Enums.Currencies)
+    currency: $Enums.Currencies;
 }
 
 @ObjectType()
-export class Utilities_PurchaseAirtimeResponse{
-    @Field({nullable: false})
+export class Utilities_PurchaseAirtimeResponse {
+    @Field({ nullable: false })
     message: string;
 }

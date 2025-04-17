@@ -227,7 +227,7 @@ enum CurrencyType {
   CRYPTO
 }
 
-enum CurrencyName {
+enum Currencies {
   NGN
   BTC
   CUSD
@@ -278,6 +278,7 @@ model Transactions {
   id         Int                 @id @default(autoincrement())
   amount     Float
   note       String
+  currency   Currencies
   category   TransactionCategory
   mode       TransactionsMode
   status     TransactionStatus

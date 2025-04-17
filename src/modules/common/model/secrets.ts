@@ -1,4 +1,4 @@
-import { Config } from "./config";
+import { Config } from './config';
 
 export const secrets: Record<keyof Config, string> = {
     PORT: process.env.PORT!,
@@ -14,6 +14,7 @@ export const secrets: Record<keyof Config, string> = {
     PRIVY_AUTH_KEY: process.env.PRIVY_AUTH_KEY!,
     RELOADLY_CLIENT_ID: process.env.RELOADLY_CLIENT_ID!,
     RELOADLY_CLIENT_SECRET: process.env.RELOADLY_CLIENT_SECRET!,
+    RELOADLY_TOP_UP_ACCESS_TOKEN: process.env.RELOADLY_TOP_UP_ACCESS_TOKEN!,
     NODE_ENV: process.env.NODE_ENV!,
     EXCHANGE_RATE_KEY: process.env.EXCHANGE_RATE_KEY!,
     JWT_TELEGRAM_PUBLIC: process.env.JWT_TELEGRAM_PUBLIC!,

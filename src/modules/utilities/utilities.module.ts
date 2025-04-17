@@ -3,6 +3,7 @@ import { CommonModule } from "../common";
 import { UtilitiesService } from "./utilities.service";
 import { NotificationModule } from "../notification/notification.module";
 import { UtilitiesResolver } from "./utilies.resolver";
+import { TransactionsService } from "../transactions/transact.service";
 
 
 
@@ -11,6 +12,7 @@ import { UtilitiesResolver } from "./utilies.resolver";
     providers: [
         UtilitiesService,
         UtilitiesResolver,
+        TransactionsService,
     ],
 })
 export class UtilitiesModule {}

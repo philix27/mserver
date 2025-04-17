@@ -64,3 +64,14 @@ registerEnumType($Enums.UserRole, {
 registerEnumType($Enums.AdvertStatus, {
     name: "AdvertStatus",
 });
+registerEnumType($Enums.TransactionCategory, {
+    name: 'TransactionCategory',
+});
+
+registerEnumType($Enums.TransactionsMode, {
+    name: 'TransactionsMode',
+});
+
+registerEnumType($Enums.TransactionStatus, {
+    name: 'TransactionStatus',
+});
