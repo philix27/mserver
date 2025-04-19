@@ -15,7 +15,7 @@ export class TransactionsResolver {
 
     @Query((returns) => [Transaction_GetResponse])
     @UseGuards(VendorGuard)
-    async adverts_getAll(
+    async transactions_getAll(
         @Context() context: { req: { userId: number } }
         // @Args("input") input: Advert_GetAllInput
     ): Promise<Transaction_GetResponse[]> {
@@ -29,7 +29,7 @@ export class TransactionsResolver {
 
     @Query((returns) => Transaction_GetResponse)
     @UseGuards(VendorGuard)
-    async adverts_getOne(
+    async transactions_getOne(
         @Context() context: { req: { userId: number } },
         @Args("input") input: Transaction_GetOneInput
     ): Promise<Transaction_GetResponse> {

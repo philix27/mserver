@@ -13,6 +13,8 @@ import {
     Auth_ResetPasswordResponse,
     Auth_sendEmailOtpInput,
     Auth_sendEmailOtpResponse,
+    Auth_TelegramLoginInput,
+    Auth_TelegramLoginResponse,
     Auth_verifyEmailOtpInput,
     Auth_verifyOtpResponse,
 } from "./auth.dto";
@@ -22,13 +24,11 @@ import { GqlAuthGuard } from "../common/guards";
 
 @Resolver((of: any) => UserDto)
 export class AuthResolver {
-    constructor(
-        private readonly service: AuthService,
-    ) {}
+    constructor(private readonly service: AuthService) {}
 
     @Mutation((returns) => Auth_sendEmailOtpResponse)
     async auth_sendEmailOtp(
-        @Args("input") input: Auth_sendEmailOtpInput,
+        @Args('input') input: Auth_sendEmailOtpInput,
     ): Promise<Auth_sendEmailOtpResponse> {
         const res = await this.service.sendEmailOtp(input);
         return res!;
@@ -36,7 +36,7 @@ export class AuthResolver {
 
     @Mutation((returns) => Auth_verifyOtpResponse)
     async auth_verifyEmailOtp(
-        @Args("input") input: Auth_verifyEmailOtpInput,
+        @Args('input') input: Auth_verifyEmailOtpInput,
     ): Promise<Auth_verifyOtpResponse> {
         const res = await this.service.verifyEmailOtp(input);
         return res!;
@@ -44,7 +44,7 @@ export class AuthResolver {
 
     @Mutation((returns) => Auth_CreateAccountResponse)
     async auth_createAccount(
-        @Args("input") input: Auth_CreateAccountInput,
+        @Args('input') input: Auth_CreateAccountInput,
     ): Promise<Auth_CreateAccountResponse> {
         const res = await this.service.createAccount(input);
         return res;
@@ -52,7 +52,7 @@ export class AuthResolver {
 
     @Mutation((returns) => Auth_LoginResponse)
     async auth_login(
-        @Args("input") input: Auth_LoginInput,
+        @Args('input') input: Auth_LoginInput,
     ): Promise<Auth_LoginResponse> {
         const res = await this.service.login(input);
 
@@ -60,15 +60,22 @@ export class AuthResolver {
     }
     @Mutation((returns) => Auth_LoginMinipayResponse)
     async auth_minipayLogin(
-        @Args("input") input: Auth_LoginMinipayInput,
+        @Args('input') input: Auth_LoginMinipayInput,
     ): Promise<Auth_LoginMinipayResponse> {
         const res = await this.service.minipayLogin(input);
+        return res!;
+    }
+    @Mutation((returns) => Auth_TelegramLoginResponse)
+    async auth_loginTelegram(
+        @Args('input') input: Auth_TelegramLoginInput,
+    ): Promise<Auth_TelegramLoginResponse> {
+        const res = await this.service.loginTelegramUser(input);
         return res!;
     }
 
     @Mutation((returns) => Auth_LoginMinipayResponse)
     async auth_minipayCreateAccount(
-        @Args("input") input: Auth_MinipayCreateAccountInput,
+        @Args('input') input: Auth_MinipayCreateAccountInput,
     ): Promise<Auth_LoginMinipayResponse> {
         const res = await this.service.minipayCreateAccount(input);
         return res!;
@@ -78,7 +85,7 @@ export class AuthResolver {
     @UseGuards(GqlAuthGuard)
     async auth_logout(
         @Context() context: any,
-        @Args("input") input: Auth_LogoutInput,
+        @Args('input') input: Auth_LogoutInput,
     ) {
         // const res = await this.service.logout(input);
         const user = context.req.user; // Extract user data
@@ -87,11 +94,10 @@ export class AuthResolver {
 
     @Mutation((returns) => Auth_ResetPasswordResponse)
     async auth_resetPassword(
-        @Args("input") input: Auth_ResetPasswordInput,
+        @Args('input') input: Auth_ResetPasswordInput,
     ): Promise<Auth_ResetPasswordResponse> {
         const res = await this.service.resetPassword(input);
 
         return res!;
     }
-   
 }

@@ -16,6 +16,7 @@ model User {
   email                 String?            @unique
   password              String?
   transaction_pin       String?
+  telegram_id           String?            @unique
   // minipay_wallet    String?
   // minipay           Boolean?           @default(false)
   role                  UserRole?          @default(Regular)

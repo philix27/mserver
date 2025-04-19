@@ -1,6 +1,6 @@
-import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { $Enums } from "@prisma/client";
-import { OtpPurpose } from "../common/enums";
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { $Enums } from '@prisma/client';
+import { OtpPurpose } from '../common/enums';
 
 @InputType()
 export class Auth_CreateAccountInput {
@@ -103,6 +103,35 @@ export class Auth_MinipayCreateAccountInput {
 
     @Field()
     email: string;
+}
+@InputType()
+export class Auth_TelegramLoginInput {
+    @Field()
+    walletAddress?: string;
+
+    @Field()
+    telegramUserId: string;
+}
+
+@ObjectType()
+export class Auth_TelegramLoginResponse {
+    @Field({ nullable: true })
+    email?: string;
+
+    @Field({ nullable: true })
+    firstname?: string;
+
+    @Field({ nullable: true })
+    lastname?: string;
+
+    @Field({ nullable: true })
+    middlename?: string;
+
+    @Field({ nullable: true })
+    token: string;
+
+    @Field()
+    walletAddress?: string;
 }
 @ObjectType()
 export class Auth_LoginMinipayResponse {
