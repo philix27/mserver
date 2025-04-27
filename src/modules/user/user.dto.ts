@@ -1,11 +1,11 @@
-import { Field, InputType } from "@nestjs/graphql";
-import { IsOptional } from "class-validator";
-import { ID, ObjectType } from "@nestjs/graphql";
-import { registerEnumType } from "@nestjs/graphql";
-import { $Enums } from "@prisma/client";
+import { Field, InputType } from '@nestjs/graphql';
+import { IsOptional } from 'class-validator';
+import { ID, ObjectType } from '@nestjs/graphql';
+import { registerEnumType } from '@nestjs/graphql';
+import { $Enums } from '@prisma/client';
 
 registerEnumType($Enums.Country, {
-    name: "Country",
+    name: 'Country',
 });
 
 @InputType()
@@ -53,21 +53,30 @@ export class UserDto {
     @Field((type) => ID)
     id: number;
 
-    @Field({ nullable: false })
-    firstname: string;
+    @Field({ nullable: true })
+    firstname?: string;
 
-    @Field({ nullable: false })
-    lastname: string;
+    @Field({ nullable: true })
+    lastname?: string;
 
     @Field({ nullable: true })
     middlename?: string;
 
-    @Field()
-    email: string;
+    @Field({ nullable: true })
+    email?: string;
 
-    @Field()
-    password: string;
+    @Field({ nullable: true })
+    password?: string;
 
-    @Field((type) => $Enums.Country)
-    country: $Enums.Country;
+    @Field({ nullable: true })
+    telegram_id?: string;
+
+    @Field({ nullable: true })
+    phone?: string;
+
+    @Field({ nullable: true })
+    role?: string;
+
+    @Field((type) => $Enums.Country, { nullable: true })
+    country?: $Enums.Country;
 }

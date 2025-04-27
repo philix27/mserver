@@ -1,5 +1,5 @@
-import { Injectable } from "@nestjs/common";
-import { LoggerService, PrismaService } from "../common";
+import { Injectable } from '@nestjs/common';
+import { LoggerService, PrismaService } from '../common';
 import {
     Order_AppealInput,
     Order_CancelInput,
@@ -9,36 +9,40 @@ import {
     Order_GetAllInput,
     Order_GetOneInput,
     Order_Response,
-} from "./orders.dto";
+} from './orders.dto';
 
 @Injectable()
 export class OrderService {
     public constructor(
         private readonly logger: LoggerService,
         // private readonly notification: NotificationService,
-        private readonly prisma: PrismaService
+        private readonly prisma: PrismaService,
     ) {}
 
-    public async createSell(p: Order_CreteSellInput & { userId: number }) : Promise<Order_CreteSellResponse> {
-        this.logger.info("Creating platform account ...");
+    public async createSell(
+        p: Order_CreteSellInput & { userId: number },
+    ): Promise<Order_CreteSellResponse> {
+        this.logger.info('Creating platform account ...');
 
         const res = await this.prisma.orders.create({
             data: {
-            customer_id: p.userId,
-            merchant_id: p.merchant_id,
-            action_merchant: p.action_merchant,
-            amount_crypto: p.amount_crypto,
-            amount_fiat: p.amount_fiat,
-            bank_account_name: p.bank_account_name,
-            bank_name: p.bank_name,
-            bank_account_no: p.bank_account_no,
-            currency_crypto: p.currency_crypto,
-            currency_fiat: p.currency_fiat,
-            wallet_customer: p.wallet_customer,
-            wallet_merchant: p.wallet_merchant,
-            estimated_duration: p.estimated_duration,
-            trade_type: p.trade_type,
-            status: p.status
+                customer_id: p.userId,
+                merchant_id: p.merchant_id,
+                action_merchant: p.action_merchant,
+                amount_crypto: p.amount_crypto,
+                amount_fiat: p.amount_fiat,
+                bank_account_name: p.bank_account_name,
+                bank_name: p.bank_name,
+                bank_account_no: p.bank_account_no,
+                currency_crypto: p.currency_crypto,
+                currency_fiat: p.currency_fiat,
+                wallet_customer: p.wallet_customer,
+                wallet_merchant: p.wallet_merchant,
+                estimated_duration: p.estimated_duration,
+                trade_type: p.trade_type,
+                status: p.status,
+                mode: p.mode,
+                txn_hash: p.txn_hash,
             },
         });
 
@@ -47,6 +51,8 @@ export class OrderService {
             id: res.id,
             action_merchant: res.action_merchant!,
             action_user: res.action_user!,
+            mode: res.mode,
+            txn_hash: res.txn_hash,
             // amount_crypto: res.amount_crypto,
             // amount_fiat: res.amount_fiat,
             // bank_account_name: res.bank_account_name,
@@ -61,50 +67,56 @@ export class OrderService {
             // status: p.status
         };
     }
-    public async createBuy(p: Order_CreteBuyInput & { userId: number }) : Promise<Order_CreteSellResponse> {
-        this.logger.info("Creating platform account ...");
+    public async createBuy(
+        p: Order_CreteBuyInput & { userId: number },
+    ): Promise<Order_CreteSellResponse> {
+        this.logger.info('Creating platform account ...');
 
         const res = await this.prisma.orders.create({
             data: {
                 ...p,
                 customer_id: p.userId,
                 buy_time1_customer_request: new Date(),
+                txn_hash: p.txn_hash,
             },
         });
 
-       
         return {
             ...res,
             id: res.id,
             action_merchant: res.action_merchant!,
             action_user: res.action_user!,
+            txn_hash: res.txn_hash,
         };
     }
 
-   
-
-    public async getAllForCustomer(p: Order_GetAllInput & { userId: number }): Promise<Order_Response[]> {
+    public async getAllForCustomer(
+        p: Order_GetAllInput & { userId: number },
+    ): Promise<Order_Response[]> {
         const res = await this.prisma.orders.findMany({
             where: {
-               trade_type: p.trade_type,
+                trade_type: p.trade_type,
                 currency_crypto: p.currency_crypto,
                 currency_fiat: p.currency_fiat,
                 status: p.status,
                 customer_id: p.userId,
             },
         });
-        
+
         return res.map((item) => {
             return {
-            ...item,
-            id: item.id,
-            action_merchant: item.action_merchant!,
-            action_user: item.action_user!,
-
-        }});
+                ...item,
+                id: item.id,
+                action_merchant: item.action_merchant!,
+                action_user: item.action_user!,
+                txn_hash: item.txn_hash,
+            };
+        });
     }
 
-    public async getAllForMerchant(p: Order_GetAllInput & { userId: number }): Promise<Order_Response[]> {
+    public async getAllForMerchant(
+        p: Order_GetAllInput & { userId: number },
+    ): Promise<Order_Response[]> {
         const res = await this.prisma.orders.findMany({
             where: {
                 merchant_id: p.userId,
@@ -120,11 +132,35 @@ export class OrderService {
                 id: item.id,
                 action_merchant: item.action_merchant!,
                 action_user: item.action_user!,
-            }
+                txn_hash: item.txn_hash,
+            };
+        });
+    }
+    public async getAllForAdmin(
+        p: Order_GetAllInput & { userId: number },
+    ): Promise<Order_Response[]> {
+        const res = await this.prisma.orders.findMany({
+            where: {
+                trade_type: p.trade_type,
+                currency_crypto: p.currency_crypto,
+                currency_fiat: p.currency_fiat,
+                status: p.status,
+            },
+        });
+        return res.map((item) => {
+            return {
+                ...res,
+                id: item.id,
+                action_merchant: item.action_merchant!,
+                action_user: item.action_user!,
+                txn_hash: item.txn_hash,
+            };
         });
     }
 
-    public async getOne(p: Order_GetOneInput & { userId: number }): Promise<Order_Response> {
+    public async getOne(
+        p: Order_GetOneInput & { userId: number },
+    ): Promise<Order_Response> {
         const res = await this.prisma.orders.findFirst({
             where: {
                 id: p.id,
@@ -135,14 +171,19 @@ export class OrderService {
             id: res!.id,
             action_merchant: res!.action_merchant!,
             action_user: res!.action_user!,
+            txn_hash: res.txn_hash,
         };
     }
-    
-    public async appeal(params: Order_AppealInput & { userId: number }): Promise<Order_Response>  {
-        throw new Error("Unimplemented");
+
+    public async appeal(
+        params: Order_AppealInput & { userId: number },
+    ): Promise<Order_Response> {
+        throw new Error('Unimplemented');
     }
-    
-    public async cancel(params: Order_CancelInput & { userId: number }) : Promise<Order_Response>{
-         throw new Error("Unimplemented");
+
+    public async cancel(
+        params: Order_CancelInput & { userId: number },
+    ): Promise<Order_Response> {
+        throw new Error('Unimplemented');
     }
 }

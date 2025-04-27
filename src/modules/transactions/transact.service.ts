@@ -37,6 +37,7 @@ export class TransactionsService {
             mode: $Enums.TransactionsMode;
             status: $Enums.TransactionStatus;
             note?: string;
+            transaction_hash?: string;
         } & UserInput,
     ): Promise<Transaction_GetResponse> {
         this.logger.info(this.create.name);
@@ -50,6 +51,7 @@ export class TransactionsService {
                 status: input.status,
                 user_id: input.userId,
                 note: input.note || input.category,
+                transaction_hash: input.transaction_hash,
             },
         });
 

@@ -155,6 +155,7 @@ model Orders {
   estimated_duration                    String
   bank_account_name                     String
   bank_account_no                       String
+  mode                                  OrderMode?
   bank_name                             BankName
   currency_crypto                       CurrencyCrypto
   currency_fiat                         CurrencyFiat
@@ -163,6 +164,7 @@ model Orders {
   action_user                           OrderActions?
   action_merchant                       OrderActions?
   // ! fiat
+  txn_hash                              String?
   sell_txn_hash_customer_lock_crypto    String?
   sell_txn_hash_customer_release_crypto String?
   // ! fiat
@@ -183,6 +185,11 @@ model Orders {
   customer_id                           Int
   customer                              User?          @relation(fields: [customer_id], references: [id])
   merchant_id                           Int
+}
+
+enum OrderMode {
+  MARKET
+  EXPRESS
 }
 
 enum OrderStatus {
@@ -276,15 +283,16 @@ enum TransactionStatus {
 }
 
 model Transactions {
-  id         Int                 @id @default(autoincrement())
-  amount     Float
-  note       String
-  currency   Currencies
-  category   TransactionCategory
-  mode       TransactionsMode
-  status     TransactionStatus
-  created_at DateTime?           @default(now())
-  updated_at DateTime?           @updatedAt
-  user_id    Int?
-  user       User?               @relation(fields: [user_id], references: [id])
+  id               Int                 @id @default(autoincrement())
+  amount           Float
+  transaction_hash String?
+  note             String
+  currency         Currencies
+  category         TransactionCategory
+  mode             TransactionsMode
+  status           TransactionStatus
+  created_at       DateTime?           @default(now())
+  updated_at       DateTime?           @updatedAt
+  user_id          Int?
+  user             User?               @relation(fields: [user_id], references: [id])
 }

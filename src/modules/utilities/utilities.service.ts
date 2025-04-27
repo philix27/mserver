@@ -21,6 +21,7 @@ export class UtilitiesService {
     }
 
     private async initializeReloadly() {
+        // todo: Generate reloadly access token every 30 days
         // const res = await this.prisma.accessTokens.findFirst({
         //     where: {
         //         platform: 'RELOADLY',
@@ -62,6 +63,7 @@ export class UtilitiesService {
             userId: input.userId,
             currencies: input.currency,
             note: '',
+            transaction_hash: input.transaction_hash,
         });
 
         this.logger.info(res.customIdentifier);

@@ -1,17 +1,17 @@
-import { INestApplication } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
+import { INestApplication } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import {
     FastifyAdapter,
     NestFastifyApplication,
-} from "@nestjs/platform-fastify";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+} from '@nestjs/platform-fastify';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-import { ApplicationModule } from "./modules/app.module";
+import { ApplicationModule } from './modules/app.module';
 import {
     CommonModule,
     GraphQLExceptionFilter,
     LogInterceptor,
-} from "./modules/common";
+} from './modules/common';
 
 /**
  * These are API defaults that can be changed using environment variables,
@@ -19,8 +19,8 @@ import {
  */
 const PORT = process.env.PORT || 3000;
 const SWAGGER_STATE =
-    !process.env.SWAGGER_ENABLE || process.env.SWAGGER_ENABLE === "1";
-const API_DEFAULT_PREFIX = "/api/v1/";
+    !process.env.SWAGGER_ENABLE || process.env.SWAGGER_ENABLE === '1';
+const API_DEFAULT_PREFIX = '/api/v1/';
 const API_PREFIX = process.env.API_PREFIX || API_DEFAULT_PREFIX;
 /**
  * The defaults below are dedicated to Swagger configuration, change them
@@ -28,9 +28,9 @@ const API_PREFIX = process.env.API_PREFIX || API_DEFAULT_PREFIX;
  *
  * @todo Change the constants below following your API requirements
  */
-const SWAGGER_TITLE = "Passenger API";
-const SWAGGER_DESCRIPTION = "API used for passenger management";
-const SWAGGER_PREFIX = "/docs";
+const SWAGGER_TITLE = 'Passenger API';
+const SWAGGER_DESCRIPTION = 'API used for passenger management';
+const SWAGGER_PREFIX = '/docs';
 
 /**
  * Register a Swagger module in the NestJS application.
@@ -61,7 +61,7 @@ function createSwagger(app: INestApplication) {
 async function bootstrap(): Promise<void> {
     const app = await NestFactory.create<NestFastifyApplication>(
         ApplicationModule,
-        new FastifyAdapter()
+        new FastifyAdapter(),
         // { cors: true }
     );
 
@@ -75,16 +75,33 @@ async function bootstrap(): Promise<void> {
 
     const logInterceptor = app.select(CommonModule).get(LogInterceptor);
     app.useGlobalInterceptors(logInterceptor);
+    const allowedOrigins = [
+        'http://localhost:4545',
+        'http://127.0.0.1:4545',
+        'https://tg.mobarter.com',
+        'https://minipay.mobarter.com',
+        'https://admin.mobarter.com',
+    ];
+
     app.enableCors({
-        origin: "*", // Allow all origins
-        methods: "GET,HEAD,POST", // Allowed methods
-        allowedHeaders: "Content-Type, Authorization", // Allowed headers
+        origin: (origin, callback) => {
+            if (!origin) {
+                // Allow requests with no origin (like mobile apps, curl, etc.)
+                return callback(null, true);
+            }
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            }
+            return callback(new Error('Not allowed by CORS'));
+        },
+        methods: 'GET,HEAD,POST', // Allowed methods
+        allowedHeaders: 'Content-Type, Authorization', // Allowed headers
         credentials: true, // Allow credentials (cookies, authorization headers, etc.)
     });
 
     app.useGlobalFilters(new GraphQLExceptionFilter());
-    console.log("Listening on port: " + PORT);
-    await app.listen(PORT, "0.0.0.0");
+    console.log('Listening on port: ' + PORT);
+    await app.listen(PORT, '0.0.0.0');
     // await app.listen(PORT);
 }
 

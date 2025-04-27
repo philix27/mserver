@@ -37,6 +37,9 @@ export class Transaction_GetResponse  {
 
     @Field((type) => Float)
     amount: number;
+
+    @Field((type) => String, {nullable: true})
+    transaction_hash: string;
     
     @Field((type) => $Enums.TransactionCategory)
     category: $Enums.TransactionCategory;

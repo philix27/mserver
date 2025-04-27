@@ -1,6 +1,5 @@
-import { registerEnumType } from "@nestjs/graphql";
-import { $Enums } from "@prisma/client";
-
+import { registerEnumType } from '@nestjs/graphql';
+import { $Enums } from '@prisma/client';
 
 export enum OtpPurpose {
     SignUp,
@@ -8,61 +7,65 @@ export enum OtpPurpose {
 }
 
 export enum OrderParticipant {
-  MERCHANT = "MERCHANT",
-  CUSTOMER = "CUSTOMER"
+    MERCHANT = 'MERCHANT',
+    CUSTOMER = 'CUSTOMER',
 }
 
 registerEnumType(OrderParticipant, {
-    name: "OtpPurpose",
+    name: 'OtpPurpose',
 });
 registerEnumType(OtpPurpose, {
-  name: 'OtpPurpose',
+    name: 'OtpPurpose',
 });
 registerEnumType($Enums.Country, {
-    name: "country",
+    name: 'country',
 });
 
 registerEnumType($Enums.ChainType, {
-    name: "ChainType",
+    name: 'ChainType',
 });
 
 registerEnumType($Enums.BankName, {
-    name: "BankName",
+    name: 'BankName',
 });
 
 registerEnumType($Enums.CredentialsStatus, {
-    name: "CredentialsStatus",
+    name: 'CredentialsStatus',
 });
 
 registerEnumType($Enums.CurrencyCrypto, {
-    name: "CurrencyCrypto",
+    name: 'CurrencyCrypto',
 });
 
 registerEnumType($Enums.CurrencyFiat, {
-    name: "CurrencyFiat",
+    name: 'CurrencyFiat',
 });
 
 registerEnumType($Enums.MerchantStatus, {
-    name: "MerchantStatus",
+    name: 'MerchantStatus',
 });
 
 registerEnumType($Enums.OrderActions, {
-    name: "OrderActions",
+    name: 'OrderActions',
 });
 
 registerEnumType($Enums.OrderStatus, {
-    name: "OrderStatus",
+    name: 'OrderStatus',
+});
+
+registerEnumType($Enums.OrderMode, {
+    name: 'OrderMode',
 });
 
 registerEnumType($Enums.TradeType, {
-    name: "TradeType",
+    name: 'TradeType',
 });
 
 registerEnumType($Enums.UserRole, {
-    name: "UserRole",
+    name: 'UserRole',
 });
 registerEnumType($Enums.AdvertStatus, {
-    name: "AdvertStatus",
+    name: 'AdvertStatus',
 });
 registerEnumType($Enums.TransactionCategory, {
     name: 'TransactionCategory',
