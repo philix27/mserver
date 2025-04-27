@@ -75,27 +75,28 @@ async function bootstrap(): Promise<void> {
 
     const logInterceptor = app.select(CommonModule).get(LogInterceptor);
     app.useGlobalInterceptors(logInterceptor);
-    const allowedOrigins = [
-        'https://tg.mobarter.com',
-        'https://minipay.mobarter.com',
-        'https://admin.mobarter.com',
-        'https://server.mobarter.com',
-    ];
+    // const allowedOrigins = [
+    //     'https://tg.mobarter.com',
+    //     'https://minipay.mobarter.com',
+    //     'https://admin.mobarter.com',
+    //     'https://server.mobarter.com',
+    // ];
 
     app.enableCors({
-        origin:
-            process.env.NODE_ENV === 'development'
-                ? '*'
-                : (origin, callback) => {
-                      if (!origin) {
-                          // Allow requests with no origin (like mobile apps, curl, etc.)
-                          return callback(null, true);
-                      }
-                      if (allowedOrigins.includes(origin)) {
-                          return callback(null, true);
-                      }
-                      return callback(new Error('Not allowed by CORS'));
-                  },
+        origin: '*',
+        // origin:
+        //     process.env.NODE_ENV === 'development'
+        //         ? '*'
+        //         : (origin, callback) => {
+        //               if (!origin) {
+        //                   // Allow requests with no origin (like mobile apps, curl, etc.)
+        //                   return callback(null, true);
+        //               }
+        //               if (allowedOrigins.includes(origin)) {
+        //                   return callback(null, true);
+        //               }
+        //               return callback(new Error('Not allowed by CORS'));
+        //           },
         methods: 'GET,HEAD,POST', // Allowed methods
         allowedHeaders: 'Content-Type, Authorization', // Allowed headers
         credentials: true, // Allow credentials (cookies, authorization headers, etc.)
