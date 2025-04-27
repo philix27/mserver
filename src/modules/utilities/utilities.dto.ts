@@ -27,9 +27,6 @@ registerEnumType(Operator, {
 registerEnumType(AirtimeCountryCode, {
     name: 'AirtimeCountryCode',
 });
-registerEnumType($Enums.Currencies, {
-    name: 'Currencies',
-});
 
 @InputType()
 export class Utilities_PurchaseAirtimeInput {
@@ -48,8 +45,8 @@ export class Utilities_PurchaseAirtimeInput {
     @Field((type) => Operator)
     operator: Operator;
 
-    @Field((type) => $Enums.Currencies)
-    currency: $Enums.Currencies;
+    @Field((type) => $Enums.CurrencyFiat)
+    currency: $Enums.CurrencyFiat;
 }
 
 @ObjectType()

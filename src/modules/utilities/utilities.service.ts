@@ -61,7 +61,7 @@ export class UtilitiesService {
             mode: 'DEBIT',
             status: 'COMPLETED',
             userId: input.userId,
-            currencies: input.currency,
+            fiat_currency: input.currency,
             note: '',
             transaction_hash: input.transaction_hash,
         });

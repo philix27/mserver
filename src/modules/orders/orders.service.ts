@@ -10,6 +10,7 @@ import {
     Order_GetOneInput,
     Order_Response,
 } from './orders.dto';
+import { TransactionsService } from '../transactions/transact.service';
 
 @Injectable()
 export class OrderService {
@@ -17,6 +18,7 @@ export class OrderService {
         private readonly logger: LoggerService,
         // private readonly notification: NotificationService,
         private readonly prisma: PrismaService,
+        private readonly transaction: TransactionsService,
     ) {}
 
     public async createSell(
@@ -44,6 +46,20 @@ export class OrderService {
                 mode: p.mode,
                 txn_hash: p.txn_hash,
             },
+        });
+
+        const rate = `${p.amount_crypto}/${p.amount_crypto}`;
+        await this.transaction.create({
+            amount: p.amount_crypto,
+            category:
+                p.mode === 'EXPRESS' ? 'EXPRESS_EXCHANGE' : 'P2P_EXCHANGE',
+            mode: 'DEBIT',
+            status: 'COMPLETED',
+            userId: p.userId,
+            crypto_currency: p.currency_crypto,
+            fiat_currency: p.currency_fiat,
+            note: rate,
+            transaction_hash: p.txn_hash,
         });
 
         return {

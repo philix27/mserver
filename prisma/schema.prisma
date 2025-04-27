@@ -235,15 +235,6 @@ enum CurrencyType {
   CRYPTO
 }
 
-enum Currencies {
-  NGN
-  BTC
-  CUSD
-  USDT
-  USDTx
-  ETH
-}
-
 model ExchangeRates {
   id               Int       @id @default(autoincrement())
   rates            String?
@@ -270,6 +261,8 @@ enum TransactionCategory {
   AIRTIME
   DATA_BUNDLE
   GIFT_CARD
+  EXPRESS_EXCHANGE
+  P2P_EXCHANGE
 }
 
 enum TransactionsMode {
@@ -287,7 +280,8 @@ model Transactions {
   amount           Float
   transaction_hash String?
   note             String
-  currency         Currencies
+  fiat_currency    CurrencyCrypto?
+  crypto_currency  CurrencyFiat?
   category         TransactionCategory
   mode             TransactionsMode
   status           TransactionStatus
