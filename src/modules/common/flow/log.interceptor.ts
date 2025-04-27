@@ -4,12 +4,12 @@ import {
     // HttpStatus,
     Injectable,
     NestInterceptor,
-} from "@nestjs/common";
+} from '@nestjs/common';
 // import { FastifyRequest, FastifyReply } from "fastify";
-import { Observable, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
-import { LoggerService } from "../provider";
+import { LoggerService } from '../provider';
 
 @Injectable()
 export class LogInterceptor implements NestInterceptor {
@@ -17,13 +17,13 @@ export class LogInterceptor implements NestInterceptor {
 
     public intercept(
         context: ExecutionContext,
-        next: CallHandler
+        next: CallHandler,
     ): Observable<any> {
         const startTime = new Date().getTime();
         // const request = context.switchToHttp().getRequest<FastifyRequest>();
 
-        // const method_name = context.getArgs()[3].fieldName || "no name";
-        const method_name = "method_name";
+        // const method_name = context.getArgs()[3].fieldName || 'no name';
+        const method_name = '';
 
         return next.handle().pipe(
             map((data) => {
@@ -32,7 +32,7 @@ export class LogInterceptor implements NestInterceptor {
                 //         ? HttpStatus.CREATED
                 //         : HttpStatus.OK;
                 this.logger.info(
-                    `${this.getTimeDelta(startTime)}ms ${method_name}`
+                    `${this.getTimeDelta(startTime)}ms ${method_name}`,
                 );
                 //! this.logger.info(`${this.getTimeDelta(startTime)}ms ${request.ip} ${responseStatus} ${request.method} ${this.getUrl(request)}`);
                 return data;
@@ -43,11 +43,11 @@ export class LogInterceptor implements NestInterceptor {
                 // See https://docs.trafficserver.apache.org/en/6.1.x/admin-guide/monitoring/logging/log-formats.en.html
                 // const status = this.hasStatus(err) ? err.status : "XXX";
                 this.logger.error(
-                    `${this.getTimeDelta(startTime)}ms ${method_name} ${err}`
+                    `${this.getTimeDelta(startTime)}ms ${method_name} ${err}`,
                 );
                 //! this.logger.error(`${this.getTimeDelta(startTime)}ms ${request.ip} ${status} ${request.method} ${this.getUrl(request)}`);
                 return throwError(err);
-            })
+            }),
         );
     }
 
