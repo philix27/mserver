@@ -77,6 +77,7 @@ async function bootstrap(): Promise<void> {
     app.useGlobalInterceptors(logInterceptor);
     const allowedOrigins = [
         'https://tg.mobarter.com',
+        'https://preview.mobarter.com',
         'https://minipay.mobarter.com',
         'https://admin.mobarter.com',
         'https://server.mobarter.com',
