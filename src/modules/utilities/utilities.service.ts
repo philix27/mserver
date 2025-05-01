@@ -1,13 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { LoggerService, PrismaService, secrets } from '../common';
 import {
-    AirtimeCountryCode,
+    TopUpCountryCode,
     Utilities_PurchaseAirtimeInput,
-    Utilities_PurchaseAirtimeResponse,
+    Utilities_PurchaseTopUpResponse,
+    Utilities_PurchaseDataBundleInput,
 } from './utilities.dto';
 import { UserInput } from '../../lib';
-import { ReloadlyTopUpService } from '../../lib/integrations/reloadly';
-import { GqlErr } from '../common/errors/gqlErr';
+import {
+    ReloadlyCountryCode,
+    ReloadlyTopUpService,
+} from '../../lib/integrations/reloadly';
 import { TransactionsService } from '../transactions/transact.service';
 
 @Injectable()
@@ -41,14 +44,14 @@ export class UtilitiesService {
 
     public async purchaseAirtime(
         input: Utilities_PurchaseAirtimeInput & UserInput,
-    ): Promise<Utilities_PurchaseAirtimeResponse> {
+    ): Promise<Utilities_PurchaseTopUpResponse> {
         this.logger.info('Purchase Airtime');
 
         const res = await this.reloadly.topUpAirtime({
             amount: `${input.amount}.00`,
             operatorId: input.operator,
             recipientPhone: {
-                countryCode: getCountryCode(input.countryCode),
+                countryCode: getCountryCode[input.countryCode],
                 number: input.phoneNo,
             },
             useLocalAmount: true,
@@ -69,21 +72,49 @@ export class UtilitiesService {
         this.logger.info(res.customIdentifier);
         return { message: 'Successful' };
     }
+    public async purchaseDataBundle(
+        input: Utilities_PurchaseDataBundleInput & UserInput,
+    ): Promise<Utilities_PurchaseTopUpResponse> {
+        this.logger.info('Purchase Airtime');
+
+        const res = await this.reloadly.topUpAirtime({
+            amount: `${input.amount}.00`,
+            operatorId: input.operator,
+            recipientPhone: {
+                countryCode: getCountryCode[input.countryCode],
+                number: input.phoneNo,
+            },
+            useLocalAmount: true,
+            customIdentifier: `userId:${input.userId}&txnHash:${input.transaction_hash}`,
+        });
+
+        await this.transaction.create({
+            amount: input.amount,
+            category: 'DATA_BUNDLE',
+            mode: 'DEBIT',
+            status: 'COMPLETED',
+            userId: input.userId,
+            fiat_currency: input.currency,
+            note: '',
+            transaction_hash: input.transaction_hash,
+        });
+
+        this.logger.info(res.customIdentifier);
+        return { message: 'Successful' };
+    }
 
     public async validateToken() {
         this.logger.info('Validate token');
     }
 }
 
-function getCountryCode(props: AirtimeCountryCode) {
-    switch (props) {
-        case AirtimeCountryCode.NIGERIA:
-            return 'NG';
-        case AirtimeCountryCode.GHANA:
-            return 'GH';
-        case AirtimeCountryCode.KENYA:
-            return 'KE';
-        default:
-            return 'NG';
-    }
-}
+const getCountryCode: Record<TopUpCountryCode, ReloadlyCountryCode> = {
+    [TopUpCountryCode.NIGERIA]: 'NG',
+    [TopUpCountryCode.GHANA]: 'GH',
+    [TopUpCountryCode.KENYA]: 'KE',
+    [TopUpCountryCode.MALAWI]: 'MW',
+    [TopUpCountryCode.RWANDA]: 'RW',
+    [TopUpCountryCode.SOUTH_AFRICA]: 'ZA',
+    [TopUpCountryCode.TANZANIA]: 'TZ',
+    [TopUpCountryCode.UGANDA]: 'UG',
+};

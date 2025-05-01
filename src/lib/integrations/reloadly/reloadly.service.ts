@@ -4,7 +4,15 @@ import axios from 'axios';
 import { LoggerService, secrets } from '../../../modules/common';
 import { ITopUpAirtime } from './t.topUpAirtime';
 
-export type ReloadlyCountryCode = 'NG' | 'KE' | 'GH';
+export type ReloadlyCountryCode =
+    | 'NG'
+    | 'GH'
+    | 'KE'
+    | 'MW'
+    | 'RW'
+    | 'TZ'
+    | 'UG'
+    | 'ZA';
 export type IReloadlyOperatorId = 'MTN' | 'AIRTEL' | 'GLO' | 'ETISALAT';
 export const OperatorId: Record<IReloadlyOperatorId, string> = {
     ETISALAT: '340',
@@ -35,7 +43,7 @@ export class ReloadlyTopUpService {
     async topUpAirtime(props: {
         //  amount should have 2 place decimal number
         amount: string;
-        operatorId: keyof typeof OperatorId;
+        operatorId: keyof typeof OperatorId | number;
         customIdentifier: string;
         useLocalAmount: boolean;
         recipientPhone: {
@@ -48,7 +56,17 @@ export class ReloadlyTopUpService {
         };
         senderPhone?: { countryCode: ReloadlyCountryCode; number: string };
     }) {
-        const payload = { ...props, operatorId: OperatorId[props.operatorId] };
+        let payload: Object;
+
+        if (typeof props.operatorId === 'number') {
+            payload = {
+                ...props,
+                operatorId: props.operatorId,
+            };
+        } else {
+            payload = { ...props, operatorId: OperatorId[props.operatorId] };
+        }
+
         this.logger.info('Header: ' + JSON.stringify(this.header));
         this.logger.info(
             'Sending topup request to reloadly...' + JSON.stringify(payload),
