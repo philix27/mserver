@@ -25,10 +25,15 @@ export class ExchangeRateService {
 
         return {
             EUR: curr.EUR,
-            NGN: curr.NGN,
             USD: curr.USD,
-            KES: curr.KES,
-            GHS: curr.GHS,
+            NG: curr.NGN,
+            KE: curr.KES,
+            GH: curr.GHS,
+            UG: curr.UGX,
+            MW: curr.MWK,
+            TZ: curr.TZS,
+            RW: curr.RWF,
+            ZA: curr.ZAR,
         };
     }
 
