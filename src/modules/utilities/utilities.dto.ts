@@ -8,17 +8,6 @@ import {
 } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
 
-export enum TopUpCountryCode {
-    NIGERIA = 'NG',
-    GHANA = 'GH',
-    KENYA = 'KE',
-    MALAWI = 'MW',
-    RWANDA = 'RW',
-    TANZANIA = 'TZ',
-    UGANDA = 'UG',
-    SOUTH_AFRICA = 'ZA',
-}
-
 export enum Operator {
     MTN = 'MTN',
     AIRTEL = 'AIRTEL',
@@ -28,10 +17,6 @@ export enum Operator {
 
 registerEnumType(Operator, {
     name: 'Operator',
-});
-
-registerEnumType(TopUpCountryCode, {
-    name: 'TopUpCountryCode',
 });
 
 @InputType()
@@ -45,14 +30,11 @@ export class Utilities_PurchaseAirtimeInput {
     @Field()
     transaction_hash: string;
 
-    @Field((type) => TopUpCountryCode)
-    countryCode: TopUpCountryCode;
+    @Field((type) => $Enums.CurrencyFiat)
+    countryCode: $Enums.CurrencyFiat;
 
     @Field((type) => Operator)
     operator: Operator;
-
-    @Field((type) => $Enums.CurrencyFiat)
-    currency: $Enums.CurrencyFiat;
 }
 @InputType()
 export class Utilities_PurchaseDataBundleInput {
@@ -65,14 +47,11 @@ export class Utilities_PurchaseDataBundleInput {
     @Field()
     transaction_hash: string;
 
-    @Field((type) => TopUpCountryCode)
-    countryCode: TopUpCountryCode;
+    @Field((type) => $Enums.CurrencyFiat)
+    countryCode: $Enums.CurrencyFiat;
 
     @Field((type) => Int)
     operator: number;
-
-    @Field((type) => $Enums.CurrencyFiat)
-    currency: $Enums.CurrencyFiat;
 }
 
 @ObjectType()

@@ -113,9 +113,14 @@ enum CurrencyCrypto {
 }
 
 enum CurrencyFiat {
-  NGN
-  GHS
-  KES
+  NG
+  GH
+  KE
+  MW
+  RW
+  TZ
+  UG
+  ZA
 }
 
 // Buy and sell is always dependent on the crypto value

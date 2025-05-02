@@ -3,16 +3,8 @@ import { localOperators } from './localOperators';
 import axios from 'axios';
 import { LoggerService, secrets } from '../../../modules/common';
 import { ITopUpAirtime } from './t.topUpAirtime';
+import { $Enums } from '@prisma/client';
 
-export type ReloadlyCountryCode =
-    | 'NG'
-    | 'GH'
-    | 'KE'
-    | 'MW'
-    | 'RW'
-    | 'TZ'
-    | 'UG'
-    | 'ZA';
 export type IReloadlyOperatorId = 'MTN' | 'AIRTEL' | 'GLO' | 'ETISALAT';
 export const OperatorId: Record<IReloadlyOperatorId, string> = {
     ETISALAT: '340',
@@ -48,13 +40,13 @@ export class ReloadlyTopUpService {
         useLocalAmount: boolean;
         recipientPhone: {
             /** 2 values isoName */
-            countryCode: ReloadlyCountryCode;
+            countryCode: $Enums.CurrencyFiat;
             /** should include country phone no. code without the +
              * e.g2348101234567
              */
             number: string;
         };
-        senderPhone?: { countryCode: ReloadlyCountryCode; number: string };
+        senderPhone?: { countryCode: $Enums.CurrencyFiat; number: string };
     }) {
         let payload: Object;
 

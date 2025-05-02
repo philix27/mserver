@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { LoggerService, PrismaService, secrets } from '../common';
+import { LoggerService, secrets } from '../common';
 import {
-    TopUpCountryCode,
     Utilities_PurchaseAirtimeInput,
     Utilities_PurchaseTopUpResponse,
     Utilities_PurchaseDataBundleInput,
 } from './utilities.dto';
 import { UserInput } from '../../lib';
-import {
-    ReloadlyCountryCode,
-    ReloadlyTopUpService,
-} from '../../lib/integrations/reloadly';
+import { ReloadlyTopUpService } from '../../lib/integrations/reloadly';
 import { TransactionsService } from '../transactions/transact.service';
 
 @Injectable()
@@ -51,7 +47,7 @@ export class UtilitiesService {
             amount: `${input.amount}.00`,
             operatorId: input.operator,
             recipientPhone: {
-                countryCode: getCountryCode[input.countryCode],
+                countryCode: input.countryCode,
                 number: input.phoneNo,
             },
             useLocalAmount: true,
@@ -64,7 +60,7 @@ export class UtilitiesService {
             mode: 'DEBIT',
             status: 'COMPLETED',
             userId: input.userId,
-            fiat_currency: input.currency,
+            fiat_currency: input.countryCode,
             note: '',
             transaction_hash: input.transaction_hash,
         });
@@ -81,7 +77,7 @@ export class UtilitiesService {
             amount: `${input.amount}.00`,
             operatorId: input.operator,
             recipientPhone: {
-                countryCode: getCountryCode[input.countryCode],
+                countryCode: input.countryCode,
                 number: input.phoneNo,
             },
             useLocalAmount: true,
@@ -94,7 +90,7 @@ export class UtilitiesService {
             mode: 'DEBIT',
             status: 'COMPLETED',
             userId: input.userId,
-            fiat_currency: input.currency,
+            fiat_currency: input.countryCode,
             note: '',
             transaction_hash: input.transaction_hash,
         });
@@ -107,14 +103,3 @@ export class UtilitiesService {
         this.logger.info('Validate token');
     }
 }
-
-const getCountryCode: Record<TopUpCountryCode, ReloadlyCountryCode> = {
-    [TopUpCountryCode.NIGERIA]: 'NG',
-    [TopUpCountryCode.GHANA]: 'GH',
-    [TopUpCountryCode.KENYA]: 'KE',
-    [TopUpCountryCode.MALAWI]: 'MW',
-    [TopUpCountryCode.RWANDA]: 'RW',
-    [TopUpCountryCode.SOUTH_AFRICA]: 'ZA',
-    [TopUpCountryCode.TANZANIA]: 'TZ',
-    [TopUpCountryCode.UGANDA]: 'UG',
-};
