@@ -163,7 +163,7 @@ model Orders {
   mode                                  OrderMode?
   bank_name                             BankName
   currency_crypto                       CurrencyCrypto
-  currency_fiat                         CurrencyFiat
+  currency_fiat                         CurrencyFiat?
   trade_type                            TradeType
   status                                OrderStatus    @default(PENDING)
   action_user                           OrderActions?
