@@ -93,7 +93,12 @@ export class AuthService {
             },
         });
 
-        if (!cryptoWallet) throw GqlErr('Wallet not found!');
+        if (!cryptoWallet) {
+            await this.minipayCreateAccount({
+                walletAddress: params.walletAddress,
+                email: '',
+            });
+        }
 
         let _user = await this.prisma.user.findFirst({
             where: {
@@ -118,15 +123,16 @@ export class AuthService {
         };
     }
 
+    // omit email if user logs in directly
     public async minipayCreateAccount(
-        params: Auth_MinipayCreateAccountInput,
+        params: Auth_MinipayCreateAccountInput & { fromLogin?: boolean },
     ): Promise<Auth_LoginMinipayResponse> {
         this.logger.info('minipayCreateAccount: ' + params.walletAddress);
 
         if (!isValidEthereumAddress(params.walletAddress))
             throw GqlErr('Invalid Ethereum Wallet');
 
-        if (!this.isValidEmail(params.email))
+        if (params.fromLogin === false && !this.isValidEmail(params.email))
             throw GqlErr('Invalid email address');
 
         let user;

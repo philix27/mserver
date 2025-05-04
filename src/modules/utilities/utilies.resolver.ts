@@ -39,4 +39,18 @@ export class UtilitiesResolver {
 
         return res!;
     }
+
+    @Mutation((returns) => Utilities_PurchaseTopUpResponse)
+    @UseGuards(GqlAuthGuard)
+    async utility_payBill(
+        @Args('input') input: Utilities_PurchaseDataBundleInput,
+        @Context() context: { req: { userId: number } },
+    ): Promise<Utilities_PurchaseTopUpResponse> {
+        const res = await this.service.purchaseDataBundle({
+            ...input,
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
 }
