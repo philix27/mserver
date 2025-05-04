@@ -80,6 +80,7 @@ async function bootstrap(): Promise<void> {
         'https://preview.mobarter.com',
         'https://minipay.mobarter.com',
         'https://admin.mobarter.com',
+        'https://app.mobarter.com',
         'https://server.mobarter.com',
     ];
 
