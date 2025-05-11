@@ -18,4 +18,6 @@ export const secrets: Record<keyof Config, string> = {
     NODE_ENV: process.env.NODE_ENV!,
     EXCHANGE_RATE_KEY: process.env.EXCHANGE_RATE_KEY!,
     JWT_TELEGRAM_PUBLIC: process.env.JWT_TELEGRAM_PUBLIC!,
+    SELF_APP_SCOPE: process.env.SELF_APP_SCOPE!,
+    SELF_API_ENDPOINT: process.env.SELF_API_ENDPOINT!,
 };

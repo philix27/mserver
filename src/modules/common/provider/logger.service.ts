@@ -1,5 +1,5 @@
-import * as winston from "winston";
-import { secrets } from "../model";
+import * as winston from 'winston';
+import { secrets } from '../model';
 
 export class LoggerService {
     private readonly instance: winston.Logger;
@@ -8,20 +8,20 @@ export class LoggerService {
         const format = this.isProductionEnv()
             ? winston.format.combine(
                   winston.format.timestamp(),
-                  winston.format.json()
+                  winston.format.json(),
               )
             : winston.format.combine(
                   winston.format.colorize(),
-                  winston.format.simple()
+                  winston.format.simple(),
               );
 
         this.instance = winston.createLogger({
-            level: "info",
+            level: 'info',
             silent: this.isTestEnv(),
             format,
             transports: [
                 new winston.transports.Console({
-                    stderrLevels: ["error"],
+                    stderrLevels: ['error'],
                 }),
             ],
         });
@@ -36,12 +36,12 @@ export class LoggerService {
     }
 
     private isTestEnv(): boolean {
-        return secrets.NODE_ENV === "test";
+        return secrets.NODE_ENV === 'test';
     }
 
     private isProductionEnv(): boolean {
         return (
-            secrets.NODE_ENV === "production" || secrets.NODE_ENV === "staging"
+            secrets.NODE_ENV === 'production' || secrets.NODE_ENV === 'staging'
         );
     }
 }

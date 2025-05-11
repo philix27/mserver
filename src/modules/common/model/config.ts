@@ -22,4 +22,6 @@ export interface Config {
     readonly NODE_ENV: string;
     readonly EXCHANGE_RATE_KEY: string;
     readonly JWT_TELEGRAM_PUBLIC: string;
+    readonly SELF_APP_SCOPE: string;
+    readonly SELF_API_ENDPOINT: string;
 }
