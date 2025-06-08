@@ -1,11 +1,13 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UtilitiesService } from './utilities.service';
 import {
     Utilities_PurchaseTopUpResponse,
     Utilities_PurchaseAirtimeInput,
     Utilities_PurchaseDataBundleInput,
+    Utilities_GetOperatorResponse,
+    Utilities_GetOperatorsInput,
 } from './utilities.dto';
-import { GqlAuthGuard } from '../common/guards';
+import { GqlAuthGuard, VendorGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
 
 @Resolver((of: any) => Utilities_PurchaseTopUpResponse)
@@ -49,6 +51,20 @@ export class UtilitiesResolver {
         const res = await this.service.purchaseDataBundle({
             ...input,
             userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Query((returns) => [Utilities_GetOperatorResponse])
+    @UseGuards(VendorGuard)
+    async utility_getOperators(
+        @Context() context: { req: { userId: number } },
+        @Args('input') input: Utilities_GetOperatorsInput,
+    ): Promise<Utilities_GetOperatorResponse[]> {
+        const res = await this.service.getAirtimeOperators({
+            userId: context.req.userId,
+            ...input,
         });
 
         return res!;

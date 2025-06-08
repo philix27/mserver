@@ -55,17 +55,36 @@ export class Utilities_PurchaseDataBundleInput {
 }
 
 @InputType()
-export class Utilities_GetAirtimeOperatorsInput {
+export class Utilities_GetOperatorsInput {
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;
-
-    @Field((type) => Int)
-    isAvaliable: boolean;
 }
 
+// @InputType()
+// export class Utilities_GetAirtimeOperatorsInput {
+//     @Field((type) => $Enums.CountryCode)
+//     countryCode: $Enums.CountryCode;
+
+//     @Field((type) => Int)
+//     isAvaliable: boolean;
+// }
 
 @ObjectType()
 export class Utilities_PurchaseTopUpResponse {
     @Field({ nullable: false })
     message: string;
+}
+
+@ObjectType()
+export class Utilities_GetOperatorResponse {
+    @Field((type) => String)
+    name: string;
+    @Field((type) => String)
+    logo: string;
+    @Field((type) => Int)
+    operatorId: number;
+    @Field((type) => Int)
+    maxAmount: number;
+    @Field((type) => Int)
+    minAmount: number;
 }
