@@ -16,6 +16,7 @@ import {
     Auth_sendEmailOtpResponse,
     Auth_TelegramLoginInput,
     Auth_TelegramLoginResponse,
+    Auth_ThirdwebLoginInput,
     Auth_verifyEmailOtpInput,
     Auth_verifyOtpResponse,
 } from './auth.dto';
@@ -357,5 +358,58 @@ export class AuthService {
         });
 
         return user ? true : false;
+    }
+
+    public async thirdwebLogin(
+        params: Auth_ThirdwebLoginInput,
+    ): Promise<Auth_LoginMinipayResponse> {
+        this.logger.info('MinipayLogin: ' + params.walletAddress);
+
+        if (!HpFn.isValidEthereumAddress(params.walletAddress))
+            throw GqlErr('Invalid Ethereum Wallet');
+
+        if (!HpFn.isValidEmail(params.email))
+            throw GqlErr('Invalid Email address');
+
+        if (!this.verifyThirdwebPayload(params.payload))
+            throw GqlErr('You need to login first');
+
+        let _user = await this.prisma.user.findFirst({
+            where: {
+                email: params.email,
+            },
+        });
+
+        if (!_user) {
+            _user = await this.prisma.user.create({
+                data: {
+                    email: params.email,
+                    crypto_wallets: {
+                        create: {
+                            address: params.walletAddress,
+                            chainType: 'Ethereum',
+                        },
+                    },
+                },
+            });
+        }
+
+        const token = this.jwtService.generateToken({
+            userId: _user.id,
+            email: _user.email,
+        });
+
+        return {
+            walletAddress: params.walletAddress,
+            token: token,
+            email: _user.email!,
+            firstname: _user.firstname!,
+            lastname: _user.lastname!,
+            middlename: _user.middlename!,
+        };
+    }
+
+    private verifyThirdwebPayload(payload: string): boolean {
+        return false;
     }
 }

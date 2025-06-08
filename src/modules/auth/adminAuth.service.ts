@@ -24,8 +24,8 @@ export class Admin_CreateAccountInput {
     @Field({ nullable: false })
     lastname: string;
 
-    @Field((type) => $Enums.Country)
-    country: $Enums.Country;
+    @Field((type) => $Enums.CountryCode)
+    country: $Enums.CountryCode;
 
     @Field({ nullable: false })
     role: string;
@@ -79,7 +79,7 @@ export class AdminAuthService {
                 lastname: params.lastname,
                 email: params.email,
                 password: hashedPassword,
-                country: params.country,
+                country_code: params.country,
             },
         });
 
@@ -123,7 +123,7 @@ export class AdminAuthService {
         });
 
         return {
-            country: user.country!,
+            country: user.country_code!,
             email: user.email!,
             firstname: user.firstname!,
             lastname: user.lastname!,

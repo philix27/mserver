@@ -96,6 +96,20 @@ export class Auth_LoginMinipayInput {
     @Field()
     walletAddress: string;
 }
+
+
+@InputType()
+export class Auth_ThirdwebLoginInput {
+    @Field()
+    walletAddress: string;
+
+    @Field()
+    email: string;
+
+    @Field()
+    payload: string;
+}
+
 @InputType()
 export class Auth_MinipayCreateAccountInput {
     @Field()

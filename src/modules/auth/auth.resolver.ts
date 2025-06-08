@@ -15,6 +15,7 @@ import {
     Auth_sendEmailOtpResponse,
     Auth_TelegramLoginInput,
     Auth_TelegramLoginResponse,
+    Auth_ThirdwebLoginInput,
     Auth_verifyEmailOtpInput,
     Auth_verifyOtpResponse,
 } from "./auth.dto";
@@ -65,6 +66,15 @@ export class AuthResolver {
         const res = await this.service.minipayLogin(input);
         return res!;
     }
+
+    @Mutation((returns) => Auth_LoginMinipayResponse)
+    async auth_thirdwebLogin(
+        @Args('input') input: Auth_ThirdwebLoginInput,
+    ): Promise<Auth_LoginMinipayResponse> {
+        const res = await this.service.thirdwebLogin(input);
+        return res!;
+    }
+
     @Mutation((returns) => Auth_TelegramLoginResponse)
     async auth_loginTelegram(
         @Args('input') input: Auth_TelegramLoginInput,
