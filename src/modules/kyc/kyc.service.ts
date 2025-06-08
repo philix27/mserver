@@ -16,14 +16,12 @@ import {
 import { UserInput } from '../../lib';
 import { GqlErr } from '../common/errors/gqlErr';
 import { LoggerService, PrismaService } from '../common';
-import { NotificationService } from '../notification/notification.service';
 import { HelperService } from '../helper/helper.service';
 
 @Injectable()
 export class KycService {
     public constructor(
         private readonly logger: LoggerService,
-        private readonly notification: NotificationService,
         private readonly prisma: PrismaService,
         private readonly jwtService: HelperService,
     ) {} // private readonly notification: NotificationService // private readonly logger: LoggerService
