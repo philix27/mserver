@@ -75,7 +75,7 @@ export class Kyc_AddNinResponse extends PartialType(
 @InputType()
 export class Kyc_CreateTransactionPinInput {
     @Field()
-    nin: string;
+    pin: string;
 }
 
 @ObjectType()

@@ -10,17 +10,14 @@ import {
     Kyc_AddNinResponse,
     Kyc_CreateTransactionPinInput,
     Kyc_Response,
-    Kyc_SendEmailOtpInput,
-    Kyc_SendEmailResponse,
     Kyc_SendPhoneOtpInput,
-    Kyc_VerifyEmailOtpInput,
-    Kyc_VerifyEmailResponse,
     Kyc_VerifyPhoneOtpInput,
 } from './kyc.dto';
 import { UserInput } from '../../lib';
 import { GqlErr } from '../common/errors/gqlErr';
 import { LoggerService, PrismaService } from '../common';
 import { NotificationService } from '../notification/notification.service';
+import { HelperService } from '../helper/helper.service';
 
 @Injectable()
 export class KycService {
@@ -28,6 +25,7 @@ export class KycService {
         private readonly logger: LoggerService,
         private readonly notification: NotificationService,
         private readonly prisma: PrismaService,
+        private readonly jwtService: HelperService,
     ) {} // private readonly notification: NotificationService // private readonly logger: LoggerService
 
     public async sendPhoneOtp(params: Kyc_SendPhoneOtpInput & UserInput) {
@@ -39,8 +37,24 @@ export class KycService {
         throw GqlErr('Unimplemented');
     }
 
-    public async createTransactionPin(params: Kyc_CreateTransactionPinInput) {
-        throw GqlErr('Unimplemented');
+    public async createTransactionPin(
+        params: Kyc_CreateTransactionPinInput & UserInput,
+    ) {
+        this.logger.info('KYC - Create transactions pin');
+        const hashedPin = await this.jwtService.hashPassword(params.pin);
+
+        const res = await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                transaction_pin: hashedPin,
+            },
+        });
+
+        return {
+            message: 'Transactions Pin set',
+        };
     }
 
     public async addBvn(
