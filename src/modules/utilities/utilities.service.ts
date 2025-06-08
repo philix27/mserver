@@ -99,6 +99,36 @@ export class UtilitiesService {
         return { message: 'Successful' };
     }
 
+    public async getOperators(
+        input: Utilities_PurchaseDataBundleInput & UserInput,
+    ): Promise<Utilities_PurchaseTopUpResponse> {
+        this.logger.info('Purchase Airtime');
+
+        const res = await this.reloadly.topUpAirtime({
+            amount: `${input.amount}.00`,
+            operatorId: input.operator,
+            recipientPhone: {
+                countryCode: input.countryCode,
+                number: input.phoneNo,
+            },
+            useLocalAmount: true,
+            customIdentifier: `userId:${input.userId}&txnHash:${input.transaction_hash}`,
+        });
+
+        await this.transaction.create({
+            amount: input.amount,
+            category: 'DATA_BUNDLE',
+            mode: 'DEBIT',
+            status: 'COMPLETED',
+            userId: input.userId,
+            fiat_currency: input.countryCode,
+            note: '',
+            transaction_hash: input.transaction_hash,
+        });
+
+        this.logger.info(res.customIdentifier);
+        return { message: 'Successful' };
+    }
     public async validateToken() {
         this.logger.info('Validate token');
     }

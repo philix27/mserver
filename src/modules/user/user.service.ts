@@ -28,7 +28,7 @@ export class UserService {
                     // middlename: params.middlename,
                     email: params.email,
                     password: params.password,
-                    country: params.country,
+                    country_code: params.country,
                 },
             });
 
@@ -64,7 +64,7 @@ export class UserService {
         return data.map((val) => {
             return {
                 id: val.id,
-                country: val.country,
+                country: val.country_code,
                 email: val.email,
                 phone: val.phone,
                 telegram_id: val.telegram_id,

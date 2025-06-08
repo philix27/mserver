@@ -11,7 +11,7 @@ export class WalletFiatService {
         firstname: string;
         lastname: string;
         email: string;
-        country: $Enums.Country;
+        country: $Enums.CountryCode;
     }) {
         this.logger.info("Creating fiat wallet accounts ...");
 

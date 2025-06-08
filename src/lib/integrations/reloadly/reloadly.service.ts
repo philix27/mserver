@@ -40,13 +40,13 @@ export class ReloadlyTopUpService {
         useLocalAmount: boolean;
         recipientPhone: {
             /** 2 values isoName */
-            countryCode: $Enums.CurrencyFiat;
+            countryCode: $Enums.CountryCode;
             /** should include country phone no. code without the +
              * e.g2348101234567
              */
             number: string;
         };
-        senderPhone?: { countryCode: $Enums.CurrencyFiat; number: string };
+        senderPhone?: { countryCode: $Enums.CountryCode; number: string };
     }) {
         let payload: Object;
 

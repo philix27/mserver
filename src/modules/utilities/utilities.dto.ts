@@ -30,8 +30,8 @@ export class Utilities_PurchaseAirtimeInput {
     @Field()
     transaction_hash: string;
 
-    @Field((type) => $Enums.CurrencyFiat)
-    countryCode: $Enums.CurrencyFiat;
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
 
     @Field((type) => Operator)
     operator: Operator;
@@ -47,12 +47,22 @@ export class Utilities_PurchaseDataBundleInput {
     @Field()
     transaction_hash: string;
 
-    @Field((type) => $Enums.CurrencyFiat)
-    countryCode: $Enums.CurrencyFiat;
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
 
     @Field((type) => Int)
     operator: number;
 }
+
+@InputType()
+export class Utilities_GetAirtimeOperatorsInput {
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
+
+    @Field((type) => Int)
+    isAvaliable: boolean;
+}
+
 
 @ObjectType()
 export class Utilities_PurchaseTopUpResponse {

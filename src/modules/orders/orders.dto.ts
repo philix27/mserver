@@ -12,14 +12,8 @@ class Order_Dto {
     @Field({ nullable: false })
     merchant_id: number;
 
-    @Field((type) => $Enums.BankName)
-    bank_name: $Enums.BankName;
-
     @Field({ nullable: false })
-    bank_account_name: string;
-
-    @Field({ nullable: false })
-    bank_account_no: string;
+    bank_id: number;
 
     @Field({ nullable: false })
     amount_crypto: number;
@@ -39,8 +33,8 @@ class Order_Dto {
     @Field({ nullable: false })
     wallet_customer: string;
 
-    @Field({ nullable: false })
-    bank_code: string;
+    // @Field({ nullable: false })
+    // bank_code: string;
 
     @Field((type) => $Enums.OrderMode, { nullable: true })
     mode?: $Enums.OrderMode;
@@ -54,11 +48,14 @@ class Order_Dto {
     @Field((type) => $Enums.TradeType)
     trade_type: $Enums.TradeType;
 
-    @Field((type) => $Enums.CurrencyFiat)
-    currency_fiat: $Enums.CurrencyFiat;
+    @Field((type) => $Enums.CountryCode)
+    currency_fiat: $Enums.CountryCode;
 
-    @Field((type) => $Enums.CurrencyCrypto)
-    currency_crypto: $Enums.CurrencyCrypto;
+    @Field({ nullable: false })
+    currency_crypto: string;
+
+    @Field({ nullable: false })
+    currency_network: string;
 
     @Field((type) => $Enums.OrderStatus)
     status: $Enums.OrderStatus;
@@ -75,11 +72,11 @@ export class Order_GetAllInput {
     @Field((type) => $Enums.TradeType, { nullable: true })
     trade_type?: $Enums.TradeType;
 
-    @Field((type) => $Enums.CurrencyFiat, { nullable: true })
-    currency_fiat?: $Enums.CurrencyFiat;
+    @Field((type) => $Enums.CountryCode, { nullable: true })
+    currency_fiat?: $Enums.CountryCode;
 
-    @Field((type) => $Enums.CurrencyCrypto, { nullable: true })
-    currency_crypto?: $Enums.CurrencyCrypto;
+    @Field((type) => String, { nullable: true })
+    currency_crypto?: string;
 
     @Field((type) => $Enums.OrderStatus, { nullable: true })
     status?: $Enums.OrderStatus;
@@ -99,8 +96,8 @@ export class Order_MoveCryptoToEscrowInput {
     @Field((type) => Int)
     amountCrypto: number;
 
-    @Field((type) => $Enums.CurrencyCrypto)
-    currencyCrypto: $Enums.CurrencyCrypto;
+    @Field((type) => String)
+    currencyCrypto: string;
 
     @Field((type) => $Enums.OrderActions)
     action: $Enums.OrderActions;
@@ -114,8 +111,8 @@ export class Order_FaitSentInput {
     @Field((type) => Int)
     amountFiat: number;
 
-    @Field((type) => $Enums.CurrencyFiat)
-    currencyFiat: $Enums.CurrencyFiat;
+    @Field((type) => $Enums.CountryCode)
+    currencyFiat: $Enums.CountryCode;
 }
 
 @InputType()
@@ -126,8 +123,8 @@ export class Order_FaitReceivedInput {
     @Field((type) => Int)
     amountFiat: number;
 
-    @Field((type) => $Enums.CurrencyFiat)
-    currencyFiat: $Enums.CurrencyFiat;
+    @Field((type) => $Enums.CountryCode)
+    currencyFiat: $Enums.CountryCode;
 
     // @Field((type) => $Enums)
     // sender: $Enums.OrderParticipant;

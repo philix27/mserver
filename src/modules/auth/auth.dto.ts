@@ -16,8 +16,8 @@ export class Auth_CreateAccountInput {
     @Field({ nullable: true })
     middlename: string;
 
-    @Field((type) => $Enums.Country)
-    country: $Enums.Country;
+    @Field((type) => $Enums.CountryCode)
+    country: $Enums.CountryCode;
 
     @Field({ nullable: false })
     password: string;
@@ -171,8 +171,8 @@ export class Auth_LoginResponse {
     @Field({ nullable: false })
     token: string;
 
-    @Field((type) => $Enums.Country)
-    country: $Enums.Country;
+    @Field((type) => $Enums.CountryCode)
+    country: $Enums.CountryCode;
 }
 
 @InputType()

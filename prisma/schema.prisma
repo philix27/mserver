@@ -20,7 +20,7 @@ model User {
   // minipay_wallet    String?
   // minipay           Boolean?           @default(false)
   role                  UserRole?          @default(Regular)
-  country               Country?
+  country_code          CountryCode?
   created_at            DateTime?          @default(now())
   updated_at            DateTime?          @updatedAt
   bvn                   String?
@@ -55,12 +55,6 @@ enum UserRole {
   CustomeSupport
 }
 
-enum Country {
-  Nigeria
-  Ghana
-  Kenya
-}
-
 model CryptoWallets {
   id         Int       @id @default(autoincrement())
   address    String    @unique
@@ -91,12 +85,14 @@ model BankAccount {
   account_name String
   account_no   String
   soft_delete  Boolean?  @default(false)
-  bank_name    BankName
+  bank_name    String
+  nuban_id     String?
   created_at   DateTime? @default(now())
   updated_at   DateTime? @updatedAt
   user_id      Int
   user         User?     @relation(fields: [user_id], references: [id])
   advert       Adverts[]
+  Orders       Orders[]
 }
 
 enum TradeType {
@@ -104,15 +100,7 @@ enum TradeType {
   SELL
 }
 
-enum CurrencyCrypto {
-  BTC
-  CUSD
-  ETH_USDT
-  BASE_USDT
-  ETH
-}
-
-enum CurrencyFiat {
+enum CountryCode {
   NG
   GH
   KE
@@ -125,25 +113,25 @@ enum CurrencyFiat {
 
 // Buy and sell is always dependent on the crypto value
 model Adverts {
-  id                  Int            @id @default(autoincrement())
+  id                  Int           @id @default(autoincrement())
   rateFloat           Float?
   rateFixed           Float?
-  isFloatRate         Boolean        @default(true)
+  isFloatRate         Boolean       @default(true)
   limitUpper          Float
   limitLower          Float
   fiatAmountPerCrypto Int
   tradeType           TradeType
-  currency_crypto     CurrencyCrypto
-  currency_fiat       CurrencyFiat
+  currency_crypto     String
+  currency_fiat       CountryCode
   instructions        String
   wallet_address      String
-  status              AdvertStatus?  @default(OPEN)
+  status              AdvertStatus? @default(OPEN)
   duration            String
-  created_at          DateTime?      @default(now())
-  updated_at          DateTime?      @updatedAt
+  created_at          DateTime?     @default(now())
+  updated_at          DateTime?     @updatedAt
   bank_accounts       BankAccount[]
   merchant_id         Int
-  merchant            User?          @relation(fields: [merchant_id], references: [id])
+  merchant            User?         @relation(fields: [merchant_id], references: [id])
 }
 
 enum AdvertStatus {
@@ -152,20 +140,17 @@ enum AdvertStatus {
 }
 
 model Orders {
-  id                                    Int            @id @default(autoincrement())
+  id                                    Int           @id @default(autoincrement())
   amount_fiat                           Float
   amount_crypto                         Float
   wallet_customer                       String
   wallet_merchant                       String
   estimated_duration                    String
-  bank_account_name                     String
-  bank_account_no                       String
   mode                                  OrderMode?
-  bank_name                             BankName
-  currency_crypto                       CurrencyCrypto
-  currency_fiat                         CurrencyFiat?
+  currency_crypto                       String
+  currency_fiat                         CountryCode?
   trade_type                            TradeType
-  status                                OrderStatus    @default(PENDING)
+  status                                OrderStatus   @default(PENDING)
   action_user                           OrderActions?
   action_merchant                       OrderActions?
   // ! fiat
@@ -185,10 +170,12 @@ model Orders {
   buy_txn_hash_merchant_lock_crypto     String?
   buy_txn_hash_merchant_release_crypto  String?
   // ! open
-  created_at                            DateTime?      @default(now())
-  updated_at                            DateTime?      @updatedAt
+  created_at                            DateTime?     @default(now())
+  updated_at                            DateTime?     @updatedAt
+  bank_id                               Int
+  bank                                  BankAccount?  @relation(fields: [bank_id], references: [id])
   customer_id                           Int
-  customer                              User?          @relation(fields: [customer_id], references: [id])
+  customer                              User?         @relation(fields: [customer_id], references: [id])
   merchant_id                           Int
 }
 
@@ -211,28 +198,6 @@ enum OrderActions {
   ReleaseCrypto
   Appeal
   Cancel
-}
-
-enum BankName {
-  NG_ZENITH
-  NG_GTB
-  NG_UBA
-  NG_FIDELITY
-  NG_OPAY
-  NG_MONIEPOINT
-  NG_WEMA
-  NG_UNITY
-  NG_STERLING
-  NG_STANBIC
-  NG_LOTUS
-  NG_KEYSTONE
-  NG_JAIZ
-  NG_KUDA
-  NG_PALMPAY
-  NG_ACCESS
-  NG_FCMB
-  NG_ECOBANK
-  NG_FIRST
 }
 
 enum CurrencyType {
@@ -268,6 +233,8 @@ enum TransactionCategory {
   GIFT_CARD
   EXPRESS_EXCHANGE
   P2P_EXCHANGE
+  OFF_RAMPING
+  ON_RAMPING
 }
 
 enum TransactionsMode {
@@ -284,9 +251,9 @@ model Transactions {
   id               Int                 @id @default(autoincrement())
   amount           Float
   transaction_hash String?
-  note             String
-  fiat_currency    CurrencyCrypto?
-  crypto_currency  CurrencyFiat?
+  note             String?
+  fiat_currency    CountryCode?
+  crypto_currency  String?
   category         TransactionCategory
   mode             TransactionsMode
   status           TransactionStatus

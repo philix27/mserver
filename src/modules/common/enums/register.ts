@@ -17,7 +17,7 @@ registerEnumType(OrderParticipant, {
 registerEnumType(OtpPurpose, {
     name: 'OtpPurpose',
 });
-registerEnumType($Enums.Country, {
+registerEnumType($Enums.CountryCode, {
     name: 'country',
 });
 
@@ -25,20 +25,14 @@ registerEnumType($Enums.ChainType, {
     name: 'ChainType',
 });
 
-registerEnumType($Enums.BankName, {
-    name: 'BankName',
-});
 
 registerEnumType($Enums.CredentialsStatus, {
     name: 'CredentialsStatus',
 });
 
-registerEnumType($Enums.CurrencyCrypto, {
-    name: 'CurrencyCrypto',
-});
 
-registerEnumType($Enums.CurrencyFiat, {
-    name: 'CurrencyFiat',
+registerEnumType($Enums.CountryCode, {
+    name: 'CountryCode',
 });
 
 registerEnumType($Enums.MerchantStatus, {

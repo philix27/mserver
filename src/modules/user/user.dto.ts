@@ -4,7 +4,7 @@ import { ID, ObjectType } from '@nestjs/graphql';
 import { registerEnumType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
 
-registerEnumType($Enums.Country, {
+registerEnumType($Enums.CountryCode, {
     name: 'Country',
 });
 
@@ -22,8 +22,8 @@ export class UserCreate {
     @Field({ nullable: true })
     email: string;
 
-    @Field((type) => $Enums.Country)
-    country: $Enums.Country;
+    @Field((type) => $Enums.CountryCode)
+    country: $Enums.CountryCode;
 
     @Field()
     password: string;
@@ -77,6 +77,6 @@ export class UserDto {
     @Field({ nullable: true })
     role?: string;
 
-    @Field((type) => $Enums.Country, { nullable: true })
-    country?: $Enums.Country;
+    @Field((type) => $Enums.CountryCode, { nullable: true })
+    country?: $Enums.CountryCode;
 }

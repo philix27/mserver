@@ -249,7 +249,7 @@ export class AuthService {
                 middlename: params.middlename,
                 email: params.email,
                 password: hashedPassword,
-                country: params.country,
+                country_code: params.country,
             },
         });
 
@@ -335,7 +335,7 @@ export class AuthService {
         });
 
         return {
-            country: user.country!,
+            country: user.country_code!,
             email: user.email!,
             firstname: user.firstname!,
             lastname: user.lastname!,

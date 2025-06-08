@@ -32,8 +32,8 @@ export class TransactionsService {
     public async create(
         input: {
             amount: number;
-            crypto_currency?: $Enums.CurrencyCrypto;
-            fiat_currency?: $Enums.CurrencyFiat;
+            crypto_currency?: string;
+            fiat_currency?: $Enums.CountryCode;
             category: $Enums.TransactionCategory;
             mode: $Enums.TransactionsMode;
             status: $Enums.TransactionStatus;
@@ -45,8 +45,8 @@ export class TransactionsService {
 
         const transact = await this.prisma.transactions.create({
             data: {
-                crypto_currency: input.fiat_currency,
-                fiat_currency: input.crypto_currency,
+                crypto_currency: input.crypto_currency,
+                fiat_currency: input.fiat_currency,
                 amount: input.amount,
                 category: input.category,
                 mode: input.mode,

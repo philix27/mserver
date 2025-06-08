@@ -1,5 +1,4 @@
 import { Field, InputType, ObjectType } from "@nestjs/graphql";
-import { $Enums } from "@prisma/client";
 
 @InputType()
 export class BankAccount_CreateInput {
@@ -9,8 +8,8 @@ export class BankAccount_CreateInput {
     @Field({ nullable: false })
     accountNo: string;
 
-    @Field((type) => $Enums.BankName)
-    bankName: $Enums.BankName;
+    @Field({ nullable: false })
+    bankName: string;
 }
 @ObjectType()
 export class BankAccount_Response {
@@ -23,8 +22,8 @@ export class BankAccount_Response {
     @Field({ nullable: false })
     account_no: string;
 
-    @Field((type) => $Enums.BankName)
-    bank_name: $Enums.BankName;
+    @Field({ nullable: false })
+    bank_name: string;
 }
 
 
