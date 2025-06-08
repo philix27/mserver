@@ -23,7 +23,7 @@ import { GqlErr } from '../common/errors/gqlErr';
 import { OtpPurpose } from '../common/enums';
 import { HelperService } from '../helper/helper.service';
 import { WalletCryptoService } from '../wallet-crypto/crypto.service';
-import { isValidEthereumAddress } from '../../lib';
+import { HpFn } from '../../lib';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +40,7 @@ export class AuthService {
     ): Promise<Auth_sendEmailOtpResponse> {
         this.logger.info('sendEmailOtp');
 
-        if (!this.isValidEmail(params.email))
+        if (!HpFn.isValidEmail(params.email))
             throw GqlErr('Invalid email address');
 
         if (params.purpose === OtpPurpose.SignUp) {
@@ -84,7 +84,7 @@ export class AuthService {
     ): Promise<Auth_LoginMinipayResponse> {
         this.logger.info('MinipayLogin: ' + params.walletAddress);
 
-        if (!isValidEthereumAddress(params.walletAddress))
+        if (!HpFn.isValidEthereumAddress(params.walletAddress))
             throw GqlErr('Invalid Ethereum Wallet');
 
         let cryptoWallet = await this.prisma.cryptoWallets.findFirst({
@@ -129,10 +129,10 @@ export class AuthService {
     ): Promise<Auth_LoginMinipayResponse> {
         this.logger.info('minipayCreateAccount: ' + params.walletAddress);
 
-        if (!isValidEthereumAddress(params.walletAddress))
+        if (!HpFn.isValidEthereumAddress(params.walletAddress))
             throw GqlErr('Invalid Ethereum Wallet');
 
-        if (params.fromLogin === false && !this.isValidEmail(params.email))
+        if (params.fromLogin === false && !HpFn.isValidEmail(params.email))
             throw GqlErr('Invalid email address');
 
         let user;
@@ -184,7 +184,7 @@ export class AuthService {
         params: Auth_TelegramLoginInput,
     ): Promise<Auth_TelegramLoginResponse> {
         this.logger.info('minipayCreateAccount: ' + params.walletAddress);
-
+        // todo: Validate telegram raw data and payload
         // if (!isValidEthereumAddress(params.walletAddress))
         //     throw GqlErr('Invalid Ethereum Wallet');
         let user;
@@ -229,10 +229,10 @@ export class AuthService {
         // try {
         this.logger.info('Create user account');
 
-        if (!this.isValidEmail(params.email))
+        if (!HpFn.isValidEmail(params.email))
             throw GqlErr('Invalid email address');
 
-        if (!this.isValidPassword(params.password))
+        if (!HpFn.isValidPassword(params.password))
             throw GqlErr('Invalid password structure');
 
         if (await this.doesEmailExist(params.email))
@@ -273,7 +273,7 @@ export class AuthService {
             throw GqlErr("Passwords doesn't match");
         }
 
-        if (!this.isValidPassword(params.password))
+        if (!HpFn.isValidPassword(params.password))
             throw GqlErr('Invalid password structure');
 
         const hashedPassword = await this.jwtService.hashPassword(
@@ -349,10 +349,6 @@ export class AuthService {
         this.logger.info('Deleting platform');
     }
 
-    private isValidEmail(email: string) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
     private async doesEmailExist(email: string) {
         const user = await this.prisma.user.findFirst({
             where: {
@@ -361,10 +357,5 @@ export class AuthService {
         });
 
         return user ? true : false;
-    }
-    private isValidPassword(password: string) {
-        const passwordRegex =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
-        return passwordRegex.test(password);
     }
 }

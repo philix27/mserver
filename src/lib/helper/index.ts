@@ -1,1 +1,5 @@
-export * from "./isAddress"
+import * as a from './isAddress';
+
+export const HpFn = {
+    ...a,
+};

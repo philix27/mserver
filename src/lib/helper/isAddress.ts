@@ -1,4 +1,4 @@
-import { isAddress } from "ethers"; // ethers v6 (or use utils.isAddress in v5)
+import { isAddress } from 'ethers'; // ethers v6 (or use utils.isAddress in v5)
 
 /**
  * Validates an Ethereum wallet address.
@@ -12,4 +12,15 @@ export function isValidEthereumAddress(address: string): boolean {
 
     // Use ethers.js for checksum validation (ensures correct case sensitivity)
     return isAddress(address);
+}
+
+export function isValidEmail(email: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+export function isValidPassword(password: string) {
+    const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    return passwordRegex.test(password);
 }
