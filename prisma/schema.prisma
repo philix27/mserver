@@ -27,8 +27,13 @@ model User {
   bvn_status            CredentialsStatus? @default(NONE)
   nin                   String?
   nin_status            CredentialsStatus? @default(NONE)
+  dob                   String?
+  dob_status            CredentialsStatus? @default(NONE)
   home_address          String?
+  street_address        String?
+  state                 String?
   phone                 String?
+  proof_of_address      String?
   phone_verified        Boolean?           @default(false)
   crypto_wallets        CryptoWallets[]
   bank_accounts         BankAccount[]

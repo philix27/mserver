@@ -6,7 +6,7 @@ import { NotificationService } from '../notification/notification.service';
 import { KycResolver } from './kyc.resolver';
 import { GqlAuthGuard } from '../common/guards';
 import { HelperService } from '../helper/helper.service';
-import { SelfService } from './self.service';
+// import { SelfService } from './self.service';
 
 @Module({
     imports: [CommonModule, NotificationModule],
@@ -16,7 +16,7 @@ import { SelfService } from './self.service';
         NotificationService,
         GqlAuthGuard,
         HelperService,
-        SelfService,
+        // SelfService,
     ],
     exports: [],
 })

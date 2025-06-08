@@ -1,58 +1,161 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import {
+    Kyc_AddAddressInfoInput,
+    Kyc_AddAddressProofInput,
     Kyc_AddBvnInput,
     Kyc_AddBvnResponse,
+    Kyc_AddDobInput,
+    Kyc_AddNamesInput,
     Kyc_AddNinInput,
     Kyc_AddNinResponse,
     Kyc_CreateTransactionPinInput,
+    Kyc_Response,
     Kyc_SendEmailOtpInput,
     Kyc_SendEmailResponse,
     Kyc_SendPhoneOtpInput,
     Kyc_VerifyEmailOtpInput,
     Kyc_VerifyEmailResponse,
     Kyc_VerifyPhoneOtpInput,
-} from "./kyc.dto";
-import { UserInput } from "../../lib";
-import { GqlErr } from "../common/errors/gqlErr";
+} from './kyc.dto';
+import { UserInput } from '../../lib';
+import { GqlErr } from '../common/errors/gqlErr';
+import { LoggerService, PrismaService } from '../common';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable()
 export class KycService {
-    public constructor() {} // private readonly notification: NotificationService // private readonly logger: LoggerService
+    public constructor(
+        private readonly logger: LoggerService,
+        private readonly notification: NotificationService,
+        private readonly prisma: PrismaService,
+    ) {} // private readonly notification: NotificationService // private readonly logger: LoggerService
 
     public async sendPhoneOtp(params: Kyc_SendPhoneOtpInput & UserInput) {
         // this.logger.info("Creating platform account ...");
-        throw GqlErr("Unimplemented");
+        throw GqlErr('Unimplemented');
     }
 
     public async verifyPhoneOtp(params: Kyc_VerifyPhoneOtpInput & UserInput) {
-        throw GqlErr("Unimplemented");
+        throw GqlErr('Unimplemented');
     }
 
     public async createTransactionPin(params: Kyc_CreateTransactionPinInput) {
-        throw GqlErr("Unimplemented");
+        throw GqlErr('Unimplemented');
     }
 
     public async addBvn(
-        params: Kyc_AddBvnInput & UserInput
+        params: Kyc_AddBvnInput & UserInput,
     ): Promise<Kyc_AddBvnResponse> {
-        throw GqlErr("Unimplemented");
+        this.logger.info('KYC - Add BVN number');
+        const res = await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                bvn: params.bvn,
+                bvn_status: 'REVIEW',
+            },
+        });
+        return {
+            message: 'BVN verification request sent',
+        };
     }
 
     public async addNin(
-        params: Kyc_AddNinInput & UserInput
+        params: Kyc_AddNinInput & UserInput,
     ): Promise<Kyc_AddNinResponse> {
-        throw GqlErr("Unimplemented");
+        this.logger.info('KYC - Add NIN number');
+        const res = await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                nin: params.nin,
+                nin_status: 'REVIEW',
+            },
+        });
+
+        return {
+            message: 'NIN verification request sent',
+        };
     }
 
-    public async sendEmailOtp(
-        params: Kyc_SendEmailOtpInput & UserInput
-    ): Promise<Kyc_SendEmailResponse> {
-        throw GqlErr("Unimplemented");
+    public async addNames(
+        params: Kyc_AddNamesInput & UserInput,
+    ): Promise<Kyc_Response> {
+        this.logger.info('KYC - Add names');
+
+        await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                firstname: params.firstName,
+                lastname: params.lastName,
+                middlename: params.middleName,
+            },
+        });
+
+        return {
+            message: 'Update user names',
+        };
     }
 
-    public async verifyEmailOtp(
-        params: Kyc_VerifyEmailOtpInput & UserInput
-    ): Promise<Kyc_VerifyEmailResponse> {
-        throw GqlErr("Unimplemented");
+    public async addDob(
+        params: Kyc_AddDobInput & UserInput,
+    ): Promise<Kyc_Response> {
+        this.logger.info('KYC - Add Date of Birth');
+        await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                dob: params.dob,
+                dob_status: 'REVIEW',
+            },
+        });
+
+        return {
+            message: 'Date of Birth added',
+        };
+    }
+
+    public async addAddressInfo(
+        params: Kyc_AddAddressInfoInput & UserInput,
+    ): Promise<Kyc_Response> {
+        this.logger.info('KYC - Add address info');
+        await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                street_address: params.street,
+                state: params.state,
+                country_code: params.country,
+                home_address: params.houseAddress,
+            },
+        });
+
+        return {
+            message: 'Address updated',
+        };
+    }
+
+    public async addAddressProof(
+        params: Kyc_AddAddressProofInput & UserInput,
+    ): Promise<Kyc_Response> {
+        this.logger.info('KYC - Proof of address');
+        await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                proof_of_address: params.proofOfAddressUrl,
+            },
+        });
+
+        return {
+            message: 'Address updated',
+        };
     }
 }

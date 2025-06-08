@@ -15,7 +15,7 @@ import { AdvertsModule } from './adverts/adverts.module';
 import { CronModule } from './cron/cron.module';
 import { WalletCryptoModule } from './wallet-crypto/crypto.module';
 import { WalletFiatModule } from './wallet-fiat/fiat.module';
-// import { KycModule } from "./kyc/kyc.module";
+import { KycModule } from "./kyc/kyc.module";
 import { ExchangeRateModule } from './rates/rates.module';
 import { OrdersModule } from './orders/orders.module';
 import { UtilitiesModule } from './utilities/utilities.module';
@@ -55,7 +55,7 @@ import { HelpersModule } from './helper/helper.module';
         AdvertsModule,
         CronModule,
         OrdersModule,
-        // KycModule,
+        KycModule,
         WalletFiatModule,
         WalletCryptoModule,
         ExchangeRateModule,

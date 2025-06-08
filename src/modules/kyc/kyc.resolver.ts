@@ -2,10 +2,15 @@ import { Args, Context, Mutation, Resolver } from "@nestjs/graphql";
 
 import { KycService } from "./kyc.service";
 import {
+    Kyc_AddAddressInfoInput,
+    Kyc_AddAddressProofInput,
     Kyc_AddBvnInput,
     Kyc_AddBvnResponse,
+    Kyc_AddDobInput,
+    Kyc_AddNamesInput,
     Kyc_AddNinInput,
     Kyc_AddNinResponse,
+    Kyc_Response,
     Kyc_SendEmailOtpInput,
     Kyc_SendEmailResponse,
     Kyc_VerifyEmailOtpInput,
@@ -24,7 +29,7 @@ export class KycResolver {
     @UseGuards(GqlAuthGuard)
     async kyc_addBvn(
         @Context() context: IContextUser,
-        @Args("input") input: Kyc_AddBvnInput
+        @Args('input') input: Kyc_AddBvnInput,
     ): Promise<Kyc_AddBvnResponse> {
         const res = await this.service.addBvn({
             ...input,
@@ -38,7 +43,7 @@ export class KycResolver {
     @UseGuards(GqlAuthGuard)
     async kyc_addNin(
         @Context() context: IContextUser,
-        @Args("input") input: Kyc_AddNinInput
+        @Args('input') input: Kyc_AddNinInput,
     ): Promise<Kyc_AddNinResponse> {
         const res = await this.service.addNin({
             ...input,
@@ -48,13 +53,13 @@ export class KycResolver {
         return res!;
     }
 
-    @Mutation((returns) => Kyc_VerifyEmailResponse)
+    @Mutation((returns) => Kyc_Response)
     @UseGuards(GqlAuthGuard)
-    async kyc_verifyEmailOtp(
+    async kyc_addNames(
         @Context() context: IContextUser,
-        @Args("input") input: Kyc_VerifyEmailOtpInput
-    ): Promise<Kyc_VerifyEmailResponse> {
-        const res = await this.service.verifyEmailOtp({
+        @Args('input') input: Kyc_AddNamesInput,
+    ): Promise<Kyc_Response> {
+        const res = await this.service.addNames({
             ...input,
             userId: context.req.userId,
         });
@@ -62,13 +67,41 @@ export class KycResolver {
         return res!;
     }
 
-    @Mutation((returns) => Kyc_SendEmailResponse)
+    @Mutation((returns) => Kyc_Response)
     @UseGuards(GqlAuthGuard)
-    async kyc_sendEmailOtp(
+    async kyc_addDob(
         @Context() context: IContextUser,
-        @Args("input") input: Kyc_SendEmailOtpInput
-    ): Promise<Kyc_SendEmailResponse> {
-        const res = await this.service.sendEmailOtp({
+        @Args('input') input: Kyc_AddDobInput,
+    ): Promise<Kyc_Response> {
+        const res = await this.service.addDob({
+            ...input,
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Mutation((returns) => Kyc_Response)
+    @UseGuards(GqlAuthGuard)
+    async kyc_addAddressInfo(
+        @Context() context: IContextUser,
+        @Args('input') input: Kyc_AddAddressInfoInput,
+    ): Promise<Kyc_Response> {
+        const res = await this.service.addAddressInfo({
+            ...input,
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Mutation((returns) => Kyc_Response)
+    @UseGuards(GqlAuthGuard)
+    async kyc_addAddressProof(
+        @Context() context: IContextUser,
+        @Args('input') input: Kyc_AddAddressProofInput,
+    ): Promise<Kyc_Response> {
+        const res = await this.service.addAddressProof({
             ...input,
             userId: context.req.userId,
         });
