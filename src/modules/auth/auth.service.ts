@@ -25,6 +25,7 @@ import { OtpPurpose } from '../common/enums';
 import { HelperService } from '../helper/helper.service';
 import { WalletCryptoService } from '../wallet-crypto/crypto.service';
 import { HpFn } from '../../lib';
+import { ThirdwebService } from './thirdweb.service';
 
 @Injectable()
 export class AuthService {
@@ -34,6 +35,7 @@ export class AuthService {
         private readonly prisma: PrismaService,
         private readonly walletCrypto: WalletCryptoService,
         private readonly jwtService: HelperService,
+        private readonly thirdweb: ThirdwebService,
     ) {}
 
     public async sendEmailOtp(
@@ -371,8 +373,11 @@ export class AuthService {
         if (!HpFn.isValidEmail(params.email))
             throw GqlErr('Invalid Email address');
 
-        if (!this.verifyThirdwebPayload(params.payload))
-            throw GqlErr('You need to login first');
+        const userData = await this.thirdweb.verifyThirdwebToken(
+            params.payload,
+        );
+
+        if (!userData) throw GqlErr('You need to login first');
 
         let _user = await this.prisma.user.findFirst({
             where: {
@@ -407,9 +412,5 @@ export class AuthService {
             lastname: _user.lastname!,
             middlename: _user.middlename!,
         };
-    }
-
-    private verifyThirdwebPayload(payload: string): boolean {
-        return false;
     }
 }

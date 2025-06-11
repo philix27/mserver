@@ -16,6 +16,7 @@ import { ConfigModule } from "@nestjs/config";
 import { HelperService } from "../helper/helper.service";
 import { HelpersModule } from "../helper/helper.module";
 import { AuthController } from "./auth.controller";
+import { ThirdwebService } from "./thirdweb.service";
 
 @Module({
     imports: [
@@ -36,6 +37,7 @@ import { AuthController } from "./auth.controller";
         UserService,
         PrivyWalletService,
         JwtStrategy,
+        ThirdwebService,
     ],
     controllers: [AuthController],
     // exports: [JwtStrategy, GqlAuthGuard],

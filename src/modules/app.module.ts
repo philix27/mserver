@@ -47,7 +47,6 @@ import { HelpersModule } from './helper/helper.module';
         }),
         CommonModule,
         HelpersModule,
-        // PubSubModule,
         NotificationModule,
         AuthModule,
         UserModule,
@@ -61,6 +60,7 @@ import { HelpersModule } from './helper/helper.module';
         ExchangeRateModule,
         UtilitiesModule,
         TransactionsModule,
+        // PubSubModule,
         // CryptoModule,
     ],
 })
