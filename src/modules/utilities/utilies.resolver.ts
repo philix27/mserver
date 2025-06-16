@@ -10,7 +10,7 @@ import {
 import { GqlAuthGuard, VendorGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
 
-@Resolver((of: any) => Utilities_PurchaseTopUpResponse)
+@Resolver((of: any) => Utilities_PurchaseTopUpResponse, { isAbstract: false })
 export class UtilitiesResolver {
     constructor(private readonly service: UtilitiesService) {}
 
@@ -56,13 +56,13 @@ export class UtilitiesResolver {
         return res!;
     }
 
-    @Query((returns) => [Utilities_GetOperatorResponse])
+    @Query((returns) => Utilities_GetOperatorResponse)
     @UseGuards(VendorGuard)
-    async utility_getOperators(
+    async utility_getTopUpOperators(
         @Context() context: { req: { userId: number } },
         @Args('input') input: Utilities_GetOperatorsInput,
-    ): Promise<Utilities_GetOperatorResponse[]> {
-        const res = await this.service.getAirtimeOperators({
+    ): Promise<Utilities_GetOperatorResponse> {
+        const res = await this.service.getOperators({
             userId: context.req.userId,
             ...input,
         });

@@ -7,6 +7,7 @@ import {
     registerEnumType,
 } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
+import { number } from 'joi';
 
 export enum Operator {
     MTN = 'MTN',
@@ -33,8 +34,8 @@ export class Utilities_PurchaseAirtimeInput {
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;
 
-    @Field((type) => Operator)
-    operator: Operator;
+    @Field((type) => Int)
+    operatorId: number;
 }
 @InputType()
 export class Utilities_PurchaseDataBundleInput {
@@ -51,7 +52,7 @@ export class Utilities_PurchaseDataBundleInput {
     countryCode: $Enums.CountryCode;
 
     @Field((type) => Int)
-    operator: number;
+    operatorId: number;
 }
 
 @InputType()
@@ -77,14 +78,56 @@ export class Utilities_PurchaseTopUpResponse {
 
 @ObjectType()
 export class Utilities_GetOperatorResponse {
+    @Field((type) => [IOperator])
+    dataPlan: IOperator[];
+
+    @Field((type) => [IOperator])
+    dataBundles: IOperator[];
+
+    @Field((type) => [IAirtimeOperator])
+    airtime: IAirtimeOperator[];
+}
+
+@ObjectType()
+class IOperator {
     @Field((type) => String)
     name: string;
+
     @Field((type) => String)
     logo: string;
+
     @Field((type) => Int)
     operatorId: number;
+
+    @Field((type) => [IDataPlan], { nullable: true })
+    plans?: IDataPlan[];
+}
+
+@ObjectType()
+class IAirtimeOperator {
+    @Field((type) => String)
+    name: string;
+
+    @Field((type) => String)
+    logo: string;
+
     @Field((type) => Int)
-    maxAmount: number;
+    operatorId: number;
+
+    @Field((type) => Int, { nullable: true })
+    maxAmount?: number;
+
+    @Field((type) => Int, { nullable: true })
+    minAmount?: number;
+
+    @Field((type) => [Int], { nullable: true })
+    suggestedAmounts?: number[];
+}
+@ObjectType()
+export class IDataPlan {
     @Field((type) => Int)
-    minAmount: number;
+    amount: number;
+
+    @Field((type) => String)
+    desc: string;
 }

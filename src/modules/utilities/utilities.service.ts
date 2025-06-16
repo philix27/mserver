@@ -10,7 +10,7 @@ import {
 import { UserInput } from '../../lib';
 import { ReloadlyTopUpService } from '../../lib/integrations/reloadly';
 import { TransactionsService } from '../transactions/transact.service';
-import { operatorsData } from './operatorsData';
+import { operatorsData } from './operatorData';
 
 @Injectable()
 export class UtilitiesService {
@@ -48,7 +48,7 @@ export class UtilitiesService {
 
         const res = await this.reloadly.topUpAirtime({
             amount: `${input.amount}.00`,
-            operatorId: input.operator,
+            operatorId: input.operatorId,
             recipientPhone: {
                 countryCode: input.countryCode,
                 number: input.phoneNo,
@@ -68,17 +68,17 @@ export class UtilitiesService {
             transaction_hash: input.transaction_hash,
         });
 
-        this.logger.info(res.customIdentifier);
+        // this.logger.info('Custom Identifier ' + res.customIdentifier);
         return { message: 'Successful' };
     }
     public async purchaseDataBundle(
         input: Utilities_PurchaseDataBundleInput & UserInput,
     ): Promise<Utilities_PurchaseTopUpResponse> {
-        this.logger.info('Purchase Airtime');
+        this.logger.info('Purchase Data bundle');
 
         const res = await this.reloadly.topUpAirtime({
             amount: `${input.amount}.00`,
-            operatorId: input.operator,
+            operatorId: input.operatorId,
             recipientPhone: {
                 countryCode: input.countryCode,
                 number: input.phoneNo,
@@ -98,18 +98,17 @@ export class UtilitiesService {
             transaction_hash: input.transaction_hash,
         });
 
-        this.logger.info(res.customIdentifier);
+        // this.logger.info(res.customIdentifier);
         return { message: 'Successful' };
     }
 
-    public async getAirtimeOperators(
+    public async getOperators(
         input: Utilities_GetOperatorsInput & UserInput,
-    ): Promise<Utilities_GetOperatorResponse[]> {
-        this.logger.info('Purchase Airtime');
+    ): Promise<Utilities_GetOperatorResponse> {
+        this.logger.info('Fetching operators');
 
-        const list = operatorsData[input.countryCode].airtime;
+        const list = operatorsData[input.countryCode];
 
-        this.logger.info('Get airtime operators');
         return list;
     }
 

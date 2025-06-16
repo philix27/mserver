@@ -6,12 +6,12 @@ import { ITopUpAirtime } from './t.topUpAirtime';
 import { $Enums } from '@prisma/client';
 
 export type IReloadlyOperatorId = 'MTN' | 'AIRTEL' | 'GLO' | 'ETISALAT';
-export const OperatorId: Record<IReloadlyOperatorId, string> = {
-    ETISALAT: '340',
-    MTN: '341',
-    AIRTEL: '342',
-    GLO: '344',
-};
+// export const OperatorId: Record<IReloadlyOperatorId, string> = {
+//     ETISALAT: '340',
+//     MTN: '341',
+//     AIRTEL: '342',
+//     GLO: '344',
+// };
 
 @Injectable()
 export class ReloadlyTopUpService {
@@ -35,7 +35,7 @@ export class ReloadlyTopUpService {
     async topUpAirtime(props: {
         //  amount should have 2 place decimal number
         amount: string;
-        operatorId: keyof typeof OperatorId | number;
+        operatorId: number;
         customIdentifier: string;
         useLocalAmount: boolean;
         recipientPhone: {
@@ -56,7 +56,7 @@ export class ReloadlyTopUpService {
                 operatorId: props.operatorId,
             };
         } else {
-            payload = { ...props, operatorId: OperatorId[props.operatorId] };
+            payload = { ...props, operatorId: props.operatorId };
         }
 
         this.logger.info('Header: ' + JSON.stringify(this.header));

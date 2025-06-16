@@ -365,7 +365,7 @@ export class AuthService {
     public async thirdwebLogin(
         params: Auth_ThirdwebLoginInput,
     ): Promise<Auth_LoginMinipayResponse> {
-        this.logger.info('MinipayLogin: ' + params.walletAddress);
+        this.logger.info('thirdwebLogin: ' + params.walletAddress);
 
         if (!HpFn.isValidEthereumAddress(params.walletAddress))
             throw GqlErr('Invalid Ethereum Wallet');
@@ -386,6 +386,7 @@ export class AuthService {
         });
 
         if (!_user) {
+            console.log('No user found. Creating a new user');
             _user = await this.prisma.user.create({
                 data: {
                     email: params.email,
