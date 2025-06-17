@@ -7,10 +7,11 @@ import {
     Utilities_GetOperatorResponse,
     Utilities_GetOperatorsInput,
 } from './utilities.dto';
-import { GqlAuthGuard,  } from '../common/guards';
+import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
 
-@Resolver((of: any) => Utilities_PurchaseTopUpResponse, { isAbstract: false })
+// @Resolver((of: any) => Utilities_PurchaseTopUpResponse, { isAbstract: false })
+@Resolver()
 export class UtilitiesResolver {
     constructor(private readonly service: UtilitiesService) {}
 

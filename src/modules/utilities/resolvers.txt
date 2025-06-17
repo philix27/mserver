@@ -1,0 +1,31 @@
+// TODO:
+
+import { ObjectType, Field } from '@nestjs/graphql';
+import { BettingPaymentResponse } from './Betting/Betting.dto';
+
+@ObjectType()
+export class Betting {
+    @Field((type) => BettingPaymentResponse)
+    makePayment: BettingPaymentResponse;
+}
+
+@ObjectType()
+export class Electricity {
+    @Field(() => [String])
+    listAll(): string[] {
+        return ['Admin1', 'Admin2'];
+    }
+}
+
+@ObjectType()
+export class Utilities {
+    @Field(() => Betting)
+    betting(): Betting {
+        return new Betting();
+    }
+
+    @Field(() => Electricity)
+    electricity(): Electricity {
+        return new Electricity();
+    }
+}

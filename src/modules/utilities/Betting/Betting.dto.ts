@@ -20,7 +20,7 @@ export class BettingPaymentInput {
 }
 
 @ObjectType()
-export class BettingPaymentResponseData {
+export class BettingPaymentResponse {
     @Field((type) => Int)
     order_id: number;
 
@@ -67,24 +67,12 @@ export class BettingPaymentResponseData {
     request_id: string;
 }
 
-@ObjectType()
-export class BettingPaymentResponse {
-    @Field((type) => String)
+export interface IBettingPaymentResponse {
     code: string;
 
-    @Field((type) => String)
-    message: string;
-    // message: 'ORDER PROCESSING' | 'ORDER COMPLETED' | 'ORDER REFUNDED';
-    @Field((type) => BettingPaymentResponseData)
-    data: BettingPaymentResponseData;
+    message: 'ORDER PROCESSING' | 'ORDER COMPLETED' | 'ORDER REFUNDED';
 
-    // Amount in NGN (min ₦100, max ₦100,000).
-
-    @Field((type) => Int)
-    maxAmount: number;
-
-    @Field((type) => Int)
-    minAmount: number;
+    data: BettingPaymentResponse;
 }
 
 @ObjectType()

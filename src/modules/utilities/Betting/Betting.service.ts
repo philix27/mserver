@@ -9,6 +9,7 @@ import {
     BettingPaymentResponse,
     BettingProvidersInput,
     BettingProvidersResponse,
+    IBettingPaymentResponse,
 } from './Betting.dto';
 
 @Injectable()
@@ -46,9 +47,12 @@ export class FundBettingWalletService {
             throw GqlErr('No provider for this country');
         }
 
+        // validate
+        // Amount in NGN (min ₦100, max ₦100,000).
+
         const url = 'https://ebills.africa/wp-json/api/v2/betting';
 
-        const response = await axios.post(
+        const response = (await axios.post(
             url,
             {
                 // wallet id
@@ -61,7 +65,7 @@ export class FundBettingWalletService {
                 amount: input.amount,
             },
             this.headers,
-        );
+        )) as IBettingPaymentResponse;
 
         await this.transaction.create({
             amount: input.amount,
@@ -79,11 +83,7 @@ export class FundBettingWalletService {
             transaction_hash: input.transaction_hash,
         });
 
-        return {
-            ...response.data,
-            maxAmount: 100_000,
-            minAmount: 100,
-        };
+        return response.data;
     }
 }
 

@@ -9,13 +9,13 @@ import {
 import { FundBettingWalletService } from './Betting.service';
 import { GqlAuthGuard } from '../../common/guards';
 
-@Resolver((of: any) => BettingPaymentResponse)
+@Resolver()
 export class FundBettingWalletResolver {
     constructor(private readonly service: FundBettingWalletService) {}
 
     @Mutation((returns) => BettingPaymentResponse)
     @UseGuards(GqlAuthGuard)
-    async makePayment(
+    async fundBetting_makePayment(
         @Args('input') input: BettingPaymentInput,
         @Context() context: { req: { userId: number } },
     ): Promise<BettingPaymentResponse> {
@@ -29,7 +29,7 @@ export class FundBettingWalletResolver {
 
     @Query((returns) => [BettingProvidersResponse])
     @UseGuards(GqlAuthGuard)
-    async getProviders(
+    async fundBetting_getProviders(
         @Context() context: { req: { userId: number } },
         @Args('input') input: BettingProvidersInput,
     ): Promise<BettingProvidersResponse[]> {
