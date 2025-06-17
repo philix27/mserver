@@ -9,17 +9,6 @@ import {
 import { $Enums } from '@prisma/client';
 import { number } from 'joi';
 
-export enum Operator {
-    MTN = 'MTN',
-    AIRTEL = 'AIRTEL',
-    GLO = 'GLO',
-    ETISALAT = 'ETISALAT',
-}
-
-registerEnumType(Operator, {
-    name: 'Operator',
-});
-
 @InputType()
 export class Utilities_PurchaseAirtimeInput {
     @Field({ nullable: false })
@@ -59,6 +48,43 @@ export class Utilities_PurchaseDataBundleInput {
 export class Utilities_GetOperatorsInput {
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;
+}
+
+export enum BillerType {
+    Electricity = 'Electricity',
+    Water = 'Water',
+    Internet = 'Internet',
+}
+
+registerEnumType(BillerType, {
+    name: 'BillerType',
+});
+
+@InputType()
+export class Utilities_GetBillingOperatorsInput {
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
+
+    @Field((type) => BillerType, { nullable: true })
+    biller_type?: BillerType;
+}
+
+@ObjectType()
+export class Utilities_BillingResponse {
+    @Field((type) => String)
+    name: string;
+
+    @Field((type) => String)
+    category: string;
+
+    @Field((type) => String)
+    slug: string;
+
+    @Field((type) => Boolean)
+    status: boolean;
+
+    @Field((type) => String)
+    logo: string;
 }
 
 // @InputType()

@@ -1,0 +1,103 @@
+import { InputType, Field, Int, ObjectType } from '@nestjs/graphql';
+import { $Enums } from '@prisma/client';
+
+@InputType()
+export class BettingPaymentInput {
+    @Field((type) => String)
+    customer_id: string;
+
+    @Field((type) => String)
+    service_id: string;
+
+    @Field((type) => Int)
+    amount: number;
+
+    @Field()
+    transaction_hash: string;
+
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
+}
+
+@ObjectType()
+export class BettingPaymentResponseData {
+    @Field((type) => Int)
+    order_id: number;
+
+    @Field((type) => String)
+    status: string;
+
+    @Field((type) => String)
+    product_name: string;
+
+    @Field((type) => String)
+    service_name: string;
+
+    @Field((type) => String)
+    customer_id: string;
+
+    @Field((type) => String)
+    customer_name: string;
+
+    @Field((type) => String)
+    customer_username: string;
+
+    @Field((type) => String)
+    customer_email_address: string;
+
+    @Field((type) => String)
+    customer_phone_number: string;
+
+    @Field((type) => Int)
+    amount: number;
+
+    // @Field((type) => String)
+    // amount_charged: string;
+
+    // @Field((type) => String)
+    // discount: string;
+
+    // @Field((type) => String)
+    // initial_balance: string;
+
+    // @Field((type) => String)
+    // final_balance: string;
+
+    @Field((type) => String)
+    request_id: string;
+}
+
+@ObjectType()
+export class BettingPaymentResponse {
+    @Field((type) => String)
+    code: string;
+
+    @Field((type) => String)
+    message: string;
+    // message: 'ORDER PROCESSING' | 'ORDER COMPLETED' | 'ORDER REFUNDED';
+    @Field((type) => BettingPaymentResponseData)
+    data: BettingPaymentResponseData;
+
+    // Amount in NGN (min ₦100, max ₦100,000).
+
+    @Field((type) => Int)
+    maxAmount: number;
+
+    @Field((type) => Int)
+    minAmount: number;
+}
+
+@ObjectType()
+export class BettingProvidersResponse {
+    @Field((type) => String)
+    name: string;
+
+    @Field((type) => String)
+    logo: string;
+}
+
+@InputType()
+export class BettingProvidersInput {
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
+}

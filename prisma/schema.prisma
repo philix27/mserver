@@ -240,6 +240,11 @@ enum TransactionCategory {
   P2P_EXCHANGE
   OFF_RAMPING
   ON_RAMPING
+  BETTING_WALLET
+  ELECTRICITY_BILL
+  TV_BILL
+  WATER_BILL
+  INTERNET_BILL
 }
 
 enum TransactionsMode {

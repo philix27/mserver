@@ -7,7 +7,7 @@ import {
     Utilities_GetOperatorResponse,
     Utilities_GetOperatorsInput,
 } from './utilities.dto';
-import { GqlAuthGuard, VendorGuard } from '../common/guards';
+import { GqlAuthGuard,  } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
 
 @Resolver((of: any) => Utilities_PurchaseTopUpResponse, { isAbstract: false })
@@ -57,7 +57,7 @@ export class UtilitiesResolver {
     }
 
     @Query((returns) => Utilities_GetOperatorResponse)
-    @UseGuards(VendorGuard)
+    @UseGuards(GqlAuthGuard)
     async utility_getTopUpOperators(
         @Context() context: { req: { userId: number } },
         @Args('input') input: Utilities_GetOperatorsInput,
