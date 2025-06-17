@@ -1,19 +1,19 @@
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
 
-export interface ElectricityBillProviders {
+export interface IElectricityBillProviders {
     status: string;
     message: string;
-    data: ElectricityBillProvidersResponse[];
+    data: ElectricityBill_ProvidersResponse[];
 }
 @InputType()
-export class ElectricityBillProviderInput {
+export class ElectricityBill_ProviderInput {
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;
 }
 
 @ObjectType()
-export class ElectricityBillProvidersResponse {
+export class ElectricityBill_ProvidersResponse {
     @Field((type) => String)
     name: string;
 
@@ -32,7 +32,7 @@ export class ElectricityBillProvidersResponse {
 
 // Section
 @InputType()
-export class ElectricityValidateAccountInput {
+export class ElectricityBill_ValidateAccountInput {
     @Field((type) => String)
     service: string;
 
@@ -51,11 +51,11 @@ export interface IElectricityValidateAccountResponse {
 
     message: string;
 
-    data: ElectricityValidateAccountResponse;
+    data: ElectricityBill_ValidateAccountResponse;
 }
 
 @ObjectType()
-export class ElectricityValidateAccountResponse {
+export class ElectricityBill_ValidateAccountResponse {
     @Field((type) => String)
     customerName: string;
 
@@ -74,7 +74,7 @@ export class ElectricityValidateAccountResponse {
 
 //
 @InputType()
-export class ElectricityPaymentInput {
+export class ElectricityBill_PaymentInput {
     @Field((type) => String)
     service: string;
 
@@ -106,11 +106,11 @@ export class ElectricityPaymentInput {
 export interface IElectricityPaymentResponse {
     status: string;
     message: string;
-    data: ElectricityPaymentResponse;
+    data: ElectricityBill_PaymentResponse;
 }
 
 @ObjectType()
-export class ElectricityPaymentResponse {
+export class ElectricityBill_PaymentResponse {
     @Field((type) => String)
     reference: string;
 

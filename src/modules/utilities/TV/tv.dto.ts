@@ -1,21 +1,25 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
+import { $Enums } from '@prisma/client';
 
-@ObjectType()
-export class GetTVResponse {
-    @Field((type) => String)
+export interface IGetTVProvidersResponse {
     status: string;
 
-    @Field((type) => String)
     message: string;
 
-    @Field((type) => [GetTVResponseData])
-    data: GetTVResponseData[];
+    data: TvBill_GetTVProvidersResponse[];
+}
+
+@InputType()
+export class TvBill_GetTVProvidersInput {
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
 }
 
 @ObjectType()
-export class GetTVResponseData {
+export class TvBill_GetTVProvidersResponse {
     @Field((type) => String)
     name: string;
+
     @Field((type) => String)
     category: string;
 
@@ -30,26 +34,28 @@ export class GetTVResponseData {
 }
 
 // Section
-@ObjectType()
-export class GetBouquetResponse {
+
+@InputType()
+export class TvBill_GetTVBouquetInput {
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
+
     @Field((type) => String)
+    service: string;
+}
+
+export interface IGetBouquetResponse {
     status: string;
 
-    @Field((type) => String)
     message: string;
 
-    @Field((type) => GetBouquetData)
-    data: GetBouquetData;
+    data: {
+        packages: TvBill_GetBouquetPackageResponse[];
+    };
 }
 
 @ObjectType()
-export class GetBouquetData {
-    @Field((type) => [Package])
-    packages: Package[];
-}
-
-@ObjectType()
-export class Package {
+export class TvBill_GetBouquetPackageResponse {
     @Field((type) => String)
     code: string;
 
@@ -62,7 +68,7 @@ export class Package {
 
 // Section
 @InputType()
-export class ValidateAccountInput {
+export class TvBill_ValidateAccountInput {
     @Field((type) => String)
     service: string;
 
@@ -70,20 +76,16 @@ export class ValidateAccountInput {
     smartCardNumber: string;
 }
 
-@ObjectType()
-export class ValidateAccountResponse {
-    @Field((type) => String)
+export interface IValidateAccountResponse {
     status: string;
 
-    @Field((type) => String)
     message: string;
 
-    @Field((type) => ValidateAccountResponseData)
-    data: ValidateAccountResponseData;
+    data: TvBill_ValidateAccountResponse;
 }
 
 @ObjectType()
-export class ValidateAccountResponseData {
+export class TvBill_ValidateAccountResponse {
     @Field((type) => String)
     customerName: string;
 
@@ -96,7 +98,7 @@ export class ValidateAccountResponseData {
 
 // Section Payment
 @InputType()
-export class PaymentInput {
+export class TvBill_PaymentInput {
     @Field((type) => String)
     service: string;
 
@@ -114,32 +116,40 @@ export class PaymentInput {
 
     @Field((type) => String)
     reference: string;
+
+    @Field((type) => String)
+    txn_hash: string;
+
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
 }
 
-@ObjectType()
-export class PaymentResponse {
-    @Field((type) => String)
+export interface IPaymentResponse {
     status: string;
-
-    @Field((type) => String)
     message: string;
+    data: IPaymentData;
+}
 
-    @Field((type) => String)
-    data: PaymentResponseData;
+export interface IPaymentData {
+    reference: string;
+    amount: number;
+    chargedAmount: number;
+    commission: number;
+    biller: string;
+    customerId: string;
+    token: String;
+    unit: String;
+    bonusToken: String;
+    transactionDate: string;
+    transactionId: string;
 }
 
 @ObjectType()
-export class PaymentResponseData {
-    @Field((type) => String)
-    reference: string;
-
-    @Field((type) => String)
+export class TvBill_PaymentResponse {
+    @Field((type) => Int)
     amount: number;
 
-    @Field((type) => String)
-    chargedAmount: number;
-
-    @Field((type) => String)
+    @Field((type) => Int)
     commission: number;
 
     @Field((type) => String)
@@ -149,13 +159,7 @@ export class PaymentResponseData {
     customerId: string;
 
     @Field((type) => String)
-    token: String;
-
-    @Field((type) => String)
     unit: String;
-
-    @Field((type) => String)
-    bonusToken: String;
 
     @Field((type) => String)
     transactionDate: string;

@@ -4,23 +4,23 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../../common/guards';
 import { ElectricityBillService } from './ElectricityBill.service';
 import {
-    ElectricityBillProvidersResponse,
-    ElectricityPaymentInput,
-    ElectricityPaymentResponse,
-    ElectricityValidateAccountInput,
-    ElectricityValidateAccountResponse,
+    ElectricityBill_ProvidersResponse,
+    ElectricityBill_PaymentInput,
+    ElectricityBill_PaymentResponse,
+    ElectricityBill_ValidateAccountInput,
+    ElectricityBill_ValidateAccountResponse,
 } from './ElectricityBill.dto';
 
 @Resolver()
 export class ElectricityBillResolver {
     constructor(private readonly service: ElectricityBillService) {}
 
-    @Mutation((returns) => ElectricityPaymentResponse)
+    @Mutation((returns) => ElectricityBill_PaymentResponse)
     @UseGuards(GqlAuthGuard)
     async electricityBill_makePayment(
-        @Args('input') input: ElectricityPaymentInput,
+        @Args('input') input: ElectricityBill_PaymentInput,
         @Context() context: { req: { userId: number } },
-    ): Promise<ElectricityPaymentResponse> {
+    ): Promise<ElectricityBill_PaymentResponse> {
         const res = await this.service.makePayment({
             ...input,
             userId: context.req.userId,
@@ -29,12 +29,12 @@ export class ElectricityBillResolver {
         return res!;
     }
 
-    @Mutation((returns) => ElectricityValidateAccountResponse)
+    @Mutation((returns) => ElectricityBill_ValidateAccountResponse)
     @UseGuards(GqlAuthGuard)
     async electricityBill_verifyAccount(
-        @Args('input') input: ElectricityValidateAccountInput,
+        @Args('input') input: ElectricityBill_ValidateAccountInput,
         @Context() context: { req: { userId: number } },
-    ): Promise<ElectricityValidateAccountResponse> {
+    ): Promise<ElectricityBill_ValidateAccountResponse> {
         const res = await this.service.verifyAccount({
             ...input,
             userId: context.req.userId,
@@ -43,12 +43,12 @@ export class ElectricityBillResolver {
         return res!;
     }
 
-    @Query((returns) => [ElectricityBillProvidersResponse])
+    @Query((returns) => [ElectricityBill_ProvidersResponse])
     @UseGuards(GqlAuthGuard)
     async electricityBill_getProviders(
         @Context() context: { req: { userId: number } },
-        @Args('input') input: ElectricityValidateAccountInput,
-    ): Promise<ElectricityBillProvidersResponse[]> {
+        @Args('input') input: ElectricityBill_ValidateAccountInput,
+    ): Promise<ElectricityBill_ProvidersResponse[]> {
         const res = await this.service.getProviders({
             userId: context.req.userId,
             ...input,

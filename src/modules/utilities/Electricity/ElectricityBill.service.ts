@@ -7,16 +7,16 @@ import { TransactionsService } from '../../transactions/transact.service';
 import axios from 'axios';
 import { GqlErr } from '../../common/errors/gqlErr';
 import {
-    ElectricityBillProviders,
-    ElectricityBillProvidersResponse,
-    ElectricityPaymentInput,
-    ElectricityPaymentResponse,
-    ElectricityValidateAccountInput,
-    ElectricityValidateAccountResponse,
+    ElectricityBill_PaymentInput,
+    ElectricityBill_PaymentResponse,
+    ElectricityBill_ProviderInput,
+    ElectricityBill_ProvidersResponse,
+    ElectricityBill_ValidateAccountInput,
+    ElectricityBill_ValidateAccountResponse,
+    IElectricityBillProviders,
     IElectricityPaymentResponse,
     IElectricityValidateAccountResponse,
 } from './ElectricityBill.dto';
-import { ElectricityBillProviderInput } from './ElectricityBill.dto';
 
 @Injectable()
 export class ElectricityBillService {
@@ -33,8 +33,8 @@ export class ElectricityBillService {
     };
 
     public async getProviders(
-        input: ElectricityBillProviderInput & UserInput,
-    ): Promise<ElectricityBillProvidersResponse[]> {
+        input: ElectricityBill_ProviderInput & UserInput,
+    ): Promise<ElectricityBill_ProvidersResponse[]> {
         this.logger.info('Get Electricity Billers');
 
         if (input.countryCode !== 'NG') {
@@ -45,7 +45,7 @@ export class ElectricityBillService {
 
         const response = await axios.get(url, this.headers);
 
-        const r = response.data as ElectricityBillProviders;
+        const r = response.data as IElectricityBillProviders;
         const list = r.data.map((item) => {
             return item;
         });
@@ -53,8 +53,8 @@ export class ElectricityBillService {
     }
 
     public async verifyAccount(
-        input: ElectricityValidateAccountInput & UserInput,
-    ): Promise<ElectricityValidateAccountResponse> {
+        input: ElectricityBill_ValidateAccountInput & UserInput,
+    ): Promise<ElectricityBill_ValidateAccountResponse> {
         this.logger.info('Get Electricity Billers');
 
         if (input.countryCode !== 'NG') {
@@ -84,15 +84,15 @@ export class ElectricityBillService {
     }
 
     public async makePayment(
-        input: ElectricityPaymentInput & UserInput,
-    ): Promise<ElectricityPaymentResponse> {
+        input: ElectricityBill_PaymentInput & UserInput,
+    ): Promise<ElectricityBill_PaymentResponse> {
         this.logger.info('Get Electricity Billers');
         const { userId, countryCode, ...rest } = input;
         if (countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
         }
 
-        const url = 'https://ebills.africa/wp-json/api/v2/betting';
+        const url = 'https://api.paybeta.ng/v2/electricity/purchase';
 
         const response = (await axios.post(
             url,
