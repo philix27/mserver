@@ -7,6 +7,7 @@ import {
     UserResetPassword,
 } from './user.dto';
 import { GqlErr } from '../common/errors/gqlErr';
+import { UserInput } from 'src/lib';
 
 @Injectable()
 export class UserService {
@@ -40,8 +41,8 @@ export class UserService {
         }
     }
 
-    public async getInfo(params: UserGetInfo): Promise<UserDto> {
-        this.logger.info('get user info');
+    public async getInfo(params: UserInput): Promise<UserDto> {
+        this.logger.info('get user info: ' + params.userId);
 
         const data = await this.prisma.user.findFirst({
             where: {

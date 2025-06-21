@@ -65,8 +65,8 @@ export class UserDto {
     @Field({ nullable: true })
     email?: string;
 
-    @Field({ nullable: true })
-    password?: string;
+    // @Field({ nullable: true })
+    // password?: string;
 
     @Field({ nullable: true })
     telegram_id?: string;
@@ -77,6 +77,30 @@ export class UserDto {
     @Field({ nullable: true })
     role?: string;
 
+    @Field({ nullable: true })
+    nin?: string;
+
+    @Field((type) => $Enums.CredentialsStatus, { nullable: true })
+    nin_status?: $Enums.CredentialsStatus;
+
+    @Field({ nullable: true })
+    bvn?: string;
+
+    @Field((type) => $Enums.CredentialsStatus, { nullable: true })
+    bvn_status?: $Enums.CredentialsStatus;
+
+    @Field({ nullable: true })
+    dob?: string;
+
+    @Field((type) => $Enums.CredentialsStatus, { nullable: true })
+    dob_status?: $Enums.CredentialsStatus;
+
+    @Field({ nullable: true })
+    home_address?: string;
+
+    @Field({ nullable: true })
+    state?: string;
+
     @Field((type) => $Enums.CountryCode, { nullable: true })
-    country?: $Enums.CountryCode;
+    country_code?: $Enums.CountryCode;
 }

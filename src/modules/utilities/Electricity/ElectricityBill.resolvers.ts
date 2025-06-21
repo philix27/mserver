@@ -9,6 +9,7 @@ import {
     ElectricityBill_PaymentResponse,
     ElectricityBill_ValidateAccountInput,
     ElectricityBill_ValidateAccountResponse,
+    ElectricityBill_ProviderInput,
 } from './ElectricityBill.dto';
 
 @Resolver()
@@ -47,7 +48,7 @@ export class ElectricityBillResolver {
     @UseGuards(GqlAuthGuard)
     async electricityBill_getProviders(
         @Context() context: { req: { userId: number } },
-        @Args('input') input: ElectricityBill_ValidateAccountInput,
+        @Args('input') input: ElectricityBill_ProviderInput,
     ): Promise<ElectricityBill_ProvidersResponse[]> {
         const res = await this.service.getProviders({
             userId: context.req.userId,

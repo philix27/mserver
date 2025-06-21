@@ -49,7 +49,7 @@ export class TvBillService {
             url,
             this.headers,
         )) as IGetTVProvidersResponse;
-
+        console.log('Data TV', response.data);
         return response.data;
     }
 

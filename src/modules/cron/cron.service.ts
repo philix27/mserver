@@ -1,23 +1,30 @@
-import { Injectable } from "@nestjs/common";
-import { Cron, CronExpression} from "@nestjs/schedule";
-import { LoggerService } from "../common";
-import { ExchangeRateService } from "../rates/rates.service";
+import { Injectable } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { LoggerService } from '../common';
+import { ExchangeRateService } from '../rates/rates.service';
 
 @Injectable()
 export class CronService {
-    public constructor(private readonly logger: LoggerService, private readonly fx:ExchangeRateService) {}
-   
+    public constructor(
+        private readonly logger: LoggerService,
+        private readonly fx: ExchangeRateService,
+    ) {}
 
     @Cron(CronExpression.EVERY_HOUR)
     async getLatestRate() {
-        this.logger.info("Running a daily task at midnight");
-        await this.fx.updateRates()
+        this.logger.info('Running a daily task at midnight');
+        await this.fx.updateRates();
     }
 
     @Cron(CronExpression.EVERY_WEEK)
     async validateReloadlyAccessToken() {
-        this.logger.info("Running a daily task at midnight");
-        await this.fx.updateRates()
+        this.logger.info('Running a daily task at midnight');
+        // await this.fx.updateRates()
+    }
+
+    @Cron(CronExpression.EVERY_WEEK)
+    async getElectricityProviders() {
+        this.logger.info('Running a daily task at midnight');
     }
 
     //  // Runs at every 10 seconds
@@ -28,7 +35,7 @@ export class CronService {
     // // Runs at midnight every day
     // @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
     // handleMidnightTask() {
-        
+
     //     this.logger.info("Running a daily task at midnight");
     // }
 
