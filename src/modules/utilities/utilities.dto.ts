@@ -7,7 +7,6 @@ import {
     registerEnumType,
 } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
-import { number } from 'joi';
 
 @InputType()
 export class Utilities_PurchaseAirtimeInput {
