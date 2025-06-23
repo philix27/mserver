@@ -1,4 +1,10 @@
-import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
+import {
+    Field,
+    Float,
+    Int,
+    ObjectType,
+    registerEnumType,
+} from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
 
 @ObjectType()
@@ -28,22 +34,35 @@ export class Static_GetTokenResponse {
     isSellable?: boolean;
 }
 
+export enum LinkGroup {
+    Docs,
+    Social,
+    Learn,
+}
+
+registerEnumType(LinkGroup, {
+    name: 'StaticLinkGroup',
+});
+
 @ObjectType()
 export class Static_GetLinkResponse {
-    @Field({ nullable: false })
-    phoneNo: string;
+    @Field()
+    title: string;
 
-    @Field((returns) => Float)
-    amount: number;
+    @Field({ nullable: true })
+    desc?: string;
 
     @Field()
-    transaction_hash: string;
+    url: string;
 
-    @Field((type) => $Enums.CountryCode)
-    countryCode: $Enums.CountryCode;
+    @Field({ nullable: true })
+    imgLink?: string;
 
-    @Field((type) => Int)
-    operatorId: number;
+    @Field({ nullable: true })
+    category?: string;
+
+    @Field((type) => LinkGroup)
+    group: LinkGroup;
 }
 
 @ObjectType()

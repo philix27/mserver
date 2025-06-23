@@ -1,5 +1,5 @@
-import { publicPath } from './publicPath';
-import { Assets } from './Assets';
+import { publicPath } from '../publicPath';
+import { Assets } from '../Assets';
 import { Color } from './Color';
 
 export interface Token {

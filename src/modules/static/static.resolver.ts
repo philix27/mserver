@@ -8,17 +8,17 @@ import { StaticService } from './static.service';
 export class StaticResolver {
     constructor(private readonly service: StaticService) {}
 
-    @Query((returns) => [Static_GetLinkResponse])
-    @UseGuards(GqlAuthGuard)
-    async static_getTxnHistory(
-        @Context() context: { req: { userId: number } },
-    ): Promise<Static_GetLinkResponse[]> {
-        const res = await this.service.getTxnHistory({
-            userId: context.req.userId,
-        });
+    // @Query((returns) => [Static_GetLinkResponse])
+    // @UseGuards(GqlAuthGuard)
+    // async static_getTxnHistory(
+    //     @Context() context: { req: { userId: number } },
+    // ): Promise<Static_GetLinkResponse[]> {
+    //     const res = await this.service.getTxnHistory({
+    //         userId: context.req.userId,
+    //     });
 
-        return res!;
-    }
+    //     return res!;
+    // }
 
     @Query((returns) => [Static_GetLinkResponse])
     @UseGuards(GqlAuthGuard)
