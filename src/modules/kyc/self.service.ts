@@ -10,6 +10,8 @@ export class SelfService {
         this.verifier = new SelfBackendVerifier(
             secrets.SELF_APP_SCOPE, // the scope that you chose to identify your app
             secrets.SELF_API_ENDPOINT, // The API endpoint of this backend
+            'hex',
+            true,
         );
     }
 
