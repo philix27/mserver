@@ -1,5 +1,10 @@
 import { Context, Query, Resolver } from '@nestjs/graphql';
-import { Static_GetTokenResponse, Static_GetLinkResponse } from './static.dto';
+import {
+    Static_GetTokenResponse,
+    Static_GetLinkResponse,
+    Static_GetCountries,
+    Static_GetChainsResponse,
+} from './static.dto';
 import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
 import { StaticService } from './static.service';
@@ -19,6 +24,30 @@ export class StaticResolver {
 
     //     return res!;
     // }
+
+    @Query((returns) => [Static_GetChainsResponse])
+    @UseGuards(GqlAuthGuard)
+    async static_getChains(
+        @Context() context: { req: { userId: number } },
+    ): Promise<Static_GetChainsResponse[]> {
+        const res = await this.service.getChains({
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Query((returns) => [Static_GetCountries])
+    @UseGuards(GqlAuthGuard)
+    async static_getCountries(
+        @Context() context: { req: { userId: number } },
+    ): Promise<Static_GetCountries[]> {
+        const res = await this.service.getCountries({
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
 
     @Query((returns) => [Static_GetLinkResponse])
     @UseGuards(GqlAuthGuard)

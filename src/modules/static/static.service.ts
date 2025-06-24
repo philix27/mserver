@@ -2,19 +2,38 @@ import { Injectable } from '@nestjs/common';
 import { UserInput } from 'src/lib';
 import {
     LinkGroup,
+    Static_GetChainsResponse,
+    Static_GetCountries,
     Static_GetLinkResponse,
     Static_GetTokenResponse,
-    Static_GetTxnHistoryResponse,
 } from './static.dto';
 import { LoggerService } from '../common/provider/logger.service';
 import { CeloTokens } from './tokens/Tokens';
 import { docsLinks } from './links/docs';
 import { learnLinks } from './links/learn';
 import { socialLinks } from './links/social';
+import { countriesDataList } from './links/country';
+import { allChains } from './links/chains';
 
 @Injectable()
 export class StaticService {
     public constructor(private readonly logger: LoggerService) {}
+
+    public async getCountries(
+        input: UserInput,
+    ): Promise<Static_GetCountries[]> {
+        this.logger.info('GetCountries');
+
+        return countriesDataList;
+    }
+
+    public async getChains(
+        input: UserInput,
+    ): Promise<Static_GetChainsResponse[]> {
+        this.logger.info('getChains');
+
+        return allChains;
+    }
 
     public async getTokens(
         input: UserInput,

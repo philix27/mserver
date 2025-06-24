@@ -34,6 +34,48 @@ export class Static_GetTokenResponse {
     isSellable?: boolean;
 }
 
+export enum CountriesIso {
+    NG,
+    GH,
+    KE,
+    MW,
+    RW,
+    TZ,
+    UG,
+    ZA,
+}
+
+registerEnumType(CountriesIso, {
+    name: 'CountriesIso',
+});
+
+@ObjectType()
+export class Static_GetCountries {
+    @Field()
+    isoName: string;
+
+    @Field()
+    name: string;
+
+    @Field()
+    continent: string;
+
+    @Field()
+    currencyCode: string;
+
+    @Field()
+    currencyName: string;
+
+    @Field()
+    currencySymbol: string;
+
+    @Field()
+    flag: string;
+
+    @Field()
+    callingCodes: string;
+}
+
 export enum LinkGroup {
     Docs,
     Social,
@@ -81,4 +123,20 @@ export class Static_GetTxnHistoryResponse {
 
     @Field((type) => Int)
     operatorId: number;
+}
+
+@ObjectType()
+export class Static_GetChainsResponse {
+    @Field()
+    chainId: number;
+    @Field()
+    name: string;
+    @Field()
+    rpcUrl: string;
+    @Field()
+    explorerUrl: string;
+    @Field()
+    explorerApiUrl: string;
+    @Field()
+    logoUrl: string;
 }

@@ -11,6 +11,7 @@ import {
     BettingProvidersResponse,
     IBettingPaymentResponse,
 } from './Betting.dto';
+import { bettingProviders } from '../../static/links/betting';
 
 @Injectable()
 export class FundBettingWalletService {
@@ -35,7 +36,7 @@ export class FundBettingWalletService {
             throw GqlErr('No provider for this country');
         }
 
-        return providers;
+        return bettingProviders;
     }
 
     public async makePayment(
@@ -87,21 +88,3 @@ export class FundBettingWalletService {
     }
 }
 
-const providers: { name: string; logo: string }[] = [
-    {
-        name: '1xBet',
-        logo: '',
-    },
-    { name: 'BangBet', logo: '' },
-    { name: 'Bet9ja', logo: '' },
-    { name: 'BetKing', logo: '' },
-    { name: 'BetLand', logo: '' },
-    { name: 'BetLion', logo: '' },
-    { name: 'BetWay', logo: '' },
-    { name: 'CloudBet', logo: '' },
-    { name: 'LiveScoreBet', logo: '' },
-    { name: 'MerryBet', logo: '' },
-    { name: 'NaijaBet', logo: '' },
-    { name: 'NairaBet', logo: '' },
-    { name: 'SupaBet', logo: '' },
-];
