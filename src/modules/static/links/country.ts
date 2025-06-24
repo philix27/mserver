@@ -1,18 +1,9 @@
+import { $Enums } from '@prisma/client';
 import { Assets } from '../Assets';
 import { publicPath } from '../publicPath';
 
-export type CountriesIso =
-    | 'NG'
-    | 'GH'
-    | 'KE'
-    | 'MW'
-    | 'RW'
-    | 'TZ'
-    | 'UG'
-    | 'ZA';
-
 export type ICountriesData = {
-    isoName: CountriesIso;
+    isoName: $Enums.CountryCode;
     name: string;
     continent: string;
     currencyCode: string;
@@ -24,7 +15,7 @@ export type ICountriesData = {
 
 export const countriesDataList: ICountriesData[] = [
     {
-        isoName: 'NG',
+        isoName: $Enums.CountryCode.NG,
         name: 'Nigeria',
         continent: 'Africa',
         currencyCode: 'NGN',
@@ -35,7 +26,7 @@ export const countriesDataList: ICountriesData[] = [
         callingCodes: '+234',
     },
     {
-        isoName: 'GH',
+        isoName: $Enums.CountryCode.GH,
         name: 'Ghana',
         continent: 'Africa',
         currencyCode: 'GHS',
@@ -46,7 +37,7 @@ export const countriesDataList: ICountriesData[] = [
         callingCodes: '+233',
     },
     {
-        isoName: 'KE',
+        isoName: $Enums.CountryCode.KE,
         name: 'Kenya',
         continent: 'Africa',
         currencyCode: 'KES',
@@ -57,7 +48,7 @@ export const countriesDataList: ICountriesData[] = [
         callingCodes: '+254',
     },
     {
-        isoName: 'MW',
+        isoName: $Enums.CountryCode.MW,
         name: 'Malawi',
         continent: 'Africa',
         currencyCode: 'MWK',
@@ -68,7 +59,7 @@ export const countriesDataList: ICountriesData[] = [
         callingCodes: '+265',
     },
     {
-        isoName: 'RW',
+        isoName: $Enums.CountryCode.RW,
         name: 'Rwanda',
         continent: 'Africa',
         currencyCode: 'RWF',
@@ -79,7 +70,7 @@ export const countriesDataList: ICountriesData[] = [
         callingCodes: '+250',
     },
     {
-        isoName: 'TZ',
+        isoName: $Enums.CountryCode.TZ,
         name: 'Tanzania',
         continent: 'Africa',
         currencyCode: 'TZS',
@@ -90,7 +81,7 @@ export const countriesDataList: ICountriesData[] = [
         callingCodes: '+255',
     },
     {
-        isoName: 'UG',
+        isoName: $Enums.CountryCode.UG,
         name: 'Uganda',
         continent: 'Africa',
         currencyCode: 'UGX',
@@ -101,7 +92,7 @@ export const countriesDataList: ICountriesData[] = [
         callingCodes: '+256',
     },
     {
-        isoName: 'ZA',
+        isoName: $Enums.CountryCode.ZA,
         name: 'South Africa',
         continent: 'Africa',
         currencyCode: 'ZAR',

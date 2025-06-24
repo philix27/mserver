@@ -34,25 +34,10 @@ export class Static_GetTokenResponse {
     isSellable?: boolean;
 }
 
-export enum CountriesIso {
-    NG,
-    GH,
-    KE,
-    MW,
-    RW,
-    TZ,
-    UG,
-    ZA,
-}
-
-registerEnumType(CountriesIso, {
-    name: 'CountriesIso',
-});
-
 @ObjectType()
 export class Static_GetCountries {
-    @Field()
-    isoName: string;
+    @Field((type) => $Enums.CountryCode)
+    isoName: $Enums.CountryCode;
 
     @Field()
     name: string;
