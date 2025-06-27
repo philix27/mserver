@@ -45,18 +45,16 @@ export class TvBillService {
 
         const url = this.baseUrl.concat('providers');
 
-        const response = (await axios.get(
-            url,
-            this.headers,
-        )) as IGetTVProvidersResponse;
-        console.log('Data TV', response.data);
-        return response.data;
+        const response = await axios.get(url, this.headers);
+        const r = response.data as IGetTVProvidersResponse;
+        console.log('Data TV', r.data);
+        return r.data;
     }
 
     public async getBouquet(
         input: TvBill_GetTVBouquetInput & UserInput,
     ): Promise<TvBill_GetBouquetPackageResponse[]> {
-        this.logger.info('Get Electricity Billers');
+        this.logger.info('Get TV Bouquet');
 
         if (input.countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
@@ -64,12 +62,9 @@ export class TvBillService {
 
         const url = this.baseUrl.concat(`bouquet?service=${input.service}`);
 
-        const response = (await axios.get(
-            url,
-            this.headers,
-        )) as IGetBouquetResponse;
-
-        return response.data.packages;
+        const response = await axios.get(url, this.headers);
+        const r = response.data as IGetBouquetResponse;
+        return r.data.packages;
     }
 
     public async validateAccount(

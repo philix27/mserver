@@ -92,6 +92,33 @@ export class Static_GetLinkResponse {
     group: LinkGroup;
 }
 
+export enum FundCollectorsCategories {
+    TopUp,
+    OffRamping,
+    TV_Bills,
+    ElectricityBills,
+    WaterBills,
+    FundBetting,
+}
+registerEnumType(FundCollectorsCategories, {
+    name: 'FundCollectors',
+});
+@ObjectType()
+export class Static_FundCollectorsResponse {
+    @Field()
+    TopUp: string;
+    @Field()
+    OffRamping: string;
+    @Field()
+    TV_Bills: string;
+    @Field()
+    ElectricityBills: string;
+    @Field()
+    WaterBills: string;
+    @Field()
+    FundBetting: string;
+}
+
 @ObjectType()
 export class Static_GetTxnHistoryResponse {
     @Field({ nullable: false })

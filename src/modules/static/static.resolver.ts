@@ -4,6 +4,7 @@ import {
     Static_GetLinkResponse,
     Static_GetCountries,
     Static_GetChainsResponse,
+    Static_FundCollectorsResponse,
 } from './static.dto';
 import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
@@ -67,6 +68,18 @@ export class StaticResolver {
         @Context() context: { req: { userId: number } },
     ): Promise<Static_GetTokenResponse[]> {
         const res = await this.service.getTokens({
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Query((returns) => Static_FundCollectorsResponse)
+    @UseGuards(GqlAuthGuard)
+    async static_getFundCollectors(
+        @Context() context: { req: { userId: number } },
+    ): Promise<Static_FundCollectorsResponse> {
+        const res = await this.service.getFundCollectors({
             userId: context.req.userId,
         });
 

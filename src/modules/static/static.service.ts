@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserInput } from 'src/lib';
 import {
     LinkGroup,
+    Static_FundCollectorsResponse,
     Static_GetChainsResponse,
     Static_GetCountries,
     Static_GetLinkResponse,
@@ -14,6 +15,7 @@ import { learnLinks } from './links/learn';
 import { socialLinks } from './links/social';
 import { countriesDataList } from './links/country';
 import { allChains } from './links/chains';
+import { collectors } from './collectors';
 
 @Injectable()
 export class StaticService {
@@ -63,11 +65,11 @@ export class StaticService {
         ];
     }
 
-    // public async getTxnHistory(
-    //     input: UserInput,
-    // ): Promise<Static_GetTxnHistoryResponse[]> {
-    //     this.logger.info('getTxnHistory');
+    public async getFundCollectors(
+        input: UserInput,
+    ): Promise<Static_FundCollectorsResponse> {
+        this.logger.info('get fund collectors');
 
-    //     return [];
-    // }
+        return collectors;
+    }
 }
