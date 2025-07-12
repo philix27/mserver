@@ -5,6 +5,7 @@ import {
     Static_GetCountries,
     Static_GetChainsResponse,
     Static_FundCollectorsResponse,
+    Static_AppInfoResponse,
 } from './static.dto';
 import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
@@ -61,13 +62,24 @@ export class StaticResolver {
 
         return res!;
     }
-
+ 
     @Query((returns) => [Static_GetTokenResponse])
     @UseGuards(GqlAuthGuard)
     async static_getTokens(
         @Context() context: { req: { userId: number } },
     ): Promise<Static_GetTokenResponse[]> {
         const res = await this.service.getTokens({
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Query((returns) => Static_AppInfoResponse)
+    async static_appInfo(
+        @Context() context: { req: { userId: number } },
+    ): Promise<Static_AppInfoResponse> {
+        const res = await this.service.appInfo({
             userId: context.req.userId,
         });
 

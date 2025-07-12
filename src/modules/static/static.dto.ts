@@ -8,6 +8,21 @@ import {
 import { $Enums } from '@prisma/client';
 
 @ObjectType()
+export class Static_AppInfoResponse {
+    @Field()
+    minBuild: number;
+
+    @Field()
+    deployedBuild: number;
+
+    @Field()
+    androidAppUrl: string;
+
+    @Field()
+    iosAppUrl: string; 
+}
+
+@ObjectType()
 export class Static_GetTokenResponse {
     id: string;
     @Field()

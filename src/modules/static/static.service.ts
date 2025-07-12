@@ -3,6 +3,7 @@ import { UserInput } from 'src/lib';
 import {
     LinkGroup,
     Static_FundCollectorsResponse,
+    Static_AppInfoResponse,
     Static_GetChainsResponse,
     Static_GetCountries,
     Static_GetLinkResponse,
@@ -71,5 +72,20 @@ export class StaticService {
         this.logger.info('get fund collectors');
 
         return collectors;
+    }
+
+     public async appInfo(
+        input: UserInput,
+    ): Promise<Static_AppInfoResponse> {
+        this.logger.info('getAppInfo');
+
+        const data: Static_AppInfoResponse = {
+            minBuild: 2,
+            deployedBuild: 2,
+            androidAppUrl: 'https://play.google.com/store/apps/details?id=com.onemanstartup.roads',
+            iosAppUrl: 'https://apps.apple.com/app/id6443961864'
+        }
+
+        return  data
     }
 }
