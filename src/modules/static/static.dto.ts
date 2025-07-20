@@ -39,6 +39,12 @@ export class Static_GetTokenResponse {
     decimals: number;
 
     @Field()
+    priceUSD: number;
+    
+    @Field()
+    priceNGN: number;
+
+    @Field()
     chainId: number;
 
     @Field({ nullable: true })

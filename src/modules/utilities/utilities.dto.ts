@@ -127,7 +127,7 @@ class IOperator {
     @Field((type) => [IDataPlan], { nullable: true })
     plans?: IDataPlan[];
 }
-
+      
 @ObjectType()
 class IAirtimeOperator {
     @Field((type) => String)
@@ -148,6 +148,7 @@ class IAirtimeOperator {
     @Field((type) => [Int], { nullable: true })
     suggestedAmounts?: number[];
 }
+
 @ObjectType()
 export class IDataPlan {
     @Field((type) => Int)

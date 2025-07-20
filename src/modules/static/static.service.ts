@@ -10,13 +10,14 @@ import {
     Static_GetTokenResponse,
 } from './static.dto';
 import { LoggerService } from '../common/provider/logger.service';
-import { CeloTokens } from './tokens/Tokens';
+import { CeloTokens, TokenId } from './tokens/Tokens';
 import { docsLinks } from './links/docs';
 import { learnLinks } from './links/learn';
 import { socialLinks } from './links/social';
 import { countriesDataList } from './links/country';
 import { allChains } from './links/chains';
 import { collectors } from './collectors';
+import { func } from 'joi';
 
 @Injectable()
 export class StaticService {
@@ -45,7 +46,12 @@ export class StaticService {
 
         return [
             ...CeloTokens.map((V) => {
-                return { ...V, chainId: 42220 };
+                return { 
+                    ...V, 
+                    chainId: 42220, 
+                    priceUSD: getPriceUSD(V.id), 
+                    priceNGN: getPriceNGN(V.id), 
+            };
             }),
         ];
     }
@@ -80,12 +86,33 @@ export class StaticService {
         this.logger.info('getAppInfo');
 
         const data: Static_AppInfoResponse = {
-            minBuild: 2,
-            deployedBuild: 2,
+            minBuild: 1,
+            deployedBuild: 3,
             androidAppUrl: 'https://play.google.com/store/apps/details?id=com.onemanstartup.roads',
             iosAppUrl: 'https://apps.apple.com/app/id6443961864'
         }
 
         return  data
     }
+}
+
+function getPriceUSD(tokenId :TokenId) :number {
+    if(tokenId === TokenId.CELO) return 0.327;
+    if(tokenId === TokenId.USDC) return 1;
+    if(tokenId === TokenId.cUSD) return 1;
+    if(tokenId === TokenId.USDT) return 1;
+    if(tokenId === TokenId.cEUR) return 0.8;
+    if(tokenId === TokenId.cNGN) return 1600;
+    
+    return 0
+}
+function getPriceNGN(tokenId :TokenId) :number {
+    if(tokenId === TokenId.CELO) return 500;
+    if(tokenId === TokenId.USDC) return 1540;
+    if(tokenId === TokenId.cUSD) return 1540;
+    if(tokenId === TokenId.USDT) return 1540;
+    if(tokenId === TokenId.cEUR) return 1700;
+    if(tokenId === TokenId.cNGN) return 1;
+    
+    return 0
 }
