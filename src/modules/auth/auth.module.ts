@@ -17,6 +17,7 @@ import { HelperService } from "../helper/helper.service";
 import { HelpersModule } from "../helper/helper.module";
 import { AuthController } from "./auth.controller";
 import { ThirdwebService } from "./thirdweb.service";
+import { AuthFirebaseService } from "./firebase/firebase.service";
 
 @Module({
     imports: [
@@ -38,6 +39,7 @@ import { ThirdwebService } from "./thirdweb.service";
         PrivyWalletService,
         JwtStrategy,
         ThirdwebService,
+        AuthFirebaseService
     ],
     controllers: [AuthController],
     // exports: [JwtStrategy, GqlAuthGuard],

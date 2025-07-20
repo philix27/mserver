@@ -24,3 +24,8 @@ npm-debug.log
 .env
 wallet_data.txt
 .wallet_data.txt
+
+/secrets
+/secrets/*
+/serviceAccountKey.json
+serviceAccountKey.json

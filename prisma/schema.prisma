@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../src/lib/gen/prisma"
+  output   = "../src/lib/gen/prisma"
 }
 
 datasource db {
@@ -33,6 +33,7 @@ model User {
   street_address        String?
   state                 String?
   phone                 String?
+  googleId                 String?
   proof_of_address      String?
   phone_verified        Boolean?           @default(false)
   crypto_wallets        CryptoWallets[]

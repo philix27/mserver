@@ -3,6 +3,8 @@ import { AuthService } from "./auth.service";
 import {
     Auth_CreateAccountInput,
     Auth_CreateAccountResponse,
+    Auth_FirebaseLoginInput,
+    Auth_FirebaseLoginResponse,
     Auth_LoginInput,
     Auth_LoginMinipayInput,
     Auth_LoginMinipayResponse,
@@ -22,10 +24,11 @@ import {
 import { UserDto } from "../user/user.dto";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "../common/guards";
+import { AuthFirebaseService } from "./firebase/firebase.service";
 
 @Resolver((of: any) => UserDto)
 export class AuthResolver {
-    constructor(private readonly service: AuthService) {}
+    constructor(private readonly service: AuthService,) {}
 
     @Mutation((returns) => Auth_sendEmailOtpResponse)
     async auth_sendEmailOtp(
@@ -110,4 +113,13 @@ export class AuthResolver {
 
         return res!;
     }
+
+     @Mutation((returns) => Auth_FirebaseLoginResponse)
+    async auth_firebaseLogin(
+        @Args('input') input: Auth_FirebaseLoginInput,
+    ): Promise<Auth_FirebaseLoginResponse> {
+        const res = await this.service.fbAuth(input);
+        return res!;
+    }
+
 }

@@ -109,6 +109,11 @@ export class Auth_ThirdwebLoginInput {
     @Field()
     payload: string;
 }
+@InputType()
+export class Auth_FirebaseLoginInput {
+    @Field()
+    idToken: string;
+}
 
 @InputType()
 export class Auth_MinipayCreateAccountInput {
@@ -166,6 +171,26 @@ export class Auth_LoginMinipayResponse {
 
     @Field()
     walletAddress: string;
+}
+@ObjectType()
+export class Auth_FirebaseLoginResponse {
+    @Field({ nullable: true })
+    email?: string;
+
+    @Field({ nullable: true })
+    firstname?: string;
+
+    @Field({ nullable: true })
+    lastname?: string;
+
+    @Field({ nullable: true })
+    middlename?: string;
+
+    @Field({ nullable: true })
+    token: string;
+
+    @Field({ nullable: true })
+    walletAddress?: string;
 }
 
 @ObjectType()

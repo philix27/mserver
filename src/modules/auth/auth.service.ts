@@ -4,6 +4,8 @@ import { NotificationService } from '../notification/notification.service';
 import {
     Auth_CreateAccountInput,
     Auth_CreateAccountResponse,
+    Auth_FirebaseLoginInput,
+    Auth_FirebaseLoginResponse,
     Auth_LoginInput,
     Auth_LoginMinipayInput,
     Auth_LoginMinipayResponse,
@@ -26,6 +28,7 @@ import { HelperService } from '../helper/helper.service';
 import { WalletCryptoService } from '../wallet-crypto/crypto.service';
 import { HpFn } from '../../lib';
 import { ThirdwebService } from './thirdweb.service';
+import { AuthFirebaseService } from './firebase/firebase.service';
 
 @Injectable()
 export class AuthService {
@@ -36,6 +39,7 @@ export class AuthService {
         private readonly walletCrypto: WalletCryptoService,
         private readonly jwtService: HelperService,
         private readonly thirdweb: ThirdwebService,
+         private readonly fbService : AuthFirebaseService
     ) {}
 
     public async sendEmailOtp(
@@ -407,6 +411,52 @@ export class AuthService {
 
         return {
             walletAddress: params.walletAddress,
+            token: token,
+            email: _user.email!,
+            firstname: _user.firstname!,
+            lastname: _user.lastname!,
+            middlename: _user.middlename!,
+        };
+    }
+    
+    public async fbAuth(
+        {idToken}: Auth_FirebaseLoginInput,
+    ): Promise<Auth_FirebaseLoginResponse>{
+        this.logger.info('Login from app ');
+        
+       
+        const payload = await this.fbService.verifyIdToken(
+          idToken
+        );
+
+        if (!payload) throw GqlErr('You need to login first');
+
+
+        const email = payload.email;;
+
+        let _user = await this.prisma.user.findFirst({
+            where: {
+                email,
+            },
+        });
+
+        if (!_user) {
+            console.log('No user found. Creating a new user');
+            _user = await this.prisma.user.create({
+                data: {
+                    email: email,   
+                    firstname: payload.name,
+                },
+            });
+        }
+
+        const token = this.jwtService.generateToken({
+            userId: _user.id,
+            email: _user.email,
+            googleId: payload.uid,
+        });
+
+        return {
             token: token,
             email: _user.email!,
             firstname: _user.firstname!,
