@@ -114,7 +114,7 @@ export class AuthResolver {
         return res!;
     }
 
-     @Mutation((returns) => Auth_FirebaseLoginResponse)
+    @Mutation((returns) => Auth_FirebaseLoginResponse)
     async auth_firebaseLogin(
         @Args('input') input: Auth_FirebaseLoginInput,
     ): Promise<Auth_FirebaseLoginResponse> {
