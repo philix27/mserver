@@ -11,7 +11,6 @@ import { UserModule } from './user/user.module';
 import { BankAccountModule } from './bankAccount/bankAccount.module';
 import { PassportModule } from '@nestjs/passport';
 import jwtConfig from './auth/jwt.config';
-import { AdvertsModule } from './adverts/adverts.module';
 import { CronModule } from './cron/cron.module';
 import { WalletCryptoModule } from './wallet-crypto/crypto.module';
 import { WalletFiatModule } from './wallet-fiat/fiat.module';
