@@ -29,11 +29,6 @@ export type CryptoWallets = $Result.DefaultSelection<Prisma.$CryptoWalletsPayloa
  */
 export type BankAccount = $Result.DefaultSelection<Prisma.$BankAccountPayload>
 /**
- * Model Adverts
- * 
- */
-export type Adverts = $Result.DefaultSelection<Prisma.$AdvertsPayload>
-/**
  * Model Orders
  * 
  */
@@ -115,14 +110,6 @@ export const CountryCode: {
 };
 
 export type CountryCode = (typeof CountryCode)[keyof typeof CountryCode]
-
-
-export const AdvertStatus: {
-  OPEN: 'OPEN',
-  CLOSE: 'CLOSE'
-};
-
-export type AdvertStatus = (typeof AdvertStatus)[keyof typeof AdvertStatus]
 
 
 export const OrderMode: {
@@ -228,10 +215,6 @@ export const TradeType: typeof $Enums.TradeType
 export type CountryCode = $Enums.CountryCode
 
 export const CountryCode: typeof $Enums.CountryCode
-
-export type AdvertStatus = $Enums.AdvertStatus
-
-export const AdvertStatus: typeof $Enums.AdvertStatus
 
 export type OrderMode = $Enums.OrderMode
 
@@ -419,16 +402,6 @@ export class PrismaClient<
     * ```
     */
   get bankAccount(): Prisma.BankAccountDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.adverts`: Exposes CRUD operations for the **Adverts** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Adverts
-    * const adverts = await prisma.adverts.findMany()
-    * ```
-    */
-  get adverts(): Prisma.AdvertsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.orders`: Exposes CRUD operations for the **Orders** model.
@@ -912,7 +885,6 @@ export namespace Prisma {
     User: 'User',
     CryptoWallets: 'CryptoWallets',
     BankAccount: 'BankAccount',
-    Adverts: 'Adverts',
     Orders: 'Orders',
     ExchangeRates: 'ExchangeRates',
     AccessTokens: 'AccessTokens',
@@ -935,7 +907,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "cryptoWallets" | "bankAccount" | "adverts" | "orders" | "exchangeRates" | "accessTokens" | "transactions"
+      modelProps: "user" | "cryptoWallets" | "bankAccount" | "orders" | "exchangeRates" | "accessTokens" | "transactions"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1158,80 +1130,6 @@ export namespace Prisma {
           count: {
             args: Prisma.BankAccountCountArgs<ExtArgs>
             result: $Utils.Optional<BankAccountCountAggregateOutputType> | number
-          }
-        }
-      }
-      Adverts: {
-        payload: Prisma.$AdvertsPayload<ExtArgs>
-        fields: Prisma.AdvertsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AdvertsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AdvertsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>
-          }
-          findFirst: {
-            args: Prisma.AdvertsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AdvertsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>
-          }
-          findMany: {
-            args: Prisma.AdvertsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>[]
-          }
-          create: {
-            args: Prisma.AdvertsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>
-          }
-          createMany: {
-            args: Prisma.AdvertsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AdvertsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>[]
-          }
-          delete: {
-            args: Prisma.AdvertsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>
-          }
-          update: {
-            args: Prisma.AdvertsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>
-          }
-          deleteMany: {
-            args: Prisma.AdvertsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AdvertsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AdvertsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>[]
-          }
-          upsert: {
-            args: Prisma.AdvertsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AdvertsPayload>
-          }
-          aggregate: {
-            args: Prisma.AdvertsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAdverts>
-          }
-          groupBy: {
-            args: Prisma.AdvertsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AdvertsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AdvertsCountArgs<ExtArgs>
-            result: $Utils.Optional<AdvertsCountAggregateOutputType> | number
           }
         }
       }
@@ -1618,7 +1516,6 @@ export namespace Prisma {
     user?: UserOmit
     cryptoWallets?: CryptoWalletsOmit
     bankAccount?: BankAccountOmit
-    adverts?: AdvertsOmit
     orders?: OrdersOmit
     exchangeRates?: ExchangeRatesOmit
     accessTokens?: AccessTokensOmit
@@ -1719,7 +1616,6 @@ export namespace Prisma {
   export type UserCountOutputType = {
     crypto_wallets: number
     bank_accounts: number
-    adverts: number
     orders: number
     transactions: number
   }
@@ -1727,7 +1623,6 @@ export namespace Prisma {
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     crypto_wallets?: boolean | UserCountOutputTypeCountCrypto_walletsArgs
     bank_accounts?: boolean | UserCountOutputTypeCountBank_accountsArgs
-    adverts?: boolean | UserCountOutputTypeCountAdvertsArgs
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
     transactions?: boolean | UserCountOutputTypeCountTransactionsArgs
   }
@@ -1760,13 +1655,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAdvertsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AdvertsWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrdersWhereInput
   }
@@ -1784,12 +1672,10 @@ export namespace Prisma {
    */
 
   export type BankAccountCountOutputType = {
-    advert: number
     Orders: number
   }
 
   export type BankAccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    advert?: boolean | BankAccountCountOutputTypeCountAdvertArgs
     Orders?: boolean | BankAccountCountOutputTypeCountOrdersArgs
   }
 
@@ -1807,46 +1693,8 @@ export namespace Prisma {
   /**
    * BankAccountCountOutputType without action
    */
-  export type BankAccountCountOutputTypeCountAdvertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AdvertsWhereInput
-  }
-
-  /**
-   * BankAccountCountOutputType without action
-   */
   export type BankAccountCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrdersWhereInput
-  }
-
-
-  /**
-   * Count Type AdvertsCountOutputType
-   */
-
-  export type AdvertsCountOutputType = {
-    bank_accounts: number
-  }
-
-  export type AdvertsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    bank_accounts?: boolean | AdvertsCountOutputTypeCountBank_accountsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * AdvertsCountOutputType without action
-   */
-  export type AdvertsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AdvertsCountOutputType
-     */
-    select?: AdvertsCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * AdvertsCountOutputType without action
-   */
-  export type AdvertsCountOutputTypeCountBank_accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BankAccountWhereInput
   }
 
 
@@ -1868,14 +1716,10 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
-    merchant_success_rate: number | null
-    merchant_trade_count: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: number | null
-    merchant_success_rate: number | null
-    merchant_trade_count: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1904,10 +1748,6 @@ export namespace Prisma {
     googleId: string | null
     proof_of_address: string | null
     phone_verified: boolean | null
-    merchant_success_rate: number | null
-    merchant_trade_count: number | null
-    merchant_nickname: string | null
-    merchant_status: $Enums.MerchantStatus | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1936,10 +1776,6 @@ export namespace Prisma {
     googleId: string | null
     proof_of_address: string | null
     phone_verified: boolean | null
-    merchant_success_rate: number | null
-    merchant_trade_count: number | null
-    merchant_nickname: string | null
-    merchant_status: $Enums.MerchantStatus | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1968,24 +1804,16 @@ export namespace Prisma {
     googleId: number
     proof_of_address: number
     phone_verified: number
-    merchant_success_rate: number
-    merchant_trade_count: number
-    merchant_nickname: number
-    merchant_status: number
     _all: number
   }
 
 
   export type UserAvgAggregateInputType = {
     id?: true
-    merchant_success_rate?: true
-    merchant_trade_count?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
-    merchant_success_rate?: true
-    merchant_trade_count?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -2014,10 +1842,6 @@ export namespace Prisma {
     googleId?: true
     proof_of_address?: true
     phone_verified?: true
-    merchant_success_rate?: true
-    merchant_trade_count?: true
-    merchant_nickname?: true
-    merchant_status?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2046,10 +1870,6 @@ export namespace Prisma {
     googleId?: true
     proof_of_address?: true
     phone_verified?: true
-    merchant_success_rate?: true
-    merchant_trade_count?: true
-    merchant_nickname?: true
-    merchant_status?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2078,10 +1898,6 @@ export namespace Prisma {
     googleId?: true
     proof_of_address?: true
     phone_verified?: true
-    merchant_success_rate?: true
-    merchant_trade_count?: true
-    merchant_nickname?: true
-    merchant_status?: true
     _all?: true
   }
 
@@ -2197,10 +2013,6 @@ export namespace Prisma {
     googleId: string | null
     proof_of_address: string | null
     phone_verified: boolean | null
-    merchant_success_rate: number | null
-    merchant_trade_count: number | null
-    merchant_nickname: string | null
-    merchant_status: $Enums.MerchantStatus | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2248,13 +2060,8 @@ export namespace Prisma {
     googleId?: boolean
     proof_of_address?: boolean
     phone_verified?: boolean
-    merchant_success_rate?: boolean
-    merchant_trade_count?: boolean
-    merchant_nickname?: boolean
-    merchant_status?: boolean
     crypto_wallets?: boolean | User$crypto_walletsArgs<ExtArgs>
     bank_accounts?: boolean | User$bank_accountsArgs<ExtArgs>
-    adverts?: boolean | User$advertsArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     transactions?: boolean | User$transactionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2286,10 +2093,6 @@ export namespace Prisma {
     googleId?: boolean
     proof_of_address?: boolean
     phone_verified?: boolean
-    merchant_success_rate?: boolean
-    merchant_trade_count?: boolean
-    merchant_nickname?: boolean
-    merchant_status?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2318,10 +2121,6 @@ export namespace Prisma {
     googleId?: boolean
     proof_of_address?: boolean
     phone_verified?: boolean
-    merchant_success_rate?: boolean
-    merchant_trade_count?: boolean
-    merchant_nickname?: boolean
-    merchant_status?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2350,17 +2149,12 @@ export namespace Prisma {
     googleId?: boolean
     proof_of_address?: boolean
     phone_verified?: boolean
-    merchant_success_rate?: boolean
-    merchant_trade_count?: boolean
-    merchant_nickname?: boolean
-    merchant_status?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstname" | "lastname" | "middlename" | "email" | "password" | "transaction_pin" | "telegram_id" | "role" | "country_code" | "created_at" | "updated_at" | "bvn" | "bvn_status" | "nin" | "nin_status" | "dob" | "dob_status" | "home_address" | "street_address" | "state" | "phone" | "googleId" | "proof_of_address" | "phone_verified" | "merchant_success_rate" | "merchant_trade_count" | "merchant_nickname" | "merchant_status", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstname" | "lastname" | "middlename" | "email" | "password" | "transaction_pin" | "telegram_id" | "role" | "country_code" | "created_at" | "updated_at" | "bvn" | "bvn_status" | "nin" | "nin_status" | "dob" | "dob_status" | "home_address" | "street_address" | "state" | "phone" | "googleId" | "proof_of_address" | "phone_verified", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     crypto_wallets?: boolean | User$crypto_walletsArgs<ExtArgs>
     bank_accounts?: boolean | User$bank_accountsArgs<ExtArgs>
-    adverts?: boolean | User$advertsArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     transactions?: boolean | User$transactionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2373,7 +2167,6 @@ export namespace Prisma {
     objects: {
       crypto_wallets: Prisma.$CryptoWalletsPayload<ExtArgs>[]
       bank_accounts: Prisma.$BankAccountPayload<ExtArgs>[]
-      adverts: Prisma.$AdvertsPayload<ExtArgs>[]
       orders: Prisma.$OrdersPayload<ExtArgs>[]
       transactions: Prisma.$TransactionsPayload<ExtArgs>[]
     }
@@ -2403,10 +2196,6 @@ export namespace Prisma {
       googleId: string | null
       proof_of_address: string | null
       phone_verified: boolean | null
-      merchant_success_rate: number | null
-      merchant_trade_count: number | null
-      merchant_nickname: string | null
-      merchant_status: $Enums.MerchantStatus | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2803,7 +2592,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     crypto_wallets<T extends User$crypto_walletsArgs<ExtArgs> = {}>(args?: Subset<T, User$crypto_walletsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CryptoWalletsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     bank_accounts<T extends User$bank_accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$bank_accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    adverts<T extends User$advertsArgs<ExtArgs> = {}>(args?: Subset<T, User$advertsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     transactions<T extends User$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -2860,10 +2648,6 @@ export namespace Prisma {
     readonly googleId: FieldRef<"User", 'String'>
     readonly proof_of_address: FieldRef<"User", 'String'>
     readonly phone_verified: FieldRef<"User", 'Boolean'>
-    readonly merchant_success_rate: FieldRef<"User", 'Int'>
-    readonly merchant_trade_count: FieldRef<"User", 'Int'>
-    readonly merchant_nickname: FieldRef<"User", 'String'>
-    readonly merchant_status: FieldRef<"User", 'MerchantStatus'>
   }
     
 
@@ -3297,30 +3081,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BankAccountScalarFieldEnum | BankAccountScalarFieldEnum[]
-  }
-
-  /**
-   * User.adverts
-   */
-  export type User$advertsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    where?: AdvertsWhereInput
-    orderBy?: AdvertsOrderByWithRelationInput | AdvertsOrderByWithRelationInput[]
-    cursor?: AdvertsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AdvertsScalarFieldEnum | AdvertsScalarFieldEnum[]
   }
 
   /**
@@ -4779,7 +4539,6 @@ export namespace Prisma {
     updated_at?: boolean
     user_id?: boolean
     user?: boolean | BankAccount$userArgs<ExtArgs>
-    advert?: boolean | BankAccount$advertArgs<ExtArgs>
     Orders?: boolean | BankAccount$OrdersArgs<ExtArgs>
     _count?: boolean | BankAccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bankAccount"]>
@@ -4825,7 +4584,6 @@ export namespace Prisma {
   export type BankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "account_name" | "account_no" | "soft_delete" | "bank_name" | "nuban_id" | "created_at" | "updated_at" | "user_id", ExtArgs["result"]["bankAccount"]>
   export type BankAccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | BankAccount$userArgs<ExtArgs>
-    advert?: boolean | BankAccount$advertArgs<ExtArgs>
     Orders?: boolean | BankAccount$OrdersArgs<ExtArgs>
     _count?: boolean | BankAccountCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4840,7 +4598,6 @@ export namespace Prisma {
     name: "BankAccount"
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
-      advert: Prisma.$AdvertsPayload<ExtArgs>[]
       Orders: Prisma.$OrdersPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5248,7 +5005,6 @@ export namespace Prisma {
   export interface Prisma__BankAccountClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends BankAccount$userArgs<ExtArgs> = {}>(args?: Subset<T, BankAccount$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    advert<T extends BankAccount$advertArgs<ExtArgs> = {}>(args?: Subset<T, BankAccount$advertArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Orders<T extends BankAccount$OrdersArgs<ExtArgs> = {}>(args?: Subset<T, BankAccount$OrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5703,30 +5459,6 @@ export namespace Prisma {
   }
 
   /**
-   * BankAccount.advert
-   */
-  export type BankAccount$advertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    where?: AdvertsWhereInput
-    orderBy?: AdvertsOrderByWithRelationInput | AdvertsOrderByWithRelationInput[]
-    cursor?: AdvertsWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AdvertsScalarFieldEnum | AdvertsScalarFieldEnum[]
-  }
-
-  /**
    * BankAccount.Orders
    */
   export type BankAccount$OrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5770,1327 +5502,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Adverts
-   */
-
-  export type AggregateAdverts = {
-    _count: AdvertsCountAggregateOutputType | null
-    _avg: AdvertsAvgAggregateOutputType | null
-    _sum: AdvertsSumAggregateOutputType | null
-    _min: AdvertsMinAggregateOutputType | null
-    _max: AdvertsMaxAggregateOutputType | null
-  }
-
-  export type AdvertsAvgAggregateOutputType = {
-    id: number | null
-    rateFloat: number | null
-    rateFixed: number | null
-    limitUpper: number | null
-    limitLower: number | null
-    fiatAmountPerCrypto: number | null
-    merchant_id: number | null
-  }
-
-  export type AdvertsSumAggregateOutputType = {
-    id: number | null
-    rateFloat: number | null
-    rateFixed: number | null
-    limitUpper: number | null
-    limitLower: number | null
-    fiatAmountPerCrypto: number | null
-    merchant_id: number | null
-  }
-
-  export type AdvertsMinAggregateOutputType = {
-    id: number | null
-    rateFloat: number | null
-    rateFixed: number | null
-    isFloatRate: boolean | null
-    limitUpper: number | null
-    limitLower: number | null
-    fiatAmountPerCrypto: number | null
-    tradeType: $Enums.TradeType | null
-    currency_crypto: string | null
-    currency_fiat: $Enums.CountryCode | null
-    instructions: string | null
-    wallet_address: string | null
-    status: $Enums.AdvertStatus | null
-    duration: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    merchant_id: number | null
-  }
-
-  export type AdvertsMaxAggregateOutputType = {
-    id: number | null
-    rateFloat: number | null
-    rateFixed: number | null
-    isFloatRate: boolean | null
-    limitUpper: number | null
-    limitLower: number | null
-    fiatAmountPerCrypto: number | null
-    tradeType: $Enums.TradeType | null
-    currency_crypto: string | null
-    currency_fiat: $Enums.CountryCode | null
-    instructions: string | null
-    wallet_address: string | null
-    status: $Enums.AdvertStatus | null
-    duration: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    merchant_id: number | null
-  }
-
-  export type AdvertsCountAggregateOutputType = {
-    id: number
-    rateFloat: number
-    rateFixed: number
-    isFloatRate: number
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: number
-    currency_crypto: number
-    currency_fiat: number
-    instructions: number
-    wallet_address: number
-    status: number
-    duration: number
-    created_at: number
-    updated_at: number
-    merchant_id: number
-    _all: number
-  }
-
-
-  export type AdvertsAvgAggregateInputType = {
-    id?: true
-    rateFloat?: true
-    rateFixed?: true
-    limitUpper?: true
-    limitLower?: true
-    fiatAmountPerCrypto?: true
-    merchant_id?: true
-  }
-
-  export type AdvertsSumAggregateInputType = {
-    id?: true
-    rateFloat?: true
-    rateFixed?: true
-    limitUpper?: true
-    limitLower?: true
-    fiatAmountPerCrypto?: true
-    merchant_id?: true
-  }
-
-  export type AdvertsMinAggregateInputType = {
-    id?: true
-    rateFloat?: true
-    rateFixed?: true
-    isFloatRate?: true
-    limitUpper?: true
-    limitLower?: true
-    fiatAmountPerCrypto?: true
-    tradeType?: true
-    currency_crypto?: true
-    currency_fiat?: true
-    instructions?: true
-    wallet_address?: true
-    status?: true
-    duration?: true
-    created_at?: true
-    updated_at?: true
-    merchant_id?: true
-  }
-
-  export type AdvertsMaxAggregateInputType = {
-    id?: true
-    rateFloat?: true
-    rateFixed?: true
-    isFloatRate?: true
-    limitUpper?: true
-    limitLower?: true
-    fiatAmountPerCrypto?: true
-    tradeType?: true
-    currency_crypto?: true
-    currency_fiat?: true
-    instructions?: true
-    wallet_address?: true
-    status?: true
-    duration?: true
-    created_at?: true
-    updated_at?: true
-    merchant_id?: true
-  }
-
-  export type AdvertsCountAggregateInputType = {
-    id?: true
-    rateFloat?: true
-    rateFixed?: true
-    isFloatRate?: true
-    limitUpper?: true
-    limitLower?: true
-    fiatAmountPerCrypto?: true
-    tradeType?: true
-    currency_crypto?: true
-    currency_fiat?: true
-    instructions?: true
-    wallet_address?: true
-    status?: true
-    duration?: true
-    created_at?: true
-    updated_at?: true
-    merchant_id?: true
-    _all?: true
-  }
-
-  export type AdvertsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Adverts to aggregate.
-     */
-    where?: AdvertsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Adverts to fetch.
-     */
-    orderBy?: AdvertsOrderByWithRelationInput | AdvertsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AdvertsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Adverts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Adverts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Adverts
-    **/
-    _count?: true | AdvertsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: AdvertsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: AdvertsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AdvertsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AdvertsMaxAggregateInputType
-  }
-
-  export type GetAdvertsAggregateType<T extends AdvertsAggregateArgs> = {
-        [P in keyof T & keyof AggregateAdverts]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAdverts[P]>
-      : GetScalarType<T[P], AggregateAdverts[P]>
-  }
-
-
-
-
-  export type AdvertsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AdvertsWhereInput
-    orderBy?: AdvertsOrderByWithAggregationInput | AdvertsOrderByWithAggregationInput[]
-    by: AdvertsScalarFieldEnum[] | AdvertsScalarFieldEnum
-    having?: AdvertsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AdvertsCountAggregateInputType | true
-    _avg?: AdvertsAvgAggregateInputType
-    _sum?: AdvertsSumAggregateInputType
-    _min?: AdvertsMinAggregateInputType
-    _max?: AdvertsMaxAggregateInputType
-  }
-
-  export type AdvertsGroupByOutputType = {
-    id: number
-    rateFloat: number | null
-    rateFixed: number | null
-    isFloatRate: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status: $Enums.AdvertStatus | null
-    duration: string
-    created_at: Date | null
-    updated_at: Date | null
-    merchant_id: number
-    _count: AdvertsCountAggregateOutputType | null
-    _avg: AdvertsAvgAggregateOutputType | null
-    _sum: AdvertsSumAggregateOutputType | null
-    _min: AdvertsMinAggregateOutputType | null
-    _max: AdvertsMaxAggregateOutputType | null
-  }
-
-  type GetAdvertsGroupByPayload<T extends AdvertsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AdvertsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AdvertsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AdvertsGroupByOutputType[P]>
-            : GetScalarType<T[P], AdvertsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AdvertsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    rateFloat?: boolean
-    rateFixed?: boolean
-    isFloatRate?: boolean
-    limitUpper?: boolean
-    limitLower?: boolean
-    fiatAmountPerCrypto?: boolean
-    tradeType?: boolean
-    currency_crypto?: boolean
-    currency_fiat?: boolean
-    instructions?: boolean
-    wallet_address?: boolean
-    status?: boolean
-    duration?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    merchant_id?: boolean
-    bank_accounts?: boolean | Adverts$bank_accountsArgs<ExtArgs>
-    merchant?: boolean | Adverts$merchantArgs<ExtArgs>
-    _count?: boolean | AdvertsCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["adverts"]>
-
-  export type AdvertsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    rateFloat?: boolean
-    rateFixed?: boolean
-    isFloatRate?: boolean
-    limitUpper?: boolean
-    limitLower?: boolean
-    fiatAmountPerCrypto?: boolean
-    tradeType?: boolean
-    currency_crypto?: boolean
-    currency_fiat?: boolean
-    instructions?: boolean
-    wallet_address?: boolean
-    status?: boolean
-    duration?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    merchant_id?: boolean
-    merchant?: boolean | Adverts$merchantArgs<ExtArgs>
-  }, ExtArgs["result"]["adverts"]>
-
-  export type AdvertsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    rateFloat?: boolean
-    rateFixed?: boolean
-    isFloatRate?: boolean
-    limitUpper?: boolean
-    limitLower?: boolean
-    fiatAmountPerCrypto?: boolean
-    tradeType?: boolean
-    currency_crypto?: boolean
-    currency_fiat?: boolean
-    instructions?: boolean
-    wallet_address?: boolean
-    status?: boolean
-    duration?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    merchant_id?: boolean
-    merchant?: boolean | Adverts$merchantArgs<ExtArgs>
-  }, ExtArgs["result"]["adverts"]>
-
-  export type AdvertsSelectScalar = {
-    id?: boolean
-    rateFloat?: boolean
-    rateFixed?: boolean
-    isFloatRate?: boolean
-    limitUpper?: boolean
-    limitLower?: boolean
-    fiatAmountPerCrypto?: boolean
-    tradeType?: boolean
-    currency_crypto?: boolean
-    currency_fiat?: boolean
-    instructions?: boolean
-    wallet_address?: boolean
-    status?: boolean
-    duration?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    merchant_id?: boolean
-  }
-
-  export type AdvertsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rateFloat" | "rateFixed" | "isFloatRate" | "limitUpper" | "limitLower" | "fiatAmountPerCrypto" | "tradeType" | "currency_crypto" | "currency_fiat" | "instructions" | "wallet_address" | "status" | "duration" | "created_at" | "updated_at" | "merchant_id", ExtArgs["result"]["adverts"]>
-  export type AdvertsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    bank_accounts?: boolean | Adverts$bank_accountsArgs<ExtArgs>
-    merchant?: boolean | Adverts$merchantArgs<ExtArgs>
-    _count?: boolean | AdvertsCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type AdvertsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    merchant?: boolean | Adverts$merchantArgs<ExtArgs>
-  }
-  export type AdvertsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    merchant?: boolean | Adverts$merchantArgs<ExtArgs>
-  }
-
-  export type $AdvertsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Adverts"
-    objects: {
-      bank_accounts: Prisma.$BankAccountPayload<ExtArgs>[]
-      merchant: Prisma.$UserPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      rateFloat: number | null
-      rateFixed: number | null
-      isFloatRate: boolean
-      limitUpper: number
-      limitLower: number
-      fiatAmountPerCrypto: number
-      tradeType: $Enums.TradeType
-      currency_crypto: string
-      currency_fiat: $Enums.CountryCode
-      instructions: string
-      wallet_address: string
-      status: $Enums.AdvertStatus | null
-      duration: string
-      created_at: Date | null
-      updated_at: Date | null
-      merchant_id: number
-    }, ExtArgs["result"]["adverts"]>
-    composites: {}
-  }
-
-  type AdvertsGetPayload<S extends boolean | null | undefined | AdvertsDefaultArgs> = $Result.GetResult<Prisma.$AdvertsPayload, S>
-
-  type AdvertsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AdvertsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AdvertsCountAggregateInputType | true
-    }
-
-  export interface AdvertsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Adverts'], meta: { name: 'Adverts' } }
-    /**
-     * Find zero or one Adverts that matches the filter.
-     * @param {AdvertsFindUniqueArgs} args - Arguments to find a Adverts
-     * @example
-     * // Get one Adverts
-     * const adverts = await prisma.adverts.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AdvertsFindUniqueArgs>(args: SelectSubset<T, AdvertsFindUniqueArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Adverts that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AdvertsFindUniqueOrThrowArgs} args - Arguments to find a Adverts
-     * @example
-     * // Get one Adverts
-     * const adverts = await prisma.adverts.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AdvertsFindUniqueOrThrowArgs>(args: SelectSubset<T, AdvertsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Adverts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdvertsFindFirstArgs} args - Arguments to find a Adverts
-     * @example
-     * // Get one Adverts
-     * const adverts = await prisma.adverts.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AdvertsFindFirstArgs>(args?: SelectSubset<T, AdvertsFindFirstArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Adverts that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdvertsFindFirstOrThrowArgs} args - Arguments to find a Adverts
-     * @example
-     * // Get one Adverts
-     * const adverts = await prisma.adverts.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AdvertsFindFirstOrThrowArgs>(args?: SelectSubset<T, AdvertsFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Adverts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdvertsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Adverts
-     * const adverts = await prisma.adverts.findMany()
-     * 
-     * // Get first 10 Adverts
-     * const adverts = await prisma.adverts.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const advertsWithIdOnly = await prisma.adverts.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AdvertsFindManyArgs>(args?: SelectSubset<T, AdvertsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Adverts.
-     * @param {AdvertsCreateArgs} args - Arguments to create a Adverts.
-     * @example
-     * // Create one Adverts
-     * const Adverts = await prisma.adverts.create({
-     *   data: {
-     *     // ... data to create a Adverts
-     *   }
-     * })
-     * 
-     */
-    create<T extends AdvertsCreateArgs>(args: SelectSubset<T, AdvertsCreateArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Adverts.
-     * @param {AdvertsCreateManyArgs} args - Arguments to create many Adverts.
-     * @example
-     * // Create many Adverts
-     * const adverts = await prisma.adverts.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AdvertsCreateManyArgs>(args?: SelectSubset<T, AdvertsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Adverts and returns the data saved in the database.
-     * @param {AdvertsCreateManyAndReturnArgs} args - Arguments to create many Adverts.
-     * @example
-     * // Create many Adverts
-     * const adverts = await prisma.adverts.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Adverts and only return the `id`
-     * const advertsWithIdOnly = await prisma.adverts.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AdvertsCreateManyAndReturnArgs>(args?: SelectSubset<T, AdvertsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Adverts.
-     * @param {AdvertsDeleteArgs} args - Arguments to delete one Adverts.
-     * @example
-     * // Delete one Adverts
-     * const Adverts = await prisma.adverts.delete({
-     *   where: {
-     *     // ... filter to delete one Adverts
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AdvertsDeleteArgs>(args: SelectSubset<T, AdvertsDeleteArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Adverts.
-     * @param {AdvertsUpdateArgs} args - Arguments to update one Adverts.
-     * @example
-     * // Update one Adverts
-     * const adverts = await prisma.adverts.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AdvertsUpdateArgs>(args: SelectSubset<T, AdvertsUpdateArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Adverts.
-     * @param {AdvertsDeleteManyArgs} args - Arguments to filter Adverts to delete.
-     * @example
-     * // Delete a few Adverts
-     * const { count } = await prisma.adverts.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AdvertsDeleteManyArgs>(args?: SelectSubset<T, AdvertsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Adverts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdvertsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Adverts
-     * const adverts = await prisma.adverts.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AdvertsUpdateManyArgs>(args: SelectSubset<T, AdvertsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Adverts and returns the data updated in the database.
-     * @param {AdvertsUpdateManyAndReturnArgs} args - Arguments to update many Adverts.
-     * @example
-     * // Update many Adverts
-     * const adverts = await prisma.adverts.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Adverts and only return the `id`
-     * const advertsWithIdOnly = await prisma.adverts.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AdvertsUpdateManyAndReturnArgs>(args: SelectSubset<T, AdvertsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Adverts.
-     * @param {AdvertsUpsertArgs} args - Arguments to update or create a Adverts.
-     * @example
-     * // Update or create a Adverts
-     * const adverts = await prisma.adverts.upsert({
-     *   create: {
-     *     // ... data to create a Adverts
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Adverts we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AdvertsUpsertArgs>(args: SelectSubset<T, AdvertsUpsertArgs<ExtArgs>>): Prisma__AdvertsClient<$Result.GetResult<Prisma.$AdvertsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Adverts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdvertsCountArgs} args - Arguments to filter Adverts to count.
-     * @example
-     * // Count the number of Adverts
-     * const count = await prisma.adverts.count({
-     *   where: {
-     *     // ... the filter for the Adverts we want to count
-     *   }
-     * })
-    **/
-    count<T extends AdvertsCountArgs>(
-      args?: Subset<T, AdvertsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AdvertsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Adverts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdvertsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AdvertsAggregateArgs>(args: Subset<T, AdvertsAggregateArgs>): Prisma.PrismaPromise<GetAdvertsAggregateType<T>>
-
-    /**
-     * Group by Adverts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AdvertsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AdvertsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AdvertsGroupByArgs['orderBy'] }
-        : { orderBy?: AdvertsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AdvertsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdvertsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Adverts model
-   */
-  readonly fields: AdvertsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Adverts.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__AdvertsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    bank_accounts<T extends Adverts$bank_accountsArgs<ExtArgs> = {}>(args?: Subset<T, Adverts$bank_accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    merchant<T extends Adverts$merchantArgs<ExtArgs> = {}>(args?: Subset<T, Adverts$merchantArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Adverts model
-   */
-  interface AdvertsFieldRefs {
-    readonly id: FieldRef<"Adverts", 'Int'>
-    readonly rateFloat: FieldRef<"Adverts", 'Float'>
-    readonly rateFixed: FieldRef<"Adverts", 'Float'>
-    readonly isFloatRate: FieldRef<"Adverts", 'Boolean'>
-    readonly limitUpper: FieldRef<"Adverts", 'Float'>
-    readonly limitLower: FieldRef<"Adverts", 'Float'>
-    readonly fiatAmountPerCrypto: FieldRef<"Adverts", 'Int'>
-    readonly tradeType: FieldRef<"Adverts", 'TradeType'>
-    readonly currency_crypto: FieldRef<"Adverts", 'String'>
-    readonly currency_fiat: FieldRef<"Adverts", 'CountryCode'>
-    readonly instructions: FieldRef<"Adverts", 'String'>
-    readonly wallet_address: FieldRef<"Adverts", 'String'>
-    readonly status: FieldRef<"Adverts", 'AdvertStatus'>
-    readonly duration: FieldRef<"Adverts", 'String'>
-    readonly created_at: FieldRef<"Adverts", 'DateTime'>
-    readonly updated_at: FieldRef<"Adverts", 'DateTime'>
-    readonly merchant_id: FieldRef<"Adverts", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Adverts findUnique
-   */
-  export type AdvertsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * Filter, which Adverts to fetch.
-     */
-    where: AdvertsWhereUniqueInput
-  }
-
-  /**
-   * Adverts findUniqueOrThrow
-   */
-  export type AdvertsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * Filter, which Adverts to fetch.
-     */
-    where: AdvertsWhereUniqueInput
-  }
-
-  /**
-   * Adverts findFirst
-   */
-  export type AdvertsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * Filter, which Adverts to fetch.
-     */
-    where?: AdvertsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Adverts to fetch.
-     */
-    orderBy?: AdvertsOrderByWithRelationInput | AdvertsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Adverts.
-     */
-    cursor?: AdvertsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Adverts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Adverts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Adverts.
-     */
-    distinct?: AdvertsScalarFieldEnum | AdvertsScalarFieldEnum[]
-  }
-
-  /**
-   * Adverts findFirstOrThrow
-   */
-  export type AdvertsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * Filter, which Adverts to fetch.
-     */
-    where?: AdvertsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Adverts to fetch.
-     */
-    orderBy?: AdvertsOrderByWithRelationInput | AdvertsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Adverts.
-     */
-    cursor?: AdvertsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Adverts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Adverts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Adverts.
-     */
-    distinct?: AdvertsScalarFieldEnum | AdvertsScalarFieldEnum[]
-  }
-
-  /**
-   * Adverts findMany
-   */
-  export type AdvertsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * Filter, which Adverts to fetch.
-     */
-    where?: AdvertsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Adverts to fetch.
-     */
-    orderBy?: AdvertsOrderByWithRelationInput | AdvertsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Adverts.
-     */
-    cursor?: AdvertsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Adverts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Adverts.
-     */
-    skip?: number
-    distinct?: AdvertsScalarFieldEnum | AdvertsScalarFieldEnum[]
-  }
-
-  /**
-   * Adverts create
-   */
-  export type AdvertsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Adverts.
-     */
-    data: XOR<AdvertsCreateInput, AdvertsUncheckedCreateInput>
-  }
-
-  /**
-   * Adverts createMany
-   */
-  export type AdvertsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Adverts.
-     */
-    data: AdvertsCreateManyInput | AdvertsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Adverts createManyAndReturn
-   */
-  export type AdvertsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * The data used to create many Adverts.
-     */
-    data: AdvertsCreateManyInput | AdvertsCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Adverts update
-   */
-  export type AdvertsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Adverts.
-     */
-    data: XOR<AdvertsUpdateInput, AdvertsUncheckedUpdateInput>
-    /**
-     * Choose, which Adverts to update.
-     */
-    where: AdvertsWhereUniqueInput
-  }
-
-  /**
-   * Adverts updateMany
-   */
-  export type AdvertsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Adverts.
-     */
-    data: XOR<AdvertsUpdateManyMutationInput, AdvertsUncheckedUpdateManyInput>
-    /**
-     * Filter which Adverts to update
-     */
-    where?: AdvertsWhereInput
-    /**
-     * Limit how many Adverts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Adverts updateManyAndReturn
-   */
-  export type AdvertsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * The data used to update Adverts.
-     */
-    data: XOR<AdvertsUpdateManyMutationInput, AdvertsUncheckedUpdateManyInput>
-    /**
-     * Filter which Adverts to update
-     */
-    where?: AdvertsWhereInput
-    /**
-     * Limit how many Adverts to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Adverts upsert
-   */
-  export type AdvertsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Adverts to update in case it exists.
-     */
-    where: AdvertsWhereUniqueInput
-    /**
-     * In case the Adverts found by the `where` argument doesn't exist, create a new Adverts with this data.
-     */
-    create: XOR<AdvertsCreateInput, AdvertsUncheckedCreateInput>
-    /**
-     * In case the Adverts was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AdvertsUpdateInput, AdvertsUncheckedUpdateInput>
-  }
-
-  /**
-   * Adverts delete
-   */
-  export type AdvertsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-    /**
-     * Filter which Adverts to delete.
-     */
-    where: AdvertsWhereUniqueInput
-  }
-
-  /**
-   * Adverts deleteMany
-   */
-  export type AdvertsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Adverts to delete
-     */
-    where?: AdvertsWhereInput
-    /**
-     * Limit how many Adverts to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Adverts.bank_accounts
-   */
-  export type Adverts$bank_accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BankAccount
-     */
-    select?: BankAccountSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BankAccount
-     */
-    omit?: BankAccountOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BankAccountInclude<ExtArgs> | null
-    where?: BankAccountWhereInput
-    orderBy?: BankAccountOrderByWithRelationInput | BankAccountOrderByWithRelationInput[]
-    cursor?: BankAccountWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BankAccountScalarFieldEnum | BankAccountScalarFieldEnum[]
-  }
-
-  /**
-   * Adverts.merchant
-   */
-  export type Adverts$merchantArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * Adverts without action
-   */
-  export type AdvertsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Adverts
-     */
-    select?: AdvertsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Adverts
-     */
-    omit?: AdvertsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdvertsInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Orders
    */
 
@@ -7107,8 +5518,7 @@ export namespace Prisma {
     amount_fiat: number | null
     amount_crypto: number | null
     bank_id: number | null
-    customer_id: number | null
-    merchant_id: number | null
+    user_id: number | null
   }
 
   export type OrdersSumAggregateOutputType = {
@@ -7116,8 +5526,7 @@ export namespace Prisma {
     amount_fiat: number | null
     amount_crypto: number | null
     bank_id: number | null
-    customer_id: number | null
-    merchant_id: number | null
+    user_id: number | null
   }
 
   export type OrdersMinAggregateOutputType = {
@@ -7127,31 +5536,16 @@ export namespace Prisma {
     wallet_customer: string | null
     wallet_merchant: string | null
     estimated_duration: string | null
+    txn_hash: string | null
     mode: $Enums.OrderMode | null
     currency_crypto: string | null
     currency_fiat: $Enums.CountryCode | null
     trade_type: $Enums.TradeType | null
     status: $Enums.OrderStatus | null
-    action_user: $Enums.OrderActions | null
-    action_merchant: $Enums.OrderActions | null
-    txn_hash: string | null
-    sell_txn_hash_customer_lock_crypto: string | null
-    sell_txn_hash_customer_release_crypto: string | null
-    sell_time2_customer_lock_crypto: Date | null
-    sell_time1_customer_request: Date | null
-    sell_time3_merchant_send_fiat: Date | null
-    sell_time4_customer_release_crypto: Date | null
-    buy_time1_customer_request: Date | null
-    buy_time2_merchant_lock_crypto: Date | null
-    buy_time3_customer_send_fiat: Date | null
-    buy_time4_merchant_release_crypto: Date | null
-    buy_txn_hash_merchant_lock_crypto: string | null
-    buy_txn_hash_merchant_release_crypto: string | null
     created_at: Date | null
     updated_at: Date | null
     bank_id: number | null
-    customer_id: number | null
-    merchant_id: number | null
+    user_id: number | null
   }
 
   export type OrdersMaxAggregateOutputType = {
@@ -7161,31 +5555,16 @@ export namespace Prisma {
     wallet_customer: string | null
     wallet_merchant: string | null
     estimated_duration: string | null
+    txn_hash: string | null
     mode: $Enums.OrderMode | null
     currency_crypto: string | null
     currency_fiat: $Enums.CountryCode | null
     trade_type: $Enums.TradeType | null
     status: $Enums.OrderStatus | null
-    action_user: $Enums.OrderActions | null
-    action_merchant: $Enums.OrderActions | null
-    txn_hash: string | null
-    sell_txn_hash_customer_lock_crypto: string | null
-    sell_txn_hash_customer_release_crypto: string | null
-    sell_time2_customer_lock_crypto: Date | null
-    sell_time1_customer_request: Date | null
-    sell_time3_merchant_send_fiat: Date | null
-    sell_time4_customer_release_crypto: Date | null
-    buy_time1_customer_request: Date | null
-    buy_time2_merchant_lock_crypto: Date | null
-    buy_time3_customer_send_fiat: Date | null
-    buy_time4_merchant_release_crypto: Date | null
-    buy_txn_hash_merchant_lock_crypto: string | null
-    buy_txn_hash_merchant_release_crypto: string | null
     created_at: Date | null
     updated_at: Date | null
     bank_id: number | null
-    customer_id: number | null
-    merchant_id: number | null
+    user_id: number | null
   }
 
   export type OrdersCountAggregateOutputType = {
@@ -7195,31 +5574,16 @@ export namespace Prisma {
     wallet_customer: number
     wallet_merchant: number
     estimated_duration: number
+    txn_hash: number
     mode: number
     currency_crypto: number
     currency_fiat: number
     trade_type: number
     status: number
-    action_user: number
-    action_merchant: number
-    txn_hash: number
-    sell_txn_hash_customer_lock_crypto: number
-    sell_txn_hash_customer_release_crypto: number
-    sell_time2_customer_lock_crypto: number
-    sell_time1_customer_request: number
-    sell_time3_merchant_send_fiat: number
-    sell_time4_customer_release_crypto: number
-    buy_time1_customer_request: number
-    buy_time2_merchant_lock_crypto: number
-    buy_time3_customer_send_fiat: number
-    buy_time4_merchant_release_crypto: number
-    buy_txn_hash_merchant_lock_crypto: number
-    buy_txn_hash_merchant_release_crypto: number
     created_at: number
     updated_at: number
     bank_id: number
-    customer_id: number
-    merchant_id: number
+    user_id: number
     _all: number
   }
 
@@ -7229,8 +5593,7 @@ export namespace Prisma {
     amount_fiat?: true
     amount_crypto?: true
     bank_id?: true
-    customer_id?: true
-    merchant_id?: true
+    user_id?: true
   }
 
   export type OrdersSumAggregateInputType = {
@@ -7238,8 +5601,7 @@ export namespace Prisma {
     amount_fiat?: true
     amount_crypto?: true
     bank_id?: true
-    customer_id?: true
-    merchant_id?: true
+    user_id?: true
   }
 
   export type OrdersMinAggregateInputType = {
@@ -7249,31 +5611,16 @@ export namespace Prisma {
     wallet_customer?: true
     wallet_merchant?: true
     estimated_duration?: true
+    txn_hash?: true
     mode?: true
     currency_crypto?: true
     currency_fiat?: true
     trade_type?: true
     status?: true
-    action_user?: true
-    action_merchant?: true
-    txn_hash?: true
-    sell_txn_hash_customer_lock_crypto?: true
-    sell_txn_hash_customer_release_crypto?: true
-    sell_time2_customer_lock_crypto?: true
-    sell_time1_customer_request?: true
-    sell_time3_merchant_send_fiat?: true
-    sell_time4_customer_release_crypto?: true
-    buy_time1_customer_request?: true
-    buy_time2_merchant_lock_crypto?: true
-    buy_time3_customer_send_fiat?: true
-    buy_time4_merchant_release_crypto?: true
-    buy_txn_hash_merchant_lock_crypto?: true
-    buy_txn_hash_merchant_release_crypto?: true
     created_at?: true
     updated_at?: true
     bank_id?: true
-    customer_id?: true
-    merchant_id?: true
+    user_id?: true
   }
 
   export type OrdersMaxAggregateInputType = {
@@ -7283,31 +5630,16 @@ export namespace Prisma {
     wallet_customer?: true
     wallet_merchant?: true
     estimated_duration?: true
+    txn_hash?: true
     mode?: true
     currency_crypto?: true
     currency_fiat?: true
     trade_type?: true
     status?: true
-    action_user?: true
-    action_merchant?: true
-    txn_hash?: true
-    sell_txn_hash_customer_lock_crypto?: true
-    sell_txn_hash_customer_release_crypto?: true
-    sell_time2_customer_lock_crypto?: true
-    sell_time1_customer_request?: true
-    sell_time3_merchant_send_fiat?: true
-    sell_time4_customer_release_crypto?: true
-    buy_time1_customer_request?: true
-    buy_time2_merchant_lock_crypto?: true
-    buy_time3_customer_send_fiat?: true
-    buy_time4_merchant_release_crypto?: true
-    buy_txn_hash_merchant_lock_crypto?: true
-    buy_txn_hash_merchant_release_crypto?: true
     created_at?: true
     updated_at?: true
     bank_id?: true
-    customer_id?: true
-    merchant_id?: true
+    user_id?: true
   }
 
   export type OrdersCountAggregateInputType = {
@@ -7317,31 +5649,16 @@ export namespace Prisma {
     wallet_customer?: true
     wallet_merchant?: true
     estimated_duration?: true
+    txn_hash?: true
     mode?: true
     currency_crypto?: true
     currency_fiat?: true
     trade_type?: true
     status?: true
-    action_user?: true
-    action_merchant?: true
-    txn_hash?: true
-    sell_txn_hash_customer_lock_crypto?: true
-    sell_txn_hash_customer_release_crypto?: true
-    sell_time2_customer_lock_crypto?: true
-    sell_time1_customer_request?: true
-    sell_time3_merchant_send_fiat?: true
-    sell_time4_customer_release_crypto?: true
-    buy_time1_customer_request?: true
-    buy_time2_merchant_lock_crypto?: true
-    buy_time3_customer_send_fiat?: true
-    buy_time4_merchant_release_crypto?: true
-    buy_txn_hash_merchant_lock_crypto?: true
-    buy_txn_hash_merchant_release_crypto?: true
     created_at?: true
     updated_at?: true
     bank_id?: true
-    customer_id?: true
-    merchant_id?: true
+    user_id?: true
     _all?: true
   }
 
@@ -7438,31 +5755,16 @@ export namespace Prisma {
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash: string | null
     mode: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status: $Enums.OrderStatus
-    action_user: $Enums.OrderActions | null
-    action_merchant: $Enums.OrderActions | null
-    txn_hash: string | null
-    sell_txn_hash_customer_lock_crypto: string | null
-    sell_txn_hash_customer_release_crypto: string | null
-    sell_time2_customer_lock_crypto: Date | null
-    sell_time1_customer_request: Date | null
-    sell_time3_merchant_send_fiat: Date | null
-    sell_time4_customer_release_crypto: Date | null
-    buy_time1_customer_request: Date | null
-    buy_time2_merchant_lock_crypto: Date | null
-    buy_time3_customer_send_fiat: Date | null
-    buy_time4_merchant_release_crypto: Date | null
-    buy_txn_hash_merchant_lock_crypto: string | null
-    buy_txn_hash_merchant_release_crypto: string | null
     created_at: Date | null
     updated_at: Date | null
     bank_id: number
-    customer_id: number
-    merchant_id: number
+    user_id: number
     _count: OrdersCountAggregateOutputType | null
     _avg: OrdersAvgAggregateOutputType | null
     _sum: OrdersSumAggregateOutputType | null
@@ -7491,33 +5793,18 @@ export namespace Prisma {
     wallet_customer?: boolean
     wallet_merchant?: boolean
     estimated_duration?: boolean
+    txn_hash?: boolean
     mode?: boolean
     currency_crypto?: boolean
     currency_fiat?: boolean
     trade_type?: boolean
     status?: boolean
-    action_user?: boolean
-    action_merchant?: boolean
-    txn_hash?: boolean
-    sell_txn_hash_customer_lock_crypto?: boolean
-    sell_txn_hash_customer_release_crypto?: boolean
-    sell_time2_customer_lock_crypto?: boolean
-    sell_time1_customer_request?: boolean
-    sell_time3_merchant_send_fiat?: boolean
-    sell_time4_customer_release_crypto?: boolean
-    buy_time1_customer_request?: boolean
-    buy_time2_merchant_lock_crypto?: boolean
-    buy_time3_customer_send_fiat?: boolean
-    buy_time4_merchant_release_crypto?: boolean
-    buy_txn_hash_merchant_lock_crypto?: boolean
-    buy_txn_hash_merchant_release_crypto?: boolean
     created_at?: boolean
     updated_at?: boolean
     bank_id?: boolean
-    customer_id?: boolean
-    merchant_id?: boolean
+    user_id?: boolean
     bank?: boolean | Orders$bankArgs<ExtArgs>
-    customer?: boolean | Orders$customerArgs<ExtArgs>
+    user?: boolean | Orders$userArgs<ExtArgs>
   }, ExtArgs["result"]["orders"]>
 
   export type OrdersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7527,33 +5814,18 @@ export namespace Prisma {
     wallet_customer?: boolean
     wallet_merchant?: boolean
     estimated_duration?: boolean
+    txn_hash?: boolean
     mode?: boolean
     currency_crypto?: boolean
     currency_fiat?: boolean
     trade_type?: boolean
     status?: boolean
-    action_user?: boolean
-    action_merchant?: boolean
-    txn_hash?: boolean
-    sell_txn_hash_customer_lock_crypto?: boolean
-    sell_txn_hash_customer_release_crypto?: boolean
-    sell_time2_customer_lock_crypto?: boolean
-    sell_time1_customer_request?: boolean
-    sell_time3_merchant_send_fiat?: boolean
-    sell_time4_customer_release_crypto?: boolean
-    buy_time1_customer_request?: boolean
-    buy_time2_merchant_lock_crypto?: boolean
-    buy_time3_customer_send_fiat?: boolean
-    buy_time4_merchant_release_crypto?: boolean
-    buy_txn_hash_merchant_lock_crypto?: boolean
-    buy_txn_hash_merchant_release_crypto?: boolean
     created_at?: boolean
     updated_at?: boolean
     bank_id?: boolean
-    customer_id?: boolean
-    merchant_id?: boolean
+    user_id?: boolean
     bank?: boolean | Orders$bankArgs<ExtArgs>
-    customer?: boolean | Orders$customerArgs<ExtArgs>
+    user?: boolean | Orders$userArgs<ExtArgs>
   }, ExtArgs["result"]["orders"]>
 
   export type OrdersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7563,33 +5835,18 @@ export namespace Prisma {
     wallet_customer?: boolean
     wallet_merchant?: boolean
     estimated_duration?: boolean
+    txn_hash?: boolean
     mode?: boolean
     currency_crypto?: boolean
     currency_fiat?: boolean
     trade_type?: boolean
     status?: boolean
-    action_user?: boolean
-    action_merchant?: boolean
-    txn_hash?: boolean
-    sell_txn_hash_customer_lock_crypto?: boolean
-    sell_txn_hash_customer_release_crypto?: boolean
-    sell_time2_customer_lock_crypto?: boolean
-    sell_time1_customer_request?: boolean
-    sell_time3_merchant_send_fiat?: boolean
-    sell_time4_customer_release_crypto?: boolean
-    buy_time1_customer_request?: boolean
-    buy_time2_merchant_lock_crypto?: boolean
-    buy_time3_customer_send_fiat?: boolean
-    buy_time4_merchant_release_crypto?: boolean
-    buy_txn_hash_merchant_lock_crypto?: boolean
-    buy_txn_hash_merchant_release_crypto?: boolean
     created_at?: boolean
     updated_at?: boolean
     bank_id?: boolean
-    customer_id?: boolean
-    merchant_id?: boolean
+    user_id?: boolean
     bank?: boolean | Orders$bankArgs<ExtArgs>
-    customer?: boolean | Orders$customerArgs<ExtArgs>
+    user?: boolean | Orders$userArgs<ExtArgs>
   }, ExtArgs["result"]["orders"]>
 
   export type OrdersSelectScalar = {
@@ -7599,52 +5856,37 @@ export namespace Prisma {
     wallet_customer?: boolean
     wallet_merchant?: boolean
     estimated_duration?: boolean
+    txn_hash?: boolean
     mode?: boolean
     currency_crypto?: boolean
     currency_fiat?: boolean
     trade_type?: boolean
     status?: boolean
-    action_user?: boolean
-    action_merchant?: boolean
-    txn_hash?: boolean
-    sell_txn_hash_customer_lock_crypto?: boolean
-    sell_txn_hash_customer_release_crypto?: boolean
-    sell_time2_customer_lock_crypto?: boolean
-    sell_time1_customer_request?: boolean
-    sell_time3_merchant_send_fiat?: boolean
-    sell_time4_customer_release_crypto?: boolean
-    buy_time1_customer_request?: boolean
-    buy_time2_merchant_lock_crypto?: boolean
-    buy_time3_customer_send_fiat?: boolean
-    buy_time4_merchant_release_crypto?: boolean
-    buy_txn_hash_merchant_lock_crypto?: boolean
-    buy_txn_hash_merchant_release_crypto?: boolean
     created_at?: boolean
     updated_at?: boolean
     bank_id?: boolean
-    customer_id?: boolean
-    merchant_id?: boolean
+    user_id?: boolean
   }
 
-  export type OrdersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount_fiat" | "amount_crypto" | "wallet_customer" | "wallet_merchant" | "estimated_duration" | "mode" | "currency_crypto" | "currency_fiat" | "trade_type" | "status" | "action_user" | "action_merchant" | "txn_hash" | "sell_txn_hash_customer_lock_crypto" | "sell_txn_hash_customer_release_crypto" | "sell_time2_customer_lock_crypto" | "sell_time1_customer_request" | "sell_time3_merchant_send_fiat" | "sell_time4_customer_release_crypto" | "buy_time1_customer_request" | "buy_time2_merchant_lock_crypto" | "buy_time3_customer_send_fiat" | "buy_time4_merchant_release_crypto" | "buy_txn_hash_merchant_lock_crypto" | "buy_txn_hash_merchant_release_crypto" | "created_at" | "updated_at" | "bank_id" | "customer_id" | "merchant_id", ExtArgs["result"]["orders"]>
+  export type OrdersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount_fiat" | "amount_crypto" | "wallet_customer" | "wallet_merchant" | "estimated_duration" | "txn_hash" | "mode" | "currency_crypto" | "currency_fiat" | "trade_type" | "status" | "created_at" | "updated_at" | "bank_id" | "user_id", ExtArgs["result"]["orders"]>
   export type OrdersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bank?: boolean | Orders$bankArgs<ExtArgs>
-    customer?: boolean | Orders$customerArgs<ExtArgs>
+    user?: boolean | Orders$userArgs<ExtArgs>
   }
   export type OrdersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bank?: boolean | Orders$bankArgs<ExtArgs>
-    customer?: boolean | Orders$customerArgs<ExtArgs>
+    user?: boolean | Orders$userArgs<ExtArgs>
   }
   export type OrdersIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bank?: boolean | Orders$bankArgs<ExtArgs>
-    customer?: boolean | Orders$customerArgs<ExtArgs>
+    user?: boolean | Orders$userArgs<ExtArgs>
   }
 
   export type $OrdersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Orders"
     objects: {
       bank: Prisma.$BankAccountPayload<ExtArgs> | null
-      customer: Prisma.$UserPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -7653,31 +5895,16 @@ export namespace Prisma {
       wallet_customer: string
       wallet_merchant: string
       estimated_duration: string
+      txn_hash: string | null
       mode: $Enums.OrderMode | null
       currency_crypto: string
       currency_fiat: $Enums.CountryCode | null
       trade_type: $Enums.TradeType
       status: $Enums.OrderStatus
-      action_user: $Enums.OrderActions | null
-      action_merchant: $Enums.OrderActions | null
-      txn_hash: string | null
-      sell_txn_hash_customer_lock_crypto: string | null
-      sell_txn_hash_customer_release_crypto: string | null
-      sell_time2_customer_lock_crypto: Date | null
-      sell_time1_customer_request: Date | null
-      sell_time3_merchant_send_fiat: Date | null
-      sell_time4_customer_release_crypto: Date | null
-      buy_time1_customer_request: Date | null
-      buy_time2_merchant_lock_crypto: Date | null
-      buy_time3_customer_send_fiat: Date | null
-      buy_time4_merchant_release_crypto: Date | null
-      buy_txn_hash_merchant_lock_crypto: string | null
-      buy_txn_hash_merchant_release_crypto: string | null
       created_at: Date | null
       updated_at: Date | null
       bank_id: number
-      customer_id: number
-      merchant_id: number
+      user_id: number
     }, ExtArgs["result"]["orders"]>
     composites: {}
   }
@@ -8073,7 +6300,7 @@ export namespace Prisma {
   export interface Prisma__OrdersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     bank<T extends Orders$bankArgs<ExtArgs> = {}>(args?: Subset<T, Orders$bankArgs<ExtArgs>>): Prisma__BankAccountClient<$Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    customer<T extends Orders$customerArgs<ExtArgs> = {}>(args?: Subset<T, Orders$customerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Orders$userArgs<ExtArgs> = {}>(args?: Subset<T, Orders$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8109,31 +6336,16 @@ export namespace Prisma {
     readonly wallet_customer: FieldRef<"Orders", 'String'>
     readonly wallet_merchant: FieldRef<"Orders", 'String'>
     readonly estimated_duration: FieldRef<"Orders", 'String'>
+    readonly txn_hash: FieldRef<"Orders", 'String'>
     readonly mode: FieldRef<"Orders", 'OrderMode'>
     readonly currency_crypto: FieldRef<"Orders", 'String'>
     readonly currency_fiat: FieldRef<"Orders", 'CountryCode'>
     readonly trade_type: FieldRef<"Orders", 'TradeType'>
     readonly status: FieldRef<"Orders", 'OrderStatus'>
-    readonly action_user: FieldRef<"Orders", 'OrderActions'>
-    readonly action_merchant: FieldRef<"Orders", 'OrderActions'>
-    readonly txn_hash: FieldRef<"Orders", 'String'>
-    readonly sell_txn_hash_customer_lock_crypto: FieldRef<"Orders", 'String'>
-    readonly sell_txn_hash_customer_release_crypto: FieldRef<"Orders", 'String'>
-    readonly sell_time2_customer_lock_crypto: FieldRef<"Orders", 'DateTime'>
-    readonly sell_time1_customer_request: FieldRef<"Orders", 'DateTime'>
-    readonly sell_time3_merchant_send_fiat: FieldRef<"Orders", 'DateTime'>
-    readonly sell_time4_customer_release_crypto: FieldRef<"Orders", 'DateTime'>
-    readonly buy_time1_customer_request: FieldRef<"Orders", 'DateTime'>
-    readonly buy_time2_merchant_lock_crypto: FieldRef<"Orders", 'DateTime'>
-    readonly buy_time3_customer_send_fiat: FieldRef<"Orders", 'DateTime'>
-    readonly buy_time4_merchant_release_crypto: FieldRef<"Orders", 'DateTime'>
-    readonly buy_txn_hash_merchant_lock_crypto: FieldRef<"Orders", 'String'>
-    readonly buy_txn_hash_merchant_release_crypto: FieldRef<"Orders", 'String'>
     readonly created_at: FieldRef<"Orders", 'DateTime'>
     readonly updated_at: FieldRef<"Orders", 'DateTime'>
     readonly bank_id: FieldRef<"Orders", 'Int'>
-    readonly customer_id: FieldRef<"Orders", 'Int'>
-    readonly merchant_id: FieldRef<"Orders", 'Int'>
+    readonly user_id: FieldRef<"Orders", 'Int'>
   }
     
 
@@ -8549,9 +6761,9 @@ export namespace Prisma {
   }
 
   /**
-   * Orders.customer
+   * Orders.user
    */
-  export type Orders$customerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Orders$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -11919,11 +10131,7 @@ export namespace Prisma {
     phone: 'phone',
     googleId: 'googleId',
     proof_of_address: 'proof_of_address',
-    phone_verified: 'phone_verified',
-    merchant_success_rate: 'merchant_success_rate',
-    merchant_trade_count: 'merchant_trade_count',
-    merchant_nickname: 'merchant_nickname',
-    merchant_status: 'merchant_status'
+    phone_verified: 'phone_verified'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -11958,29 +10166,6 @@ export namespace Prisma {
   export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[keyof typeof BankAccountScalarFieldEnum]
 
 
-  export const AdvertsScalarFieldEnum: {
-    id: 'id',
-    rateFloat: 'rateFloat',
-    rateFixed: 'rateFixed',
-    isFloatRate: 'isFloatRate',
-    limitUpper: 'limitUpper',
-    limitLower: 'limitLower',
-    fiatAmountPerCrypto: 'fiatAmountPerCrypto',
-    tradeType: 'tradeType',
-    currency_crypto: 'currency_crypto',
-    currency_fiat: 'currency_fiat',
-    instructions: 'instructions',
-    wallet_address: 'wallet_address',
-    status: 'status',
-    duration: 'duration',
-    created_at: 'created_at',
-    updated_at: 'updated_at',
-    merchant_id: 'merchant_id'
-  };
-
-  export type AdvertsScalarFieldEnum = (typeof AdvertsScalarFieldEnum)[keyof typeof AdvertsScalarFieldEnum]
-
-
   export const OrdersScalarFieldEnum: {
     id: 'id',
     amount_fiat: 'amount_fiat',
@@ -11988,31 +10173,16 @@ export namespace Prisma {
     wallet_customer: 'wallet_customer',
     wallet_merchant: 'wallet_merchant',
     estimated_duration: 'estimated_duration',
+    txn_hash: 'txn_hash',
     mode: 'mode',
     currency_crypto: 'currency_crypto',
     currency_fiat: 'currency_fiat',
     trade_type: 'trade_type',
     status: 'status',
-    action_user: 'action_user',
-    action_merchant: 'action_merchant',
-    txn_hash: 'txn_hash',
-    sell_txn_hash_customer_lock_crypto: 'sell_txn_hash_customer_lock_crypto',
-    sell_txn_hash_customer_release_crypto: 'sell_txn_hash_customer_release_crypto',
-    sell_time2_customer_lock_crypto: 'sell_time2_customer_lock_crypto',
-    sell_time1_customer_request: 'sell_time1_customer_request',
-    sell_time3_merchant_send_fiat: 'sell_time3_merchant_send_fiat',
-    sell_time4_customer_release_crypto: 'sell_time4_customer_release_crypto',
-    buy_time1_customer_request: 'buy_time1_customer_request',
-    buy_time2_merchant_lock_crypto: 'buy_time2_merchant_lock_crypto',
-    buy_time3_customer_send_fiat: 'buy_time3_customer_send_fiat',
-    buy_time4_merchant_release_crypto: 'buy_time4_merchant_release_crypto',
-    buy_txn_hash_merchant_lock_crypto: 'buy_txn_hash_merchant_lock_crypto',
-    buy_txn_hash_merchant_release_crypto: 'buy_txn_hash_merchant_release_crypto',
     created_at: 'created_at',
     updated_at: 'updated_at',
     bank_id: 'bank_id',
-    customer_id: 'customer_id',
-    merchant_id: 'merchant_id'
+    user_id: 'user_id'
   };
 
   export type OrdersScalarFieldEnum = (typeof OrdersScalarFieldEnum)[keyof typeof OrdersScalarFieldEnum]
@@ -12181,20 +10351,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'MerchantStatus'
-   */
-  export type EnumMerchantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MerchantStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'MerchantStatus[]'
-   */
-  export type ListEnumMerchantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MerchantStatus[]'>
-    
-
-
-  /**
    * Reference to a field of type 'ChainType'
    */
   export type EnumChainTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ChainType'>
@@ -12223,34 +10379,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TradeType'
-   */
-  export type EnumTradeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TradeType'>
-    
-
-
-  /**
-   * Reference to a field of type 'TradeType[]'
-   */
-  export type ListEnumTradeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TradeType[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'AdvertStatus'
-   */
-  export type EnumAdvertStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvertStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'AdvertStatus[]'
-   */
-  export type ListEnumAdvertStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdvertStatus[]'>
-    
-
-
-  /**
    * Reference to a field of type 'OrderMode'
    */
   export type EnumOrderModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderMode'>
@@ -12265,6 +10393,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TradeType'
+   */
+  export type EnumTradeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TradeType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TradeType[]'
+   */
+  export type ListEnumTradeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TradeType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'OrderStatus'
    */
   export type EnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus'>
@@ -12275,20 +10417,6 @@ export namespace Prisma {
    * Reference to a field of type 'OrderStatus[]'
    */
   export type ListEnumOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderStatus[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'OrderActions'
-   */
-  export type EnumOrderActionsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderActions'>
-    
-
-
-  /**
-   * Reference to a field of type 'OrderActions[]'
-   */
-  export type ListEnumOrderActionsFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OrderActions[]'>
     
 
 
@@ -12380,13 +10508,8 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     proof_of_address?: StringNullableFilter<"User"> | string | null
     phone_verified?: BoolNullableFilter<"User"> | boolean | null
-    merchant_success_rate?: IntNullableFilter<"User"> | number | null
-    merchant_trade_count?: IntNullableFilter<"User"> | number | null
-    merchant_nickname?: StringNullableFilter<"User"> | string | null
-    merchant_status?: EnumMerchantStatusNullableFilter<"User"> | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsListRelationFilter
     bank_accounts?: BankAccountListRelationFilter
-    adverts?: AdvertsListRelationFilter
     orders?: OrdersListRelationFilter
     transactions?: TransactionsListRelationFilter
   }
@@ -12417,13 +10540,8 @@ export namespace Prisma {
     googleId?: SortOrderInput | SortOrder
     proof_of_address?: SortOrderInput | SortOrder
     phone_verified?: SortOrderInput | SortOrder
-    merchant_success_rate?: SortOrderInput | SortOrder
-    merchant_trade_count?: SortOrderInput | SortOrder
-    merchant_nickname?: SortOrderInput | SortOrder
-    merchant_status?: SortOrderInput | SortOrder
     crypto_wallets?: CryptoWalletsOrderByRelationAggregateInput
     bank_accounts?: BankAccountOrderByRelationAggregateInput
-    adverts?: AdvertsOrderByRelationAggregateInput
     orders?: OrdersOrderByRelationAggregateInput
     transactions?: TransactionsOrderByRelationAggregateInput
   }
@@ -12457,13 +10575,8 @@ export namespace Prisma {
     googleId?: StringNullableFilter<"User"> | string | null
     proof_of_address?: StringNullableFilter<"User"> | string | null
     phone_verified?: BoolNullableFilter<"User"> | boolean | null
-    merchant_success_rate?: IntNullableFilter<"User"> | number | null
-    merchant_trade_count?: IntNullableFilter<"User"> | number | null
-    merchant_nickname?: StringNullableFilter<"User"> | string | null
-    merchant_status?: EnumMerchantStatusNullableFilter<"User"> | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsListRelationFilter
     bank_accounts?: BankAccountListRelationFilter
-    adverts?: AdvertsListRelationFilter
     orders?: OrdersListRelationFilter
     transactions?: TransactionsListRelationFilter
   }, "id" | "email" | "telegram_id">
@@ -12494,10 +10607,6 @@ export namespace Prisma {
     googleId?: SortOrderInput | SortOrder
     proof_of_address?: SortOrderInput | SortOrder
     phone_verified?: SortOrderInput | SortOrder
-    merchant_success_rate?: SortOrderInput | SortOrder
-    merchant_trade_count?: SortOrderInput | SortOrder
-    merchant_nickname?: SortOrderInput | SortOrder
-    merchant_status?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -12534,10 +10643,6 @@ export namespace Prisma {
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     proof_of_address?: StringNullableWithAggregatesFilter<"User"> | string | null
     phone_verified?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
-    merchant_success_rate?: IntNullableWithAggregatesFilter<"User"> | number | null
-    merchant_trade_count?: IntNullableWithAggregatesFilter<"User"> | number | null
-    merchant_nickname?: StringNullableWithAggregatesFilter<"User"> | string | null
-    merchant_status?: EnumMerchantStatusNullableWithAggregatesFilter<"User"> | $Enums.MerchantStatus | null
   }
 
   export type CryptoWalletsWhereInput = {
@@ -12626,7 +10731,6 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"BankAccount"> | Date | string | null
     user_id?: IntFilter<"BankAccount"> | number
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    advert?: AdvertsListRelationFilter
     Orders?: OrdersListRelationFilter
   }
 
@@ -12641,7 +10745,6 @@ export namespace Prisma {
     updated_at?: SortOrderInput | SortOrder
     user_id?: SortOrder
     user?: UserOrderByWithRelationInput
-    advert?: AdvertsOrderByRelationAggregateInput
     Orders?: OrdersOrderByRelationAggregateInput
   }
 
@@ -12659,7 +10762,6 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"BankAccount"> | Date | string | null
     user_id?: IntFilter<"BankAccount"> | number
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    advert?: AdvertsListRelationFilter
     Orders?: OrdersListRelationFilter
   }, "id">
 
@@ -12695,126 +10797,6 @@ export namespace Prisma {
     user_id?: IntWithAggregatesFilter<"BankAccount"> | number
   }
 
-  export type AdvertsWhereInput = {
-    AND?: AdvertsWhereInput | AdvertsWhereInput[]
-    OR?: AdvertsWhereInput[]
-    NOT?: AdvertsWhereInput | AdvertsWhereInput[]
-    id?: IntFilter<"Adverts"> | number
-    rateFloat?: FloatNullableFilter<"Adverts"> | number | null
-    rateFixed?: FloatNullableFilter<"Adverts"> | number | null
-    isFloatRate?: BoolFilter<"Adverts"> | boolean
-    limitUpper?: FloatFilter<"Adverts"> | number
-    limitLower?: FloatFilter<"Adverts"> | number
-    fiatAmountPerCrypto?: IntFilter<"Adverts"> | number
-    tradeType?: EnumTradeTypeFilter<"Adverts"> | $Enums.TradeType
-    currency_crypto?: StringFilter<"Adverts"> | string
-    currency_fiat?: EnumCountryCodeFilter<"Adverts"> | $Enums.CountryCode
-    instructions?: StringFilter<"Adverts"> | string
-    wallet_address?: StringFilter<"Adverts"> | string
-    status?: EnumAdvertStatusNullableFilter<"Adverts"> | $Enums.AdvertStatus | null
-    duration?: StringFilter<"Adverts"> | string
-    created_at?: DateTimeNullableFilter<"Adverts"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"Adverts"> | Date | string | null
-    merchant_id?: IntFilter<"Adverts"> | number
-    bank_accounts?: BankAccountListRelationFilter
-    merchant?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }
-
-  export type AdvertsOrderByWithRelationInput = {
-    id?: SortOrder
-    rateFloat?: SortOrderInput | SortOrder
-    rateFixed?: SortOrderInput | SortOrder
-    isFloatRate?: SortOrder
-    limitUpper?: SortOrder
-    limitLower?: SortOrder
-    fiatAmountPerCrypto?: SortOrder
-    tradeType?: SortOrder
-    currency_crypto?: SortOrder
-    currency_fiat?: SortOrder
-    instructions?: SortOrder
-    wallet_address?: SortOrder
-    status?: SortOrderInput | SortOrder
-    duration?: SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
-    merchant_id?: SortOrder
-    bank_accounts?: BankAccountOrderByRelationAggregateInput
-    merchant?: UserOrderByWithRelationInput
-  }
-
-  export type AdvertsWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: AdvertsWhereInput | AdvertsWhereInput[]
-    OR?: AdvertsWhereInput[]
-    NOT?: AdvertsWhereInput | AdvertsWhereInput[]
-    rateFloat?: FloatNullableFilter<"Adverts"> | number | null
-    rateFixed?: FloatNullableFilter<"Adverts"> | number | null
-    isFloatRate?: BoolFilter<"Adverts"> | boolean
-    limitUpper?: FloatFilter<"Adverts"> | number
-    limitLower?: FloatFilter<"Adverts"> | number
-    fiatAmountPerCrypto?: IntFilter<"Adverts"> | number
-    tradeType?: EnumTradeTypeFilter<"Adverts"> | $Enums.TradeType
-    currency_crypto?: StringFilter<"Adverts"> | string
-    currency_fiat?: EnumCountryCodeFilter<"Adverts"> | $Enums.CountryCode
-    instructions?: StringFilter<"Adverts"> | string
-    wallet_address?: StringFilter<"Adverts"> | string
-    status?: EnumAdvertStatusNullableFilter<"Adverts"> | $Enums.AdvertStatus | null
-    duration?: StringFilter<"Adverts"> | string
-    created_at?: DateTimeNullableFilter<"Adverts"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"Adverts"> | Date | string | null
-    merchant_id?: IntFilter<"Adverts"> | number
-    bank_accounts?: BankAccountListRelationFilter
-    merchant?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
-
-  export type AdvertsOrderByWithAggregationInput = {
-    id?: SortOrder
-    rateFloat?: SortOrderInput | SortOrder
-    rateFixed?: SortOrderInput | SortOrder
-    isFloatRate?: SortOrder
-    limitUpper?: SortOrder
-    limitLower?: SortOrder
-    fiatAmountPerCrypto?: SortOrder
-    tradeType?: SortOrder
-    currency_crypto?: SortOrder
-    currency_fiat?: SortOrder
-    instructions?: SortOrder
-    wallet_address?: SortOrder
-    status?: SortOrderInput | SortOrder
-    duration?: SortOrder
-    created_at?: SortOrderInput | SortOrder
-    updated_at?: SortOrderInput | SortOrder
-    merchant_id?: SortOrder
-    _count?: AdvertsCountOrderByAggregateInput
-    _avg?: AdvertsAvgOrderByAggregateInput
-    _max?: AdvertsMaxOrderByAggregateInput
-    _min?: AdvertsMinOrderByAggregateInput
-    _sum?: AdvertsSumOrderByAggregateInput
-  }
-
-  export type AdvertsScalarWhereWithAggregatesInput = {
-    AND?: AdvertsScalarWhereWithAggregatesInput | AdvertsScalarWhereWithAggregatesInput[]
-    OR?: AdvertsScalarWhereWithAggregatesInput[]
-    NOT?: AdvertsScalarWhereWithAggregatesInput | AdvertsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Adverts"> | number
-    rateFloat?: FloatNullableWithAggregatesFilter<"Adverts"> | number | null
-    rateFixed?: FloatNullableWithAggregatesFilter<"Adverts"> | number | null
-    isFloatRate?: BoolWithAggregatesFilter<"Adverts"> | boolean
-    limitUpper?: FloatWithAggregatesFilter<"Adverts"> | number
-    limitLower?: FloatWithAggregatesFilter<"Adverts"> | number
-    fiatAmountPerCrypto?: IntWithAggregatesFilter<"Adverts"> | number
-    tradeType?: EnumTradeTypeWithAggregatesFilter<"Adverts"> | $Enums.TradeType
-    currency_crypto?: StringWithAggregatesFilter<"Adverts"> | string
-    currency_fiat?: EnumCountryCodeWithAggregatesFilter<"Adverts"> | $Enums.CountryCode
-    instructions?: StringWithAggregatesFilter<"Adverts"> | string
-    wallet_address?: StringWithAggregatesFilter<"Adverts"> | string
-    status?: EnumAdvertStatusNullableWithAggregatesFilter<"Adverts"> | $Enums.AdvertStatus | null
-    duration?: StringWithAggregatesFilter<"Adverts"> | string
-    created_at?: DateTimeNullableWithAggregatesFilter<"Adverts"> | Date | string | null
-    updated_at?: DateTimeNullableWithAggregatesFilter<"Adverts"> | Date | string | null
-    merchant_id?: IntWithAggregatesFilter<"Adverts"> | number
-  }
-
   export type OrdersWhereInput = {
     AND?: OrdersWhereInput | OrdersWhereInput[]
     OR?: OrdersWhereInput[]
@@ -12825,33 +10807,18 @@ export namespace Prisma {
     wallet_customer?: StringFilter<"Orders"> | string
     wallet_merchant?: StringFilter<"Orders"> | string
     estimated_duration?: StringFilter<"Orders"> | string
+    txn_hash?: StringNullableFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableFilter<"Orders"> | $Enums.OrderMode | null
     currency_crypto?: StringFilter<"Orders"> | string
     currency_fiat?: EnumCountryCodeNullableFilter<"Orders"> | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFilter<"Orders"> | $Enums.TradeType
     status?: EnumOrderStatusFilter<"Orders"> | $Enums.OrderStatus
-    action_user?: EnumOrderActionsNullableFilter<"Orders"> | $Enums.OrderActions | null
-    action_merchant?: EnumOrderActionsNullableFilter<"Orders"> | $Enums.OrderActions | null
-    txn_hash?: StringNullableFilter<"Orders"> | string | null
-    sell_txn_hash_customer_lock_crypto?: StringNullableFilter<"Orders"> | string | null
-    sell_txn_hash_customer_release_crypto?: StringNullableFilter<"Orders"> | string | null
-    sell_time2_customer_lock_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time1_customer_request?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time3_merchant_send_fiat?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time4_customer_release_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time1_customer_request?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time2_merchant_lock_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time3_customer_send_fiat?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time4_merchant_release_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: StringNullableFilter<"Orders"> | string | null
-    buy_txn_hash_merchant_release_crypto?: StringNullableFilter<"Orders"> | string | null
     created_at?: DateTimeNullableFilter<"Orders"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"Orders"> | Date | string | null
     bank_id?: IntFilter<"Orders"> | number
-    customer_id?: IntFilter<"Orders"> | number
-    merchant_id?: IntFilter<"Orders"> | number
+    user_id?: IntFilter<"Orders"> | number
     bank?: XOR<BankAccountNullableScalarRelationFilter, BankAccountWhereInput> | null
-    customer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type OrdersOrderByWithRelationInput = {
@@ -12861,33 +10828,18 @@ export namespace Prisma {
     wallet_customer?: SortOrder
     wallet_merchant?: SortOrder
     estimated_duration?: SortOrder
+    txn_hash?: SortOrderInput | SortOrder
     mode?: SortOrderInput | SortOrder
     currency_crypto?: SortOrder
     currency_fiat?: SortOrderInput | SortOrder
     trade_type?: SortOrder
     status?: SortOrder
-    action_user?: SortOrderInput | SortOrder
-    action_merchant?: SortOrderInput | SortOrder
-    txn_hash?: SortOrderInput | SortOrder
-    sell_txn_hash_customer_lock_crypto?: SortOrderInput | SortOrder
-    sell_txn_hash_customer_release_crypto?: SortOrderInput | SortOrder
-    sell_time2_customer_lock_crypto?: SortOrderInput | SortOrder
-    sell_time1_customer_request?: SortOrderInput | SortOrder
-    sell_time3_merchant_send_fiat?: SortOrderInput | SortOrder
-    sell_time4_customer_release_crypto?: SortOrderInput | SortOrder
-    buy_time1_customer_request?: SortOrderInput | SortOrder
-    buy_time2_merchant_lock_crypto?: SortOrderInput | SortOrder
-    buy_time3_customer_send_fiat?: SortOrderInput | SortOrder
-    buy_time4_merchant_release_crypto?: SortOrderInput | SortOrder
-    buy_txn_hash_merchant_lock_crypto?: SortOrderInput | SortOrder
-    buy_txn_hash_merchant_release_crypto?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
     bank_id?: SortOrder
-    customer_id?: SortOrder
-    merchant_id?: SortOrder
+    user_id?: SortOrder
     bank?: BankAccountOrderByWithRelationInput
-    customer?: UserOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type OrdersWhereUniqueInput = Prisma.AtLeast<{
@@ -12900,33 +10852,18 @@ export namespace Prisma {
     wallet_customer?: StringFilter<"Orders"> | string
     wallet_merchant?: StringFilter<"Orders"> | string
     estimated_duration?: StringFilter<"Orders"> | string
+    txn_hash?: StringNullableFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableFilter<"Orders"> | $Enums.OrderMode | null
     currency_crypto?: StringFilter<"Orders"> | string
     currency_fiat?: EnumCountryCodeNullableFilter<"Orders"> | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFilter<"Orders"> | $Enums.TradeType
     status?: EnumOrderStatusFilter<"Orders"> | $Enums.OrderStatus
-    action_user?: EnumOrderActionsNullableFilter<"Orders"> | $Enums.OrderActions | null
-    action_merchant?: EnumOrderActionsNullableFilter<"Orders"> | $Enums.OrderActions | null
-    txn_hash?: StringNullableFilter<"Orders"> | string | null
-    sell_txn_hash_customer_lock_crypto?: StringNullableFilter<"Orders"> | string | null
-    sell_txn_hash_customer_release_crypto?: StringNullableFilter<"Orders"> | string | null
-    sell_time2_customer_lock_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time1_customer_request?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time3_merchant_send_fiat?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time4_customer_release_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time1_customer_request?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time2_merchant_lock_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time3_customer_send_fiat?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time4_merchant_release_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: StringNullableFilter<"Orders"> | string | null
-    buy_txn_hash_merchant_release_crypto?: StringNullableFilter<"Orders"> | string | null
     created_at?: DateTimeNullableFilter<"Orders"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"Orders"> | Date | string | null
     bank_id?: IntFilter<"Orders"> | number
-    customer_id?: IntFilter<"Orders"> | number
-    merchant_id?: IntFilter<"Orders"> | number
+    user_id?: IntFilter<"Orders"> | number
     bank?: XOR<BankAccountNullableScalarRelationFilter, BankAccountWhereInput> | null
-    customer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type OrdersOrderByWithAggregationInput = {
@@ -12936,31 +10873,16 @@ export namespace Prisma {
     wallet_customer?: SortOrder
     wallet_merchant?: SortOrder
     estimated_duration?: SortOrder
+    txn_hash?: SortOrderInput | SortOrder
     mode?: SortOrderInput | SortOrder
     currency_crypto?: SortOrder
     currency_fiat?: SortOrderInput | SortOrder
     trade_type?: SortOrder
     status?: SortOrder
-    action_user?: SortOrderInput | SortOrder
-    action_merchant?: SortOrderInput | SortOrder
-    txn_hash?: SortOrderInput | SortOrder
-    sell_txn_hash_customer_lock_crypto?: SortOrderInput | SortOrder
-    sell_txn_hash_customer_release_crypto?: SortOrderInput | SortOrder
-    sell_time2_customer_lock_crypto?: SortOrderInput | SortOrder
-    sell_time1_customer_request?: SortOrderInput | SortOrder
-    sell_time3_merchant_send_fiat?: SortOrderInput | SortOrder
-    sell_time4_customer_release_crypto?: SortOrderInput | SortOrder
-    buy_time1_customer_request?: SortOrderInput | SortOrder
-    buy_time2_merchant_lock_crypto?: SortOrderInput | SortOrder
-    buy_time3_customer_send_fiat?: SortOrderInput | SortOrder
-    buy_time4_merchant_release_crypto?: SortOrderInput | SortOrder
-    buy_txn_hash_merchant_lock_crypto?: SortOrderInput | SortOrder
-    buy_txn_hash_merchant_release_crypto?: SortOrderInput | SortOrder
     created_at?: SortOrderInput | SortOrder
     updated_at?: SortOrderInput | SortOrder
     bank_id?: SortOrder
-    customer_id?: SortOrder
-    merchant_id?: SortOrder
+    user_id?: SortOrder
     _count?: OrdersCountOrderByAggregateInput
     _avg?: OrdersAvgOrderByAggregateInput
     _max?: OrdersMaxOrderByAggregateInput
@@ -12978,31 +10900,16 @@ export namespace Prisma {
     wallet_customer?: StringWithAggregatesFilter<"Orders"> | string
     wallet_merchant?: StringWithAggregatesFilter<"Orders"> | string
     estimated_duration?: StringWithAggregatesFilter<"Orders"> | string
+    txn_hash?: StringNullableWithAggregatesFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableWithAggregatesFilter<"Orders"> | $Enums.OrderMode | null
     currency_crypto?: StringWithAggregatesFilter<"Orders"> | string
     currency_fiat?: EnumCountryCodeNullableWithAggregatesFilter<"Orders"> | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeWithAggregatesFilter<"Orders"> | $Enums.TradeType
     status?: EnumOrderStatusWithAggregatesFilter<"Orders"> | $Enums.OrderStatus
-    action_user?: EnumOrderActionsNullableWithAggregatesFilter<"Orders"> | $Enums.OrderActions | null
-    action_merchant?: EnumOrderActionsNullableWithAggregatesFilter<"Orders"> | $Enums.OrderActions | null
-    txn_hash?: StringNullableWithAggregatesFilter<"Orders"> | string | null
-    sell_txn_hash_customer_lock_crypto?: StringNullableWithAggregatesFilter<"Orders"> | string | null
-    sell_txn_hash_customer_release_crypto?: StringNullableWithAggregatesFilter<"Orders"> | string | null
-    sell_time2_customer_lock_crypto?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    sell_time1_customer_request?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    sell_time3_merchant_send_fiat?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    sell_time4_customer_release_crypto?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    buy_time1_customer_request?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    buy_time2_merchant_lock_crypto?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    buy_time3_customer_send_fiat?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    buy_time4_merchant_release_crypto?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: StringNullableWithAggregatesFilter<"Orders"> | string | null
-    buy_txn_hash_merchant_release_crypto?: StringNullableWithAggregatesFilter<"Orders"> | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"Orders"> | Date | string | null
     bank_id?: IntWithAggregatesFilter<"Orders"> | number
-    customer_id?: IntWithAggregatesFilter<"Orders"> | number
-    merchant_id?: IntWithAggregatesFilter<"Orders"> | number
+    user_id?: IntWithAggregatesFilter<"Orders"> | number
   }
 
   export type ExchangeRatesWhereInput = {
@@ -13240,14 +11147,9 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsCreateNestedManyWithoutUserInput
     bank_accounts?: BankAccountCreateNestedManyWithoutUserInput
-    adverts?: AdvertsCreateNestedManyWithoutMerchantInput
-    orders?: OrdersCreateNestedManyWithoutCustomerInput
+    orders?: OrdersCreateNestedManyWithoutUserInput
     transactions?: TransactionsCreateNestedManyWithoutUserInput
   }
 
@@ -13277,14 +11179,9 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedCreateNestedManyWithoutUserInput
     bank_accounts?: BankAccountUncheckedCreateNestedManyWithoutUserInput
-    adverts?: AdvertsUncheckedCreateNestedManyWithoutMerchantInput
-    orders?: OrdersUncheckedCreateNestedManyWithoutCustomerInput
+    orders?: OrdersUncheckedCreateNestedManyWithoutUserInput
     transactions?: TransactionsUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -13313,14 +11210,9 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUpdateManyWithoutUserNestedInput
     bank_accounts?: BankAccountUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUpdateManyWithoutUserNestedInput
     transactions?: TransactionsUpdateManyWithoutUserNestedInput
   }
 
@@ -13350,14 +11242,9 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedUpdateManyWithoutUserNestedInput
     bank_accounts?: BankAccountUncheckedUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUncheckedUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUncheckedUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUncheckedUpdateManyWithoutUserNestedInput
     transactions?: TransactionsUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -13387,10 +11274,6 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -13418,10 +11301,6 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -13450,10 +11329,6 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
   }
 
   export type CryptoWalletsCreateInput = {
@@ -13538,7 +11413,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     user?: UserCreateNestedOneWithoutBank_accountsInput
-    advert?: AdvertsCreateNestedManyWithoutBank_accountsInput
     Orders?: OrdersCreateNestedManyWithoutBankInput
   }
 
@@ -13552,7 +11426,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     user_id: number
-    advert?: AdvertsUncheckedCreateNestedManyWithoutBank_accountsInput
     Orders?: OrdersUncheckedCreateNestedManyWithoutBankInput
   }
 
@@ -13565,7 +11438,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutBank_accountsNestedInput
-    advert?: AdvertsUpdateManyWithoutBank_accountsNestedInput
     Orders?: OrdersUpdateManyWithoutBankNestedInput
   }
 
@@ -13579,7 +11451,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: IntFieldUpdateOperationsInput | number
-    advert?: AdvertsUncheckedUpdateManyWithoutBank_accountsNestedInput
     Orders?: OrdersUncheckedUpdateManyWithoutBankNestedInput
   }
 
@@ -13617,177 +11488,22 @@ export namespace Prisma {
     user_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type AdvertsCreateInput = {
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    bank_accounts?: BankAccountCreateNestedManyWithoutAdvertInput
-    merchant?: UserCreateNestedOneWithoutAdvertsInput
-  }
-
-  export type AdvertsUncheckedCreateInput = {
-    id?: number
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    merchant_id: number
-    bank_accounts?: BankAccountUncheckedCreateNestedManyWithoutAdvertInput
-  }
-
-  export type AdvertsUpdateInput = {
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    bank_accounts?: BankAccountUpdateManyWithoutAdvertNestedInput
-    merchant?: UserUpdateOneWithoutAdvertsNestedInput
-  }
-
-  export type AdvertsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
-    bank_accounts?: BankAccountUncheckedUpdateManyWithoutAdvertNestedInput
-  }
-
-  export type AdvertsCreateManyInput = {
-    id?: number
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    merchant_id: number
-  }
-
-  export type AdvertsUpdateManyMutationInput = {
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type AdvertsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
-  }
-
   export type OrdersCreateInput = {
     amount_fiat: number
     amount_crypto: number
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    merchant_id: number
     bank?: BankAccountCreateNestedOneWithoutOrdersInput
-    customer?: UserCreateNestedOneWithoutOrdersInput
+    user?: UserCreateNestedOneWithoutOrdersInput
   }
 
   export type OrdersUncheckedCreateInput = {
@@ -13797,31 +11513,16 @@ export namespace Prisma {
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
     bank_id: number
-    customer_id: number
-    merchant_id: number
+    user_id: number
   }
 
   export type OrdersUpdateInput = {
@@ -13830,31 +11531,16 @@ export namespace Prisma {
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
     bank?: BankAccountUpdateOneWithoutOrdersNestedInput
-    customer?: UserUpdateOneWithoutOrdersNestedInput
+    user?: UserUpdateOneWithoutOrdersNestedInput
   }
 
   export type OrdersUncheckedUpdateInput = {
@@ -13864,31 +11550,16 @@ export namespace Prisma {
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bank_id?: IntFieldUpdateOperationsInput | number
-    customer_id?: IntFieldUpdateOperationsInput | number
-    merchant_id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type OrdersCreateManyInput = {
@@ -13898,31 +11569,16 @@ export namespace Prisma {
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
     bank_id: number
-    customer_id: number
-    merchant_id: number
+    user_id: number
   }
 
   export type OrdersUpdateManyMutationInput = {
@@ -13931,29 +11587,14 @@ export namespace Prisma {
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type OrdersUncheckedUpdateManyInput = {
@@ -13963,31 +11604,16 @@ export namespace Prisma {
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bank_id?: IntFieldUpdateOperationsInput | number
-    customer_id?: IntFieldUpdateOperationsInput | number
-    merchant_id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type ExchangeRatesCreateInput = {
@@ -14274,24 +11900,6 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type EnumMerchantStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.MerchantStatus | EnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMerchantStatusNullableFilter<$PrismaModel> | $Enums.MerchantStatus | null
-  }
-
   export type CryptoWalletsListRelationFilter = {
     every?: CryptoWalletsWhereInput
     some?: CryptoWalletsWhereInput
@@ -14302,12 +11910,6 @@ export namespace Prisma {
     every?: BankAccountWhereInput
     some?: BankAccountWhereInput
     none?: BankAccountWhereInput
-  }
-
-  export type AdvertsListRelationFilter = {
-    every?: AdvertsWhereInput
-    some?: AdvertsWhereInput
-    none?: AdvertsWhereInput
   }
 
   export type OrdersListRelationFilter = {
@@ -14332,10 +11934,6 @@ export namespace Prisma {
   }
 
   export type BankAccountOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AdvertsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14373,16 +11971,10 @@ export namespace Prisma {
     googleId?: SortOrder
     proof_of_address?: SortOrder
     phone_verified?: SortOrder
-    merchant_success_rate?: SortOrder
-    merchant_trade_count?: SortOrder
-    merchant_nickname?: SortOrder
-    merchant_status?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
-    merchant_success_rate?: SortOrder
-    merchant_trade_count?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -14411,10 +12003,6 @@ export namespace Prisma {
     googleId?: SortOrder
     proof_of_address?: SortOrder
     phone_verified?: SortOrder
-    merchant_success_rate?: SortOrder
-    merchant_trade_count?: SortOrder
-    merchant_nickname?: SortOrder
-    merchant_status?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -14443,16 +12031,10 @@ export namespace Prisma {
     googleId?: SortOrder
     proof_of_address?: SortOrder
     phone_verified?: SortOrder
-    merchant_success_rate?: SortOrder
-    merchant_trade_count?: SortOrder
-    merchant_nickname?: SortOrder
-    merchant_status?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-    merchant_success_rate?: SortOrder
-    merchant_trade_count?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -14541,32 +12123,6 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type EnumMerchantStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MerchantStatus | EnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMerchantStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.MerchantStatus | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumMerchantStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumMerchantStatusNullableFilter<$PrismaModel>
-  }
-
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -14587,6 +12143,17 @@ export namespace Prisma {
     in?: $Enums.ChainType[] | ListEnumChainTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.ChainType[] | ListEnumChainTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumChainTypeFilter<$PrismaModel> | $Enums.ChainType
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type UserNullableScalarRelationFilter = {
@@ -14665,6 +12232,22 @@ export namespace Prisma {
     _max?: NestedEnumChainTypeFilter<$PrismaModel>
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type BankAccountCountOrderByAggregateInput = {
     id?: SortOrder
     account_name?: SortOrder
@@ -14711,22 +12294,6 @@ export namespace Prisma {
     user_id?: SortOrder
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -14738,6 +12305,13 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type EnumOrderModeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderMode | EnumOrderModeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumOrderModeNullableFilter<$PrismaModel> | $Enums.OrderMode | null
+  }
+
   export type EnumTradeTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TradeType | EnumTradeTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
@@ -14745,122 +12319,89 @@ export namespace Prisma {
     not?: NestedEnumTradeTypeFilter<$PrismaModel> | $Enums.TradeType
   }
 
-  export type EnumCountryCodeFilter<$PrismaModel = never> = {
-    equals?: $Enums.CountryCode | EnumCountryCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCountryCodeFilter<$PrismaModel> | $Enums.CountryCode
+  export type EnumOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
   }
 
-  export type EnumAdvertStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdvertStatus | EnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumAdvertStatusNullableFilter<$PrismaModel> | $Enums.AdvertStatus | null
+  export type BankAccountNullableScalarRelationFilter = {
+    is?: BankAccountWhereInput | null
+    isNot?: BankAccountWhereInput | null
   }
 
-  export type AdvertsCountOrderByAggregateInput = {
+  export type OrdersCountOrderByAggregateInput = {
     id?: SortOrder
-    rateFloat?: SortOrder
-    rateFixed?: SortOrder
-    isFloatRate?: SortOrder
-    limitUpper?: SortOrder
-    limitLower?: SortOrder
-    fiatAmountPerCrypto?: SortOrder
-    tradeType?: SortOrder
+    amount_fiat?: SortOrder
+    amount_crypto?: SortOrder
+    wallet_customer?: SortOrder
+    wallet_merchant?: SortOrder
+    estimated_duration?: SortOrder
+    txn_hash?: SortOrder
+    mode?: SortOrder
     currency_crypto?: SortOrder
     currency_fiat?: SortOrder
-    instructions?: SortOrder
-    wallet_address?: SortOrder
+    trade_type?: SortOrder
     status?: SortOrder
-    duration?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    merchant_id?: SortOrder
+    bank_id?: SortOrder
+    user_id?: SortOrder
   }
 
-  export type AdvertsAvgOrderByAggregateInput = {
+  export type OrdersAvgOrderByAggregateInput = {
     id?: SortOrder
-    rateFloat?: SortOrder
-    rateFixed?: SortOrder
-    limitUpper?: SortOrder
-    limitLower?: SortOrder
-    fiatAmountPerCrypto?: SortOrder
-    merchant_id?: SortOrder
+    amount_fiat?: SortOrder
+    amount_crypto?: SortOrder
+    bank_id?: SortOrder
+    user_id?: SortOrder
   }
 
-  export type AdvertsMaxOrderByAggregateInput = {
+  export type OrdersMaxOrderByAggregateInput = {
     id?: SortOrder
-    rateFloat?: SortOrder
-    rateFixed?: SortOrder
-    isFloatRate?: SortOrder
-    limitUpper?: SortOrder
-    limitLower?: SortOrder
-    fiatAmountPerCrypto?: SortOrder
-    tradeType?: SortOrder
+    amount_fiat?: SortOrder
+    amount_crypto?: SortOrder
+    wallet_customer?: SortOrder
+    wallet_merchant?: SortOrder
+    estimated_duration?: SortOrder
+    txn_hash?: SortOrder
+    mode?: SortOrder
     currency_crypto?: SortOrder
     currency_fiat?: SortOrder
-    instructions?: SortOrder
-    wallet_address?: SortOrder
+    trade_type?: SortOrder
     status?: SortOrder
-    duration?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    merchant_id?: SortOrder
+    bank_id?: SortOrder
+    user_id?: SortOrder
   }
 
-  export type AdvertsMinOrderByAggregateInput = {
+  export type OrdersMinOrderByAggregateInput = {
     id?: SortOrder
-    rateFloat?: SortOrder
-    rateFixed?: SortOrder
-    isFloatRate?: SortOrder
-    limitUpper?: SortOrder
-    limitLower?: SortOrder
-    fiatAmountPerCrypto?: SortOrder
-    tradeType?: SortOrder
+    amount_fiat?: SortOrder
+    amount_crypto?: SortOrder
+    wallet_customer?: SortOrder
+    wallet_merchant?: SortOrder
+    estimated_duration?: SortOrder
+    txn_hash?: SortOrder
+    mode?: SortOrder
     currency_crypto?: SortOrder
     currency_fiat?: SortOrder
-    instructions?: SortOrder
-    wallet_address?: SortOrder
+    trade_type?: SortOrder
     status?: SortOrder
-    duration?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    merchant_id?: SortOrder
+    bank_id?: SortOrder
+    user_id?: SortOrder
   }
 
-  export type AdvertsSumOrderByAggregateInput = {
+  export type OrdersSumOrderByAggregateInput = {
     id?: SortOrder
-    rateFloat?: SortOrder
-    rateFixed?: SortOrder
-    limitUpper?: SortOrder
-    limitLower?: SortOrder
-    fiatAmountPerCrypto?: SortOrder
-    merchant_id?: SortOrder
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    amount_fiat?: SortOrder
+    amount_crypto?: SortOrder
+    bank_id?: SortOrder
+    user_id?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -14879,182 +12420,6 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type EnumTradeTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TradeType | EnumTradeTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTradeTypeWithAggregatesFilter<$PrismaModel> | $Enums.TradeType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTradeTypeFilter<$PrismaModel>
-    _max?: NestedEnumTradeTypeFilter<$PrismaModel>
-  }
-
-  export type EnumCountryCodeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CountryCode | EnumCountryCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCountryCodeWithAggregatesFilter<$PrismaModel> | $Enums.CountryCode
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumCountryCodeFilter<$PrismaModel>
-    _max?: NestedEnumCountryCodeFilter<$PrismaModel>
-  }
-
-  export type EnumAdvertStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdvertStatus | EnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumAdvertStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.AdvertStatus | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumAdvertStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumAdvertStatusNullableFilter<$PrismaModel>
-  }
-
-  export type EnumOrderModeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderMode | EnumOrderModeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumOrderModeNullableFilter<$PrismaModel> | $Enums.OrderMode | null
-  }
-
-  export type EnumOrderStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
-  export type EnumOrderActionsNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderActions | EnumOrderActionsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumOrderActionsNullableFilter<$PrismaModel> | $Enums.OrderActions | null
-  }
-
-  export type BankAccountNullableScalarRelationFilter = {
-    is?: BankAccountWhereInput | null
-    isNot?: BankAccountWhereInput | null
-  }
-
-  export type OrdersCountOrderByAggregateInput = {
-    id?: SortOrder
-    amount_fiat?: SortOrder
-    amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
-    estimated_duration?: SortOrder
-    mode?: SortOrder
-    currency_crypto?: SortOrder
-    currency_fiat?: SortOrder
-    trade_type?: SortOrder
-    status?: SortOrder
-    action_user?: SortOrder
-    action_merchant?: SortOrder
-    txn_hash?: SortOrder
-    sell_txn_hash_customer_lock_crypto?: SortOrder
-    sell_txn_hash_customer_release_crypto?: SortOrder
-    sell_time2_customer_lock_crypto?: SortOrder
-    sell_time1_customer_request?: SortOrder
-    sell_time3_merchant_send_fiat?: SortOrder
-    sell_time4_customer_release_crypto?: SortOrder
-    buy_time1_customer_request?: SortOrder
-    buy_time2_merchant_lock_crypto?: SortOrder
-    buy_time3_customer_send_fiat?: SortOrder
-    buy_time4_merchant_release_crypto?: SortOrder
-    buy_txn_hash_merchant_lock_crypto?: SortOrder
-    buy_txn_hash_merchant_release_crypto?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    bank_id?: SortOrder
-    customer_id?: SortOrder
-    merchant_id?: SortOrder
-  }
-
-  export type OrdersAvgOrderByAggregateInput = {
-    id?: SortOrder
-    amount_fiat?: SortOrder
-    amount_crypto?: SortOrder
-    bank_id?: SortOrder
-    customer_id?: SortOrder
-    merchant_id?: SortOrder
-  }
-
-  export type OrdersMaxOrderByAggregateInput = {
-    id?: SortOrder
-    amount_fiat?: SortOrder
-    amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
-    estimated_duration?: SortOrder
-    mode?: SortOrder
-    currency_crypto?: SortOrder
-    currency_fiat?: SortOrder
-    trade_type?: SortOrder
-    status?: SortOrder
-    action_user?: SortOrder
-    action_merchant?: SortOrder
-    txn_hash?: SortOrder
-    sell_txn_hash_customer_lock_crypto?: SortOrder
-    sell_txn_hash_customer_release_crypto?: SortOrder
-    sell_time2_customer_lock_crypto?: SortOrder
-    sell_time1_customer_request?: SortOrder
-    sell_time3_merchant_send_fiat?: SortOrder
-    sell_time4_customer_release_crypto?: SortOrder
-    buy_time1_customer_request?: SortOrder
-    buy_time2_merchant_lock_crypto?: SortOrder
-    buy_time3_customer_send_fiat?: SortOrder
-    buy_time4_merchant_release_crypto?: SortOrder
-    buy_txn_hash_merchant_lock_crypto?: SortOrder
-    buy_txn_hash_merchant_release_crypto?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    bank_id?: SortOrder
-    customer_id?: SortOrder
-    merchant_id?: SortOrder
-  }
-
-  export type OrdersMinOrderByAggregateInput = {
-    id?: SortOrder
-    amount_fiat?: SortOrder
-    amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
-    estimated_duration?: SortOrder
-    mode?: SortOrder
-    currency_crypto?: SortOrder
-    currency_fiat?: SortOrder
-    trade_type?: SortOrder
-    status?: SortOrder
-    action_user?: SortOrder
-    action_merchant?: SortOrder
-    txn_hash?: SortOrder
-    sell_txn_hash_customer_lock_crypto?: SortOrder
-    sell_txn_hash_customer_release_crypto?: SortOrder
-    sell_time2_customer_lock_crypto?: SortOrder
-    sell_time1_customer_request?: SortOrder
-    sell_time3_merchant_send_fiat?: SortOrder
-    sell_time4_customer_release_crypto?: SortOrder
-    buy_time1_customer_request?: SortOrder
-    buy_time2_merchant_lock_crypto?: SortOrder
-    buy_time3_customer_send_fiat?: SortOrder
-    buy_time4_merchant_release_crypto?: SortOrder
-    buy_txn_hash_merchant_lock_crypto?: SortOrder
-    buy_txn_hash_merchant_release_crypto?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    bank_id?: SortOrder
-    customer_id?: SortOrder
-    merchant_id?: SortOrder
-  }
-
-  export type OrdersSumOrderByAggregateInput = {
-    id?: SortOrder
-    amount_fiat?: SortOrder
-    amount_crypto?: SortOrder
-    bank_id?: SortOrder
-    customer_id?: SortOrder
-    merchant_id?: SortOrder
-  }
-
   export type EnumOrderModeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderMode | EnumOrderModeFieldRefInput<$PrismaModel> | null
     in?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
@@ -15065,6 +12430,16 @@ export namespace Prisma {
     _max?: NestedEnumOrderModeNullableFilter<$PrismaModel>
   }
 
+  export type EnumTradeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TradeType | EnumTradeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTradeTypeWithAggregatesFilter<$PrismaModel> | $Enums.TradeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTradeTypeFilter<$PrismaModel>
+    _max?: NestedEnumTradeTypeFilter<$PrismaModel>
+  }
+
   export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
@@ -15073,16 +12448,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
-  export type EnumOrderActionsNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderActions | EnumOrderActionsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumOrderActionsNullableWithAggregatesFilter<$PrismaModel> | $Enums.OrderActions | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumOrderActionsNullableFilter<$PrismaModel>
-    _max?: NestedEnumOrderActionsNullableFilter<$PrismaModel>
   }
 
   export type ExchangeRatesCountOrderByAggregateInput = {
@@ -15294,17 +12659,10 @@ export namespace Prisma {
     connect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
   }
 
-  export type AdvertsCreateNestedManyWithoutMerchantInput = {
-    create?: XOR<AdvertsCreateWithoutMerchantInput, AdvertsUncheckedCreateWithoutMerchantInput> | AdvertsCreateWithoutMerchantInput[] | AdvertsUncheckedCreateWithoutMerchantInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutMerchantInput | AdvertsCreateOrConnectWithoutMerchantInput[]
-    createMany?: AdvertsCreateManyMerchantInputEnvelope
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-  }
-
-  export type OrdersCreateNestedManyWithoutCustomerInput = {
-    create?: XOR<OrdersCreateWithoutCustomerInput, OrdersUncheckedCreateWithoutCustomerInput> | OrdersCreateWithoutCustomerInput[] | OrdersUncheckedCreateWithoutCustomerInput[]
-    connectOrCreate?: OrdersCreateOrConnectWithoutCustomerInput | OrdersCreateOrConnectWithoutCustomerInput[]
-    createMany?: OrdersCreateManyCustomerInputEnvelope
+  export type OrdersCreateNestedManyWithoutUserInput = {
+    create?: XOR<OrdersCreateWithoutUserInput, OrdersUncheckedCreateWithoutUserInput> | OrdersCreateWithoutUserInput[] | OrdersUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OrdersCreateOrConnectWithoutUserInput | OrdersCreateOrConnectWithoutUserInput[]
+    createMany?: OrdersCreateManyUserInputEnvelope
     connect?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
   }
 
@@ -15329,17 +12687,10 @@ export namespace Prisma {
     connect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
   }
 
-  export type AdvertsUncheckedCreateNestedManyWithoutMerchantInput = {
-    create?: XOR<AdvertsCreateWithoutMerchantInput, AdvertsUncheckedCreateWithoutMerchantInput> | AdvertsCreateWithoutMerchantInput[] | AdvertsUncheckedCreateWithoutMerchantInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutMerchantInput | AdvertsCreateOrConnectWithoutMerchantInput[]
-    createMany?: AdvertsCreateManyMerchantInputEnvelope
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-  }
-
-  export type OrdersUncheckedCreateNestedManyWithoutCustomerInput = {
-    create?: XOR<OrdersCreateWithoutCustomerInput, OrdersUncheckedCreateWithoutCustomerInput> | OrdersCreateWithoutCustomerInput[] | OrdersUncheckedCreateWithoutCustomerInput[]
-    connectOrCreate?: OrdersCreateOrConnectWithoutCustomerInput | OrdersCreateOrConnectWithoutCustomerInput[]
-    createMany?: OrdersCreateManyCustomerInputEnvelope
+  export type OrdersUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<OrdersCreateWithoutUserInput, OrdersUncheckedCreateWithoutUserInput> | OrdersCreateWithoutUserInput[] | OrdersUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OrdersCreateOrConnectWithoutUserInput | OrdersCreateOrConnectWithoutUserInput[]
+    createMany?: OrdersCreateManyUserInputEnvelope
     connect?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
   }
 
@@ -15374,18 +12725,6 @@ export namespace Prisma {
     set?: boolean | null
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableEnumMerchantStatusFieldUpdateOperationsInput = {
-    set?: $Enums.MerchantStatus | null
-  }
-
   export type CryptoWalletsUpdateManyWithoutUserNestedInput = {
     create?: XOR<CryptoWalletsCreateWithoutUserInput, CryptoWalletsUncheckedCreateWithoutUserInput> | CryptoWalletsCreateWithoutUserInput[] | CryptoWalletsUncheckedCreateWithoutUserInput[]
     connectOrCreate?: CryptoWalletsCreateOrConnectWithoutUserInput | CryptoWalletsCreateOrConnectWithoutUserInput[]
@@ -15414,31 +12753,17 @@ export namespace Prisma {
     deleteMany?: BankAccountScalarWhereInput | BankAccountScalarWhereInput[]
   }
 
-  export type AdvertsUpdateManyWithoutMerchantNestedInput = {
-    create?: XOR<AdvertsCreateWithoutMerchantInput, AdvertsUncheckedCreateWithoutMerchantInput> | AdvertsCreateWithoutMerchantInput[] | AdvertsUncheckedCreateWithoutMerchantInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutMerchantInput | AdvertsCreateOrConnectWithoutMerchantInput[]
-    upsert?: AdvertsUpsertWithWhereUniqueWithoutMerchantInput | AdvertsUpsertWithWhereUniqueWithoutMerchantInput[]
-    createMany?: AdvertsCreateManyMerchantInputEnvelope
-    set?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    disconnect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    delete?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    update?: AdvertsUpdateWithWhereUniqueWithoutMerchantInput | AdvertsUpdateWithWhereUniqueWithoutMerchantInput[]
-    updateMany?: AdvertsUpdateManyWithWhereWithoutMerchantInput | AdvertsUpdateManyWithWhereWithoutMerchantInput[]
-    deleteMany?: AdvertsScalarWhereInput | AdvertsScalarWhereInput[]
-  }
-
-  export type OrdersUpdateManyWithoutCustomerNestedInput = {
-    create?: XOR<OrdersCreateWithoutCustomerInput, OrdersUncheckedCreateWithoutCustomerInput> | OrdersCreateWithoutCustomerInput[] | OrdersUncheckedCreateWithoutCustomerInput[]
-    connectOrCreate?: OrdersCreateOrConnectWithoutCustomerInput | OrdersCreateOrConnectWithoutCustomerInput[]
-    upsert?: OrdersUpsertWithWhereUniqueWithoutCustomerInput | OrdersUpsertWithWhereUniqueWithoutCustomerInput[]
-    createMany?: OrdersCreateManyCustomerInputEnvelope
+  export type OrdersUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OrdersCreateWithoutUserInput, OrdersUncheckedCreateWithoutUserInput> | OrdersCreateWithoutUserInput[] | OrdersUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OrdersCreateOrConnectWithoutUserInput | OrdersCreateOrConnectWithoutUserInput[]
+    upsert?: OrdersUpsertWithWhereUniqueWithoutUserInput | OrdersUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OrdersCreateManyUserInputEnvelope
     set?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
     disconnect?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
     delete?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
     connect?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
-    update?: OrdersUpdateWithWhereUniqueWithoutCustomerInput | OrdersUpdateWithWhereUniqueWithoutCustomerInput[]
-    updateMany?: OrdersUpdateManyWithWhereWithoutCustomerInput | OrdersUpdateManyWithWhereWithoutCustomerInput[]
+    update?: OrdersUpdateWithWhereUniqueWithoutUserInput | OrdersUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OrdersUpdateManyWithWhereWithoutUserInput | OrdersUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: OrdersScalarWhereInput | OrdersScalarWhereInput[]
   }
 
@@ -15492,31 +12817,17 @@ export namespace Prisma {
     deleteMany?: BankAccountScalarWhereInput | BankAccountScalarWhereInput[]
   }
 
-  export type AdvertsUncheckedUpdateManyWithoutMerchantNestedInput = {
-    create?: XOR<AdvertsCreateWithoutMerchantInput, AdvertsUncheckedCreateWithoutMerchantInput> | AdvertsCreateWithoutMerchantInput[] | AdvertsUncheckedCreateWithoutMerchantInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutMerchantInput | AdvertsCreateOrConnectWithoutMerchantInput[]
-    upsert?: AdvertsUpsertWithWhereUniqueWithoutMerchantInput | AdvertsUpsertWithWhereUniqueWithoutMerchantInput[]
-    createMany?: AdvertsCreateManyMerchantInputEnvelope
-    set?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    disconnect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    delete?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    update?: AdvertsUpdateWithWhereUniqueWithoutMerchantInput | AdvertsUpdateWithWhereUniqueWithoutMerchantInput[]
-    updateMany?: AdvertsUpdateManyWithWhereWithoutMerchantInput | AdvertsUpdateManyWithWhereWithoutMerchantInput[]
-    deleteMany?: AdvertsScalarWhereInput | AdvertsScalarWhereInput[]
-  }
-
-  export type OrdersUncheckedUpdateManyWithoutCustomerNestedInput = {
-    create?: XOR<OrdersCreateWithoutCustomerInput, OrdersUncheckedCreateWithoutCustomerInput> | OrdersCreateWithoutCustomerInput[] | OrdersUncheckedCreateWithoutCustomerInput[]
-    connectOrCreate?: OrdersCreateOrConnectWithoutCustomerInput | OrdersCreateOrConnectWithoutCustomerInput[]
-    upsert?: OrdersUpsertWithWhereUniqueWithoutCustomerInput | OrdersUpsertWithWhereUniqueWithoutCustomerInput[]
-    createMany?: OrdersCreateManyCustomerInputEnvelope
+  export type OrdersUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OrdersCreateWithoutUserInput, OrdersUncheckedCreateWithoutUserInput> | OrdersCreateWithoutUserInput[] | OrdersUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OrdersCreateOrConnectWithoutUserInput | OrdersCreateOrConnectWithoutUserInput[]
+    upsert?: OrdersUpsertWithWhereUniqueWithoutUserInput | OrdersUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OrdersCreateManyUserInputEnvelope
     set?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
     disconnect?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
     delete?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
     connect?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
-    update?: OrdersUpdateWithWhereUniqueWithoutCustomerInput | OrdersUpdateWithWhereUniqueWithoutCustomerInput[]
-    updateMany?: OrdersUpdateManyWithWhereWithoutCustomerInput | OrdersUpdateManyWithWhereWithoutCustomerInput[]
+    update?: OrdersUpdateWithWhereUniqueWithoutUserInput | OrdersUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OrdersUpdateManyWithWhereWithoutUserInput | OrdersUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: OrdersScalarWhereInput | OrdersScalarWhereInput[]
   }
 
@@ -15558,16 +12869,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCrypto_walletsInput, UserUpdateWithoutCrypto_walletsInput>, UserUncheckedUpdateWithoutCrypto_walletsInput>
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserCreateNestedOneWithoutBank_accountsInput = {
     create?: XOR<UserCreateWithoutBank_accountsInput, UserUncheckedCreateWithoutBank_accountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutBank_accountsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type AdvertsCreateNestedManyWithoutBank_accountsInput = {
-    create?: XOR<AdvertsCreateWithoutBank_accountsInput, AdvertsUncheckedCreateWithoutBank_accountsInput> | AdvertsCreateWithoutBank_accountsInput[] | AdvertsUncheckedCreateWithoutBank_accountsInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutBank_accountsInput | AdvertsCreateOrConnectWithoutBank_accountsInput[]
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
   }
 
   export type OrdersCreateNestedManyWithoutBankInput = {
@@ -15575,12 +12888,6 @@ export namespace Prisma {
     connectOrCreate?: OrdersCreateOrConnectWithoutBankInput | OrdersCreateOrConnectWithoutBankInput[]
     createMany?: OrdersCreateManyBankInputEnvelope
     connect?: OrdersWhereUniqueInput | OrdersWhereUniqueInput[]
-  }
-
-  export type AdvertsUncheckedCreateNestedManyWithoutBank_accountsInput = {
-    create?: XOR<AdvertsCreateWithoutBank_accountsInput, AdvertsUncheckedCreateWithoutBank_accountsInput> | AdvertsCreateWithoutBank_accountsInput[] | AdvertsUncheckedCreateWithoutBank_accountsInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutBank_accountsInput | AdvertsCreateOrConnectWithoutBank_accountsInput[]
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
   }
 
   export type OrdersUncheckedCreateNestedManyWithoutBankInput = {
@@ -15600,19 +12907,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBank_accountsInput, UserUpdateWithoutBank_accountsInput>, UserUncheckedUpdateWithoutBank_accountsInput>
   }
 
-  export type AdvertsUpdateManyWithoutBank_accountsNestedInput = {
-    create?: XOR<AdvertsCreateWithoutBank_accountsInput, AdvertsUncheckedCreateWithoutBank_accountsInput> | AdvertsCreateWithoutBank_accountsInput[] | AdvertsUncheckedCreateWithoutBank_accountsInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutBank_accountsInput | AdvertsCreateOrConnectWithoutBank_accountsInput[]
-    upsert?: AdvertsUpsertWithWhereUniqueWithoutBank_accountsInput | AdvertsUpsertWithWhereUniqueWithoutBank_accountsInput[]
-    set?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    disconnect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    delete?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    update?: AdvertsUpdateWithWhereUniqueWithoutBank_accountsInput | AdvertsUpdateWithWhereUniqueWithoutBank_accountsInput[]
-    updateMany?: AdvertsUpdateManyWithWhereWithoutBank_accountsInput | AdvertsUpdateManyWithWhereWithoutBank_accountsInput[]
-    deleteMany?: AdvertsScalarWhereInput | AdvertsScalarWhereInput[]
-  }
-
   export type OrdersUpdateManyWithoutBankNestedInput = {
     create?: XOR<OrdersCreateWithoutBankInput, OrdersUncheckedCreateWithoutBankInput> | OrdersCreateWithoutBankInput[] | OrdersUncheckedCreateWithoutBankInput[]
     connectOrCreate?: OrdersCreateOrConnectWithoutBankInput | OrdersCreateOrConnectWithoutBankInput[]
@@ -15625,19 +12919,6 @@ export namespace Prisma {
     update?: OrdersUpdateWithWhereUniqueWithoutBankInput | OrdersUpdateWithWhereUniqueWithoutBankInput[]
     updateMany?: OrdersUpdateManyWithWhereWithoutBankInput | OrdersUpdateManyWithWhereWithoutBankInput[]
     deleteMany?: OrdersScalarWhereInput | OrdersScalarWhereInput[]
-  }
-
-  export type AdvertsUncheckedUpdateManyWithoutBank_accountsNestedInput = {
-    create?: XOR<AdvertsCreateWithoutBank_accountsInput, AdvertsUncheckedCreateWithoutBank_accountsInput> | AdvertsCreateWithoutBank_accountsInput[] | AdvertsUncheckedCreateWithoutBank_accountsInput[]
-    connectOrCreate?: AdvertsCreateOrConnectWithoutBank_accountsInput | AdvertsCreateOrConnectWithoutBank_accountsInput[]
-    upsert?: AdvertsUpsertWithWhereUniqueWithoutBank_accountsInput | AdvertsUpsertWithWhereUniqueWithoutBank_accountsInput[]
-    set?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    disconnect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    delete?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    connect?: AdvertsWhereUniqueInput | AdvertsWhereUniqueInput[]
-    update?: AdvertsUpdateWithWhereUniqueWithoutBank_accountsInput | AdvertsUpdateWithWhereUniqueWithoutBank_accountsInput[]
-    updateMany?: AdvertsUpdateManyWithWhereWithoutBank_accountsInput | AdvertsUpdateManyWithWhereWithoutBank_accountsInput[]
-    deleteMany?: AdvertsScalarWhereInput | AdvertsScalarWhereInput[]
   }
 
   export type OrdersUncheckedUpdateManyWithoutBankNestedInput = {
@@ -15654,92 +12935,6 @@ export namespace Prisma {
     deleteMany?: OrdersScalarWhereInput | OrdersScalarWhereInput[]
   }
 
-  export type BankAccountCreateNestedManyWithoutAdvertInput = {
-    create?: XOR<BankAccountCreateWithoutAdvertInput, BankAccountUncheckedCreateWithoutAdvertInput> | BankAccountCreateWithoutAdvertInput[] | BankAccountUncheckedCreateWithoutAdvertInput[]
-    connectOrCreate?: BankAccountCreateOrConnectWithoutAdvertInput | BankAccountCreateOrConnectWithoutAdvertInput[]
-    connect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-  }
-
-  export type UserCreateNestedOneWithoutAdvertsInput = {
-    create?: XOR<UserCreateWithoutAdvertsInput, UserUncheckedCreateWithoutAdvertsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAdvertsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type BankAccountUncheckedCreateNestedManyWithoutAdvertInput = {
-    create?: XOR<BankAccountCreateWithoutAdvertInput, BankAccountUncheckedCreateWithoutAdvertInput> | BankAccountCreateWithoutAdvertInput[] | BankAccountUncheckedCreateWithoutAdvertInput[]
-    connectOrCreate?: BankAccountCreateOrConnectWithoutAdvertInput | BankAccountCreateOrConnectWithoutAdvertInput[]
-    connect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type EnumTradeTypeFieldUpdateOperationsInput = {
-    set?: $Enums.TradeType
-  }
-
-  export type EnumCountryCodeFieldUpdateOperationsInput = {
-    set?: $Enums.CountryCode
-  }
-
-  export type NullableEnumAdvertStatusFieldUpdateOperationsInput = {
-    set?: $Enums.AdvertStatus | null
-  }
-
-  export type BankAccountUpdateManyWithoutAdvertNestedInput = {
-    create?: XOR<BankAccountCreateWithoutAdvertInput, BankAccountUncheckedCreateWithoutAdvertInput> | BankAccountCreateWithoutAdvertInput[] | BankAccountUncheckedCreateWithoutAdvertInput[]
-    connectOrCreate?: BankAccountCreateOrConnectWithoutAdvertInput | BankAccountCreateOrConnectWithoutAdvertInput[]
-    upsert?: BankAccountUpsertWithWhereUniqueWithoutAdvertInput | BankAccountUpsertWithWhereUniqueWithoutAdvertInput[]
-    set?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    disconnect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    delete?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    connect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    update?: BankAccountUpdateWithWhereUniqueWithoutAdvertInput | BankAccountUpdateWithWhereUniqueWithoutAdvertInput[]
-    updateMany?: BankAccountUpdateManyWithWhereWithoutAdvertInput | BankAccountUpdateManyWithWhereWithoutAdvertInput[]
-    deleteMany?: BankAccountScalarWhereInput | BankAccountScalarWhereInput[]
-  }
-
-  export type UserUpdateOneWithoutAdvertsNestedInput = {
-    create?: XOR<UserCreateWithoutAdvertsInput, UserUncheckedCreateWithoutAdvertsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAdvertsInput
-    upsert?: UserUpsertWithoutAdvertsInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdvertsInput, UserUpdateWithoutAdvertsInput>, UserUncheckedUpdateWithoutAdvertsInput>
-  }
-
-  export type BankAccountUncheckedUpdateManyWithoutAdvertNestedInput = {
-    create?: XOR<BankAccountCreateWithoutAdvertInput, BankAccountUncheckedCreateWithoutAdvertInput> | BankAccountCreateWithoutAdvertInput[] | BankAccountUncheckedCreateWithoutAdvertInput[]
-    connectOrCreate?: BankAccountCreateOrConnectWithoutAdvertInput | BankAccountCreateOrConnectWithoutAdvertInput[]
-    upsert?: BankAccountUpsertWithWhereUniqueWithoutAdvertInput | BankAccountUpsertWithWhereUniqueWithoutAdvertInput[]
-    set?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    disconnect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    delete?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    connect?: BankAccountWhereUniqueInput | BankAccountWhereUniqueInput[]
-    update?: BankAccountUpdateWithWhereUniqueWithoutAdvertInput | BankAccountUpdateWithWhereUniqueWithoutAdvertInput[]
-    updateMany?: BankAccountUpdateManyWithWhereWithoutAdvertInput | BankAccountUpdateManyWithWhereWithoutAdvertInput[]
-    deleteMany?: BankAccountScalarWhereInput | BankAccountScalarWhereInput[]
-  }
-
   export type BankAccountCreateNestedOneWithoutOrdersInput = {
     create?: XOR<BankAccountCreateWithoutOrdersInput, BankAccountUncheckedCreateWithoutOrdersInput>
     connectOrCreate?: BankAccountCreateOrConnectWithoutOrdersInput
@@ -15752,16 +12947,24 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NullableEnumOrderModeFieldUpdateOperationsInput = {
     set?: $Enums.OrderMode | null
   }
 
-  export type EnumOrderStatusFieldUpdateOperationsInput = {
-    set?: $Enums.OrderStatus
+  export type EnumTradeTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TradeType
   }
 
-  export type NullableEnumOrderActionsFieldUpdateOperationsInput = {
-    set?: $Enums.OrderActions | null
+  export type EnumOrderStatusFieldUpdateOperationsInput = {
+    set?: $Enums.OrderStatus
   }
 
   export type BankAccountUpdateOneWithoutOrdersNestedInput = {
@@ -15878,24 +13081,6 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumMerchantStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.MerchantStatus | EnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMerchantStatusNullableFilter<$PrismaModel> | $Enums.MerchantStatus | null
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -15938,6 +13123,17 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedEnumUserRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -15992,43 +13188,6 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumMerchantStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MerchantStatus | EnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.MerchantStatus[] | ListEnumMerchantStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumMerchantStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.MerchantStatus | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumMerchantStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumMerchantStatusNullableFilter<$PrismaModel>
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -16077,9 +13236,38 @@ export namespace Prisma {
     _max?: NestedEnumChainTypeFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumOrderModeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderMode | EnumOrderModeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumOrderModeNullableFilter<$PrismaModel> | $Enums.OrderMode | null
   }
 
   export type NestedEnumTradeTypeFilter<$PrismaModel = never> = {
@@ -16089,42 +13277,11 @@ export namespace Prisma {
     not?: NestedEnumTradeTypeFilter<$PrismaModel> | $Enums.TradeType
   }
 
-  export type NestedEnumCountryCodeFilter<$PrismaModel = never> = {
-    equals?: $Enums.CountryCode | EnumCountryCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCountryCodeFilter<$PrismaModel> | $Enums.CountryCode
-  }
-
-  export type NestedEnumAdvertStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdvertStatus | EnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumAdvertStatusNullableFilter<$PrismaModel> | $Enums.AdvertStatus | null
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -16143,57 +13300,6 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedEnumTradeTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TradeType | EnumTradeTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTradeTypeWithAggregatesFilter<$PrismaModel> | $Enums.TradeType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTradeTypeFilter<$PrismaModel>
-    _max?: NestedEnumTradeTypeFilter<$PrismaModel>
-  }
-
-  export type NestedEnumCountryCodeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.CountryCode | EnumCountryCodeFieldRefInput<$PrismaModel>
-    in?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.CountryCode[] | ListEnumCountryCodeFieldRefInput<$PrismaModel>
-    not?: NestedEnumCountryCodeWithAggregatesFilter<$PrismaModel> | $Enums.CountryCode
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumCountryCodeFilter<$PrismaModel>
-    _max?: NestedEnumCountryCodeFilter<$PrismaModel>
-  }
-
-  export type NestedEnumAdvertStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AdvertStatus | EnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.AdvertStatus[] | ListEnumAdvertStatusFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumAdvertStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.AdvertStatus | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumAdvertStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumAdvertStatusNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumOrderModeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderMode | EnumOrderModeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumOrderModeNullableFilter<$PrismaModel> | $Enums.OrderMode | null
-  }
-
-  export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
-  export type NestedEnumOrderActionsNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderActions | EnumOrderActionsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumOrderActionsNullableFilter<$PrismaModel> | $Enums.OrderActions | null
-  }
-
   export type NestedEnumOrderModeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderMode | EnumOrderModeFieldRefInput<$PrismaModel> | null
     in?: $Enums.OrderMode[] | ListEnumOrderModeFieldRefInput<$PrismaModel> | null
@@ -16204,6 +13310,16 @@ export namespace Prisma {
     _max?: NestedEnumOrderModeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumTradeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TradeType | EnumTradeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TradeType[] | ListEnumTradeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTradeTypeWithAggregatesFilter<$PrismaModel> | $Enums.TradeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTradeTypeFilter<$PrismaModel>
+    _max?: NestedEnumTradeTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
@@ -16212,16 +13328,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
-  export type NestedEnumOrderActionsNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderActions | EnumOrderActionsFieldRefInput<$PrismaModel> | null
-    in?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.OrderActions[] | ListEnumOrderActionsFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumOrderActionsNullableWithAggregatesFilter<$PrismaModel> | $Enums.OrderActions | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumOrderActionsNullableFilter<$PrismaModel>
-    _max?: NestedEnumOrderActionsNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumAccessTokenPlatformFilter<$PrismaModel = never> = {
@@ -16329,7 +13435,6 @@ export namespace Prisma {
     nuban_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    advert?: AdvertsCreateNestedManyWithoutBank_accountsInput
     Orders?: OrdersCreateNestedManyWithoutBankInput
   }
 
@@ -16342,7 +13447,6 @@ export namespace Prisma {
     nuban_id?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    advert?: AdvertsUncheckedCreateNestedManyWithoutBank_accountsInput
     Orders?: OrdersUncheckedCreateNestedManyWithoutBankInput
   }
 
@@ -16356,127 +13460,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AdvertsCreateWithoutMerchantInput = {
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    bank_accounts?: BankAccountCreateNestedManyWithoutAdvertInput
-  }
-
-  export type AdvertsUncheckedCreateWithoutMerchantInput = {
-    id?: number
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    bank_accounts?: BankAccountUncheckedCreateNestedManyWithoutAdvertInput
-  }
-
-  export type AdvertsCreateOrConnectWithoutMerchantInput = {
-    where: AdvertsWhereUniqueInput
-    create: XOR<AdvertsCreateWithoutMerchantInput, AdvertsUncheckedCreateWithoutMerchantInput>
-  }
-
-  export type AdvertsCreateManyMerchantInputEnvelope = {
-    data: AdvertsCreateManyMerchantInput | AdvertsCreateManyMerchantInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type OrdersCreateWithoutCustomerInput = {
+  export type OrdersCreateWithoutUserInput = {
     amount_fiat: number
     amount_crypto: number
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    merchant_id: number
     bank?: BankAccountCreateNestedOneWithoutOrdersInput
   }
 
-  export type OrdersUncheckedCreateWithoutCustomerInput = {
+  export type OrdersUncheckedCreateWithoutUserInput = {
     id?: number
     amount_fiat: number
     amount_crypto: number
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
     bank_id: number
-    merchant_id: number
   }
 
-  export type OrdersCreateOrConnectWithoutCustomerInput = {
+  export type OrdersCreateOrConnectWithoutUserInput = {
     where: OrdersWhereUniqueInput
-    create: XOR<OrdersCreateWithoutCustomerInput, OrdersUncheckedCreateWithoutCustomerInput>
+    create: XOR<OrdersCreateWithoutUserInput, OrdersUncheckedCreateWithoutUserInput>
   }
 
-  export type OrdersCreateManyCustomerInputEnvelope = {
-    data: OrdersCreateManyCustomerInput | OrdersCreateManyCustomerInput[]
+  export type OrdersCreateManyUserInputEnvelope = {
+    data: OrdersCreateManyUserInput | OrdersCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -16578,59 +13603,20 @@ export namespace Prisma {
     user_id?: IntFilter<"BankAccount"> | number
   }
 
-  export type AdvertsUpsertWithWhereUniqueWithoutMerchantInput = {
-    where: AdvertsWhereUniqueInput
-    update: XOR<AdvertsUpdateWithoutMerchantInput, AdvertsUncheckedUpdateWithoutMerchantInput>
-    create: XOR<AdvertsCreateWithoutMerchantInput, AdvertsUncheckedCreateWithoutMerchantInput>
-  }
-
-  export type AdvertsUpdateWithWhereUniqueWithoutMerchantInput = {
-    where: AdvertsWhereUniqueInput
-    data: XOR<AdvertsUpdateWithoutMerchantInput, AdvertsUncheckedUpdateWithoutMerchantInput>
-  }
-
-  export type AdvertsUpdateManyWithWhereWithoutMerchantInput = {
-    where: AdvertsScalarWhereInput
-    data: XOR<AdvertsUpdateManyMutationInput, AdvertsUncheckedUpdateManyWithoutMerchantInput>
-  }
-
-  export type AdvertsScalarWhereInput = {
-    AND?: AdvertsScalarWhereInput | AdvertsScalarWhereInput[]
-    OR?: AdvertsScalarWhereInput[]
-    NOT?: AdvertsScalarWhereInput | AdvertsScalarWhereInput[]
-    id?: IntFilter<"Adverts"> | number
-    rateFloat?: FloatNullableFilter<"Adverts"> | number | null
-    rateFixed?: FloatNullableFilter<"Adverts"> | number | null
-    isFloatRate?: BoolFilter<"Adverts"> | boolean
-    limitUpper?: FloatFilter<"Adverts"> | number
-    limitLower?: FloatFilter<"Adverts"> | number
-    fiatAmountPerCrypto?: IntFilter<"Adverts"> | number
-    tradeType?: EnumTradeTypeFilter<"Adverts"> | $Enums.TradeType
-    currency_crypto?: StringFilter<"Adverts"> | string
-    currency_fiat?: EnumCountryCodeFilter<"Adverts"> | $Enums.CountryCode
-    instructions?: StringFilter<"Adverts"> | string
-    wallet_address?: StringFilter<"Adverts"> | string
-    status?: EnumAdvertStatusNullableFilter<"Adverts"> | $Enums.AdvertStatus | null
-    duration?: StringFilter<"Adverts"> | string
-    created_at?: DateTimeNullableFilter<"Adverts"> | Date | string | null
-    updated_at?: DateTimeNullableFilter<"Adverts"> | Date | string | null
-    merchant_id?: IntFilter<"Adverts"> | number
-  }
-
-  export type OrdersUpsertWithWhereUniqueWithoutCustomerInput = {
+  export type OrdersUpsertWithWhereUniqueWithoutUserInput = {
     where: OrdersWhereUniqueInput
-    update: XOR<OrdersUpdateWithoutCustomerInput, OrdersUncheckedUpdateWithoutCustomerInput>
-    create: XOR<OrdersCreateWithoutCustomerInput, OrdersUncheckedCreateWithoutCustomerInput>
+    update: XOR<OrdersUpdateWithoutUserInput, OrdersUncheckedUpdateWithoutUserInput>
+    create: XOR<OrdersCreateWithoutUserInput, OrdersUncheckedCreateWithoutUserInput>
   }
 
-  export type OrdersUpdateWithWhereUniqueWithoutCustomerInput = {
+  export type OrdersUpdateWithWhereUniqueWithoutUserInput = {
     where: OrdersWhereUniqueInput
-    data: XOR<OrdersUpdateWithoutCustomerInput, OrdersUncheckedUpdateWithoutCustomerInput>
+    data: XOR<OrdersUpdateWithoutUserInput, OrdersUncheckedUpdateWithoutUserInput>
   }
 
-  export type OrdersUpdateManyWithWhereWithoutCustomerInput = {
+  export type OrdersUpdateManyWithWhereWithoutUserInput = {
     where: OrdersScalarWhereInput
-    data: XOR<OrdersUpdateManyMutationInput, OrdersUncheckedUpdateManyWithoutCustomerInput>
+    data: XOR<OrdersUpdateManyMutationInput, OrdersUncheckedUpdateManyWithoutUserInput>
   }
 
   export type OrdersScalarWhereInput = {
@@ -16643,31 +13629,16 @@ export namespace Prisma {
     wallet_customer?: StringFilter<"Orders"> | string
     wallet_merchant?: StringFilter<"Orders"> | string
     estimated_duration?: StringFilter<"Orders"> | string
+    txn_hash?: StringNullableFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableFilter<"Orders"> | $Enums.OrderMode | null
     currency_crypto?: StringFilter<"Orders"> | string
     currency_fiat?: EnumCountryCodeNullableFilter<"Orders"> | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFilter<"Orders"> | $Enums.TradeType
     status?: EnumOrderStatusFilter<"Orders"> | $Enums.OrderStatus
-    action_user?: EnumOrderActionsNullableFilter<"Orders"> | $Enums.OrderActions | null
-    action_merchant?: EnumOrderActionsNullableFilter<"Orders"> | $Enums.OrderActions | null
-    txn_hash?: StringNullableFilter<"Orders"> | string | null
-    sell_txn_hash_customer_lock_crypto?: StringNullableFilter<"Orders"> | string | null
-    sell_txn_hash_customer_release_crypto?: StringNullableFilter<"Orders"> | string | null
-    sell_time2_customer_lock_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time1_customer_request?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time3_merchant_send_fiat?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    sell_time4_customer_release_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time1_customer_request?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time2_merchant_lock_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time3_customer_send_fiat?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_time4_merchant_release_crypto?: DateTimeNullableFilter<"Orders"> | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: StringNullableFilter<"Orders"> | string | null
-    buy_txn_hash_merchant_release_crypto?: StringNullableFilter<"Orders"> | string | null
     created_at?: DateTimeNullableFilter<"Orders"> | Date | string | null
     updated_at?: DateTimeNullableFilter<"Orders"> | Date | string | null
     bank_id?: IntFilter<"Orders"> | number
-    customer_id?: IntFilter<"Orders"> | number
-    merchant_id?: IntFilter<"Orders"> | number
+    user_id?: IntFilter<"Orders"> | number
   }
 
   export type TransactionsUpsertWithWhereUniqueWithoutUserInput = {
@@ -16729,13 +13700,8 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     bank_accounts?: BankAccountCreateNestedManyWithoutUserInput
-    adverts?: AdvertsCreateNestedManyWithoutMerchantInput
-    orders?: OrdersCreateNestedManyWithoutCustomerInput
+    orders?: OrdersCreateNestedManyWithoutUserInput
     transactions?: TransactionsCreateNestedManyWithoutUserInput
   }
 
@@ -16765,13 +13731,8 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     bank_accounts?: BankAccountUncheckedCreateNestedManyWithoutUserInput
-    adverts?: AdvertsUncheckedCreateNestedManyWithoutMerchantInput
-    orders?: OrdersUncheckedCreateNestedManyWithoutCustomerInput
+    orders?: OrdersUncheckedCreateNestedManyWithoutUserInput
     transactions?: TransactionsUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -16816,13 +13777,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     bank_accounts?: BankAccountUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUpdateManyWithoutUserNestedInput
     transactions?: TransactionsUpdateManyWithoutUserNestedInput
   }
 
@@ -16852,13 +13808,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     bank_accounts?: BankAccountUncheckedUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUncheckedUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUncheckedUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUncheckedUpdateManyWithoutUserNestedInput
     transactions?: TransactionsUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -16887,13 +13838,8 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsCreateNestedManyWithoutUserInput
-    adverts?: AdvertsCreateNestedManyWithoutMerchantInput
-    orders?: OrdersCreateNestedManyWithoutCustomerInput
+    orders?: OrdersCreateNestedManyWithoutUserInput
     transactions?: TransactionsCreateNestedManyWithoutUserInput
   }
 
@@ -16923,13 +13869,8 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedCreateNestedManyWithoutUserInput
-    adverts?: AdvertsUncheckedCreateNestedManyWithoutMerchantInput
-    orders?: OrdersUncheckedCreateNestedManyWithoutCustomerInput
+    orders?: OrdersUncheckedCreateNestedManyWithoutUserInput
     transactions?: TransactionsUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -16938,80 +13879,21 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutBank_accountsInput, UserUncheckedCreateWithoutBank_accountsInput>
   }
 
-  export type AdvertsCreateWithoutBank_accountsInput = {
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    merchant?: UserCreateNestedOneWithoutAdvertsInput
-  }
-
-  export type AdvertsUncheckedCreateWithoutBank_accountsInput = {
-    id?: number
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    merchant_id: number
-  }
-
-  export type AdvertsCreateOrConnectWithoutBank_accountsInput = {
-    where: AdvertsWhereUniqueInput
-    create: XOR<AdvertsCreateWithoutBank_accountsInput, AdvertsUncheckedCreateWithoutBank_accountsInput>
-  }
-
   export type OrdersCreateWithoutBankInput = {
     amount_fiat: number
     amount_crypto: number
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    merchant_id: number
-    customer?: UserCreateNestedOneWithoutOrdersInput
+    user?: UserCreateNestedOneWithoutOrdersInput
   }
 
   export type OrdersUncheckedCreateWithoutBankInput = {
@@ -17021,30 +13903,15 @@ export namespace Prisma {
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    customer_id: number
-    merchant_id: number
+    user_id: number
   }
 
   export type OrdersCreateOrConnectWithoutBankInput = {
@@ -17093,13 +13960,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUpdateManyWithoutUserNestedInput
     transactions?: TransactionsUpdateManyWithoutUserNestedInput
   }
 
@@ -17129,30 +13991,9 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUncheckedUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUncheckedUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUncheckedUpdateManyWithoutUserNestedInput
     transactions?: TransactionsUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type AdvertsUpsertWithWhereUniqueWithoutBank_accountsInput = {
-    where: AdvertsWhereUniqueInput
-    update: XOR<AdvertsUpdateWithoutBank_accountsInput, AdvertsUncheckedUpdateWithoutBank_accountsInput>
-    create: XOR<AdvertsCreateWithoutBank_accountsInput, AdvertsUncheckedCreateWithoutBank_accountsInput>
-  }
-
-  export type AdvertsUpdateWithWhereUniqueWithoutBank_accountsInput = {
-    where: AdvertsWhereUniqueInput
-    data: XOR<AdvertsUpdateWithoutBank_accountsInput, AdvertsUncheckedUpdateWithoutBank_accountsInput>
-  }
-
-  export type AdvertsUpdateManyWithWhereWithoutBank_accountsInput = {
-    where: AdvertsScalarWhereInput
-    data: XOR<AdvertsUpdateManyMutationInput, AdvertsUncheckedUpdateManyWithoutBank_accountsInput>
   }
 
   export type OrdersUpsertWithWhereUniqueWithoutBankInput = {
@@ -17171,210 +14012,6 @@ export namespace Prisma {
     data: XOR<OrdersUpdateManyMutationInput, OrdersUncheckedUpdateManyWithoutBankInput>
   }
 
-  export type BankAccountCreateWithoutAdvertInput = {
-    account_name: string
-    account_no: string
-    soft_delete?: boolean | null
-    bank_name: string
-    nuban_id?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    user?: UserCreateNestedOneWithoutBank_accountsInput
-    Orders?: OrdersCreateNestedManyWithoutBankInput
-  }
-
-  export type BankAccountUncheckedCreateWithoutAdvertInput = {
-    id?: number
-    account_name: string
-    account_no: string
-    soft_delete?: boolean | null
-    bank_name: string
-    nuban_id?: string | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    user_id: number
-    Orders?: OrdersUncheckedCreateNestedManyWithoutBankInput
-  }
-
-  export type BankAccountCreateOrConnectWithoutAdvertInput = {
-    where: BankAccountWhereUniqueInput
-    create: XOR<BankAccountCreateWithoutAdvertInput, BankAccountUncheckedCreateWithoutAdvertInput>
-  }
-
-  export type UserCreateWithoutAdvertsInput = {
-    firstname?: string | null
-    lastname?: string | null
-    middlename?: string | null
-    email?: string | null
-    password?: string | null
-    transaction_pin?: string | null
-    telegram_id?: string | null
-    role?: $Enums.UserRole | null
-    country_code?: $Enums.CountryCode | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    bvn?: string | null
-    bvn_status?: $Enums.CredentialsStatus | null
-    nin?: string | null
-    nin_status?: $Enums.CredentialsStatus | null
-    dob?: string | null
-    dob_status?: $Enums.CredentialsStatus | null
-    home_address?: string | null
-    street_address?: string | null
-    state?: string | null
-    phone?: string | null
-    googleId?: string | null
-    proof_of_address?: string | null
-    phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
-    crypto_wallets?: CryptoWalletsCreateNestedManyWithoutUserInput
-    bank_accounts?: BankAccountCreateNestedManyWithoutUserInput
-    orders?: OrdersCreateNestedManyWithoutCustomerInput
-    transactions?: TransactionsCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutAdvertsInput = {
-    id?: number
-    firstname?: string | null
-    lastname?: string | null
-    middlename?: string | null
-    email?: string | null
-    password?: string | null
-    transaction_pin?: string | null
-    telegram_id?: string | null
-    role?: $Enums.UserRole | null
-    country_code?: $Enums.CountryCode | null
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-    bvn?: string | null
-    bvn_status?: $Enums.CredentialsStatus | null
-    nin?: string | null
-    nin_status?: $Enums.CredentialsStatus | null
-    dob?: string | null
-    dob_status?: $Enums.CredentialsStatus | null
-    home_address?: string | null
-    street_address?: string | null
-    state?: string | null
-    phone?: string | null
-    googleId?: string | null
-    proof_of_address?: string | null
-    phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
-    crypto_wallets?: CryptoWalletsUncheckedCreateNestedManyWithoutUserInput
-    bank_accounts?: BankAccountUncheckedCreateNestedManyWithoutUserInput
-    orders?: OrdersUncheckedCreateNestedManyWithoutCustomerInput
-    transactions?: TransactionsUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutAdvertsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAdvertsInput, UserUncheckedCreateWithoutAdvertsInput>
-  }
-
-  export type BankAccountUpsertWithWhereUniqueWithoutAdvertInput = {
-    where: BankAccountWhereUniqueInput
-    update: XOR<BankAccountUpdateWithoutAdvertInput, BankAccountUncheckedUpdateWithoutAdvertInput>
-    create: XOR<BankAccountCreateWithoutAdvertInput, BankAccountUncheckedCreateWithoutAdvertInput>
-  }
-
-  export type BankAccountUpdateWithWhereUniqueWithoutAdvertInput = {
-    where: BankAccountWhereUniqueInput
-    data: XOR<BankAccountUpdateWithoutAdvertInput, BankAccountUncheckedUpdateWithoutAdvertInput>
-  }
-
-  export type BankAccountUpdateManyWithWhereWithoutAdvertInput = {
-    where: BankAccountScalarWhereInput
-    data: XOR<BankAccountUpdateManyMutationInput, BankAccountUncheckedUpdateManyWithoutAdvertInput>
-  }
-
-  export type UserUpsertWithoutAdvertsInput = {
-    update: XOR<UserUpdateWithoutAdvertsInput, UserUncheckedUpdateWithoutAdvertsInput>
-    create: XOR<UserCreateWithoutAdvertsInput, UserUncheckedCreateWithoutAdvertsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutAdvertsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAdvertsInput, UserUncheckedUpdateWithoutAdvertsInput>
-  }
-
-  export type UserUpdateWithoutAdvertsInput = {
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
-    telegram_id?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
-    country_code?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    bvn?: NullableStringFieldUpdateOperationsInput | string | null
-    bvn_status?: NullableEnumCredentialsStatusFieldUpdateOperationsInput | $Enums.CredentialsStatus | null
-    nin?: NullableStringFieldUpdateOperationsInput | string | null
-    nin_status?: NullableEnumCredentialsStatusFieldUpdateOperationsInput | $Enums.CredentialsStatus | null
-    dob?: NullableStringFieldUpdateOperationsInput | string | null
-    dob_status?: NullableEnumCredentialsStatusFieldUpdateOperationsInput | $Enums.CredentialsStatus | null
-    home_address?: NullableStringFieldUpdateOperationsInput | string | null
-    street_address?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
-    phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
-    crypto_wallets?: CryptoWalletsUpdateManyWithoutUserNestedInput
-    bank_accounts?: BankAccountUpdateManyWithoutUserNestedInput
-    orders?: OrdersUpdateManyWithoutCustomerNestedInput
-    transactions?: TransactionsUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutAdvertsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    firstname?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: NullableStringFieldUpdateOperationsInput | string | null
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
-    telegram_id?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: NullableEnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole | null
-    country_code?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    bvn?: NullableStringFieldUpdateOperationsInput | string | null
-    bvn_status?: NullableEnumCredentialsStatusFieldUpdateOperationsInput | $Enums.CredentialsStatus | null
-    nin?: NullableStringFieldUpdateOperationsInput | string | null
-    nin_status?: NullableEnumCredentialsStatusFieldUpdateOperationsInput | $Enums.CredentialsStatus | null
-    dob?: NullableStringFieldUpdateOperationsInput | string | null
-    dob_status?: NullableEnumCredentialsStatusFieldUpdateOperationsInput | $Enums.CredentialsStatus | null
-    home_address?: NullableStringFieldUpdateOperationsInput | string | null
-    street_address?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
-    phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
-    crypto_wallets?: CryptoWalletsUncheckedUpdateManyWithoutUserNestedInput
-    bank_accounts?: BankAccountUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrdersUncheckedUpdateManyWithoutCustomerNestedInput
-    transactions?: TransactionsUncheckedUpdateManyWithoutUserNestedInput
-  }
-
   export type BankAccountCreateWithoutOrdersInput = {
     account_name: string
     account_no: string
@@ -17384,7 +14021,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     user?: UserCreateNestedOneWithoutBank_accountsInput
-    advert?: AdvertsCreateNestedManyWithoutBank_accountsInput
   }
 
   export type BankAccountUncheckedCreateWithoutOrdersInput = {
@@ -17397,7 +14033,6 @@ export namespace Prisma {
     created_at?: Date | string | null
     updated_at?: Date | string | null
     user_id: number
-    advert?: AdvertsUncheckedCreateNestedManyWithoutBank_accountsInput
   }
 
   export type BankAccountCreateOrConnectWithoutOrdersInput = {
@@ -17430,13 +14065,8 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsCreateNestedManyWithoutUserInput
     bank_accounts?: BankAccountCreateNestedManyWithoutUserInput
-    adverts?: AdvertsCreateNestedManyWithoutMerchantInput
     transactions?: TransactionsCreateNestedManyWithoutUserInput
   }
 
@@ -17466,13 +14096,8 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedCreateNestedManyWithoutUserInput
     bank_accounts?: BankAccountUncheckedCreateNestedManyWithoutUserInput
-    adverts?: AdvertsUncheckedCreateNestedManyWithoutMerchantInput
     transactions?: TransactionsUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -17501,7 +14126,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutBank_accountsNestedInput
-    advert?: AdvertsUpdateManyWithoutBank_accountsNestedInput
   }
 
   export type BankAccountUncheckedUpdateWithoutOrdersInput = {
@@ -17514,7 +14138,6 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: IntFieldUpdateOperationsInput | number
-    advert?: AdvertsUncheckedUpdateManyWithoutBank_accountsNestedInput
   }
 
   export type UserUpsertWithoutOrdersInput = {
@@ -17553,13 +14176,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUpdateManyWithoutUserNestedInput
     bank_accounts?: BankAccountUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUpdateManyWithoutMerchantNestedInput
     transactions?: TransactionsUpdateManyWithoutUserNestedInput
   }
 
@@ -17589,13 +14207,8 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedUpdateManyWithoutUserNestedInput
     bank_accounts?: BankAccountUncheckedUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUncheckedUpdateManyWithoutMerchantNestedInput
     transactions?: TransactionsUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -17624,14 +14237,9 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsCreateNestedManyWithoutUserInput
     bank_accounts?: BankAccountCreateNestedManyWithoutUserInput
-    adverts?: AdvertsCreateNestedManyWithoutMerchantInput
-    orders?: OrdersCreateNestedManyWithoutCustomerInput
+    orders?: OrdersCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTransactionsInput = {
@@ -17660,14 +14268,9 @@ export namespace Prisma {
     googleId?: string | null
     proof_of_address?: string | null
     phone_verified?: boolean | null
-    merchant_success_rate?: number | null
-    merchant_trade_count?: number | null
-    merchant_nickname?: string | null
-    merchant_status?: $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedCreateNestedManyWithoutUserInput
     bank_accounts?: BankAccountUncheckedCreateNestedManyWithoutUserInput
-    adverts?: AdvertsUncheckedCreateNestedManyWithoutMerchantInput
-    orders?: OrdersUncheckedCreateNestedManyWithoutCustomerInput
+    orders?: OrdersUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTransactionsInput = {
@@ -17711,14 +14314,9 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUpdateManyWithoutUserNestedInput
     bank_accounts?: BankAccountUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTransactionsInput = {
@@ -17747,14 +14345,9 @@ export namespace Prisma {
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_address?: NullableStringFieldUpdateOperationsInput | string | null
     phone_verified?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    merchant_success_rate?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_trade_count?: NullableIntFieldUpdateOperationsInput | number | null
-    merchant_nickname?: NullableStringFieldUpdateOperationsInput | string | null
-    merchant_status?: NullableEnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus | null
     crypto_wallets?: CryptoWalletsUncheckedUpdateManyWithoutUserNestedInput
     bank_accounts?: BankAccountUncheckedUpdateManyWithoutUserNestedInput
-    adverts?: AdvertsUncheckedUpdateManyWithoutMerchantNestedInput
-    orders?: OrdersUncheckedUpdateManyWithoutCustomerNestedInput
+    orders?: OrdersUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CryptoWalletsCreateManyUserInput = {
@@ -17778,56 +14371,22 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type AdvertsCreateManyMerchantInput = {
-    id?: number
-    rateFloat?: number | null
-    rateFixed?: number | null
-    isFloatRate?: boolean
-    limitUpper: number
-    limitLower: number
-    fiatAmountPerCrypto: number
-    tradeType: $Enums.TradeType
-    currency_crypto: string
-    currency_fiat: $Enums.CountryCode
-    instructions: string
-    wallet_address: string
-    status?: $Enums.AdvertStatus | null
-    duration: string
-    created_at?: Date | string | null
-    updated_at?: Date | string | null
-  }
-
-  export type OrdersCreateManyCustomerInput = {
+  export type OrdersCreateManyUserInput = {
     id?: number
     amount_fiat: number
     amount_crypto: number
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
     bank_id: number
-    merchant_id: number
   }
 
   export type TransactionsCreateManyUserInput = {
@@ -17881,7 +14440,6 @@ export namespace Prisma {
     nuban_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    advert?: AdvertsUpdateManyWithoutBank_accountsNestedInput
     Orders?: OrdersUpdateManyWithoutBankNestedInput
   }
 
@@ -17894,7 +14452,6 @@ export namespace Prisma {
     nuban_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    advert?: AdvertsUncheckedUpdateManyWithoutBank_accountsNestedInput
     Orders?: OrdersUncheckedUpdateManyWithoutBankNestedInput
   }
 
@@ -17909,160 +14466,57 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type AdvertsUpdateWithoutMerchantInput = {
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    bank_accounts?: BankAccountUpdateManyWithoutAdvertNestedInput
-  }
-
-  export type AdvertsUncheckedUpdateWithoutMerchantInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    bank_accounts?: BankAccountUncheckedUpdateManyWithoutAdvertNestedInput
-  }
-
-  export type AdvertsUncheckedUpdateManyWithoutMerchantInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type OrdersUpdateWithoutCustomerInput = {
+  export type OrdersUpdateWithoutUserInput = {
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
     bank?: BankAccountUpdateOneWithoutOrdersNestedInput
   }
 
-  export type OrdersUncheckedUpdateWithoutCustomerInput = {
+  export type OrdersUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bank_id?: IntFieldUpdateOperationsInput | number
-    merchant_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type OrdersUncheckedUpdateManyWithoutCustomerInput = {
+  export type OrdersUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bank_id?: IntFieldUpdateOperationsInput | number
-    merchant_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type TransactionsUpdateWithoutUserInput = {
@@ -18113,89 +14567,15 @@ export namespace Prisma {
     wallet_customer: string
     wallet_merchant: string
     estimated_duration: string
+    txn_hash?: string | null
     mode?: $Enums.OrderMode | null
     currency_crypto: string
     currency_fiat?: $Enums.CountryCode | null
     trade_type: $Enums.TradeType
     status?: $Enums.OrderStatus
-    action_user?: $Enums.OrderActions | null
-    action_merchant?: $Enums.OrderActions | null
-    txn_hash?: string | null
-    sell_txn_hash_customer_lock_crypto?: string | null
-    sell_txn_hash_customer_release_crypto?: string | null
-    sell_time2_customer_lock_crypto?: Date | string | null
-    sell_time1_customer_request?: Date | string | null
-    sell_time3_merchant_send_fiat?: Date | string | null
-    sell_time4_customer_release_crypto?: Date | string | null
-    buy_time1_customer_request?: Date | string | null
-    buy_time2_merchant_lock_crypto?: Date | string | null
-    buy_time3_customer_send_fiat?: Date | string | null
-    buy_time4_merchant_release_crypto?: Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: string | null
-    buy_txn_hash_merchant_release_crypto?: string | null
     created_at?: Date | string | null
     updated_at?: Date | string | null
-    customer_id: number
-    merchant_id: number
-  }
-
-  export type AdvertsUpdateWithoutBank_accountsInput = {
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant?: UserUpdateOneWithoutAdvertsNestedInput
-  }
-
-  export type AdvertsUncheckedUpdateWithoutBank_accountsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type AdvertsUncheckedUpdateManyWithoutBank_accountsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    rateFloat?: NullableFloatFieldUpdateOperationsInput | number | null
-    rateFixed?: NullableFloatFieldUpdateOperationsInput | number | null
-    isFloatRate?: BoolFieldUpdateOperationsInput | boolean
-    limitUpper?: FloatFieldUpdateOperationsInput | number
-    limitLower?: FloatFieldUpdateOperationsInput | number
-    fiatAmountPerCrypto?: IntFieldUpdateOperationsInput | number
-    tradeType?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
-    currency_crypto?: StringFieldUpdateOperationsInput | string
-    currency_fiat?: EnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode
-    instructions?: StringFieldUpdateOperationsInput | string
-    wallet_address?: StringFieldUpdateOperationsInput | string
-    status?: NullableEnumAdvertStatusFieldUpdateOperationsInput | $Enums.AdvertStatus | null
-    duration?: StringFieldUpdateOperationsInput | string
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
+    user_id: number
   }
 
   export type OrdersUpdateWithoutBankInput = {
@@ -18204,30 +14584,15 @@ export namespace Prisma {
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    merchant_id?: IntFieldUpdateOperationsInput | number
-    customer?: UserUpdateOneWithoutOrdersNestedInput
+    user?: UserUpdateOneWithoutOrdersNestedInput
   }
 
   export type OrdersUncheckedUpdateWithoutBankInput = {
@@ -18237,30 +14602,15 @@ export namespace Prisma {
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    customer_id?: IntFieldUpdateOperationsInput | number
-    merchant_id?: IntFieldUpdateOperationsInput | number
+    user_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type OrdersUncheckedUpdateManyWithoutBankInput = {
@@ -18270,64 +14620,12 @@ export namespace Prisma {
     wallet_customer?: StringFieldUpdateOperationsInput | string
     wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
+    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
     currency_crypto?: StringFieldUpdateOperationsInput | string
     currency_fiat?: NullableEnumCountryCodeFieldUpdateOperationsInput | $Enums.CountryCode | null
     trade_type?: EnumTradeTypeFieldUpdateOperationsInput | $Enums.TradeType
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    action_user?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    action_merchant?: NullableEnumOrderActionsFieldUpdateOperationsInput | $Enums.OrderActions | null
-    txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_txn_hash_customer_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    sell_time2_customer_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time3_merchant_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sell_time4_customer_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time1_customer_request?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time2_merchant_lock_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time3_customer_send_fiat?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_time4_merchant_release_crypto?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    buy_txn_hash_merchant_lock_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    buy_txn_hash_merchant_release_crypto?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    customer_id?: IntFieldUpdateOperationsInput | number
-    merchant_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BankAccountUpdateWithoutAdvertInput = {
-    account_name?: StringFieldUpdateOperationsInput | string
-    account_no?: StringFieldUpdateOperationsInput | string
-    soft_delete?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    bank_name?: StringFieldUpdateOperationsInput | string
-    nuban_id?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneWithoutBank_accountsNestedInput
-    Orders?: OrdersUpdateManyWithoutBankNestedInput
-  }
-
-  export type BankAccountUncheckedUpdateWithoutAdvertInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    account_name?: StringFieldUpdateOperationsInput | string
-    account_no?: StringFieldUpdateOperationsInput | string
-    soft_delete?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    bank_name?: StringFieldUpdateOperationsInput | string
-    nuban_id?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user_id?: IntFieldUpdateOperationsInput | number
-    Orders?: OrdersUncheckedUpdateManyWithoutBankNestedInput
-  }
-
-  export type BankAccountUncheckedUpdateManyWithoutAdvertInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    account_name?: StringFieldUpdateOperationsInput | string
-    account_no?: StringFieldUpdateOperationsInput | string
-    soft_delete?: NullableBoolFieldUpdateOperationsInput | boolean | null
-    bank_name?: StringFieldUpdateOperationsInput | string
-    nuban_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: IntFieldUpdateOperationsInput | number

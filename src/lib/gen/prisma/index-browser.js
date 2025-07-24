@@ -145,11 +145,7 @@ exports.Prisma.UserScalarFieldEnum = {
   phone: 'phone',
   googleId: 'googleId',
   proof_of_address: 'proof_of_address',
-  phone_verified: 'phone_verified',
-  merchant_success_rate: 'merchant_success_rate',
-  merchant_trade_count: 'merchant_trade_count',
-  merchant_nickname: 'merchant_nickname',
-  merchant_status: 'merchant_status'
+  phone_verified: 'phone_verified'
 };
 
 exports.Prisma.CryptoWalletsScalarFieldEnum = {
@@ -175,26 +171,6 @@ exports.Prisma.BankAccountScalarFieldEnum = {
   user_id: 'user_id'
 };
 
-exports.Prisma.AdvertsScalarFieldEnum = {
-  id: 'id',
-  rateFloat: 'rateFloat',
-  rateFixed: 'rateFixed',
-  isFloatRate: 'isFloatRate',
-  limitUpper: 'limitUpper',
-  limitLower: 'limitLower',
-  fiatAmountPerCrypto: 'fiatAmountPerCrypto',
-  tradeType: 'tradeType',
-  currency_crypto: 'currency_crypto',
-  currency_fiat: 'currency_fiat',
-  instructions: 'instructions',
-  wallet_address: 'wallet_address',
-  status: 'status',
-  duration: 'duration',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  merchant_id: 'merchant_id'
-};
-
 exports.Prisma.OrdersScalarFieldEnum = {
   id: 'id',
   amount_fiat: 'amount_fiat',
@@ -202,31 +178,16 @@ exports.Prisma.OrdersScalarFieldEnum = {
   wallet_customer: 'wallet_customer',
   wallet_merchant: 'wallet_merchant',
   estimated_duration: 'estimated_duration',
+  txn_hash: 'txn_hash',
   mode: 'mode',
   currency_crypto: 'currency_crypto',
   currency_fiat: 'currency_fiat',
   trade_type: 'trade_type',
   status: 'status',
-  action_user: 'action_user',
-  action_merchant: 'action_merchant',
-  txn_hash: 'txn_hash',
-  sell_txn_hash_customer_lock_crypto: 'sell_txn_hash_customer_lock_crypto',
-  sell_txn_hash_customer_release_crypto: 'sell_txn_hash_customer_release_crypto',
-  sell_time2_customer_lock_crypto: 'sell_time2_customer_lock_crypto',
-  sell_time1_customer_request: 'sell_time1_customer_request',
-  sell_time3_merchant_send_fiat: 'sell_time3_merchant_send_fiat',
-  sell_time4_customer_release_crypto: 'sell_time4_customer_release_crypto',
-  buy_time1_customer_request: 'buy_time1_customer_request',
-  buy_time2_merchant_lock_crypto: 'buy_time2_merchant_lock_crypto',
-  buy_time3_customer_send_fiat: 'buy_time3_customer_send_fiat',
-  buy_time4_merchant_release_crypto: 'buy_time4_merchant_release_crypto',
-  buy_txn_hash_merchant_lock_crypto: 'buy_txn_hash_merchant_lock_crypto',
-  buy_txn_hash_merchant_release_crypto: 'buy_txn_hash_merchant_release_crypto',
   created_at: 'created_at',
   updated_at: 'updated_at',
   bank_id: 'bank_id',
-  customer_id: 'customer_id',
-  merchant_id: 'merchant_id'
+  user_id: 'user_id'
 };
 
 exports.Prisma.ExchangeRatesScalarFieldEnum = {
@@ -300,26 +261,10 @@ exports.CredentialsStatus = exports.$Enums.CredentialsStatus = {
   NONE: 'NONE'
 };
 
-exports.MerchantStatus = exports.$Enums.MerchantStatus = {
-  Online: 'Online',
-  Offline: 'Offline',
-  Wait: 'Wait'
-};
-
 exports.ChainType = exports.$Enums.ChainType = {
   Ethereum: 'Ethereum',
   Solana: 'Solana',
   Cosmos: 'Cosmos'
-};
-
-exports.TradeType = exports.$Enums.TradeType = {
-  BUY: 'BUY',
-  SELL: 'SELL'
-};
-
-exports.AdvertStatus = exports.$Enums.AdvertStatus = {
-  OPEN: 'OPEN',
-  CLOSE: 'CLOSE'
 };
 
 exports.OrderMode = exports.$Enums.OrderMode = {
@@ -327,20 +272,16 @@ exports.OrderMode = exports.$Enums.OrderMode = {
   EXPRESS: 'EXPRESS'
 };
 
+exports.TradeType = exports.$Enums.TradeType = {
+  BUY: 'BUY',
+  SELL: 'SELL'
+};
+
 exports.OrderStatus = exports.$Enums.OrderStatus = {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   CANCEL: 'CANCEL',
   APPEAL: 'APPEAL'
-};
-
-exports.OrderActions = exports.$Enums.OrderActions = {
-  LockCrypto: 'LockCrypto',
-  FaitSent: 'FaitSent',
-  FaitReceived: 'FaitReceived',
-  ReleaseCrypto: 'ReleaseCrypto',
-  Appeal: 'Appeal',
-  Cancel: 'Cancel'
 };
 
 exports.AccessTokenPlatform = exports.$Enums.AccessTokenPlatform = {
@@ -376,7 +317,6 @@ exports.Prisma.ModelName = {
   User: 'User',
   CryptoWallets: 'CryptoWallets',
   BankAccount: 'BankAccount',
-  Adverts: 'Adverts',
   Orders: 'Orders',
   ExchangeRates: 'ExchangeRates',
   AccessTokens: 'AccessTokens',

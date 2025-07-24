@@ -4,6 +4,7 @@ import axios from 'axios';
 import { LoggerService, secrets } from '../../../modules/common';
 import { ITopUpAirtime } from './t.topUpAirtime';
 import { $Enums } from '@prisma/client';
+import { GqlErr } from 'src/modules/common/errors/gqlErr';
 
 export type IReloadlyOperatorId = 'MTN' | 'AIRTEL' | 'GLO' | 'ETISALAT';
 // export const OperatorId: Record<IReloadlyOperatorId, string> = {
@@ -63,35 +64,37 @@ export class ReloadlyTopUpService {
         this.logger.info(
             'Sending topup request to reloadly...' + JSON.stringify(payload),
         );
-        try {
-            const url = 'https://topups.reloadly.com/topups';
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/com.reloadly.topups-v1+json',
-                    Authorization: `Bearer ${this.token}`,
-                },
-                body: JSON.stringify(payload),
-            };
 
-            let result: ITopUpAirtime;
-            fetch(url, options)
-                .then((res) => res.json())
-                .then((json) => {
-                    result = json as ITopUpAirtime;
-                    this.logger.info(
-                        'Airtime result...' + JSON.stringify(json),
-                    );
-                    return json as ITopUpAirtime;
-                })
-                .catch((err) =>
-                    this.logger.info('Airtime result...' + JSON.stringify(err)),
+        const url = 'https://topups.reloadly.com/topups';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/com.reloadly.topups-v1+json',
+                Authorization: `Bearer ${this.token}`,
+            },
+            body: JSON.stringify(payload),
+        };
+
+        let result: ITopUpAirtime;
+        fetch(url, options)
+            .then((res) => res.json())
+            .then((json) => {
+                result = json as ITopUpAirtime;
+                this.logger.info(
+                    'Airtime result...' + JSON.stringify(json),
                 );
-            return result;
-        } catch (error) {
-            throw new Error(error);
-        }
+                return json as ITopUpAirtime;
+            })
+            .catch((err) => {
+                this.logger.info('Airtime ...' + JSON.stringify(err));
+
+                throw Error("Could not topup: " + err);
+            }
+
+            );
+        return result;
+
     }
 
     async createAccessToken() {

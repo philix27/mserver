@@ -8,7 +8,7 @@ export class CronService {
     public constructor(
         private readonly logger: LoggerService,
         private readonly fx: ExchangeRateService,
-    ) {}
+    ) { }
 
     @Cron(CronExpression.EVERY_HOUR)
     async getLatestRate() {

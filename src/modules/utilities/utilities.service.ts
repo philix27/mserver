@@ -11,6 +11,7 @@ import { UserInput } from '../../lib';
 import { ReloadlyTopUpService } from '../../lib/integrations/reloadly';
 import { TransactionsService } from '../transactions/transact.service';
 import { operatorsData } from './operatorData';
+import { GqlErr } from '../common/errors/gqlErr';
 
 @Injectable()
 export class UtilitiesService {
@@ -46,30 +47,34 @@ export class UtilitiesService {
     ): Promise<Utilities_PurchaseTopUpResponse> {
         this.logger.info('Purchase Airtime');
 
-        const res = await this.reloadly.topUpAirtime({
-            amount: `${input.amount}.00`,
-            operatorId: input.operatorId,
-            recipientPhone: {
-                countryCode: input.countryCode,
-                number: input.phoneNo,
-            },
-            useLocalAmount: true,
-            customIdentifier: `userId:${input.userId}&txnHash:${input.transaction_hash}`,
-        });
+        try {
+            const res = await this.reloadly.topUpAirtime({
+                amount: `${input.amount}.00`,
+                operatorId: input.operatorId,
+                recipientPhone: {
+                    countryCode: input.countryCode,
+                    number: input.phoneNo,
+                },
+                useLocalAmount: true,
+                customIdentifier: `userId:${input.userId}&txnHash:${input.transaction_hash}`,
+            });
 
-        await this.transaction.create({
-            amount: input.amount,
-            category: 'AIRTIME',
-            mode: 'DEBIT',
-            status: 'COMPLETED',
-            userId: input.userId,
-            fiat_currency: input.countryCode,
-            note: '',
-            transaction_hash: input.transaction_hash,
-        });
+            await this.transaction.create({
+                amount: input.amount,
+                category: 'AIRTIME',
+                mode: 'DEBIT',
+                status: 'COMPLETED',
+                userId: input.userId,
+                fiat_currency: input.countryCode,
+                note: '',
+                transaction_hash: input.transaction_hash,
+            });
 
-        // this.logger.info('Custom Identifier ' + res.customIdentifier);
-        return { message: 'Successful' };
+            // this.logger.info('Custom Identifier ' + res.customIdentifier);
+            return { message: 'Successful' };
+        } catch (error) {
+            throw GqlErr("Could not send airtime")
+        }
     }
     public async purchaseDataBundle(
         input: Utilities_PurchaseDataBundleInput & UserInput,

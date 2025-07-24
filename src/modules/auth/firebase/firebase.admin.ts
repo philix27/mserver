@@ -8,7 +8,6 @@ const serviceAccountCredentials :admin.ServiceAccount  = {
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountCredentials,
-    
   ),
 });
 

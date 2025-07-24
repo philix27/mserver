@@ -39,8 +39,8 @@ export class AuthService {
         private readonly walletCrypto: WalletCryptoService,
         private readonly jwtService: HelperService,
         private readonly thirdweb: ThirdwebService,
-         private readonly fbService : AuthFirebaseService
-    ) {}
+        private readonly fbService: AuthFirebaseService
+    ) { }
 
     public async sendEmailOtp(
         params: Auth_sendEmailOtpInput,
@@ -418,15 +418,15 @@ export class AuthService {
             middlename: _user.middlename!,
         };
     }
-    
+
     public async fbAuth(
-        {idToken}: Auth_FirebaseLoginInput,
-    ): Promise<Auth_FirebaseLoginResponse>{
+        { idToken }: Auth_FirebaseLoginInput,
+    ): Promise<Auth_FirebaseLoginResponse> {
         this.logger.info('Login from app ');
-        
-       
+
+
         const payload = await this.fbService.verifyIdToken(
-          idToken
+            idToken
         );
 
         if (!payload) throw GqlErr('You need to login first');
@@ -434,6 +434,7 @@ export class AuthService {
 
         const email = payload.email;;
 
+        console.log("User email : " + email)
         let _user = await this.prisma.user.findFirst({
             where: {
                 email,
@@ -444,7 +445,7 @@ export class AuthService {
             console.log('No user found. Creating a new user');
             _user = await this.prisma.user.create({
                 data: {
-                    email: email,   
+                    email: email,
                     firstname: payload.name,
                 },
             });

@@ -58,9 +58,7 @@ registerEnumType($Enums.TradeType, {
 registerEnumType($Enums.UserRole, {
     name: 'UserRole',
 });
-registerEnumType($Enums.AdvertStatus, {
-    name: 'AdvertStatus',
-});
+
 registerEnumType($Enums.TransactionCategory, {
     name: 'TransactionCategory',
 });

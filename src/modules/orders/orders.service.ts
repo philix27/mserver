@@ -19,7 +19,7 @@ export class OrderService {
         // private readonly notification: NotificationService,
         private readonly prisma: PrismaService,
         private readonly transaction: TransactionsService,
-    ) {}
+    ) { }
 
     public async createSell(
         p: Order_CreteSellInput & { userId: number },
@@ -30,7 +30,6 @@ export class OrderService {
             data: {
                 customer_id: p.userId,
                 merchant_id: p.merchant_id,
-                action_merchant: p.action_merchant,
                 amount_crypto: p.amount_crypto,
                 amount_fiat: p.amount_fiat,
                 bank_id: p.bank_id,
@@ -42,9 +41,12 @@ export class OrderService {
                 trade_type: p.trade_type,
                 status: p.status,
                 mode: p.mode,
-                txn_hash: p.txn_hash,
+                // action_merchant: p.action_merchant,
+                // txn_hash: p.txn_hash,
             },
         });
+
+
 
         const rate = `${p.amount_crypto}/${p.amount_crypto}`;
         await this.transaction.create({
@@ -63,10 +65,11 @@ export class OrderService {
         return {
             ...res,
             id: res.id,
-            action_merchant: res.action_merchant!,
-            action_user: res.action_user!,
             mode: res.mode,
-            txn_hash: res.txn_hash,
+            // action_merchant: res.action_merchant!,
+            // action_user: res.action_user!,
+            // txn_hash: res.txn_hash,
+
             // amount_crypto: res.amount_crypto,
             // amount_fiat: res.amount_fiat,
             // bank_account_name: res.bank_account_name,
@@ -90,17 +93,17 @@ export class OrderService {
             data: {
                 ...p,
                 customer_id: p.userId,
-                buy_time1_customer_request: new Date(),
-                txn_hash: p.txn_hash,
+                // buy_time1_customer_request: new Date(),
+                // txn_hash: p.txn_hash,
             },
         });
 
         return {
             ...res,
             id: res.id,
-            action_merchant: res.action_merchant!,
-            action_user: res.action_user!,
-            txn_hash: res.txn_hash,
+            // action_merchant: res.action_merchant!,
+            // action_user: res.action_user!,
+            // txn_hash: res.txn_hash,
         };
     }
 
@@ -121,9 +124,9 @@ export class OrderService {
             return {
                 ...item,
                 id: item.id,
-                action_merchant: item.action_merchant!,
-                action_user: item.action_user!,
-                txn_hash: item.txn_hash,
+                // action_merchant: item.action_merchant!,
+                // action_user: item.action_user!,
+                // txn_hash: item.txn_hash,
             };
         });
     }
@@ -144,9 +147,9 @@ export class OrderService {
             return {
                 ...res,
                 id: item.id,
-                action_merchant: item.action_merchant!,
-                action_user: item.action_user!,
-                txn_hash: item.txn_hash,
+                // action_merchant: item.action_merchant!,
+                // action_user: item.action_user!,
+                // txn_hash: item.txn_hash,
             };
         });
     }
@@ -165,9 +168,9 @@ export class OrderService {
             return {
                 ...res,
                 id: item.id,
-                action_merchant: item.action_merchant!,
-                action_user: item.action_user!,
-                txn_hash: item.txn_hash,
+                // action_merchant: item.action_merchant!,
+                // action_user: item.action_user!,
+                // txn_hash: item.txn_hash,
             };
         });
     }
@@ -183,9 +186,9 @@ export class OrderService {
         return {
             ...res,
             id: res!.id,
-            action_merchant: res!.action_merchant!,
-            action_user: res!.action_user!,
-            txn_hash: res.txn_hash,
+            // action_merchant: res!.action_merchant!,
+            // action_user: res!.action_user!,
+            // txn_hash: res.txn_hash,
         };
     }
 

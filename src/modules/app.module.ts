@@ -43,7 +43,7 @@ import { StaticModule } from './static/static.module';
         JwtModule.register({
             global: true,
             secret: process.env.JWT_SECRET,
-            signOptions: { expiresIn: '12h', algorithm: 'RS256', keyid: '' },
+            signOptions: { expiresIn: '72h', algorithm: 'RS256', keyid: '' },
             privateKey: '',
         }),
         CommonModule,
@@ -52,7 +52,7 @@ import { StaticModule } from './static/static.module';
         AuthModule,
         UserModule,
         BankAccountModule,
-        AdvertsModule,
+        // AdvertsModule,
         CronModule,
         OrdersModule,
         KycModule,
@@ -66,4 +66,4 @@ import { StaticModule } from './static/static.module';
         // CryptoModule,
     ],
 })
-export class ApplicationModule {}
+export class ApplicationModule { }
