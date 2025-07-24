@@ -115,8 +115,6 @@ model Orders {
   id                 Int          @id @default(autoincrement())
   amount_fiat        Float
   amount_crypto      Float
-  wallet_customer    String
-  wallet_merchant    String
   estimated_duration String
   txn_hash           String?
   mode               OrderMode?

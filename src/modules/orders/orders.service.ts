@@ -28,15 +28,15 @@ export class OrderService {
 
         const res = await this.prisma.orders.create({
             data: {
-                customer_id: p.userId,
-                merchant_id: p.merchant_id,
+                user_id: p.userId,
+                // merchant_id: p.merchant_id,
                 amount_crypto: p.amount_crypto,
                 amount_fiat: p.amount_fiat,
                 bank_id: p.bank_id,
                 currency_crypto: p.currency_crypto,
                 currency_fiat: p.currency_fiat,
-                wallet_customer: p.wallet_customer,
-                wallet_merchant: p.wallet_merchant,
+                // wallet_customer: p.wallet_customer,
+                // wallet_merchant: p.wallet_merchant,
                 estimated_duration: p.estimated_duration,
                 trade_type: p.trade_type,
                 status: p.status,
@@ -92,7 +92,7 @@ export class OrderService {
         const res = await this.prisma.orders.create({
             data: {
                 ...p,
-                customer_id: p.userId,
+                user_id: p.userId,
                 // buy_time1_customer_request: new Date(),
                 // txn_hash: p.txn_hash,
             },
@@ -116,7 +116,7 @@ export class OrderService {
                 currency_crypto: p.currency_crypto,
                 currency_fiat: p.currency_fiat,
                 status: p.status,
-                customer_id: p.userId,
+                user_id: p.userId,
             },
         });
 
@@ -136,7 +136,7 @@ export class OrderService {
     ): Promise<Order_Response[]> {
         const res = await this.prisma.orders.findMany({
             where: {
-                merchant_id: p.userId,
+                user_id: p.userId,
                 trade_type: p.trade_type,
                 currency_crypto: p.currency_crypto,
                 currency_fiat: p.currency_fiat,

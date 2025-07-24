@@ -175,8 +175,6 @@ exports.Prisma.OrdersScalarFieldEnum = {
   id: 'id',
   amount_fiat: 'amount_fiat',
   amount_crypto: 'amount_crypto',
-  wallet_customer: 'wallet_customer',
-  wallet_merchant: 'wallet_merchant',
   estimated_duration: 'estimated_duration',
   txn_hash: 'txn_hash',
   mode: 'mode',

@@ -5533,8 +5533,6 @@ export namespace Prisma {
     id: number | null
     amount_fiat: number | null
     amount_crypto: number | null
-    wallet_customer: string | null
-    wallet_merchant: string | null
     estimated_duration: string | null
     txn_hash: string | null
     mode: $Enums.OrderMode | null
@@ -5552,8 +5550,6 @@ export namespace Prisma {
     id: number | null
     amount_fiat: number | null
     amount_crypto: number | null
-    wallet_customer: string | null
-    wallet_merchant: string | null
     estimated_duration: string | null
     txn_hash: string | null
     mode: $Enums.OrderMode | null
@@ -5571,8 +5567,6 @@ export namespace Prisma {
     id: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: number
-    wallet_merchant: number
     estimated_duration: number
     txn_hash: number
     mode: number
@@ -5608,8 +5602,6 @@ export namespace Prisma {
     id?: true
     amount_fiat?: true
     amount_crypto?: true
-    wallet_customer?: true
-    wallet_merchant?: true
     estimated_duration?: true
     txn_hash?: true
     mode?: true
@@ -5627,8 +5619,6 @@ export namespace Prisma {
     id?: true
     amount_fiat?: true
     amount_crypto?: true
-    wallet_customer?: true
-    wallet_merchant?: true
     estimated_duration?: true
     txn_hash?: true
     mode?: true
@@ -5646,8 +5636,6 @@ export namespace Prisma {
     id?: true
     amount_fiat?: true
     amount_crypto?: true
-    wallet_customer?: true
-    wallet_merchant?: true
     estimated_duration?: true
     txn_hash?: true
     mode?: true
@@ -5752,8 +5740,6 @@ export namespace Prisma {
     id: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash: string | null
     mode: $Enums.OrderMode | null
@@ -5790,8 +5776,6 @@ export namespace Prisma {
     id?: boolean
     amount_fiat?: boolean
     amount_crypto?: boolean
-    wallet_customer?: boolean
-    wallet_merchant?: boolean
     estimated_duration?: boolean
     txn_hash?: boolean
     mode?: boolean
@@ -5811,8 +5795,6 @@ export namespace Prisma {
     id?: boolean
     amount_fiat?: boolean
     amount_crypto?: boolean
-    wallet_customer?: boolean
-    wallet_merchant?: boolean
     estimated_duration?: boolean
     txn_hash?: boolean
     mode?: boolean
@@ -5832,8 +5814,6 @@ export namespace Prisma {
     id?: boolean
     amount_fiat?: boolean
     amount_crypto?: boolean
-    wallet_customer?: boolean
-    wallet_merchant?: boolean
     estimated_duration?: boolean
     txn_hash?: boolean
     mode?: boolean
@@ -5853,8 +5833,6 @@ export namespace Prisma {
     id?: boolean
     amount_fiat?: boolean
     amount_crypto?: boolean
-    wallet_customer?: boolean
-    wallet_merchant?: boolean
     estimated_duration?: boolean
     txn_hash?: boolean
     mode?: boolean
@@ -5868,7 +5846,7 @@ export namespace Prisma {
     user_id?: boolean
   }
 
-  export type OrdersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount_fiat" | "amount_crypto" | "wallet_customer" | "wallet_merchant" | "estimated_duration" | "txn_hash" | "mode" | "currency_crypto" | "currency_fiat" | "trade_type" | "status" | "created_at" | "updated_at" | "bank_id" | "user_id", ExtArgs["result"]["orders"]>
+  export type OrdersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "amount_fiat" | "amount_crypto" | "estimated_duration" | "txn_hash" | "mode" | "currency_crypto" | "currency_fiat" | "trade_type" | "status" | "created_at" | "updated_at" | "bank_id" | "user_id", ExtArgs["result"]["orders"]>
   export type OrdersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bank?: boolean | Orders$bankArgs<ExtArgs>
     user?: boolean | Orders$userArgs<ExtArgs>
@@ -5892,8 +5870,6 @@ export namespace Prisma {
       id: number
       amount_fiat: number
       amount_crypto: number
-      wallet_customer: string
-      wallet_merchant: string
       estimated_duration: string
       txn_hash: string | null
       mode: $Enums.OrderMode | null
@@ -6333,8 +6309,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Orders", 'Int'>
     readonly amount_fiat: FieldRef<"Orders", 'Float'>
     readonly amount_crypto: FieldRef<"Orders", 'Float'>
-    readonly wallet_customer: FieldRef<"Orders", 'String'>
-    readonly wallet_merchant: FieldRef<"Orders", 'String'>
     readonly estimated_duration: FieldRef<"Orders", 'String'>
     readonly txn_hash: FieldRef<"Orders", 'String'>
     readonly mode: FieldRef<"Orders", 'OrderMode'>
@@ -10170,8 +10144,6 @@ export namespace Prisma {
     id: 'id',
     amount_fiat: 'amount_fiat',
     amount_crypto: 'amount_crypto',
-    wallet_customer: 'wallet_customer',
-    wallet_merchant: 'wallet_merchant',
     estimated_duration: 'estimated_duration',
     txn_hash: 'txn_hash',
     mode: 'mode',
@@ -10804,8 +10776,6 @@ export namespace Prisma {
     id?: IntFilter<"Orders"> | number
     amount_fiat?: FloatFilter<"Orders"> | number
     amount_crypto?: FloatFilter<"Orders"> | number
-    wallet_customer?: StringFilter<"Orders"> | string
-    wallet_merchant?: StringFilter<"Orders"> | string
     estimated_duration?: StringFilter<"Orders"> | string
     txn_hash?: StringNullableFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableFilter<"Orders"> | $Enums.OrderMode | null
@@ -10825,8 +10795,6 @@ export namespace Prisma {
     id?: SortOrder
     amount_fiat?: SortOrder
     amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
     estimated_duration?: SortOrder
     txn_hash?: SortOrderInput | SortOrder
     mode?: SortOrderInput | SortOrder
@@ -10849,8 +10817,6 @@ export namespace Prisma {
     NOT?: OrdersWhereInput | OrdersWhereInput[]
     amount_fiat?: FloatFilter<"Orders"> | number
     amount_crypto?: FloatFilter<"Orders"> | number
-    wallet_customer?: StringFilter<"Orders"> | string
-    wallet_merchant?: StringFilter<"Orders"> | string
     estimated_duration?: StringFilter<"Orders"> | string
     txn_hash?: StringNullableFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableFilter<"Orders"> | $Enums.OrderMode | null
@@ -10870,8 +10836,6 @@ export namespace Prisma {
     id?: SortOrder
     amount_fiat?: SortOrder
     amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
     estimated_duration?: SortOrder
     txn_hash?: SortOrderInput | SortOrder
     mode?: SortOrderInput | SortOrder
@@ -10897,8 +10861,6 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Orders"> | number
     amount_fiat?: FloatWithAggregatesFilter<"Orders"> | number
     amount_crypto?: FloatWithAggregatesFilter<"Orders"> | number
-    wallet_customer?: StringWithAggregatesFilter<"Orders"> | string
-    wallet_merchant?: StringWithAggregatesFilter<"Orders"> | string
     estimated_duration?: StringWithAggregatesFilter<"Orders"> | string
     txn_hash?: StringNullableWithAggregatesFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableWithAggregatesFilter<"Orders"> | $Enums.OrderMode | null
@@ -11491,8 +11453,6 @@ export namespace Prisma {
   export type OrdersCreateInput = {
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -11510,8 +11470,6 @@ export namespace Prisma {
     id?: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -11528,8 +11486,6 @@ export namespace Prisma {
   export type OrdersUpdateInput = {
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -11547,8 +11503,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -11566,8 +11520,6 @@ export namespace Prisma {
     id?: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -11584,8 +11536,6 @@ export namespace Prisma {
   export type OrdersUpdateManyMutationInput = {
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -11601,8 +11551,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -12335,8 +12283,6 @@ export namespace Prisma {
     id?: SortOrder
     amount_fiat?: SortOrder
     amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
     estimated_duration?: SortOrder
     txn_hash?: SortOrder
     mode?: SortOrder
@@ -12362,8 +12308,6 @@ export namespace Prisma {
     id?: SortOrder
     amount_fiat?: SortOrder
     amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
     estimated_duration?: SortOrder
     txn_hash?: SortOrder
     mode?: SortOrder
@@ -12381,8 +12325,6 @@ export namespace Prisma {
     id?: SortOrder
     amount_fiat?: SortOrder
     amount_crypto?: SortOrder
-    wallet_customer?: SortOrder
-    wallet_merchant?: SortOrder
     estimated_duration?: SortOrder
     txn_hash?: SortOrder
     mode?: SortOrder
@@ -13463,8 +13405,6 @@ export namespace Prisma {
   export type OrdersCreateWithoutUserInput = {
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -13481,8 +13421,6 @@ export namespace Prisma {
     id?: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -13626,8 +13564,6 @@ export namespace Prisma {
     id?: IntFilter<"Orders"> | number
     amount_fiat?: FloatFilter<"Orders"> | number
     amount_crypto?: FloatFilter<"Orders"> | number
-    wallet_customer?: StringFilter<"Orders"> | string
-    wallet_merchant?: StringFilter<"Orders"> | string
     estimated_duration?: StringFilter<"Orders"> | string
     txn_hash?: StringNullableFilter<"Orders"> | string | null
     mode?: EnumOrderModeNullableFilter<"Orders"> | $Enums.OrderMode | null
@@ -13882,8 +13818,6 @@ export namespace Prisma {
   export type OrdersCreateWithoutBankInput = {
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -13900,8 +13834,6 @@ export namespace Prisma {
     id?: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -14375,8 +14307,6 @@ export namespace Prisma {
     id?: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -14469,8 +14399,6 @@ export namespace Prisma {
   export type OrdersUpdateWithoutUserInput = {
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -14487,8 +14415,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -14505,8 +14431,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -14564,8 +14488,6 @@ export namespace Prisma {
     id?: number
     amount_fiat: number
     amount_crypto: number
-    wallet_customer: string
-    wallet_merchant: string
     estimated_duration: string
     txn_hash?: string | null
     mode?: $Enums.OrderMode | null
@@ -14581,8 +14503,6 @@ export namespace Prisma {
   export type OrdersUpdateWithoutBankInput = {
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -14599,8 +14519,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
@@ -14617,8 +14535,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     amount_fiat?: FloatFieldUpdateOperationsInput | number
     amount_crypto?: FloatFieldUpdateOperationsInput | number
-    wallet_customer?: StringFieldUpdateOperationsInput | string
-    wallet_merchant?: StringFieldUpdateOperationsInput | string
     estimated_duration?: StringFieldUpdateOperationsInput | string
     txn_hash?: NullableStringFieldUpdateOperationsInput | string | null
     mode?: NullableEnumOrderModeFieldUpdateOperationsInput | $Enums.OrderMode | null
