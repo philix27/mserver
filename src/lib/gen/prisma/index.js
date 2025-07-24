@@ -358,7 +358,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://mobarter_user:mobarter_pass@localhost:5438/mobarter_db?schema=public"
+        "value": "postgresql://postgres:GBedLnFzFSCUPBeJWSznMgXeSlvmbgIU@nozomi.proxy.rlwy.net:11819/railway"
       }
     }
   },
