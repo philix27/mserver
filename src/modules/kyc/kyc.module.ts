@@ -5,7 +5,7 @@ import { NotificationModule } from '../notification/notification.module';
 import { NotificationService } from '../notification/notification.service';
 import { KycResolver } from './kyc.resolver';
 import { GqlAuthGuard } from '../common/guards';
-import { HelperService } from '../helper/helper.service';
+import { CryptoService } from '../helper/crypto.service';
 import { KycController } from './kyc.controller';
 import { SelfService } from './self.service';
 
@@ -17,7 +17,7 @@ import { SelfService } from './self.service';
         KycResolver,
         NotificationService,
         GqlAuthGuard,
-        HelperService,
+        CryptoService,
         SelfService,
     ],
     exports: [],

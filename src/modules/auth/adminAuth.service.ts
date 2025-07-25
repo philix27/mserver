@@ -1,17 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { LoggerService, PrismaService } from '../common';
 import {
-    Auth_CreateAccountInput,
-    Auth_CreateAccountResponse,
-    Auth_LoginInput,
+   
     Auth_LoginResponse,
     Auth_LogoutInput,
 } from './auth.dto';
 import { GqlErr } from '../common/errors/gqlErr';
-import { HelperService } from '../helper/helper.service';
 import { HpFn } from '../../lib';
 import { InputType, Field, ObjectType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
+import { CryptoService } from '../helper/crypto.service';
 
 @InputType()
 export class Admin_CreateAccountInput {
@@ -54,8 +52,8 @@ export class AdminAuthService {
     public constructor(
         private readonly logger: LoggerService,
         private readonly prisma: PrismaService,
-        private readonly jwtService: HelperService,
-    ) {}
+        private readonly jwtService: CryptoService,
+    ) { }
 
     public async createAccount(
         params: Admin_CreateAccountInput,
@@ -69,7 +67,7 @@ export class AdminAuthService {
         if (!HpFn.isValidPassword(params.password))
             throw GqlErr('Invalid password structure');
 
-        const hashedPassword = await this.jwtService.hashPassword(
+        const hashedPassword = await this.jwtService.hash(
             params.password,
         );
 
@@ -107,7 +105,7 @@ export class AdminAuthService {
             throw GqlErr('No password for this account');
         }
 
-        const isValid = await this.jwtService.verifyPassword(
+        const isValid = await this.jwtService.verify(
             params.password,
             user?.password!,
         );

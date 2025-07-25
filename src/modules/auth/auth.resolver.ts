@@ -24,11 +24,10 @@ import {
 import { UserDto } from "../user/user.dto";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "../common/guards";
-import { AuthFirebaseService } from "./firebase/firebase.service";
 
 @Resolver((of: any) => UserDto)
 export class AuthResolver {
-    constructor(private readonly service: AuthService,) {}
+    constructor(private readonly service: AuthService,) { }
 
     @Mutation((returns) => Auth_sendEmailOtpResponse)
     async auth_sendEmailOtp(

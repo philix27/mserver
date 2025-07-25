@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import admin from './firebase.admin';
 
 @Injectable()
-export class AuthFirebaseService {
+export class FirebaseAuthService {
   async verifyIdToken(idToken:string): Promise<IFirebaseAuthPayload> {
     try {
       const decodedToken = await admin.auth().verifyIdToken(idToken) as IFirebaseAuthPayload;

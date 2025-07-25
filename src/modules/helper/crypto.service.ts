@@ -13,13 +13,13 @@ export class CryptoService extends JwtAppService {
     }
 
     // Function to hash a password
-    public async hashPassword(password: string) {
-        const salt = await bcrypt.genSalt(this.saltRounds);
-        return await bcrypt.hash(password, salt);
+    public async hash(value: string, _saltRounds?: number) {
+        const salt = await bcrypt.genSalt(_saltRounds ?? this.saltRounds);
+        return await bcrypt.hash(value, salt);
     }
 
     // Function to compare a password with a hashed password
-    public async verifyPassword(password: string, hashedPassword: string) {
+    public async verify(password: string, hashedPassword: string) {
         return await bcrypt.compare(password, hashedPassword);
     }
 }

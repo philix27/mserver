@@ -3,15 +3,58 @@ import { LoggerService, PrismaService } from "../common";
 import { PrivyWalletService } from "./privy.service";
 import { ChainType } from "@prisma/client";
 import { GqlErr } from "../common/errors/gqlErr";
-import { WalletCryptoResponse } from "./crypto.dto";
+import { Wallet_CreateInput, Wallet_CreateResponse, WalletCryptoResponse } from "./wallet.dto";
+import { ICreateWallet, FirestoreService } from '../firebase/FbService';
+import { CryptoService } from "../helper/crypto.service";
+import { WalletGeneratorService } from './walletGenerator.service';
 
 @Injectable()
 export class WalletCryptoService {
     public constructor(
         private readonly logger: LoggerService,
         private readonly prisma: PrismaService,
-        private readonly privy: PrivyWalletService
-    ) {}
+        private readonly privy: PrivyWalletService,
+        private readonly crypto: CryptoService,
+        private readonly walletGen: WalletGeneratorService,
+        private readonly firestoreService: FirestoreService,
+    ) { }
+
+
+    async createWallet(params: Wallet_CreateInput & { userId: number }): Promise<Wallet_CreateResponse> {
+        try {
+            this.logger.info("Creating wallet for mobile app");
+
+            const salt_iterations = 12
+            const pin_hash = await this.crypto.hash(params.pin, salt_iterations);
+
+            const seedPhrase = this.walletGen.generateSeedPhrase();
+
+            const seedPhraseHash = await this.crypto.hash(seedPhrase, salt_iterations);
+
+            const answerHash = await this.crypto.hash(params.answer, salt_iterations);
+
+            const load = await this.walletGen.generateEthereumAddress(params.pin, params.answer);
+
+            const payload: ICreateWallet = {
+                address: load.walletAddress,
+                ecrypted_private_key: load.encryptedPrivateKey,
+                public_key: load.publicKey,
+                seed_phrase_hash: seedPhraseHash,
+                secret_question: params.question,
+                answer_hash: answerHash,
+                pin_hash,
+                salt_iterations,
+                ivBase64: load.ivBase64,
+                encryptedPin: load.encryptedPin
+            }
+
+            const result = await this.firestoreService.createWallet(params.user_uid, payload);
+
+            return { message: "Wallet created successfully" }
+        } catch (error) {
+            throw GqlErr("Could not create wallet for user: " + error);
+        }
+    }
 
     public async createWalletsForNewUser(params: {
         userId: number;
@@ -88,6 +131,7 @@ export class WalletCryptoService {
         });
         return cryptoWallets;
     }
+
 
     public async getWallets(params: {
         userId: number;

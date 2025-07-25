@@ -1,12 +1,17 @@
-import { Context, Mutation, Query, Resolver } from "@nestjs/graphql";
-import { WalletCryptoService } from "./crypto.service";
-import { WalletCryptoResponse } from "./crypto.dto";
+import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { WalletCryptoService } from "./wallet.service";
+import { Wallet_CreateInput, Wallet_CreateResponse, WalletCryptoResponse } from "./wallet.dto";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "../common/guards";
+import { WalletGeneratorService } from "./walletGenerator.service";
+
 
 @Resolver((of: any) => WalletCryptoResponse)
 export class WalletCryptoResolver {
-    constructor(private readonly service: WalletCryptoService) {}
+    constructor(
+        private readonly service: WalletCryptoService,
+        private readonly cryptoSvc: WalletGeneratorService
+    ) { }
 
     @Query((returns) => [WalletCryptoResponse])
     @UseGuards(GqlAuthGuard)
@@ -39,5 +44,26 @@ export class WalletCryptoResolver {
                 id: val.id,
             };
         });
+    }
+
+    // @Mutation((returns) => [WalletCryptoResponse])
+    // async walletCrypto_gen(
+    //     @Context() context: { req: { userId: string } }
+    // ): Promise<WalletCryptoResponse[]> {
+    //     await this.cryptoSvc.generateEthereumAddress("philix", "ockop");
+    //     return []
+    // }
+
+    @Mutation((returns) => Wallet_CreateResponse)
+    // @UseGuards(GqlAuthGuard)
+    async walletCrypto_mobileCreate(
+        @Args('input') input: Wallet_CreateInput,
+        @Context() context: { req: { userId: number } }
+    ): Promise<Wallet_CreateResponse> {
+        return await this.service.createWallet({
+            ...input,
+            userId: context.req.userId,
+        });
+
     }
 }

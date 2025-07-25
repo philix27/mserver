@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { $Enums } from "@prisma/client";
 
 @ObjectType()
@@ -29,3 +29,28 @@ export class WalletCryptoResponse {
 //     minipay: boolean | null;
 //     user_id: number | null;
 // }
+
+
+@InputType()
+export class Wallet_CreateInput {
+    @Field()
+    user_uid: string;
+
+    @Field()
+    question: string;
+
+    @Field()
+    answer: string;
+
+    @Field()
+    pin: string;
+
+}
+
+@ObjectType()
+export class Wallet_CreateResponse {
+    @Field()
+    message: string;
+
+}
+

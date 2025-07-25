@@ -24,11 +24,11 @@ import {
 } from './auth.dto';
 import { GqlErr } from '../common/errors/gqlErr';
 import { OtpPurpose } from '../common/enums';
-import { HelperService } from '../helper/helper.service';
-import { WalletCryptoService } from '../wallet-crypto/crypto.service';
 import { HpFn } from '../../lib';
 import { ThirdwebService } from './thirdweb.service';
-import { AuthFirebaseService } from './firebase/firebase.service';
+import { FirebaseAuthService } from '../firebase/firebase.service';
+import { WalletCryptoService } from '../wallet-crypto/wallet.service';
+import { CryptoService } from '../helper/crypto.service';
 
 @Injectable()
 export class AuthService {
@@ -37,9 +37,9 @@ export class AuthService {
         private readonly notification: NotificationService,
         private readonly prisma: PrismaService,
         private readonly walletCrypto: WalletCryptoService,
-        private readonly jwtService: HelperService,
+        private readonly cryptoService: CryptoService,
         private readonly thirdweb: ThirdwebService,
-        private readonly fbService: AuthFirebaseService
+        private readonly fbService: FirebaseAuthService
     ) { }
 
     public async sendEmailOtp(
@@ -55,11 +55,11 @@ export class AuthService {
                 throw GqlErr('Account already exist');
         }
 
-        const otp = this.jwtService.generateOTP();
+        const otp = this.cryptoService.generateOTP();
         this.logger.info('sendEmailOtp: ' + otp);
 
         try {
-            const token = this.jwtService.generateToken({ otp });
+            const token = this.cryptoService.generateToken({ otp });
             await this.notification.sendEmailOtp({ email: params.email, otp });
             // todo: return jwt token with otp
             return {
@@ -79,7 +79,7 @@ export class AuthService {
         params: Auth_verifyEmailOtpInput,
     ): Promise<Auth_verifyOtpResponse> {
         this.logger.info('VerifyEmailOtp: ');
-        const isValid = this.jwtService.verifyOTP(params.token, params.otp);
+        const isValid = this.cryptoService.verifyOTP(params.token, params.otp);
 
         if (!isValid) throw GqlErr('Invalid otp');
 
@@ -115,7 +115,7 @@ export class AuthService {
 
         if (!_user) throw GqlErr('User account not found');
 
-        const token = this.jwtService.generateToken({
+        const token = this.cryptoService.generateToken({
             userId: _user.id,
             email: cryptoWallet,
         });
@@ -173,7 +173,7 @@ export class AuthService {
             });
         }
 
-        const token = this.jwtService.generateToken({
+        const token = this.cryptoService.generateToken({
             userId: user!.id,
             email: user!.email,
         });
@@ -215,7 +215,7 @@ export class AuthService {
             });
         }
 
-        const token = this.jwtService.generateToken({
+        const token = this.cryptoService.generateToken({
             userId: user!.id,
             telegramId: user!.telegram_id,
         });
@@ -245,7 +245,7 @@ export class AuthService {
         if (await this.doesEmailExist(params.email))
             throw GqlErr('Account already exist');
 
-        const hashedPassword = await this.jwtService.hashPassword(
+        const hashedPassword = await this.cryptoService.hash(
             params.password,
         );
 
@@ -283,7 +283,7 @@ export class AuthService {
         if (!HpFn.isValidPassword(params.password))
             throw GqlErr('Invalid password structure');
 
-        const hashedPassword = await this.jwtService.hashPassword(
+        const hashedPassword = await this.cryptoService.hash(
             params.password,
         );
 
@@ -326,7 +326,7 @@ export class AuthService {
             throw GqlErr('No password for this account');
         }
 
-        const isValid = await this.jwtService.verifyPassword(
+        const isValid = await this.cryptoService.verify(
             params.password,
             user?.password!,
         );
@@ -336,7 +336,7 @@ export class AuthService {
             throw GqlErr('Invalid credentials');
         }
 
-        const token = this.jwtService.generateToken({
+        const token = this.cryptoService.generateToken({
             userId: user.id,
             email: user.email,
         });
@@ -404,7 +404,7 @@ export class AuthService {
             });
         }
 
-        const token = this.jwtService.generateToken({
+        const token = this.cryptoService.generateToken({
             userId: _user.id,
             email: _user.email,
         });
@@ -451,7 +451,7 @@ export class AuthService {
             });
         }
 
-        const token = this.jwtService.generateToken({
+        const token = this.cryptoService.generateToken({
             userId: _user.id,
             email: _user.email,
             googleId: payload.uid,

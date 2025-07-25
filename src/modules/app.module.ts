@@ -12,7 +12,7 @@ import { BankAccountModule } from './bankAccount/bankAccount.module';
 import { PassportModule } from '@nestjs/passport';
 import jwtConfig from './auth/jwt.config';
 import { CronModule } from './cron/cron.module';
-import { WalletCryptoModule } from './wallet-crypto/crypto.module';
+import { WalletCryptoModule } from './wallet-crypto/wallet.module';
 import { WalletFiatModule } from './wallet-fiat/fiat.module';
 import { KycModule } from "./kyc/kyc.module";
 import { ExchangeRateModule } from './rates/rates.module';

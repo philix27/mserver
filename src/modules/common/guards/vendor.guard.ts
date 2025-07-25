@@ -1,12 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
-import { HelperService } from "../../helper/helper.service";
+import { CryptoService } from "../../helper/crypto.service";
 import { GqlErr } from "../errors/gqlErr";
 
 
 @Injectable()
 export class VendorGuard implements CanActivate {
-    constructor(private readonly jwt: HelperService) {}
+    constructor(private readonly jwt: CryptoService) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const ctx = GqlExecutionContext.create(context);

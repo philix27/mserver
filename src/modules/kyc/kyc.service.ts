@@ -16,14 +16,15 @@ import {
 import { UserInput } from '../../lib';
 import { GqlErr } from '../common/errors/gqlErr';
 import { LoggerService, PrismaService } from '../common';
-import { HelperService } from '../helper/helper.service';
+import { CryptoService } from '../helper/crypto.service';
+// import { HelperService } from '../helper/helper.service';
 
 @Injectable()
 export class KycService {
     public constructor(
         private readonly logger: LoggerService,
         private readonly prisma: PrismaService,
-        private readonly jwtService: HelperService,
+        private readonly jwtService: CryptoService,
     ) {} // private readonly notification: NotificationService // private readonly logger: LoggerService
 
     public async sendPhoneOtp(params: Kyc_SendPhoneOtpInput & UserInput) {
@@ -39,7 +40,7 @@ export class KycService {
         params: Kyc_CreateTransactionPinInput & UserInput,
     ) {
         this.logger.info('KYC - Create transactions pin');
-        const hashedPin = await this.jwtService.hashPassword(params.pin);
+        const hashedPin = await this.jwtService.hash(params.pin);
 
         const res = await this.prisma.user.update({
             where: {
