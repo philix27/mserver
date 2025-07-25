@@ -6,6 +6,7 @@ import {
     Static_GetChainsResponse,
     Static_FundCollectorsResponse,
     Static_AppInfoResponse,
+    Static_SecretQuestionsResponse,
 } from './static.dto';
 import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
@@ -13,7 +14,7 @@ import { StaticService } from './static.service';
 
 @Resolver()
 export class StaticResolver {
-    constructor(private readonly service: StaticService) {}
+    constructor(private readonly service: StaticService) { }
 
     // @Query((returns) => [Static_GetLinkResponse])
     // @UseGuards(GqlAuthGuard)
@@ -62,7 +63,7 @@ export class StaticResolver {
 
         return res!;
     }
- 
+
     @Query((returns) => [Static_GetTokenResponse])
     @UseGuards(GqlAuthGuard)
     async static_getTokens(
@@ -92,6 +93,17 @@ export class StaticResolver {
         @Context() context: { req: { userId: number } },
     ): Promise<Static_FundCollectorsResponse> {
         const res = await this.service.getFundCollectors({
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+    @Query((returns) => [Static_SecretQuestionsResponse])
+    // @UseGuards(GqlAuthGuard)
+    async static_secretQuestions(
+        @Context() context: { req: { userId: number } },
+    ): Promise<Static_SecretQuestionsResponse[]> {
+        const res = await this.service.walletSecretQuestions({
             userId: context.req.userId,
         });
 

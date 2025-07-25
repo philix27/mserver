@@ -13,10 +13,6 @@ export class FirestoreService {
     }
 
     constructor() {
-        // const app = initializeApp(this.firebaseConfig);
-        // this.auth = getAuth(app);
-        // this.db = getFirestore(app);
-        // const ff = admin.firestore();
         this.db = admin.firestore();
     }
 

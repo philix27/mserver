@@ -19,7 +19,27 @@ export class Static_AppInfoResponse {
     androidAppUrl: string;
 
     @Field()
-    iosAppUrl: string; 
+    iosAppUrl: string;
+
+    @Field()
+    enableAirtime: boolean;
+
+    @Field()
+    enableDataPlan: boolean;
+
+    @Field()
+    enableTVBillPayment: boolean;
+
+    @Field()
+    enableBetting: boolean;
+
+    @Field()
+    enableElectricityBillPayment: boolean;
+}
+@ObjectType()
+export class Static_SecretQuestionsResponse {
+    @Field()
+    text: string;
 }
 
 @ObjectType()
@@ -40,7 +60,7 @@ export class Static_GetTokenResponse {
 
     @Field()
     priceUSD: number;
-    
+
     @Field()
     priceNGN: number;
 
