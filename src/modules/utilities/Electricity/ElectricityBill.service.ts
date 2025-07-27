@@ -23,7 +23,7 @@ export class ElectricityBillService {
     public constructor(
         private readonly logger: LoggerService,
         private readonly transaction: TransactionsService,
-    ) {}
+    ) { }
 
     headers = {
         headers: {
@@ -35,7 +35,7 @@ export class ElectricityBillService {
     public async getProviders(
         input: ElectricityBill_ProviderInput & UserInput,
     ): Promise<ElectricityBill_ProvidersResponse[]> {
-        this.logger.info('Get Electricity Billers');
+        this.logger.info('Get Electricity Bill Provider');
 
         if (input.countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
@@ -43,19 +43,27 @@ export class ElectricityBillService {
 
         const url = 'https://api.paybeta.ng/v2/electricity/providers';
 
-        const response = await axios.get(url, this.headers);
+        try {
 
-        const r = response.data as IElectricityBillProviders;
-        const list = r.data.map((item) => {
-            return item;
-        });
-        return list;
+            const response = await axios.get(url, this.headers);
+
+            const r = response.data as IElectricityBillProviders;
+            const list = r.data.map((item) => {
+                return item;
+            });
+
+            return list;
+        } catch (error) {
+            console.log("Error " + error)
+        }
+
+
     }
 
     public async verifyAccount(
         input: ElectricityBill_ValidateAccountInput & UserInput,
     ): Promise<ElectricityBill_ValidateAccountResponse> {
-        this.logger.info('Get Electricity Billers');
+        this.logger.info('Electricity Billers - Verify Account');
 
         if (input.countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
@@ -86,11 +94,12 @@ export class ElectricityBillService {
     public async makePayment(
         input: ElectricityBill_PaymentInput & UserInput,
     ): Promise<ElectricityBill_PaymentResponse> {
-        this.logger.info('Get Electricity Billers');
+        this.logger.info('Electricity Bill - Make payment');
         const { userId, countryCode, ...rest } = input;
         if (countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
         }
+        const transaction_hash = "hash from transfer"
 
         const url = 'https://api.paybeta.ng/v2/electricity/purchase';
 
@@ -112,7 +121,7 @@ export class ElectricityBillService {
             note: JSON.stringify({
                 ...rest,
             }),
-            transaction_hash: input.transaction_hash,
+            transaction_hash: transaction_hash,
         });
 
         return {

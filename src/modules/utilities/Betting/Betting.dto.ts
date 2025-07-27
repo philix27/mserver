@@ -1,5 +1,6 @@
 import { InputType, Field, Int, ObjectType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
+import { PaymentInput } from '../utilities.dto';
 
 @InputType()
 export class BettingPaymentInput {
@@ -12,8 +13,8 @@ export class BettingPaymentInput {
     @Field((type) => Int)
     amount: number;
 
-    @Field()
-    transaction_hash: string;
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
 
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;

@@ -24,7 +24,7 @@ export class TvBillService {
     public constructor(
         private readonly logger: LoggerService,
         private readonly transaction: TransactionsService,
-    ) {}
+    ) { }
 
     headers = {
         headers: {
@@ -87,7 +87,8 @@ export class TvBillService {
         input: TvBill_PaymentInput & UserInput,
     ): Promise<TvBill_PaymentResponse> {
         this.logger.info('Get Electricity Billers');
-        const { countryCode, txn_hash, ...payload } = input;
+        const { countryCode, ...payload } = input;
+        const transaction_hash = "hash from transfer"
 
         if (countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
@@ -115,9 +116,9 @@ export class TvBillService {
             fiat_currency: input.countryCode,
             note: JSON.stringify({
                 ...response.data,
-                hash: input.txn_hash,
+                hash: transaction_hash,
             }),
-            transaction_hash: input.txn_hash,
+            transaction_hash: transaction_hash,
         });
 
         return response.data;

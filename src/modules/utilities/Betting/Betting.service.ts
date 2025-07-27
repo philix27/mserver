@@ -18,7 +18,7 @@ export class FundBettingWalletService {
     public constructor(
         private readonly logger: LoggerService,
         private readonly transaction: TransactionsService,
-    ) {}
+    ) { }
 
     headers = {
         headers: {
@@ -50,6 +50,7 @@ export class FundBettingWalletService {
 
         // validate
         // Amount in NGN (min ₦100, max ₦100,000).
+        const transaction_hash = "hash from transfer"
 
         const url = 'https://ebills.africa/wp-json/api/v2/betting';
 
@@ -61,7 +62,7 @@ export class FundBettingWalletService {
                 // wallet provider
                 service_id: input.service_id,
                 // unique identifier
-                request_id: input.transaction_hash,
+                request_id: transaction_hash,
                 // amount in naira
                 amount: input.amount,
             },
@@ -75,13 +76,13 @@ export class FundBettingWalletService {
             status: 'COMPLETED',
             userId: input.userId,
             fiat_currency: input.countryCode,
+            transaction_hash: transaction_hash,
             note: JSON.stringify({
                 customer_id: input.customer_id,
                 service_id: input.service_id,
-                request_id: input.transaction_hash,
-                hash: input.transaction_hash,
+                request_id: transaction_hash,
+                hash: transaction_hash,
             }),
-            transaction_hash: input.transaction_hash,
         });
 
         return response.data;

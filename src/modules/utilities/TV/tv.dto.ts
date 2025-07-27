@@ -1,5 +1,6 @@
 import { Field, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
+import { PaymentInput } from '../utilities.dto';
 
 export interface IGetTVProvidersResponse {
     status: string;
@@ -117,8 +118,8 @@ export class TvBill_PaymentInput {
     @Field((type) => String)
     reference: string;
 
-    @Field((type) => String)
-    txn_hash: string;
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
 
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;

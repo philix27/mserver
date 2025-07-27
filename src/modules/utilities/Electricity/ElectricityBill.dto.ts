@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
+import { PaymentInput } from '../utilities.dto';
 
 export interface IElectricityBillProviders {
     status: string;
@@ -99,8 +100,8 @@ export class ElectricityBill_PaymentInput {
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;
 
-    @Field()
-    transaction_hash: string;
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
 }
 
 export interface IElectricityPaymentResponse {

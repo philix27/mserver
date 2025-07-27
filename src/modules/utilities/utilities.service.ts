@@ -47,6 +47,8 @@ export class UtilitiesService {
     ): Promise<Utilities_PurchaseTopUpResponse> {
         this.logger.info('Purchase Airtime');
 
+        const transaction_hash = "hash from transfer"
+
         try {
             const res = await this.reloadly.topUpAirtime({
                 amount: `${input.amount}.00`,
@@ -56,7 +58,7 @@ export class UtilitiesService {
                     number: input.phoneNo,
                 },
                 useLocalAmount: true,
-                customIdentifier: `userId:${input.userId}&txnHash:${input.transaction_hash}`,
+                customIdentifier: `userId:${input.userId}&txnHash:${transaction_hash}`,
             });
 
             await this.transaction.create({
@@ -67,11 +69,11 @@ export class UtilitiesService {
                 userId: input.userId,
                 fiat_currency: input.countryCode,
                 note: '',
-                transaction_hash: input.transaction_hash,
+                transaction_hash,
             });
 
             // this.logger.info('Custom Identifier ' + res.customIdentifier);
-            return { message: 'Successful' };
+            return { title: 'Successful', subtitle: "Airtime sent successfully" };
         } catch (error) {
             throw GqlErr("Could not send airtime")
         }
@@ -80,6 +82,7 @@ export class UtilitiesService {
         input: Utilities_PurchaseDataBundleInput & UserInput,
     ): Promise<Utilities_PurchaseTopUpResponse> {
         this.logger.info('Purchase Data bundle');
+        const transaction_hash = "hash from transfer"
 
         const res = await this.reloadly.topUpAirtime({
             amount: `${input.amount}.00`,
@@ -89,7 +92,7 @@ export class UtilitiesService {
                 number: input.phoneNo,
             },
             useLocalAmount: true,
-            customIdentifier: `userId:${input.userId}&txnHash:${input.transaction_hash}`,
+            customIdentifier: `userId:${input.userId}&txnHash:${transaction_hash}`,
         });
 
         await this.transaction.create({
@@ -100,11 +103,11 @@ export class UtilitiesService {
             userId: input.userId,
             fiat_currency: input.countryCode,
             note: '',
-            transaction_hash: input.transaction_hash,
+            transaction_hash
         });
 
         // this.logger.info(res.customIdentifier);
-        return { message: 'Successful' };
+        return { title: 'Successful', subtitle: "Data plan sent successully" };
     }
 
     public async getOperators(

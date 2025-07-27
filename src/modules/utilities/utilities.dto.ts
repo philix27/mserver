@@ -9,6 +9,16 @@ import {
 import { $Enums } from '@prisma/client';
 
 @InputType()
+export class PaymentInput {
+    @Field()
+    transaction_pin: string;
+
+    @Field()
+    user_uid: string;
+}
+
+
+@InputType()
 export class Utilities_PurchaseAirtimeInput {
     @Field({ nullable: false })
     phoneNo: string;
@@ -16,15 +26,18 @@ export class Utilities_PurchaseAirtimeInput {
     @Field((returns) => Float)
     amount: number;
 
-    @Field()
-    transaction_hash: string;
-
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;
 
     @Field((type) => Int)
     operatorId: number;
+
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
 }
+
+
+
 @InputType()
 export class Utilities_PurchaseDataBundleInput {
     @Field({ nullable: false })
@@ -33,8 +46,8 @@ export class Utilities_PurchaseDataBundleInput {
     @Field((returns) => Float)
     amount: number;
 
-    @Field()
-    transaction_hash: string;
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
 
     @Field((type) => $Enums.CountryCode)
     countryCode: $Enums.CountryCode;
@@ -98,7 +111,10 @@ export class Utilities_BillingResponse {
 @ObjectType()
 export class Utilities_PurchaseTopUpResponse {
     @Field({ nullable: false })
-    message: string;
+    title: string;
+
+    @Field({ nullable: false })
+    subtitle: string;
 }
 
 @ObjectType()
@@ -127,7 +143,7 @@ class IOperator {
     @Field((type) => [IDataPlan], { nullable: true })
     plans?: IDataPlan[];
 }
-      
+
 @ObjectType()
 class IAirtimeOperator {
     @Field((type) => String)

@@ -18,7 +18,6 @@ import { socialLinks } from './links/social';
 import { countriesDataList } from './links/country';
 import { allChains } from './links/chains';
 import { collectors } from './collectors';
-import { func } from 'joi';
 import { mobileAppInfo } from './mobileAppInfo';
 import { secretQuestionsList } from './secreteQuestions';
 
@@ -38,7 +37,6 @@ export class StaticService {
         input: UserInput,
     ): Promise<Static_GetChainsResponse[]> {
         this.logger.info('getChains');
-
         return allChains;
     }
 

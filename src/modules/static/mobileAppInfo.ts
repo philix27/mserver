@@ -7,7 +7,7 @@ export const mobileAppInfo: Static_AppInfoResponse = {
     iosAppUrl: 'https://apps.apple.com/app/id6443961864',
     enableAirtime: true,
     enableDataPlan: true,
-    enableTVBillPayment: false,
+    enableTVBillPayment: true,
     enableBetting: false,
-    enableElectricityBillPayment: false
+    enableElectricityBillPayment: true
 }
