@@ -11,6 +11,7 @@ import {
 import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
 import { StaticService } from './static.service';
+import { Static_MiniAppsResponse } from './miniApps';
 
 @Resolver()
 export class StaticResolver {
@@ -104,6 +105,18 @@ export class StaticResolver {
         @Context() context: { req: { userId: number } },
     ): Promise<Static_SecretQuestionsResponse[]> {
         const res = await this.service.walletSecretQuestions({
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Query((returns) => [Static_MiniAppsResponse])
+    // @UseGuards(GqlAuthGuard)
+    async static_miniApps(
+        @Context() context: { req: { userId: number } },
+    ): Promise<Static_MiniAppsResponse[]> {
+        const res = await this.service.miniApps({
             userId: context.req.userId,
         });
 

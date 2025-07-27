@@ -20,6 +20,7 @@ import { allChains } from './links/chains';
 import { collectors } from './collectors';
 import { mobileAppInfo } from './mobileAppInfo';
 import { secretQuestionsList } from './secreteQuestions';
+import { miniAppsList, Static_MiniAppsResponse } from './miniApps';
 
 @Injectable()
 export class StaticService {
@@ -94,6 +95,14 @@ export class StaticService {
         this.logger.info('get secret questions');
 
         return secretQuestionsList.map((val) => { return { text: val } })
+    }
+
+    public async miniApps(
+        input: UserInput,
+    ): Promise<Static_MiniAppsResponse[]> {
+        this.logger.info('fetch mini apps');
+
+        return miniAppsList
     }
 }
 

@@ -42,6 +42,7 @@ export class Static_SecretQuestionsResponse {
     text: string;
 }
 
+
 @ObjectType()
 export class Static_GetTokenResponse {
     id: string;
