@@ -5,13 +5,13 @@ import {
     Static_GetCountries,
     Static_GetChainsResponse,
     Static_FundCollectorsResponse,
-    Static_AppInfoResponse,
     Static_SecretQuestionsResponse,
 } from './static.dto';
 import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
 import { StaticService } from './static.service';
 import { Static_MiniAppsResponse } from './miniApps';
+import { Static_AppInfoResponse } from './mobileAppInfo';
 
 @Resolver()
 export class StaticResolver {

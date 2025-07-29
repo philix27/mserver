@@ -3,7 +3,6 @@ import { UserInput } from 'src/lib';
 import {
     LinkGroup,
     Static_FundCollectorsResponse,
-    Static_AppInfoResponse,
     Static_GetChainsResponse,
     Static_GetCountries,
     Static_GetLinkResponse,
@@ -18,7 +17,7 @@ import { socialLinks } from './links/social';
 import { countriesDataList } from './links/country';
 import { allChains } from './links/chains';
 import { collectors } from './collectors';
-import { mobileAppInfo } from './mobileAppInfo';
+import { mobileAppInfo, Static_AppInfoResponse } from './mobileAppInfo';
 import { secretQuestionsList } from './secreteQuestions';
 import { miniAppsList, Static_MiniAppsResponse } from './miniApps';
 

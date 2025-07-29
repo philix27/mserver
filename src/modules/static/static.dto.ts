@@ -8,35 +8,6 @@ import {
 import { $Enums } from '@prisma/client';
 
 @ObjectType()
-export class Static_AppInfoResponse {
-    @Field()
-    minBuild: number;
-
-    @Field()
-    deployedBuild: number;
-
-    @Field()
-    androidAppUrl: string;
-
-    @Field()
-    iosAppUrl: string;
-
-    @Field()
-    enableAirtime: boolean;
-
-    @Field()
-    enableDataPlan: boolean;
-
-    @Field()
-    enableTVBillPayment: boolean;
-
-    @Field()
-    enableBetting: boolean;
-
-    @Field()
-    enableElectricityBillPayment: boolean;
-}
-@ObjectType()
 export class Static_SecretQuestionsResponse {
     @Field()
     text: string;
