@@ -1,0 +1,36 @@
+import { ethers, parseEther } from "ethers";
+import { Address, erc20Abi } from "viem";
+import { Injectable, } from "@nestjs/common";
+
+
+@Injectable()
+export class Erc20Service {
+    contract: ethers.Contract = undefined
+
+    constructor(private readonly wallet: ethers.Wallet, private readonly contractAddress: Address) {
+        this.contract = new ethers.Contract(this.contractAddress, erc20Abi, this.wallet);
+    }
+
+    async approve(amount: number): Promise<string> {
+        const txn = await this.contract.approve(this.contractAddress, parseEther(amount.toString()))
+        const receipt = await txn.wait();
+        return receipt.transactionHash
+    }
+
+    async transfer(to: Address, amount: number): Promise<string> {
+        const txn = await this.contract.transfer(to, parseEther(amount.toString()))
+        const receipt = await txn.wait();
+        return receipt.transactionHash
+    }
+
+    async transferFrom(to: Address, from: Address, amount: number): Promise<string> {
+        const txn = await this.contract.transfer(from, to, parseEther(amount.toString()))
+        const receipt = await txn.wait();
+        return receipt.transactionHash
+    }
+
+    async balanceOf(address: Address, amount: number): Promise<string> {
+        const balance = await this.contract.balanceOf(address,)
+        return balance
+    }
+}

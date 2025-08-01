@@ -17,6 +17,7 @@ import {
     IElectricityPaymentResponse,
     IElectricityValidateAccountResponse,
 } from './ElectricityBill.dto';
+import { electricityProviders } from './providersData';
 
 @Injectable()
 export class ElectricityBillService {
@@ -41,13 +42,14 @@ export class ElectricityBillService {
             throw GqlErr('No provider for this country');
         }
 
-        const url = 'https://api.paybeta.ng/v2/electricity/providers';
+        // const url = 'https://api.paybeta.ng/v2/electricity/providers';
 
         try {
 
-            const response = await axios.get(url, this.headers);
-
-            const r = response.data as IElectricityBillProviders;
+            // const response = await axios.get(url, this.headers);
+            // console.log("Electricity Providers: ", response)
+            // const r = response.data as IElectricityBillProviders;
+            const r = electricityProviders;
             const list = r.data.map((item) => {
                 return item;
             });

@@ -15,6 +15,18 @@ export class PaymentInput {
 
     @Field()
     user_uid: string;
+
+    @Field({ nullable: true })
+    isNative?: boolean;
+
+    @Field()
+    tokenAddress: string;
+
+    @Field()
+    tokenChain: string;
+
+    @Field((returns) => Float)
+    amount: number;
 }
 
 
