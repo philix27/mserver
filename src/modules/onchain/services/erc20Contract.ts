@@ -11,8 +11,8 @@ export class Erc20Service {
         this.contract = new ethers.Contract(this.contractAddress, erc20Abi, this.wallet);
     }
 
-    async approve(amount: number): Promise<string> {
-        const txn = await this.contract.approve(this.contractAddress, parseEther(amount.toString()))
+    async approve(amount: bigint, contractToApprove: Address): Promise<string> {
+        const txn = await this.contract.approve(contractToApprove, parseEther(amount.toString()))
         const receipt = await txn.wait();
         return receipt.transactionHash
     }

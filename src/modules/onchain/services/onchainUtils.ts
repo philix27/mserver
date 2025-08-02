@@ -7,6 +7,12 @@ export enum Chains { celo, base }
 @Injectable()
 export class OnchainUtilsService {
 
+    wallet: ethers.Wallet
+    constructor(private privateKey: string) {
+        this.wallet = this.getWallet()
+    }
+
+
     private getRpcUrl(chain?: Chains) {
         switch (chain) {
             case Chains.celo: {
@@ -25,6 +31,11 @@ export class OnchainUtilsService {
 
     getProvider(chain?: Chains) {
         return new ethers.JsonRpcProvider(this.getRpcUrl(chain));
+    }
+
+    getWallet() {
+        const provider = this.getProvider();
+        return new ethers.Wallet(this.privateKey, provider);
     }
 
 }
