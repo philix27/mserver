@@ -17,8 +17,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
         {
             provide: OnchainUtilsService,
             useFactory: () => {
-                // return new OnchainUtilsService(PRIVATE_KEY);
-                return new OnchainUtilsService("ec2eb3a4a7a2c8694c7566e1aeacfd9d6e6a2face0c8a3c99c6ec40be351f1f4");
+                return new OnchainUtilsService(PRIVATE_KEY);
             },
         },
     ],
