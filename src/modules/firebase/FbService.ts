@@ -4,7 +4,6 @@ import admin from "./firebase.admin";
 @Injectable()
 export class FirestoreService {
 
-
     // private auth: Auth | undefined = undefined
     private db: admin.firestore.Firestore | undefined = undefined
 
@@ -19,10 +18,10 @@ export class FirestoreService {
     async getUserWallet(userId: string) {
         const doc = await this.db.collection(this.cols.wallet).doc(userId).get();
         if (!doc.exists) return null;
-        return { id: doc.id, ...doc.data() };
+        return { id: doc.id, ...doc.data() } as { id: string } & IWallet;
     }
 
-    async createWallet(userId: string, payload: ICreateWallet) {
+    async createWallet(userId: string, payload: IWallet) {
         const doc = await this.db.collection(this.cols.wallet).doc(userId).get();
         if (doc.exists) {
             throw Error("User already have a wallet");
@@ -34,7 +33,7 @@ export class FirestoreService {
     }
 }
 
-export interface ICreateWallet {
+export interface IWallet {
     address: string;
     ecrypted_private_key: string;
     public_key: string;

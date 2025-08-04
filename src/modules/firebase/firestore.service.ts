@@ -4,7 +4,7 @@ import admin from './firebase.admin';
 
 
 @Injectable()
-export class FirestoreService {
+export class FirestoreServiceX {
     private db: FirebaseFirestore.Firestore;
 
     constructor() {

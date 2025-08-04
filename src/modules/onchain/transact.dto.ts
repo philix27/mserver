@@ -1,20 +1,21 @@
-import { Field, Float, ID, InputType, Int, ObjectType,  } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int, ObjectType, } from "@nestjs/graphql";
 import { $Enums } from "@prisma/client";
+import { PaymentInput } from "../utilities/utilities.dto";
 
 @ObjectType()
-export class TransactionDto  {
-     @Field((type) => ID)
+export class TransactionDto {
+    @Field((type) => ID)
     id: number;
 
     @Field((type) => Float)
     amount: number;
-    
+
     @Field((type) => $Enums.TransactionCategory)
     category: $Enums.TransactionCategory;
-    
+
     @Field((type) => $Enums.TransactionsMode)
     mode: $Enums.TransactionsMode
-    
+
     @Field((type) => $Enums.TransactionStatus)
     status: $Enums.TransactionStatus;
 
@@ -24,34 +25,23 @@ export class TransactionDto  {
 }
 
 @InputType()
-export class Transaction_GetAllInput {
-    @Field((type) => $Enums.TransactionStatus, { nullable: true })
-    status?: $Enums.TransactionStatus;
+export class Onchain_ClaimRewardsInput {
+    @Field()
+    tokenAddress: string;
+
+    @Field()
+    uid: string;
+
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
 }
 
 
 @ObjectType()
-export class Transaction_GetResponse  {
-    @Field((type) => ID)
-    id: number;
-
-    @Field((type) => Float)
-    amount: number;
-
-    @Field((type) => String, {nullable: true})
-    transaction_hash: string;
-    
-    @Field((type) => $Enums.TransactionCategory)
-    category: $Enums.TransactionCategory;
-    
-    @Field((type) => $Enums.TransactionsMode)
-    mode: $Enums.TransactionsMode
-    
-    @Field((type) => $Enums.TransactionStatus)
-    status: $Enums.TransactionStatus;
+export class Onchain_ClaimRewardsResponse {
 
     @Field()
-    note: string;
+    message: string;
 
 }
 

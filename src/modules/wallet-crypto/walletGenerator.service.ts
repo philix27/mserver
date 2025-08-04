@@ -80,7 +80,7 @@ export class WalletGeneratorService {
         return encrypted.toString('base64');
     }
 
-    private decrypt(encryptedBase64: string, ivBase64: string, password: string): string {
+    public decrypt(encryptedBase64: string, ivBase64: string, password: string): string {
         const key = crypto.createHash('sha256').update(password).digest();
         const iv = Buffer.from(ivBase64, 'base64');
         const encryptedData = Buffer.from(encryptedBase64, 'base64');

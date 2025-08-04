@@ -2,6 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { LoggerService } from '../common';
 import { ExchangeRateService } from '../rates/rates.service';
+import { RewardsService } from '../onchain/services/rewards';
+import { OnchainUtilsService, SupportedChains } from '../onchain/services/onchainUtils';
+
+const baseUSDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+
+
 
 @Injectable()
 export class CronService {
@@ -26,6 +32,15 @@ export class CronService {
     async getElectricityProviders() {
         this.logger.info('Running a daily task at midnight');
     }
+
+    // @Cron(CronExpression.EVERY_MINUTE)
+    // async claim2() {
+    //     this.logger.info('Claim Rewards');
+    //     const rewards = new RewardsService(new OnchainUtilsService(process.env.PRIVATE_KEY, SupportedChains.base));
+    //     await rewards.claim({
+    //         tokenAddress: baseUSDC,
+    //     });
+
 
     //  // Runs at every 10 seconds
     // @Cron("*/10 * * * * *")

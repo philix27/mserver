@@ -1,9 +1,9 @@
-import { Args, Context, Query, Resolver } from "@nestjs/graphql";
+import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { OnchainTransactionsService } from "./onchain.service";
 import {
+    Onchain_ClaimRewardsInput,
+    Onchain_ClaimRewardsResponse,
     TransactionDto,
-    Transaction_GetOneInput,
-    Transaction_GetResponse,
 } from "./transact.dto";
 import { UseGuards } from "@nestjs/common";
 import { VendorGuard } from "../common/guards";
@@ -13,27 +13,13 @@ import { VendorGuard } from "../common/guards";
 export class OnchainTransactionsResolver {
     constructor(private readonly service: OnchainTransactionsService) { }
 
-    @Query((returns) => [Transaction_GetResponse])
+    @Mutation((returns) => Onchain_ClaimRewardsResponse)
     @UseGuards(VendorGuard)
-    async transactions_getAll(
-        @Context() context: { req: { userId: number } }
-        // @Args("input") input: Advert_GetAllInput
-    ): Promise<Transaction_GetResponse[]> {
-        const res = await this.service.getAll({
-            userId: context.req.userId,
-        });
-
-        return res!;
-    }
-
-
-    @Query((returns) => Transaction_GetResponse)
-    @UseGuards(VendorGuard)
-    async transactions_getOne(
+    async onchain_claim(
         @Context() context: { req: { userId: number } },
-        @Args("input") input: Transaction_GetOneInput
-    ): Promise<Transaction_GetResponse> {
-        const res = await this.service.getOne({
+        @Args("input") input: Onchain_ClaimRewardsInput
+    ): Promise<Onchain_ClaimRewardsResponse> {
+        const res = await this.service.claim({
             ...input,
             userId: context.req.userId,
         });

@@ -4,7 +4,7 @@ import { PrivyWalletService } from "./privy.service";
 import { ChainType } from "@prisma/client";
 import { GqlErr } from "../common/errors/gqlErr";
 import { Wallet_CreateInput, Wallet_CreateResponse, WalletCryptoResponse } from "./wallet.dto";
-import { ICreateWallet, FirestoreService } from '../firebase/FbService';
+import { IWallet, FirestoreService } from '../firebase/FbService';
 import { CryptoService } from "../helper/crypto.service";
 import { WalletGeneratorService } from './walletGenerator.service';
 
@@ -35,7 +35,7 @@ export class WalletCryptoService {
 
             const load = await this.walletGen.generateEthereumAddress(params.pin, params.answer);
 
-            const payload: ICreateWallet = {
+            const payload: IWallet = {
                 address: load.walletAddress,
                 ecrypted_private_key: load.encryptedPrivateKey,
                 public_key: load.publicKey,

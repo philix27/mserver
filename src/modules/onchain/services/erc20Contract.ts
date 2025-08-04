@@ -29,8 +29,9 @@ export class Erc20Service {
         return receipt.transactionHash
     }
 
-    async balanceOf(address: Address, amount: number): Promise<string> {
-        const balance = await this.contract.balanceOf(address,)
+    async balanceOf(address: Address): Promise<string> {
+        const balance = await this.contract.balanceOf(address)
+        console.log("Wallet Balance:", balance)
         return balance
     }
 }

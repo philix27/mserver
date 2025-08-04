@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { CommonModule } from "../common";
 import { TxnManagerService } from "./services/txManager";
 import { TxnManagerController } from "./utils/controller";
-import { OnchainUtilsService } from "./services/onchainUtils";
+import { OnchainUtilsService, SupportedChains } from "./services/onchainUtils";
 import { RewardsService } from "./services/rewards";
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY
@@ -17,7 +17,8 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY
         {
             provide: OnchainUtilsService,
             useFactory: () => {
-                return new OnchainUtilsService(PRIVATE_KEY);
+                return new OnchainUtilsService(PRIVATE_KEY, SupportedChains.base);
+
             },
         },
     ],

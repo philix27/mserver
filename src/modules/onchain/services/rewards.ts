@@ -1,8 +1,7 @@
 import { ethers, parseEther, } from "ethers";
-import { celoContracts } from "../utils/const";
 import { Address } from "viem";
 import { Injectable, } from "@nestjs/common";
-import { OnchainUtilsService } from "./onchainUtils";
+import { OnchainUtilsService, SupportedChains } from "./onchainUtils";
 import { rewardAbi } from "../abi/rewards";
 import { Erc20Service } from "./erc20Contract";
 
@@ -12,7 +11,7 @@ export class RewardsService {
     constructor(private readonly utils: OnchainUtilsService) { }
 
     contract(signer: ethers.Wallet) {
-        return new ethers.Contract(celoContracts.rewards, rewardAbi, signer);
+        return new ethers.Contract(this.utils.getContractAddress().rewards, rewardAbi, signer);
     }
 
     async claim(payload: { tokenAddress: Address, }): Promise<string> {
@@ -84,18 +83,23 @@ export class RewardsService {
     }
     async depositTokens(payload: { tokenAddress: Address, amount: number }): Promise<string> {
         const amt = parseEther(payload.amount.toString())
+        const contractAddr = this.utils.getContractAddress().rewards
         try {
             const erc20 = new Erc20Service(this.utils.wallet, payload.tokenAddress)
-            console.log("Before Approve");
-            await erc20.approve(amt, celoContracts.rewards as Address)
+            console.log("Initiating Wallet: " + this.utils.wallet.address);
+            console.log("Before Approve: " + contractAddr);
+
+            await erc20.balanceOf(this.utils.wallet.address as Address);
+
+            await erc20.approve(amt, contractAddr as Address)
 
             console.log("Before Contract deposit");
             // const tx = await this.contract(this.utils.wallet).depositTokens(payload.tokenAddress, parseEther(payload.amount.toString()));
             const contract = this.contract(this.utils.wallet)
 
             console.log("Before deposit");
-            const tx = await contract.depositTokens(payload.tokenAddress, amt);
-            // const tx = await contract.depositTokens(payload.tokenAddress, parseEther(payload.amount.toString()));
+            // const tx = await contract.depositTokens(payload.tokenAddress, amt);
+            const tx = await contract.depositTokens(payload.tokenAddress, parseEther("0.1"));
 
             console.log("Transaction sent:", tx.hash);
 

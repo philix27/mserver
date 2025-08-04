@@ -1,41 +1,48 @@
 import { ethers, } from "ethers";
-import { celo } from "viem/chains";
+import { base, celo } from "viem/chains";
 import { Injectable, } from "@nestjs/common";
+import { baseContracts, celoContracts } from "../utils/const";
 
-export enum Chains { celo, base }
+export enum SupportedChains { celo, base }
 
 @Injectable()
 export class OnchainUtilsService {
 
     wallet: ethers.Wallet
-    constructor(private privateKey: string) {
+    constructor(private privateKey: string, private chain: SupportedChains) {
         this.wallet = this.getWallet()
     }
 
 
-    private getRpcUrl(chain?: Chains) {
-        switch (chain) {
-            case Chains.celo: {
-                return "https://forno.celo.org"
+    private getProvider() {
+        switch (this.chain) {
+            case SupportedChains.celo: {
+                return new ethers.JsonRpcProvider(celo.rpcUrls.default.http[0]);
             }
-
-            case Chains.base: {
-                return "https://forno.celo.org"
+            case SupportedChains.base: {
+                return new ethers.JsonRpcProvider(base.rpcUrls.default.http[0]);
             }
-
             default:
-                return "https://forno.celo.org"
+                return new ethers.JsonRpcProvider(celo.rpcUrls.default.http[0]);
         }
-
     }
 
-    getProvider(chain?: Chains) {
-        return new ethers.JsonRpcProvider(this.getRpcUrl(chain));
-    }
-
-    getWallet() {
+    private getWallet() {
         const provider = this.getProvider();
         return new ethers.Wallet(this.privateKey, provider);
+    }
+
+    public getContractAddress() {
+        switch (this.chain) {
+            case SupportedChains.celo: {
+                return celoContracts;
+            }
+            case SupportedChains.base: {
+                return baseContracts
+            }
+            default:
+                return celoContracts;
+        }
     }
 
 }

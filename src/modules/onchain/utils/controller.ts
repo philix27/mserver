@@ -6,8 +6,8 @@ const usdtContractAddress = "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
 const cusdContractAddress = "0x765DE816845861e75A25fCA122bb6898B8B1282a"
 const ngnContractAddress = "0xE2702Bd97ee33c88c8f6f92DA3B733608aa76F71"
 
-
-@Controller('manager')
+const baseUSDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+@Controller('onchain')
 export class TxnManagerController {
     public constructor(private readonly svc: TxnManagerService, private readonly rewards: RewardsService,) { }
 
@@ -24,17 +24,26 @@ export class TxnManagerController {
 
     @Get("deposit")
     async deposit() {
-        // await this.svc.pay(PRIVATE_KEY, {
-        //     tokenAddress: usdtContractAddress,
-        //     amount: 1,
-        //     txName: "airtime",
-        //     info: "airtime_test"
-        // })
 
         const hash = await this.rewards.depositTokens({
             tokenAddress: ngnContractAddress,
             amount: 100
         })
         console.log("Deposit Successful")
+    }
+
+    @Post("deposit-base")
+    async depositBase() {
+        await this.rewards.depositTokens({
+            tokenAddress: baseUSDC,
+            amount: 2
+        })
+    }
+
+    @Post("claim")
+    async claim() {
+        await this.rewards.claim({
+            tokenAddress: baseUSDC,
+        })
     }
 }
