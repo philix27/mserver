@@ -26,7 +26,7 @@ import { GqlErr } from '../common/errors/gqlErr';
 import { OtpPurpose } from '../common/enums';
 import { HpFn } from '../../lib';
 import { ThirdwebService } from './thirdweb.service';
-import { FirebaseAuthService } from '../firebase/firebase.service';
+import { FirebaseAuthService } from '../firebase/fbAuth.service';
 import { WalletCryptoService } from '../wallet-crypto/wallet.service';
 import { CryptoService } from '../helper/crypto.service';
 

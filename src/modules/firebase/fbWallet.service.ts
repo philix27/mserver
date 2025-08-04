@@ -1,33 +1,27 @@
 import { Injectable } from "@nestjs/common";
-import admin from "./firebase.admin";
+import { FirebaseAdminService } from "./fbAdmin.service";
 
 @Injectable()
-export class FirestoreService {
-
-    // private auth: Auth | undefined = undefined
-    private db: admin.firestore.Firestore | undefined = undefined
+export class FirestoreWalletService {
+    constructor(private readonly admin: FirebaseAdminService) { }
 
     cols = {
         wallet: "wallets"
     }
 
-    constructor() {
-        this.db = admin.firestore();
-    }
-
     async getUserWallet(userId: string) {
-        const doc = await this.db.collection(this.cols.wallet).doc(userId).get();
+        const doc = await this.admin.getApp().firestore().collection(this.cols.wallet).doc(userId).get();
         if (!doc.exists) return null;
         return { id: doc.id, ...doc.data() } as { id: string } & IWallet;
     }
 
     async createWallet(userId: string, payload: IWallet) {
-        const doc = await this.db.collection(this.cols.wallet).doc(userId).get();
+        const doc = await this.admin.getApp().firestore().collection(this.cols.wallet).doc(userId).get();
         if (doc.exists) {
             throw Error("User already have a wallet");
         }
 
-        const docRef = await this.db.collection(this.cols.wallet).doc(userId).set(payload);
+        const docRef = await this.admin.getApp().firestore().collection(this.cols.wallet).doc(userId).set(payload);
         // const docRef = await this.db.collection(this.cols.wallet).add(payload);
         return { id: userId };
     }

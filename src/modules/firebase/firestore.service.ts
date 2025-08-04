@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 // import * as admin from 'firebase-admin';
-import admin from './firebase.admin';
+import { FirebaseAdminService } from './fbAdmin.service';
 
 
 @Injectable()
 export class FirestoreServiceX {
+    constructor(private readonly admin: FirebaseAdminService) {
+        this.db = admin.getApp().firestore();
+    }
+
     private db: FirebaseFirestore.Firestore;
 
-    constructor() {
-        this.db = admin.firestore();
-    }
 
     // CREATE
     async createDoc(collection: string, data: any) {

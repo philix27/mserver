@@ -7,7 +7,7 @@ import {
 import { UserInput } from '../../lib';
 import { RewardsService } from './services/rewards';
 import { OnchainUtilsService, SupportedChains } from './services/onchainUtils';
-import { FirestoreService } from '../firebase/FbService';
+import { FirestoreWalletService } from '../firebase/fbWallet.service';
 import { WalletGeneratorService } from '../wallet-crypto/walletGenerator.service';
 import { Address } from 'viem';
 
@@ -15,7 +15,7 @@ import { Address } from 'viem';
 export class OnchainTransactionsService {
     public constructor(
         private readonly logger: LoggerService,
-        private readonly fb: FirestoreService,
+        private readonly fb: FirestoreWalletService,
         private readonly walletCrypto: WalletGeneratorService,
 
     ) { }

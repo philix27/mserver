@@ -4,7 +4,7 @@ import { PrivyWalletService } from "./privy.service";
 import { ChainType } from "@prisma/client";
 import { GqlErr } from "../common/errors/gqlErr";
 import { Wallet_CreateInput, Wallet_CreateResponse, WalletCryptoResponse } from "./wallet.dto";
-import { IWallet, FirestoreService } from '../firebase/FbService';
+import { IWallet, FirestoreWalletService } from '../firebase/fbWallet.service';
 import { CryptoService } from "../helper/crypto.service";
 import { WalletGeneratorService } from './walletGenerator.service';
 
@@ -16,7 +16,7 @@ export class WalletCryptoService {
         private readonly privy: PrivyWalletService,
         private readonly crypto: CryptoService,
         private readonly walletGen: WalletGeneratorService,
-        private readonly firestoreService: FirestoreService,
+        private readonly firestoreService: FirestoreWalletService,
     ) { }
 
 

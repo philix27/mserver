@@ -22,6 +22,7 @@ import { TransactionsModule } from './transactions/transact.module';
 import { HelpersModule } from './helper/helper.module';
 import { StaticModule } from './static/static.module';
 import { OnchainTransactionsModule } from './onchain/onchain.module';
+import { FirebaseModule } from './firebase/firebase.module';
 // import { CryptoModule } from "./crypto/crypto.module";
 // import { TelegramModule } from "./telegram/telegram.module";
 
@@ -62,7 +63,8 @@ import { OnchainTransactionsModule } from './onchain/onchain.module';
         UtilitiesModule,
         TransactionsModule,
         StaticModule,
-        OnchainTransactionsModule
+        OnchainTransactionsModule,
+        FirebaseModule
         // PubSubModule,
         // CryptoModule,
     ],

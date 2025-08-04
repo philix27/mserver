@@ -15,11 +15,10 @@ import { ConfigModule } from "@nestjs/config";
 import { HelpersModule } from "../helper/helper.module";
 import { AuthController } from "./auth.controller";
 import { ThirdwebService } from "./thirdweb.service";
-import { FirebaseAuthService } from "../firebase/firebase.service";
 import { WalletCryptoService } from "../wallet-crypto/wallet.service";
 import { CryptoService } from "../helper/crypto.service";
 import { WalletGeneratorService } from "../wallet-crypto/walletGenerator.service";
-import { FirestoreService } from "../firebase/FbService";
+import { FirebaseModule } from "../firebase/firebase.module";
 
 @Module({
     imports: [
@@ -29,6 +28,7 @@ import { FirestoreService } from "../firebase/FbService";
         HelpersModule,
         JwtModule.registerAsync(jwtConfig.asProvider()),
         ConfigModule.forFeature(jwtConfig),
+        FirebaseModule
     ],
     providers: [
         AuthService,
@@ -41,8 +41,9 @@ import { FirestoreService } from "../firebase/FbService";
         PrivyWalletService,
         JwtStrategy,
         ThirdwebService,
-        FirebaseAuthService,
-        WalletGeneratorService, FirestoreService
+        WalletGeneratorService, 
+        // FirebaseAuthService,
+        // FirestoreWalletService
     ],
     controllers: [AuthController],
     // exports: [JwtStrategy, GqlAuthGuard],
