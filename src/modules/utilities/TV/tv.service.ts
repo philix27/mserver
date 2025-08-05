@@ -18,6 +18,7 @@ import {
     TvBill_ValidateAccountInput,
     TvBill_ValidateAccountResponse,
 } from './tv.dto';
+import { tvProviders } from './providersData';
 
 @Injectable()
 export class TvBillService {
@@ -43,12 +44,13 @@ export class TvBillService {
             throw GqlErr('No provider for this country');
         }
 
-        const url = this.baseUrl.concat('providers');
+        // const url = this.baseUrl.concat('providers');
 
-        const response = await axios.get(url, this.headers);
-        const r = response.data as IGetTVProvidersResponse;
-        console.log('Data TV', r.data);
-        return r.data;
+        // const response = await axios.get(url, this.headers);
+        // const r = response.data as IGetTVProvidersResponse;
+        // console.log('Data TV', r.data);
+        const r = tvProviders as TvBill_GetTVProvidersResponse[];
+        return r;
     }
 
     public async getBouquet(
@@ -63,6 +65,7 @@ export class TvBillService {
         const url = this.baseUrl.concat(`bouquet?service=${input.service}`);
 
         const response = await axios.get(url, this.headers);
+        console.log("TV Bouquet", response.data.packages)
         const r = response.data as IGetBouquetResponse;
         return r.data.packages;
     }

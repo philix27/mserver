@@ -24,4 +24,5 @@ export interface Config {
     readonly JWT_TELEGRAM_PUBLIC: string;
     readonly SELF_APP_SCOPE: string;
     readonly SELF_API_ENDPOINT: string;
+    readonly RESEND_API_KEY: string;
 }

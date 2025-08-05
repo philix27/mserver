@@ -27,8 +27,8 @@ export class TvBill_GetTVProvidersResponse {
     @Field((type) => String)
     slug: string;
 
-    @Field((type) => Boolean)
-    status: boolean;
+    // @Field((type) => Boolean)
+    // status: boolean;
 
     @Field((type) => String)
     logo: string;

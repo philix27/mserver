@@ -20,4 +20,5 @@ export const secrets: Record<keyof Config, string> = {
     JWT_TELEGRAM_PUBLIC: process.env.JWT_TELEGRAM_PUBLIC!,
     SELF_APP_SCOPE: process.env.SELF_APP_SCOPE!,
     SELF_API_ENDPOINT: process.env.SELF_API_ENDPOINT!,
+    RESEND_API_KEY: process.env.RESEND_API_KEY!,
 };

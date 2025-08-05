@@ -33,22 +33,5 @@ export const miniAppsList: Static_MiniAppsResponse[] = [
         logo: "https://www.mobarter.com/_next/image?url=%2Fimages%2Flogo%2Flogo.png&w=256&q=75",
         url: "https://www.enviabletransport.com/"
     },
-    // {
-    //     title: "Enviable Transport",
-    //     description: "Earn as you invest in live business",
-    //     logo: "https://www.mobarter.com/_next/image?url=%2Fimages%2Flogo%2Flogo.png&w=256&q=75",
-    //     url: "https://www.mobarter.com/about"
-    // },
-    // {
-    //     title: "Enviable Transport",
-    //     description: "Earn as you invest in live business",
-    //     logo: "https://www.mobarter.com/_next/image?url=%2Fimages%2Flogo%2Flogo.png&w=256&q=75",
-    //     url: "https://www.mobarter.com/about"
-    // },
-    // {
-    //     title: "Enviable Transport",
-    //     description: "Earn as you invest in live business",
-    //     logo: "https://www.mobarter.com/_next/image?url=%2Fimages%2Flogo%2Flogo.png&w=256&q=75",
-    //     url: "https://www.mobarter.com/about"
-    // },
+
 ]
