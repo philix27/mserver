@@ -7,11 +7,13 @@ import { LoggerService } from '../../common';
 import {
     BettingPaymentInput,
     BettingPaymentResponse,
+    BettingPricesResponse,
     BettingProvidersInput,
     BettingProvidersResponse,
     IBettingPaymentResponse,
 } from './Betting.dto';
 import { bettingProviders } from '../../static/links/betting';
+import { bettingPriceList } from './priceData';
 
 @Injectable()
 export class FundBettingWalletService {
@@ -37,6 +39,17 @@ export class FundBettingWalletService {
         }
 
         return bettingProviders;
+    }
+    public async getPriceList(
+        input: BettingProvidersInput & UserInput,
+    ): Promise<BettingPricesResponse[]> {
+        this.logger.info('Get Electricity Billers');
+
+        if (input.countryCode !== 'NG') {
+            throw GqlErr('No provider for this country');
+        }
+
+        return bettingPriceList;
     }
 
     public async makePayment(
@@ -64,13 +77,13 @@ export class FundBettingWalletService {
                 // unique identifier
                 request_id: transaction_hash,
                 // amount in naira
-                amount: input.amount,
+                amount: input.payment.amountFiat,
             },
             this.headers,
         )) as IBettingPaymentResponse;
 
         await this.transaction.create({
-            amount: input.amount,
+            amount: input.payment.amountFiat,
             category: 'BETTING_WALLET',
             mode: 'DEBIT',
             status: 'COMPLETED',

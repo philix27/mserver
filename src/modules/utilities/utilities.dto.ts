@@ -26,7 +26,10 @@ export class PaymentInput {
     tokenChain: string;
 
     @Field((returns) => Float)
-    amount: number;
+    amountCrypto: number;
+    
+    @Field((returns) => Float)
+    amountFiat: number;
 }
 
 

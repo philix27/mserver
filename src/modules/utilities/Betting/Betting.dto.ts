@@ -10,9 +10,6 @@ export class BettingPaymentInput {
     @Field((type) => String)
     service_id: string;
 
-    @Field((type) => Int)
-    amount: number;
-
     @Field(() => PaymentInput)
     payment: PaymentInput;
 
@@ -83,6 +80,13 @@ export class BettingProvidersResponse {
 
     @Field((type) => String)
     logo: string;
+}
+@ObjectType()
+export class BettingPricesResponse {
+    @Field()
+    amount: number;
+
+
 }
 
 @InputType()
