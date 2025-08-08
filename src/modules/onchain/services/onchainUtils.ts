@@ -5,7 +5,7 @@ import { baseContracts, celoContracts } from "../utils/const";
 
 export enum SupportedChains { celo, base }
 
-@Injectable()
+// @Injectable()
 export class OnchainUtilsService {
 
     wallet: ethers.Wallet

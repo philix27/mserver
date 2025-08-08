@@ -17,6 +17,7 @@ export class RewardsService {
     async claim(payload: { tokenAddress: Address, }): Promise<string> {
         try {
             const tx = await this.contract(this.utils.wallet).claim(payload.tokenAddress,);
+            console.log("Sender:", this.utils.wallet.address);
             console.log("Transaction sent:", tx.hash);
 
             const receipt = await tx.wait();

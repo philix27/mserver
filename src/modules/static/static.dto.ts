@@ -31,6 +31,12 @@ export class Static_GetTokenResponse {
     decimals: number;
 
     @Field()
+    rpcUrl: string;
+
+    @Field()
+    chainName: string;
+
+    @Field()
     priceUSD: number;
 
     @Field()
@@ -41,8 +47,10 @@ export class Static_GetTokenResponse {
 
     @Field({ nullable: true })
     isPayable?: boolean;
+
     @Field({ nullable: true })
     isBuyable?: boolean;
+
     @Field({ nullable: true })
     isSellable?: boolean;
 }

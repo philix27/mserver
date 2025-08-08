@@ -88,7 +88,7 @@ const tokensObj: Record<TokenId, Token> = {
         logoUrl: publicPath(Assets.tokens.USDT),
         isPayable: true,
     },
-     [TokenId.cNGN]: {
+    [TokenId.cNGN]: {
         id: TokenId.cNGN,
         symbol: TokenId.cNGN,
         name: 'Celo Nigerian Naira',
@@ -106,7 +106,7 @@ const tokensObj: Record<TokenId, Token> = {
         address: '0xCCF663b1fF11028f0b19058d0f7B674004a40746',
         logoUrl: publicPath(Assets.tokens.cGBP),
     },
-      // [TokenId.cREAL]: {
+    // [TokenId.cREAL]: {
     //     id: TokenId.cREAL,
     //     symbol: TokenId.cREAL,
     //     name: 'Celo Real',
@@ -223,7 +223,7 @@ const tokensObj: Record<TokenId, Token> = {
     //     address: '0xc45eCF20f3CD864B32D9794d6f76814aE8892e20',
     //     logoUrl: publicPath(Assets.tokens.cJPY),
     // },
-   
+
 };
 
 export const CeloTokens: Token[] = Object.keys(tokensObj).map((val) => {

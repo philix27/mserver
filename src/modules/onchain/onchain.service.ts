@@ -7,31 +7,33 @@ import {
 import { UserInput } from '../../lib';
 import { RewardsService } from './services/rewards';
 import { OnchainUtilsService, SupportedChains } from './services/onchainUtils';
-import { FirestoreWalletService } from '../firebase/fbWallet.service';
-import { WalletGeneratorService } from '../wallet-crypto/walletGenerator.service';
 import { Address } from 'viem';
+import { WalletCryptoService } from '../wallet-crypto/wallet.service';
 
 @Injectable()
 export class OnchainTransactionsService {
     public constructor(
         private readonly logger: LoggerService,
-        private readonly fb: FirestoreWalletService,
-        private readonly walletCrypto: WalletGeneratorService,
+        private readonly walletCrypto: WalletCryptoService,
 
     ) { }
 
     public async claim(
         params: Onchain_ClaimRewardsInput & UserInput,
     ): Promise<Onchain_ClaimRewardsResponse> {
+        const baseUSDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+
         this.logger.info("Claim Rewards Service");
-        // this.rewards.contract();
-        const doc = await this.fb.getUserWallet(params.uid);
-        const privateKey = this.walletCrypto.decrypt(doc.ecrypted_private_key, doc.ivBase64, params.payment.transaction_pin);
+
+        const privateKey = await this.walletCrypto.getEthWallet({
+            user_uid: params.payment.user_uid,
+            pin: params.payment.transaction_pin
+        })
 
         const rewards = new RewardsService(new OnchainUtilsService(privateKey, SupportedChains.base))
 
         await rewards.claim({
-            tokenAddress: params.tokenAddress as Address,
+            tokenAddress: baseUSDC as Address,
         });
 
 

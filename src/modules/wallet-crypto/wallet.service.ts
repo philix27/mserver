@@ -17,6 +17,8 @@ export class WalletCryptoService {
         private readonly crypto: CryptoService,
         private readonly walletGen: WalletGeneratorService,
         private readonly firestoreService: FirestoreWalletService,
+
+
     ) { }
 
 
@@ -153,5 +155,16 @@ export class WalletCryptoService {
             };
         });
         return _wallets;
+    }
+
+    public async getEthWallet(params: {
+        user_uid: string;
+        pin: string;
+    }): Promise<string> {
+        this.logger.info("Retrieve user wallet ...");
+        const doc = await this.firestoreService.getUserWallet(params.user_uid);
+        const privateKey = this.walletGen.decrypt(doc.ecrypted_private_key, doc.ivBase64, params.pin);
+
+        return privateKey;
     }
 }

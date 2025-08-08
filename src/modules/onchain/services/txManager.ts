@@ -6,7 +6,7 @@ import { OnchainUtilsService } from "./onchainUtils";
 import { Erc20Service } from "./erc20Contract";
 
 
-@Injectable()
+// @Injectable()
 export class TxnManagerService {
 
     constructor(private readonly utils: OnchainUtilsService) { }

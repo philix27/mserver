@@ -41,6 +41,7 @@ export class FundBettingWalletResolver {
 
         return res!;
     }
+    
     @Query((returns) => [BettingPricesResponse])
     @UseGuards(GqlAuthGuard)
     async fundBetting_getPriceList(

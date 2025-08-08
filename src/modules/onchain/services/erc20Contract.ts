@@ -3,7 +3,7 @@ import { Address, erc20Abi } from "viem";
 import { Injectable, } from "@nestjs/common";
 
 
-@Injectable()
+// @Injectable()
 export class Erc20Service {
     contract: ethers.Contract = undefined
 

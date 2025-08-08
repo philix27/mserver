@@ -52,6 +52,8 @@ export class StaticService {
                     chainId: 42220,
                     priceUSD: getPriceUSD(V.id),
                     priceNGN: getPriceNGN(V.id),
+                    rpcUrl: 'https://forno.celo.org',
+                    chainName: 'CELO'
                 };
             }),
         ];

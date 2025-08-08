@@ -18,7 +18,8 @@ import { FirebaseAdminService } from "../firebase/fbAdmin.service";
         PrivyWalletService,
         WalletGeneratorService,
         CryptoService,
+        FirestoreWalletService
     ],
-    exports: [],
+    exports: [WalletCryptoService, PrivyWalletService],
 })
 export class WalletCryptoModule { }

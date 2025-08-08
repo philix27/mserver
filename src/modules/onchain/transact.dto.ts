@@ -26,11 +26,14 @@ export class TransactionDto {
 
 @InputType()
 export class Onchain_ClaimRewardsInput {
-    @Field()
-    tokenAddress: string;
+    @Field({nullable: true})
+    claimTokenAddress?: string;
 
     @Field()
-    uid: string;
+    feedback: string;
+
+    @Field({nullable: true})
+    category?: string;
 
     @Field(() => PaymentInput)
     payment: PaymentInput;
