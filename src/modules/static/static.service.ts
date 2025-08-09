@@ -30,8 +30,7 @@ export class StaticService {
     public async getCountries(
         input: UserInput,
     ): Promise<Static_GetCountries[]> {
-        this.logger.info('GetCountries');
-
+        this.logger.info('getCountries');
         return countriesDataList;
     }
 
@@ -48,12 +47,12 @@ export class StaticService {
         this.logger.info('getTokens');
 
         return [
-            ...CeloTokens.map((V) => {
+            ...CeloTokens.map((v) => {
                 return {
-                    ...V,
+                    ...v,
                     chainId: 42220,
-                    priceUSD: getPriceUSD(V.id),
-                    priceNGN: getPriceNGN(V.id),
+                    priceUSD: getPriceUSD(v.id),
+                    priceNGN: getPriceNGN(v.id),
                     rpcUrl: 'https://forno.celo.org',
                     chainName: 'CELO'
                 };
@@ -82,7 +81,6 @@ export class StaticService {
         input: UserInput,
     ): Promise<Static_FundCollectorsResponse> {
         this.logger.info('get fund collectors');
-
         return collectors;
     }
 
@@ -90,14 +88,13 @@ export class StaticService {
         input: UserInput,
     ): Promise<Static_AppInfoResponse> {
         this.logger.info('getAppInfo');
-
         return mobileAppInfo
     }
+
     public async walletSecretQuestions(
         input: UserInput,
     ): Promise<Static_SecretQuestionsResponse[]> {
         this.logger.info('get secret questions');
-
         return secretQuestionsList.map((val) => { return { text: val } })
     }
 
@@ -105,7 +102,6 @@ export class StaticService {
         input: UserInput,
     ): Promise<Static_MiniAppsResponse[]> {
         this.logger.info('fetch mini apps');
-
         return miniAppsList
     }
 }
@@ -117,9 +113,9 @@ function getPriceUSD(tokenId: TokenId): number {
     if (tokenId === TokenId.USDT) return 1;
     if (tokenId === TokenId.cEUR) return 0.8;
     if (tokenId === TokenId.cNGN) return 1600;
-
     return 0
 }
+
 function getPriceNGN(tokenId: TokenId): number {
     if (tokenId === TokenId.CELO) return 500;
     if (tokenId === TokenId.USDC) return 1540;
@@ -127,6 +123,5 @@ function getPriceNGN(tokenId: TokenId): number {
     if (tokenId === TokenId.USDT) return 1540;
     if (tokenId === TokenId.cEUR) return 1700;
     if (tokenId === TokenId.cNGN) return 1;
-
     return 0
 }

@@ -1,4 +1,5 @@
 import { Assets } from "../Assets";
+import { ChainId } from "../links/chains";
 import { publicPath } from "../publicPath";
 import { Static_GetTokenResponse } from "../static.dto";
 import { Color } from "./Color";
@@ -20,7 +21,7 @@ export const baseTokens: Static_GetTokenResponse[] = [
         chainName,
         priceUSD: 1,
         priceNGN: 1530,
-        chainId: 0
+        chainId: ChainId.Base
     },
     {
         id: TokenId.USDT,
@@ -35,7 +36,7 @@ export const baseTokens: Static_GetTokenResponse[] = [
         chainName,
         priceUSD: 1,
         priceNGN: 1530,
-        chainId: 0
+        chainId: ChainId.Base
     },
     {
         id: TokenId.CELO,
@@ -49,6 +50,6 @@ export const baseTokens: Static_GetTokenResponse[] = [
         chainName,
         priceUSD: 3980,
         priceNGN: 3900 * 1530,
-        chainId: 0
+        chainId: ChainId.Base
     },
 ]
