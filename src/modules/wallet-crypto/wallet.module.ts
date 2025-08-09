@@ -7,7 +7,6 @@ import { WalletGeneratorService } from "./walletGenerator.service";
 import { CryptoService } from "../helper/crypto.service";
 import { FirestoreWalletService } from "../firebase/fbWallet.service";
 import { FirebaseModule } from "../firebase/firebase.module";
-import { FirebaseAdminService } from "../firebase/fbAdmin.service";
 
 
 @Module({

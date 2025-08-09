@@ -10,7 +10,7 @@ import {
     Static_SecretQuestionsResponse,
 } from './static.dto';
 import { LoggerService } from '../common/provider/logger.service';
-import { CeloTokens, TokenId } from './tokens/Tokens';
+import { CeloTokens, } from './tokens/celo';
 import { docsLinks } from './links/docs';
 import { learnLinks } from './links/learn';
 import { socialLinks } from './links/social';
@@ -20,6 +20,8 @@ import { collectors } from './collectors';
 import { mobileAppInfo, Static_AppInfoResponse } from './mobileAppInfo';
 import { secretQuestionsList } from './secreteQuestions';
 import { miniAppsList, Static_MiniAppsResponse } from './miniApps';
+import { TokenId } from './tokens/types';
+import { baseTokens } from './tokens/base';
 
 @Injectable()
 export class StaticService {
@@ -56,6 +58,7 @@ export class StaticService {
                     chainName: 'CELO'
                 };
             }),
+            ...baseTokens,
         ];
     }
 
