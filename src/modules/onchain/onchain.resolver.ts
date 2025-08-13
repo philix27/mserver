@@ -14,7 +14,7 @@ export class OnchainTransactionsResolver {
     constructor(private readonly service: OnchainTransactionsService) { }
 
     @Mutation((returns) => Onchain_ClaimRewardsResponse)
-    @UseGuards(VendorGuard)
+    // @UseGuards(VendorGuard)
     async onchain_claim(
         @Context() context: { req: { userId: number } },
         @Args("input") input: Onchain_ClaimRewardsInput
