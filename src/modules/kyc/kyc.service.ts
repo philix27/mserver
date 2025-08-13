@@ -11,10 +11,10 @@ import {
     Kyc_CreateTransactionPinInput,
     Kyc_Response,
     Kyc_SendPhoneOtpInput,
-    Kyc_VerifyPhoneOtpInput,
+    Kyc_SendOtpResponse,
+    Kyc_verifyPhoneOtpAndSubmitCredentialsInput,
 } from './kyc.dto';
 import { UserInput } from '../../lib';
-import { GqlErr } from '../common/errors/gqlErr';
 import { LoggerService, PrismaService } from '../common';
 import { CryptoService } from '../helper/crypto.service';
 // import { HelperService } from '../helper/helper.service';
@@ -25,16 +25,57 @@ export class KycService {
         private readonly logger: LoggerService,
         private readonly prisma: PrismaService,
         private readonly jwtService: CryptoService,
-    ) {} // private readonly notification: NotificationService // private readonly logger: LoggerService
+    ) { } // private readonly notification: NotificationService // private readonly logger: LoggerService
 
-    public async sendPhoneOtp(params: Kyc_SendPhoneOtpInput & UserInput) {
+    public async sendPhoneOtp(params: Kyc_SendPhoneOtpInput & UserInput): Promise<Kyc_SendOtpResponse> {
+        this.logger.info(`KYC -> Send Phone ${params.phone} OTP`);
         // this.logger.info("Creating platform account ...");
-        throw GqlErr('Unimplemented');
+        // throw GqlErr('Unimplemented');
+        return {
+            message: 'Unimplemented',
+            otpToken: "02920"
+        };
     }
 
-    public async verifyPhoneOtp(params: Kyc_VerifyPhoneOtpInput & UserInput) {
-        throw GqlErr('Unimplemented');
+    public async kyc_verifyPhoneOtpAndSubmitCredentials(params: Kyc_verifyPhoneOtpAndSubmitCredentialsInput & UserInput):
+        Promise<Kyc_Response> {
+        this.logger.info(`KYC -> Verify Phone ${params.phone} OTP`);
+        // await this._sendCredentials(params)
+        return {
+            message: 'Unimplemented',
+        };
     }
+
+    private async _sendCredentials(
+        params: Kyc_verifyPhoneOtpAndSubmitCredentialsInput & UserInput,
+    ): Promise<Kyc_AddBvnResponse> {
+        this.logger.info('KYC -> Add kyc docs');
+        const res = await this.prisma.user.update({
+            where: {
+                id: params.userId,
+            },
+            data: {
+                bvn: params.bvn,
+                bvn_status: 'REVIEW',
+                nin: params.nin,
+                nin_status: 'REVIEW',
+                firstname: params.firstName,
+                lastname: params.lastName,
+                middlename: params.middleName,
+                street_address: params.street ,
+                state: params.state,
+                country_code: params.country,
+                home_address: params.houseAddress,
+                dob: params.dob,
+                phone: params.phone,
+                dob_status: 'REVIEW',
+            },
+        });
+        return {
+            message: 'success',
+        };
+    }
+
 
     public async createTransactionPin(
         params: Kyc_CreateTransactionPinInput & UserInput,
@@ -171,4 +212,5 @@ export class KycService {
             message: 'Address updated',
         };
     }
+
 }

@@ -1,5 +1,6 @@
 import {
     Field,
+    Float,
     ID,
     InputType,
     Int,
@@ -7,37 +8,17 @@ import {
     PartialType,
 } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
+import { PaymentInput } from '../utilities/utilities.dto';
+
+
+
 @InputType()
-class Order_Dto {
-    @Field({ nullable: false })
-    merchant_id: number;
+export class Order_CreteSellInput {
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
 
     @Field({ nullable: false })
     bank_id: number;
-
-    @Field({ nullable: false })
-    amount_crypto: number;
-
-    @Field({ nullable: true })
-    txn_hash?: string;
-
-    @Field({ nullable: false })
-    amount_fiat: number;
-
-    @Field({ nullable: false })
-    estimated_duration: string;
-
-    @Field({ nullable: false })
-    wallet_merchant: string;
-
-    @Field({ nullable: false })
-    wallet_customer: string;
-
-    // @Field({ nullable: false })
-    // bank_code: string;
-
-    @Field((type) => $Enums.OrderMode, { nullable: true })
-    mode?: $Enums.OrderMode;
 
     @Field((type) => $Enums.OrderActions, { nullable: true })
     action_user?: $Enums.OrderActions;
@@ -51,14 +32,66 @@ class Order_Dto {
     @Field((type) => $Enums.CountryCode)
     currency_fiat: $Enums.CountryCode;
 
-    @Field({ nullable: false })
-    currency_crypto: string;
+    @Field((type) => $Enums.OrderStatus)
+    status: $Enums.OrderStatus;
+}
 
+
+
+@InputType()
+class Order_Dto {
     @Field({ nullable: false })
-    currency_network: string;
+    bank_id: number;
+
+    @Field((type) => $Enums.OrderActions, { nullable: true })
+    action_user?: $Enums.OrderActions;
+
+    @Field((type) => $Enums.OrderActions, { nullable: true })
+    action_merchant?: $Enums.OrderActions;
+
+    @Field((type) => $Enums.TradeType)
+    trade_type: $Enums.TradeType;
+
+    @Field((type) => $Enums.CountryCode)
+    currency_fiat: $Enums.CountryCode;
 
     @Field((type) => $Enums.OrderStatus)
     status: $Enums.OrderStatus;
+
+    // @Field({ nullable: false })
+    // merchant_id: number;
+
+    // @Field({ nullable: false })
+    // amount_crypto: number;
+
+    // @Field({ nullable: true })
+    // txn_hash?: string;
+
+    // @Field({ nullable: false })
+    // amount_fiat: number;
+
+    // @Field({ nullable: false })
+    // estimated_duration: string;
+
+    // @Field({ nullable: false })
+    // wallet_merchant: string;
+
+    // @Field({ nullable: false })
+    // wallet_customer: string;
+
+    // @Field({ nullable: false })
+    // bank_code: string;
+
+    // @Field((type) => $Enums.OrderMode, { nullable: true })
+    // mode?: $Enums.OrderMode;
+
+
+    // @Field({ nullable: false })
+    // currency_crypto: string;
+
+    // @Field({ nullable: false })
+    // currency_network: string;
+
 }
 
 @ObjectType()
@@ -131,7 +164,7 @@ export class Order_FaitReceivedInput {
 }
 
 @InputType()
-export class Order_ReleaseCryptoFromEscrowInput {}
+export class Order_ReleaseCryptoFromEscrowInput { }
 
 @InputType()
 export class Order_AppealInput {
@@ -151,19 +184,14 @@ export class Order_CancelInput {
     reason: string;
 }
 
-@InputType()
-export class Order_CreteSellInput extends Order_Dto {}
 @ObjectType()
-export class Order_CreteSellResponse extends PartialType(
-    Order_CreteSellInput,
-    ObjectType,
-) {
-    @Field((type) => ID)
-    id: number;
+export class Order_CreteSellResponse {
+    @Field()
+    msg: string;
 }
 
 @InputType()
-export class Order_CreteBuyInput extends Order_Dto {}
+export class Order_CreteBuyInput extends Order_Dto { }
 
 @ObjectType()
 export class Order_CreteBuyResponse extends PartialType(

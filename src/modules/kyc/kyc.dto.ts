@@ -11,42 +11,32 @@ import { $Enums } from '@prisma/client';
 export class Kyc_SendEmailResponse extends PartialType(
     Auth_sendEmailOtpResponse,
     ObjectType,
-) {}
+) { }
 
 @ObjectType()
 export class Kyc_VerifyEmailResponse extends PartialType(
     Auth_verifyOtpResponse,
     ObjectType,
-) {}
+) { }
 
 @InputType()
 export class Kyc_SendEmailOtpInput extends PartialType(
     Auth_sendEmailOtpInput,
     InputType,
-) {}
+) { }
 
 @InputType()
 export class Kyc_VerifyEmailOtpInput extends PartialType(
     Auth_verifyEmailOtpInput,
     InputType,
-) {}
+) { }
 
 @InputType()
 export class Kyc_SendPhoneOtpInput {
     @Field()
     phone: string;
 }
-@InputType()
-export class Kyc_VerifyPhoneOtpInput {
-    @Field()
-    phone: string;
 
-    @Field()
-    otp: string;
-
-    @Field()
-    token: string;
-}
 
 @InputType()
 export class Kyc_AddBvnInput {
@@ -70,7 +60,7 @@ export class Kyc_AddNinInput {
 export class Kyc_AddNinResponse extends PartialType(
     Kyc_AddBvnResponse,
     ObjectType,
-) {}
+) { }
 
 @InputType()
 export class Kyc_CreateTransactionPinInput {
@@ -82,6 +72,14 @@ export class Kyc_CreateTransactionPinInput {
 export class Kyc_Response {
     @Field()
     message: string;
+}
+@ObjectType()
+export class Kyc_SendOtpResponse {
+    @Field()
+    message: string;
+
+    @Field()
+    otpToken: string;
 }
 
 @InputType()
@@ -121,4 +119,47 @@ export class Kyc_AddAddressInfoInput {
 export class Kyc_AddAddressProofInput {
     @Field()
     proofOfAddressUrl: string;
+}
+
+@InputType()
+export class Kyc_verifyPhoneOtpAndSubmitCredentialsInput {
+    @Field()
+    phone: string;
+
+    @Field()
+    otp: string;
+
+    @Field()
+    token: string;
+
+    @Field()
+    dob: string;
+
+    @Field()
+    state: string;
+
+    @Field()
+    street?: string;
+
+    @Field()
+    houseAddress: string;
+
+    @Field((type) => $Enums.CountryCode)
+    country: $Enums.CountryCode;
+
+    @Field()
+    firstName: string;
+
+    @Field()
+    lastName: string;
+
+    @Field({ nullable: true })
+    middleName?: string;
+
+    @Field()
+    nin: string;
+
+    @Field()
+    bvn: string;
+
 }

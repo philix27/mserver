@@ -12,7 +12,7 @@ export class TxnManagerService {
     constructor(private readonly utils: OnchainUtilsService) { }
 
     contract(signer: ethers.Wallet) {
-        return new ethers.Contract(this.utils.getContractAddress().rewards, TXN_MANAGER_ABI, signer);
+        return new ethers.Contract(this.utils.getContractAddress().txnManager, TXN_MANAGER_ABI, signer);
     }
 
     async pay(payload: { tokenAddress: Address, amount: number, txName: string, info: string }) {
@@ -24,14 +24,15 @@ export class TxnManagerService {
 
             const _txnContract = this.contract(this.utils.wallet);
 
-            const tx = await _txnContract.pay(payload.tokenAddress, payload.amount, payload.txName, payload.info);
+            const tx = await _txnContract.pay(payload.tokenAddress, "100000", payload.txName, payload.info);
+            // const tx = await _txnContract.pay(payload.tokenAddress, payload.amount, payload.txName, payload.info);
 
-            console.log("Transaction sent:", tx.hash);
+            console.log("TxnManager Transaction sent:", tx.hash);
 
             const receipt = await tx.wait();
-            console.log("Transaction mined:", receipt.transactionHash);
+            console.log("TxnManager Transaction mined:", receipt.transactionHash);
         } catch (error) {
-            console.error("Pay err: ", error)
+            console.error("TxnManager Pay err: ", error)
         }
     }
 

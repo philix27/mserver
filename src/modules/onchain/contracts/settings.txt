@@ -1,0 +1,3 @@
+optimization - 200
+EVM version - Cancum
+Compiler - 0.8.24+commit.e11b9ed9

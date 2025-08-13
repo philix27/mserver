@@ -17,7 +17,7 @@ import { GqlAuthGuard } from '../common/guards';
 
 @Resolver((of: any) => Order_Response)
 export class OrdersResolver {
-    constructor(private readonly service: OrderService) {}
+    constructor(private readonly service: OrderService) { }
 
     @Mutation((returns) => Order_CreteSellResponse)
     @UseGuards(GqlAuthGuard)
@@ -32,19 +32,19 @@ export class OrdersResolver {
 
         return res!;
     }
-    @Mutation((returns) => Order_CreteBuyResponse)
-    @UseGuards(GqlAuthGuard)
-    async orders_CreateBuy(
-        @Context() context: { req: { userId: number } },
-        @Args('input') input: Order_CreteBuyInput,
-    ): Promise<Order_CreteBuyResponse> {
-        const res = await this.service.createBuy({
-            ...input,
-            userId: context.req.userId,
-        });
+    // @Mutation((returns) => Order_CreteBuyResponse)
+    // @UseGuards(GqlAuthGuard)
+    // async orders_CreateBuy(
+    //     @Context() context: { req: { userId: number } },
+    //     @Args('input') input: Order_CreteBuyInput,
+    // ): Promise<Order_CreteBuyResponse> {
+    //     const res = await this.service.createBuy({
+    //         ...input,
+    //         userId: context.req.userId,
+    //     });
 
-        return res!;
-    }
+    //     return res!;
+    // }
 
     @Query((returns) => [Order_Response])
     @UseGuards(GqlAuthGuard)

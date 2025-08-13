@@ -27,9 +27,13 @@ export class PaymentInput {
 
     @Field((returns) => Float)
     amountCrypto: number;
-    
+
     @Field((returns) => Float)
     amountFiat: number;
+
+    @Field((type) => $Enums.CountryCode)
+    fiatCurrency: $Enums.CountryCode;
+
 }
 
 

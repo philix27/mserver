@@ -1,5 +1,4 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
-
 import { KycService } from './kyc.service';
 import {
     Kyc_AddAddressInfoInput,
@@ -12,6 +11,9 @@ import {
     Kyc_AddNinResponse,
     Kyc_CreateTransactionPinInput,
     Kyc_Response,
+    Kyc_SendOtpResponse,
+    Kyc_SendPhoneOtpInput,
+    Kyc_verifyPhoneOtpAndSubmitCredentialsInput,
 } from './kyc.dto';
 import { UserDto } from '../user/user.dto';
 import { IContextUser } from '../../lib';
@@ -20,7 +22,7 @@ import { GqlAuthGuard } from '../common/guards';
 
 @Resolver((of: any) => UserDto)
 export class KycResolver {
-    constructor(private readonly service: KycService) {}
+    constructor(private readonly service: KycService) { }
 
     @Mutation((returns) => Kyc_AddBvnResponse)
     @UseGuards(GqlAuthGuard)
@@ -119,4 +121,33 @@ export class KycResolver {
 
         return res!;
     }
+
+    @Mutation((returns) => Kyc_SendOtpResponse)
+    @UseGuards(GqlAuthGuard)
+    async kyc_sendPhoneOtp(
+        @Context() context: IContextUser,
+        @Args('input') input: Kyc_SendPhoneOtpInput,
+    ): Promise<Kyc_SendOtpResponse> {
+        const res = await this.service.sendPhoneOtp({
+            ...input,
+            userId: context.req.userId,
+        });
+
+        return res
+
+    }
+
+    @Mutation((returns) => Kyc_Response)
+    @UseGuards(GqlAuthGuard)
+    async kyc_verifyPhoneOtpAndSubmitCredentials(
+        @Context() context: IContextUser,
+        @Args('input') input: Kyc_verifyPhoneOtpAndSubmitCredentialsInput ,
+    ): Promise<Kyc_Response> {
+       return await this.service.kyc_verifyPhoneOtpAndSubmitCredentials({
+            ...input,
+            userId: context.req.userId,
+        });
+    }
+
+   
 }

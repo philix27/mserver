@@ -4,7 +4,7 @@ import { CommonModule } from "../common";
 // import { TxnManagerController } from "./utils/controller";
 // import { OnchainUtilsService, SupportedChains } from "./services/onchainUtils";
 // import { RewardsService } from "./services/rewards";
-import { OnchainTransactionsResolver } from "./transact.resolver";
+import { OnchainTransactionsResolver } from "./onchain.resolver";
 import { FirebaseModule } from "../firebase/firebase.module";
 import { OnchainTransactionsService } from "./onchain.service";
 import { WalletCryptoService } from "../wallet-crypto/wallet.service";
