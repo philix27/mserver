@@ -9,6 +9,20 @@ const rpcUrl = 'https://mainnet.base.org'
 const chainName = 'BASE'
 export const baseTokens: Static_GetTokenResponse[] = [
     {
+        id: TokenId.CELO,
+        symbol: "ETH ",
+        name: 'Eth',
+        color: Color.usdcBlue,
+        decimals: 18,
+        address: '',
+        logoUrl: publicPath(Assets.tokens.ethereum),
+        rpcUrl,
+        chainName,
+        priceUSD: 4200,
+        priceNGN: 4200 * 1530,
+        chainId: ChainId.Base
+    },
+    {
         id: TokenId.USDC,
         symbol: TokenId.USDC,
         name: "USDC",
@@ -38,18 +52,5 @@ export const baseTokens: Static_GetTokenResponse[] = [
         priceNGN: 1530,
         chainId: ChainId.Base
     },
-    {
-        id: TokenId.CELO,
-        symbol: "ETH  ",
-        name: 'Eth',
-        color: Color.usdcBlue,
-        decimals: 18,
-        address: '',
-        logoUrl: publicPath(Assets.tokens.ethereum),
-        rpcUrl,
-        chainName,
-        priceUSD: 3980,
-        priceNGN: 3900 * 1530,
-        chainId: ChainId.Base
-    },
+
 ]
