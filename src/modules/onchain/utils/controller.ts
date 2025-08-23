@@ -13,13 +13,12 @@ export class TxnManagerController {
 
     @Post("txn")
     async pay() {
-        await this.svc.pay(
-            {
-                tokenAddress: usdtContractAddress,
-                amount: 1,
-                txName: "airtime",
-                info: "airtime_test"
-            })
+        await this.svc.pay({
+            tokenAddress: usdtContractAddress,
+            amount: 1,
+            txName: "airtime",
+            info: "airtime_test"
+        })
     }
 
     @Get("deposit")

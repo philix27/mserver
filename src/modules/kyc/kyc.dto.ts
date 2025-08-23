@@ -39,9 +39,12 @@ export class Kyc_SendPhoneOtpInput {
 
 
 @InputType()
-export class Kyc_AddBvnInput {
+export class Kyc_AddBvnNinInput {
     @Field()
     bvn: string;
+
+    @Field()
+    nin: string;
 }
 
 @ObjectType()
@@ -50,17 +53,7 @@ export class Kyc_AddBvnResponse {
     message: string;
 }
 
-@InputType()
-export class Kyc_AddNinInput {
-    @Field()
-    nin: string;
-}
 
-@ObjectType()
-export class Kyc_AddNinResponse extends PartialType(
-    Kyc_AddBvnResponse,
-    ObjectType,
-) { }
 
 @InputType()
 export class Kyc_CreateTransactionPinInput {
@@ -92,13 +85,15 @@ export class Kyc_AddNamesInput {
 
     @Field({ nullable: true })
     middleName?: string;
+
+    @Field({ nullable: true })
+    dob?: string;
+
+    @Field({ nullable: true })
+    isMale?: boolean;
 }
 
-@InputType()
-export class Kyc_AddDobInput {
-    @Field()
-    dob: string;
-}
+
 
 @InputType()
 export class Kyc_AddAddressInfoInput {
@@ -122,7 +117,7 @@ export class Kyc_AddAddressProofInput {
 }
 
 @InputType()
-export class Kyc_verifyPhoneOtpAndSubmitCredentialsInput {
+export class Kyc_verifyPhoneOtpAndInput {
     @Field()
     phone: string;
 
@@ -132,34 +127,60 @@ export class Kyc_verifyPhoneOtpAndSubmitCredentialsInput {
     @Field()
     token: string;
 
-    @Field()
-    dob: string;
+}
 
-    @Field()
-    state: string;
-
-    @Field()
-    street?: string;
-
-    @Field()
-    houseAddress: string;
-
-    @Field((type) => $Enums.CountryCode)
-    country: $Enums.CountryCode;
-
-    @Field()
-    firstName: string;
-
-    @Field()
-    lastName: string;
+@ObjectType()
+export class Kyc_UserResponse {
 
     @Field({ nullable: true })
-    middleName?: string;
+    dob?: string;
 
-    @Field()
-    nin: string;
+    @Field({ nullable: true })
+    email?: string;
 
-    @Field()
-    bvn: string;
+    @Field({ nullable: true })
+    phone?: string;
+
+    @Field({ nullable: true })
+    bvn?: string;
+
+    @Field({ nullable: true })
+    nin?: string;
+
+    @Field({ nullable: true })
+    state?: string;
+
+    @Field({ nullable: true })
+    id?: number;
+
+    @Field({ nullable: true })
+    telegram_id?: string;
+
+    @Field({ nullable: true })
+    firstname?: string;
+
+    @Field({ nullable: true })
+    lastname?: string;
+
+    @Field({ nullable: true })
+    middlename?: string
+
+    @Field({ nullable: true })
+    gender?: $Enums.Gender;
+
+    @Field({ nullable: true })
+    role?: $Enums.UserRole;
+
+    @Field({ nullable: true })
+    country_code?: $Enums.CountryCode;
+
+    @Field({ nullable: true })
+    created_at?: Date;
+
+    @Field({ nullable: true })
+    bvn_status?: $Enums.CredentialsStatus;
+
+    @Field({ nullable: true })
+    nin_status?: $Enums.CredentialsStatus;
 
 }

@@ -53,7 +53,15 @@ export type Transactions = $Result.DefaultSelection<Prisma.$TransactionsPayload>
  * Enums
  */
 export namespace $Enums {
-  export const MerchantStatus: {
+  export const Gender: {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE'
+};
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const MerchantStatus: {
   Online: 'Online',
   Offline: 'Offline',
   Wait: 'Wait'
@@ -191,6 +199,10 @@ export const TransactionStatus: {
 export type TransactionStatus = (typeof TransactionStatus)[keyof typeof TransactionStatus]
 
 }
+
+export type Gender = $Enums.Gender
+
+export const Gender: typeof $Enums.Gender
 
 export type MerchantStatus = $Enums.MerchantStatus
 
@@ -1727,6 +1739,7 @@ export namespace Prisma {
     firstname: string | null
     lastname: string | null
     middlename: string | null
+    gender: $Enums.Gender | null
     email: string | null
     password: string | null
     transaction_pin: string | null
@@ -1755,6 +1768,7 @@ export namespace Prisma {
     firstname: string | null
     lastname: string | null
     middlename: string | null
+    gender: $Enums.Gender | null
     email: string | null
     password: string | null
     transaction_pin: string | null
@@ -1783,6 +1797,7 @@ export namespace Prisma {
     firstname: number
     lastname: number
     middlename: number
+    gender: number
     email: number
     password: number
     transaction_pin: number
@@ -1821,6 +1836,7 @@ export namespace Prisma {
     firstname?: true
     lastname?: true
     middlename?: true
+    gender?: true
     email?: true
     password?: true
     transaction_pin?: true
@@ -1849,6 +1865,7 @@ export namespace Prisma {
     firstname?: true
     lastname?: true
     middlename?: true
+    gender?: true
     email?: true
     password?: true
     transaction_pin?: true
@@ -1877,6 +1894,7 @@ export namespace Prisma {
     firstname?: true
     lastname?: true
     middlename?: true
+    gender?: true
     email?: true
     password?: true
     transaction_pin?: true
@@ -1992,6 +2010,7 @@ export namespace Prisma {
     firstname: string | null
     lastname: string | null
     middlename: string | null
+    gender: $Enums.Gender | null
     email: string | null
     password: string | null
     transaction_pin: string | null
@@ -2039,6 +2058,7 @@ export namespace Prisma {
     firstname?: boolean
     lastname?: boolean
     middlename?: boolean
+    gender?: boolean
     email?: boolean
     password?: boolean
     transaction_pin?: boolean
@@ -2072,6 +2092,7 @@ export namespace Prisma {
     firstname?: boolean
     lastname?: boolean
     middlename?: boolean
+    gender?: boolean
     email?: boolean
     password?: boolean
     transaction_pin?: boolean
@@ -2100,6 +2121,7 @@ export namespace Prisma {
     firstname?: boolean
     lastname?: boolean
     middlename?: boolean
+    gender?: boolean
     email?: boolean
     password?: boolean
     transaction_pin?: boolean
@@ -2128,6 +2150,7 @@ export namespace Prisma {
     firstname?: boolean
     lastname?: boolean
     middlename?: boolean
+    gender?: boolean
     email?: boolean
     password?: boolean
     transaction_pin?: boolean
@@ -2151,7 +2174,7 @@ export namespace Prisma {
     phone_verified?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstname" | "lastname" | "middlename" | "email" | "password" | "transaction_pin" | "telegram_id" | "role" | "country_code" | "created_at" | "updated_at" | "bvn" | "bvn_status" | "nin" | "nin_status" | "dob" | "dob_status" | "home_address" | "street_address" | "state" | "phone" | "googleId" | "proof_of_address" | "phone_verified", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstname" | "lastname" | "middlename" | "gender" | "email" | "password" | "transaction_pin" | "telegram_id" | "role" | "country_code" | "created_at" | "updated_at" | "bvn" | "bvn_status" | "nin" | "nin_status" | "dob" | "dob_status" | "home_address" | "street_address" | "state" | "phone" | "googleId" | "proof_of_address" | "phone_verified", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     crypto_wallets?: boolean | User$crypto_walletsArgs<ExtArgs>
     bank_accounts?: boolean | User$bank_accountsArgs<ExtArgs>
@@ -2175,6 +2198,7 @@ export namespace Prisma {
       firstname: string | null
       lastname: string | null
       middlename: string | null
+      gender: $Enums.Gender | null
       email: string | null
       password: string | null
       transaction_pin: string | null
@@ -2627,6 +2651,7 @@ export namespace Prisma {
     readonly firstname: FieldRef<"User", 'String'>
     readonly lastname: FieldRef<"User", 'String'>
     readonly middlename: FieldRef<"User", 'String'>
+    readonly gender: FieldRef<"User", 'Gender'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly transaction_pin: FieldRef<"User", 'String'>
@@ -10085,6 +10110,7 @@ export namespace Prisma {
     firstname: 'firstname',
     lastname: 'lastname',
     middlename: 'middlename',
+    gender: 'gender',
     email: 'email',
     password: 'password',
     transaction_pin: 'transaction_pin',
@@ -10256,6 +10282,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Gender'
+   */
+  export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+  /**
+   * Reference to a field of type 'Gender[]'
+   */
+  export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
     
 
 
@@ -10459,6 +10499,7 @@ export namespace Prisma {
     firstname?: StringNullableFilter<"User"> | string | null
     lastname?: StringNullableFilter<"User"> | string | null
     middlename?: StringNullableFilter<"User"> | string | null
+    gender?: EnumGenderNullableFilter<"User"> | $Enums.Gender | null
     email?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
     transaction_pin?: StringNullableFilter<"User"> | string | null
@@ -10491,6 +10532,7 @@ export namespace Prisma {
     firstname?: SortOrderInput | SortOrder
     lastname?: SortOrderInput | SortOrder
     middlename?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     transaction_pin?: SortOrderInput | SortOrder
@@ -10528,6 +10570,7 @@ export namespace Prisma {
     firstname?: StringNullableFilter<"User"> | string | null
     lastname?: StringNullableFilter<"User"> | string | null
     middlename?: StringNullableFilter<"User"> | string | null
+    gender?: EnumGenderNullableFilter<"User"> | $Enums.Gender | null
     password?: StringNullableFilter<"User"> | string | null
     transaction_pin?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleNullableFilter<"User"> | $Enums.UserRole | null
@@ -10558,6 +10601,7 @@ export namespace Prisma {
     firstname?: SortOrderInput | SortOrder
     lastname?: SortOrderInput | SortOrder
     middlename?: SortOrderInput | SortOrder
+    gender?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     transaction_pin?: SortOrderInput | SortOrder
@@ -10594,6 +10638,7 @@ export namespace Prisma {
     firstname?: StringNullableWithAggregatesFilter<"User"> | string | null
     lastname?: StringNullableWithAggregatesFilter<"User"> | string | null
     middlename?: StringNullableWithAggregatesFilter<"User"> | string | null
+    gender?: EnumGenderNullableWithAggregatesFilter<"User"> | $Enums.Gender | null
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     transaction_pin?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -11088,6 +11133,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -11120,6 +11166,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -11151,6 +11198,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11183,6 +11231,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11215,6 +11264,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -11242,6 +11292,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11270,6 +11321,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11811,6 +11863,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type EnumGenderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
+  }
+
   export type EnumUserRoleNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel> | null
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
@@ -11898,6 +11957,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     middlename?: SortOrder
+    gender?: SortOrder
     email?: SortOrder
     password?: SortOrder
     transaction_pin?: SortOrder
@@ -11930,6 +11990,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     middlename?: SortOrder
+    gender?: SortOrder
     email?: SortOrder
     password?: SortOrder
     transaction_pin?: SortOrder
@@ -11958,6 +12019,7 @@ export namespace Prisma {
     firstname?: SortOrder
     lastname?: SortOrder
     middlename?: SortOrder
+    gender?: SortOrder
     email?: SortOrder
     password?: SortOrder
     transaction_pin?: SortOrder
@@ -12017,6 +12079,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumGenderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel> | $Enums.Gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumGenderNullableFilter<$PrismaModel>
+    _max?: NestedEnumGenderNullableFilter<$PrismaModel>
   }
 
   export type EnumUserRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12647,6 +12719,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type NullableEnumGenderFieldUpdateOperationsInput = {
+    set?: $Enums.Gender | null
+  }
+
   export type NullableEnumUserRoleFieldUpdateOperationsInput = {
     set?: $Enums.UserRole | null
   }
@@ -12986,6 +13062,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedEnumGenderNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
+  }
+
   export type NestedEnumUserRoleNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel> | null
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel> | null
@@ -13076,6 +13159,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGenderNullableWithAggregatesFilter<$PrismaModel> | $Enums.Gender | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumGenderNullableFilter<$PrismaModel>
+    _max?: NestedEnumGenderNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumUserRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -13615,6 +13708,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -13646,6 +13740,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -13692,6 +13787,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13723,6 +13819,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13753,6 +13850,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -13784,6 +13882,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -13871,6 +13970,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13902,6 +14002,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13976,6 +14077,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -14007,6 +14109,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -14087,6 +14190,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14118,6 +14222,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14148,6 +14253,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -14179,6 +14285,7 @@ export namespace Prisma {
     firstname?: string | null
     lastname?: string | null
     middlename?: string | null
+    gender?: $Enums.Gender | null
     email?: string | null
     password?: string | null
     transaction_pin?: string | null
@@ -14225,6 +14332,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14256,6 +14364,7 @@ export namespace Prisma {
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     transaction_pin?: NullableStringFieldUpdateOperationsInput | string | null

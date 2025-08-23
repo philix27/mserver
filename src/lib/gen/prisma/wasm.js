@@ -125,6 +125,7 @@ exports.Prisma.UserScalarFieldEnum = {
   firstname: 'firstname',
   lastname: 'lastname',
   middlename: 'middlename',
+  gender: 'gender',
   email: 'email',
   password: 'password',
   transaction_pin: 'transaction_pin',
@@ -235,6 +236,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Gender = exports.$Enums.Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE'
+};
+
 exports.UserRole = exports.$Enums.UserRole = {
   Regular: 'Regular',
   P2pMerchant: 'P2pMerchant',

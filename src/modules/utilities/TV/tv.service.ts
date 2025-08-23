@@ -6,7 +6,6 @@ import { TransactionsService } from '../../transactions/transact.service';
 import { LoggerService } from '../../common';
 import {
     IGetBouquetResponse,
-    IGetTVProvidersResponse,
     IPaymentResponse,
     IValidateAccountResponse,
     TvBill_GetBouquetPackageResponse,

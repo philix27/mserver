@@ -39,6 +39,21 @@ export class Onchain_ClaimRewardsInput {
     payment: PaymentInput;
 }
 
+@InputType()
+export class Onchain_TransferTokenInput {
+    @Field()
+    recipient?: string;
+
+    @Field(() => PaymentInput)
+    payment: PaymentInput;
+}
+
+@ObjectType()
+export class Onchain_TransferTokenResponse {
+     @Field()
+    message: string;
+}
+
 
 @ObjectType()
 export class Onchain_ClaimRewardsResponse {

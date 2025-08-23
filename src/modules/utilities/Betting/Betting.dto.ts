@@ -85,8 +85,6 @@ export class BettingProvidersResponse {
 export class BettingPricesResponse {
     @Field()
     amount: number;
-
-
 }
 
 @InputType()

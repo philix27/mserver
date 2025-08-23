@@ -11,6 +11,7 @@ import {
     Order_CreteBuyResponse,
     Order_CreteBuyInput,
     Order_GetAllInput,
+    Order_GetAllResponse,
 } from './orders.dto';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../common/guards';
@@ -46,13 +47,13 @@ export class OrdersResolver {
     //     return res!;
     // }
 
-    @Query((returns) => [Order_Response])
+    @Query((returns) => [Order_GetAllResponse])
     @UseGuards(GqlAuthGuard)
     async orders_GetAll(
         @Context() context: { req: { userId: number } },
         @Args('input') input: Order_GetAllInput,
-    ): Promise<Order_Response[]> {
-        const res = await this.service.getAllForCustomer({
+    ): Promise<Order_GetAllResponse[]> {
+        const res = await this.service.getAll({
             ...input,
             userId: context.req.userId,
         });

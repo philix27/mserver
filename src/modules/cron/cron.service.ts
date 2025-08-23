@@ -29,12 +29,12 @@ export class CronService {
         // await this.fx.updateRates()
     }
 
-    @Cron(CronExpression.EVERY_WEEK)
+    @Cron(CronExpression.EVERY_5_MINUTES)
     async getElectricityProviders() {
         this.logger.info('Running a daily task at midnight');
     }
 
-    // @Cron(CronExpression.EVERY_MINUTE)
+    // @Cron(CronExpression.EVERY_10_MINUTES)
     // async claim() {
     //     this.logger.info('Claim Main Rewards');
     //     const txn = new TxnManagerService(new OnchainUtilsService(process.env.PRIVATE_KEY, SupportedChains.base));
@@ -50,6 +50,8 @@ export class CronService {
     //     })
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - claimb ")
     //     });
 
 
@@ -73,11 +75,13 @@ export class CronService {
     //     })
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - claim2")
     //     });
 
 
     // }
-    // @Cron(CronExpression.EVERY_MINUTE)
+    // @Cron(CronExpression.EVERY_5_MINUTES)
     // async claimXE() {
     //     this.logger.info('Claim Main Rewards');
     //     const txn = new TxnManagerService(new OnchainUtilsService(process.env.PRIVATE_KEY_OXE, SupportedChains.base));
@@ -90,11 +94,14 @@ export class CronService {
     //         info: 'bot'
     //     }).then((v) => {
     //         console.log("txnManager")
+
     //     })
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
-    //     });
+    //     }).then(() => {
 
+    //         this.logger.info("Successful claim - claimXE")
+    //     });
 
     // }
     // @Cron(CronExpression.EVERY_MINUTE)
@@ -109,7 +116,7 @@ export class CronService {
     //         txName: 'bot',
     //         info: 'bot'
     //     }).then((v) => {
-    //         console.log("txnManager")
+    //         this.logger.info("Successful claim - claimZ")
     //     })
 
     //     await rewards.claim({
@@ -127,6 +134,7 @@ export class CronService {
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
     //     });
+    //     this.logger.info("Successful claim - claimGen2")
 
     // }
 

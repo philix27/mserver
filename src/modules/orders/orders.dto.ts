@@ -100,6 +100,36 @@ export class Order_Response extends PartialType(Order_Dto, ObjectType) {
     id: number;
 }
 
+@ObjectType()
+export class Order_GetAllResponse {
+    @Field((type) => ID)
+    id: number;
+
+    @Field({ nullable: false })
+    bank_id: number;
+
+    @Field((type) => $Enums.OrderActions, { nullable: true })
+    action_user?: $Enums.OrderActions;
+
+    @Field((type) => $Enums.OrderActions, { nullable: true })
+    action_merchant?: $Enums.OrderActions;
+
+    @Field((type) => $Enums.TradeType)
+    trade_type: $Enums.TradeType;
+
+    @Field((type) => $Enums.CountryCode)
+    currency_fiat: $Enums.CountryCode;
+
+    @Field((type) => $Enums.OrderStatus)
+    status: $Enums.OrderStatus;
+
+    @Field()
+    amount_fiat: number;
+
+    @Field()
+    amount_crypto: number;
+}
+
 @InputType()
 export class Order_GetAllInput {
     @Field((type) => $Enums.TradeType, { nullable: true })
@@ -187,7 +217,7 @@ export class Order_CancelInput {
 @ObjectType()
 export class Order_CreteSellResponse {
     @Field()
-    msg: string;
+    message: string;
 }
 
 @InputType()

@@ -32,7 +32,7 @@ export class FundBettingWalletService {
     public async getProviders(
         input: BettingProvidersInput & UserInput,
     ): Promise<BettingProvidersResponse[]> {
-        this.logger.info('Get Electricity Billers');
+        this.logger.info('BETTING --> PROVIDER');
 
         if (input.countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
@@ -43,7 +43,7 @@ export class FundBettingWalletService {
     public async getPriceList(
         input: BettingProvidersInput & UserInput,
     ): Promise<BettingPricesResponse[]> {
-        this.logger.info('Get Electricity Billers');
+        this.logger.info('BETTING --> PRICELIST');
 
         if (input.countryCode !== 'NG') {
             throw GqlErr('No provider for this country');
@@ -55,7 +55,7 @@ export class FundBettingWalletService {
     public async makePayment(
         input: BettingPaymentInput & UserInput,
     ): Promise<BettingPaymentResponse> {
-        this.logger.info('Get Electricity Billers');
+         this.logger.info('BETTING --> MAKE_PAYMENT');
 
         if (input.countryCode !== 'NG') {
             throw GqlErr('No provider for this country');

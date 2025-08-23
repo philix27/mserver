@@ -6,6 +6,7 @@ import {
     Order_CreteSellInput,
     Order_CreteSellResponse,
     Order_GetAllInput,
+    Order_GetAllResponse,
     Order_GetOneInput,
     Order_Response,
 } from './orders.dto';
@@ -23,7 +24,8 @@ export class OrderService {
     public async createSell(
         p: Order_CreteSellInput & { userId: number },
     ): Promise<Order_CreteSellResponse> {
-        this.logger.info('Creating platform account ...');
+        this.logger.info('Sell order - ');
+        console.log(JSON.stringify(p))
 
         const res = await this.prisma.orders.create({
             data: {
@@ -62,7 +64,7 @@ export class OrderService {
         });
 
         return {
-            msg: "Successful"
+            message: "Order created successfully"
         };
     }
     // public async createBuy(
@@ -88,9 +90,9 @@ export class OrderService {
     //     };
     // }
 
-    public async getAllForCustomer(
+    public async getAll(
         p: Order_GetAllInput & { userId: number },
-    ): Promise<Order_Response[]> {
+    ): Promise<Order_GetAllResponse[]> {
         const res = await this.prisma.orders.findMany({
             where: {
                 trade_type: p.trade_type,

@@ -3,6 +3,8 @@ import { OnchainTransactionsService } from "./onchain.service";
 import {
     Onchain_ClaimRewardsInput,
     Onchain_ClaimRewardsResponse,
+    Onchain_TransferTokenInput,
+    Onchain_TransferTokenResponse,
     TransactionDto,
 } from "./transact.dto";
 import { UseGuards } from "@nestjs/common";
@@ -20,6 +22,20 @@ export class OnchainTransactionsResolver {
         @Args("input") input: Onchain_ClaimRewardsInput
     ): Promise<Onchain_ClaimRewardsResponse> {
         const res = await this.service.claim({
+            ...input,
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
+    @Mutation((returns) => Onchain_TransferTokenResponse)
+    @UseGuards(VendorGuard)
+    async onchain_transferToken(
+        @Context() context: { req: { userId: number } },
+        @Args("input") input: Onchain_TransferTokenInput
+    ): Promise<Onchain_TransferTokenResponse> {
+        const res = await this.service.transferToken({
             ...input,
             userId: context.req.userId,
         });

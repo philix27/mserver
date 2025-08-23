@@ -12,4 +12,4 @@ export const baseContracts = {
 export const celoContracts = {
     rewards: "0xE57274987FE02D50A23995BD4050DccD8a0145CC",
     txnManager: "0x7153731D9d6A546437BceB3aB645DadeBF9E2503"
-}  
+}     

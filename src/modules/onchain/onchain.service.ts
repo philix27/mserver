@@ -3,12 +3,15 @@ import { LoggerService, } from '../common';
 import {
     Onchain_ClaimRewardsInput,
     Onchain_ClaimRewardsResponse,
+    Onchain_TransferTokenInput,
+    Onchain_TransferTokenResponse,
 } from './transact.dto';
 import { UserInput } from '../../lib';
 import { RewardsService } from './services/rewards';
 import { OnchainUtilsService, SupportedChains } from './services/onchainUtils';
 import { Address } from 'viem';
 import { WalletCryptoService } from '../wallet-crypto/wallet.service';
+import { GqlErr } from '../common/errors/gqlErr';
 
 @Injectable()
 export class OnchainTransactionsService {
@@ -38,6 +41,13 @@ export class OnchainTransactionsService {
 
 
         return { message: "Successful" };
+    }
+    public async transferToken(
+        params: Onchain_TransferTokenInput & UserInput,
+    ): Promise<Onchain_TransferTokenResponse> {
+        throw GqlErr("Unimplemented");
+
+
     }
 
 }

@@ -1,19 +1,17 @@
-import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { KycService } from './kyc.service';
 import {
     Kyc_AddAddressInfoInput,
     Kyc_AddAddressProofInput,
-    Kyc_AddBvnInput,
+    Kyc_AddBvnNinInput,
     Kyc_AddBvnResponse,
-    Kyc_AddDobInput,
     Kyc_AddNamesInput,
-    Kyc_AddNinInput,
-    Kyc_AddNinResponse,
     Kyc_CreateTransactionPinInput,
     Kyc_Response,
     Kyc_SendOtpResponse,
     Kyc_SendPhoneOtpInput,
-    Kyc_verifyPhoneOtpAndSubmitCredentialsInput,
+    Kyc_UserResponse,
+    Kyc_verifyPhoneOtpAndInput,
 } from './kyc.dto';
 import { UserDto } from '../user/user.dto';
 import { IContextUser } from '../../lib';
@@ -24,11 +22,23 @@ import { GqlAuthGuard } from '../common/guards';
 export class KycResolver {
     constructor(private readonly service: KycService) { }
 
+    @Query((returns) => Kyc_UserResponse)
+    @UseGuards(GqlAuthGuard)
+    async kyc_profile(
+        @Context() context: IContextUser,
+    ): Promise<Kyc_UserResponse> {
+        const res = await this.service.getProfile({
+            userId: context.req.userId,
+        });
+
+        return res!;
+    }
+
     @Mutation((returns) => Kyc_AddBvnResponse)
     @UseGuards(GqlAuthGuard)
-    async kyc_addBvn(
+    async kyc_addBvnNin(
         @Context() context: IContextUser,
-        @Args('input') input: Kyc_AddBvnInput,
+        @Args('input') input: Kyc_AddBvnNinInput,
     ): Promise<Kyc_AddBvnResponse> {
         const res = await this.service.addBvn({
             ...input,
@@ -38,19 +48,19 @@ export class KycResolver {
         return res!;
     }
 
-    @Mutation((returns) => Kyc_AddNinResponse)
-    @UseGuards(GqlAuthGuard)
-    async kyc_addNin(
-        @Context() context: IContextUser,
-        @Args('input') input: Kyc_AddNinInput,
-    ): Promise<Kyc_AddNinResponse> {
-        const res = await this.service.addNin({
-            ...input,
-            userId: context.req.userId,
-        });
+    // @Mutation((returns) => Kyc_AddNinResponse)
+    // @UseGuards(GqlAuthGuard)
+    // async kyc_addNin(
+    //     @Context() context: IContextUser,
+    //     @Args('input') input: Kyc_AddNinInput,
+    // ): Promise<Kyc_AddNinResponse> {
+    //     const res = await this.service.addNin({
+    //         ...input,
+    //         userId: context.req.userId,
+    //     });
 
-        return res!;
-    }
+    //     return res!;
+    // }
 
     @Mutation((returns) => Kyc_Response)
     @UseGuards(GqlAuthGuard)
@@ -66,19 +76,19 @@ export class KycResolver {
         return res!;
     }
 
-    @Mutation((returns) => Kyc_Response)
-    @UseGuards(GqlAuthGuard)
-    async kyc_addDob(
-        @Context() context: IContextUser,
-        @Args('input') input: Kyc_AddDobInput,
-    ): Promise<Kyc_Response> {
-        const res = await this.service.addDob({
-            ...input,
-            userId: context.req.userId,
-        });
+    // @Mutation((returns) => Kyc_Response)
+    // @UseGuards(GqlAuthGuard)
+    // async kyc_addDob(
+    //     @Context() context: IContextUser,
+    //     @Args('input') input: Kyc_AddDobInput,
+    // ): Promise<Kyc_Response> {
+    //     const res = await this.service.addDob({
+    //         ...input,
+    //         userId: context.req.userId,
+    //     });
 
-        return res!;
-    }
+    //     return res!;
+    // }
 
     @Mutation((returns) => Kyc_Response)
     @UseGuards(GqlAuthGuard)
@@ -139,15 +149,15 @@ export class KycResolver {
 
     @Mutation((returns) => Kyc_Response)
     @UseGuards(GqlAuthGuard)
-    async kyc_verifyPhoneOtpAndSubmitCredentials(
+    async Kyc_verifyPhoneOtp(
         @Context() context: IContextUser,
-        @Args('input') input: Kyc_verifyPhoneOtpAndSubmitCredentialsInput ,
+        @Args('input') input: Kyc_verifyPhoneOtpAndInput,
     ): Promise<Kyc_Response> {
-       return await this.service.kyc_verifyPhoneOtpAndSubmitCredentials({
+        return await this.service.kyc_verifyPhoneOtpAndSubmitCredentials({
             ...input,
             userId: context.req.userId,
         });
     }
 
-   
+
 }
