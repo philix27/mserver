@@ -12,6 +12,7 @@ import {
     Order_CreteBuyInput,
     Order_GetAllInput,
     Order_GetAllResponse,
+    Order_RecipientAccountDetailsResponse,
 } from './orders.dto';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../common/guards';
@@ -33,19 +34,19 @@ export class OrdersResolver {
 
         return res!;
     }
-    // @Mutation((returns) => Order_CreteBuyResponse)
-    // @UseGuards(GqlAuthGuard)
-    // async orders_CreateBuy(
-    //     @Context() context: { req: { userId: number } },
-    //     @Args('input') input: Order_CreteBuyInput,
-    // ): Promise<Order_CreteBuyResponse> {
-    //     const res = await this.service.createBuy({
-    //         ...input,
-    //         userId: context.req.userId,
-    //     });
+    @Mutation((returns) => Order_CreteBuyResponse)
+    @UseGuards(GqlAuthGuard)
+    async orders_CreateBuy(
+        @Context() context: { req: { userId: number } },
+        @Args('input') input: Order_CreteBuyInput,
+    ): Promise<Order_CreteBuyResponse> {
+        const res = await this.service.createBuy({
+            ...input,
+            userId: context.req.userId,
+        });
 
-    //     return res!;
-    // }
+        return res!;
+    }
 
     @Query((returns) => [Order_GetAllResponse])
     @UseGuards(GqlAuthGuard)
@@ -55,6 +56,16 @@ export class OrdersResolver {
     ): Promise<Order_GetAllResponse[]> {
         const res = await this.service.getAll({
             ...input,
+            userId: context.req.userId,
+        });
+        return res!;
+    }
+    @Query((returns) => [Order_RecipientAccountDetailsResponse])
+    @UseGuards(GqlAuthGuard)
+    async orders_GetTransferAccount(
+        @Context() context: { req: { userId: number } },
+    ): Promise<Order_RecipientAccountDetailsResponse> {
+        const res = await this.service.recipientAccount({
             userId: context.req.userId,
         });
         return res!;

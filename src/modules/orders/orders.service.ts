@@ -3,11 +3,14 @@ import { LoggerService, PrismaService } from '../common';
 import {
     Order_AppealInput,
     Order_CancelInput,
+    Order_CreteBuyInput,
+    Order_CreteBuyResponse,
     Order_CreteSellInput,
     Order_CreteSellResponse,
     Order_GetAllInput,
     Order_GetAllResponse,
     Order_GetOneInput,
+    Order_RecipientAccountDetailsResponse,
     Order_Response,
 } from './orders.dto';
 import { TransactionsService } from '../transactions/transact.service';
@@ -67,28 +70,24 @@ export class OrderService {
             message: "Order created successfully"
         };
     }
-    // public async createBuy(
-    //     p: Order_CreteBuyInput & { userId: number },
-    // ): Promise<Order_CreteSellResponse> {
-    //     this.logger.info('Creating platform account ...');
+    public async createBuy(
+        p: Order_CreteBuyInput & { userId: number },
+    ): Promise<Order_CreteBuyResponse> {
+        this.logger.info('Creating platform account ...');
 
-    //     const res = await this.prisma.orders.create({
-    //         data: {
-    //             ...p,
-    //             user_id: p.userId,
-    //             // buy_time1_customer_request: new Date(),
-    //             txn_hash: p.txn_hash,
-    //         },
-    //     });
+        // const res = await this.prisma.orders.create({
+        //     data: {
+        //         ...p,
+        //         user_id: p.userId,
+        //         // buy_time1_customer_request: new Date(),
+        //         txn_hash: p.txn_hash,
+        //     },
+        // });
 
-    //     return {
-    //         ...res,
-    //         id: res.id,
-    //         // action_merchant: res.action_merchant!,
-    //         // action_user: res.action_user!,
-    //         // txn_hash: res.txn_hash,
-    //     };
-    // }
+        return {
+            message: "Successful", // Replace 0 with the actual order id when implemented
+        };
+    }
 
     public async getAll(
         p: Order_GetAllInput & { userId: number },
@@ -172,6 +171,18 @@ export class OrderService {
             // action_merchant: res!.action_merchant!,
             // action_user: res!.action_user!,
             // txn_hash: res.txn_hash,
+        };
+    }
+    public async recipientAccount(
+        p: { userId: number },
+    ): Promise<Order_RecipientAccountDetailsResponse> {
+
+        //todo: Replace the following with actual logic to fetch account details as needed
+        return {
+            accountName: "Sample Account Name",
+            accountNo: "1234567890",
+            bankName: "Sample Bank Name",
+            instructions: "Sample instructions for recipient account"
         };
     }
 

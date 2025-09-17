@@ -1,6 +1,6 @@
 import { ObjectType, Field, Int, InputType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
-import { PaymentInput } from '../utilities.dto';
+import { PaymentInput } from '../TopUps/utilities.dto';
 
 export interface IElectricityBillProviders {
     status: string;

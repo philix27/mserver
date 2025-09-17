@@ -6,14 +6,16 @@ import {
     Utilities_PurchaseDataBundleInput,
     Utilities_GetOperatorResponse,
     Utilities_GetOperatorsInput,
+    Utilities_LookUpNoInput,
+    Utilities_LookUpNoResponse,
 } from './utilities.dto';
-import { GqlAuthGuard } from '../common/guards';
 import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../../common/guards';
 
 // @Resolver((of: any) => Utilities_PurchaseTopUpResponse, { isAbstract: false })
 @Resolver()
 export class UtilitiesResolver {
-    constructor(private readonly service: UtilitiesService) {}
+    constructor(private readonly service: UtilitiesService) { }
 
     @Mutation((returns) => Utilities_PurchaseTopUpResponse)
     @UseGuards(GqlAuthGuard)
@@ -64,6 +66,20 @@ export class UtilitiesResolver {
         @Args('input') input: Utilities_GetOperatorsInput,
     ): Promise<Utilities_GetOperatorResponse> {
         const res = await this.service.getOperators({
+            userId: context.req.userId,
+            ...input,
+        });
+
+        return res!;
+    }
+
+    @Query((returns) => Utilities_LookUpNoResponse)
+    @UseGuards(GqlAuthGuard)
+    async utility_lookUpNo(
+        @Context() context: { req: { userId: number } },
+        @Args('input') input: Utilities_LookUpNoInput,
+    ): Promise<Utilities_LookUpNoResponse> {
+        const res = await this.service.lookUpNo({
             userId: context.req.userId,
             ...input,
         });

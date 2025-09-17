@@ -1,6 +1,6 @@
 import { InputType, Field, Int, ObjectType } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
-import { PaymentInput } from '../utilities.dto';
+import { PaymentInput } from '../TopUps/utilities.dto';
 
 @InputType()
 export class BettingPaymentInput {

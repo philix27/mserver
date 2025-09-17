@@ -25,7 +25,7 @@ export class RewardsService {
             return receipt.transactionHash;
 
         } catch (error) {
-            console.error("Txn err:", error)
+            console.error("Txn err: " + this.utils.wallet.address, error)
         }
     }
 
@@ -138,7 +138,7 @@ export class RewardsService {
             console.error("Txn err:", error)
         }
     }
-    async canClaim(payload: { tokenAddress: Address, }): Promise<string> {
+    async canClaim(payload: { tokenAddress: Address, }): Promise<boolean> {
         try {
             const tx = await this.contract(this.utils.wallet).canClaim(payload.tokenAddress);
             console.log("Transaction sent:", tx.hash);

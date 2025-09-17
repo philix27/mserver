@@ -39,24 +39,27 @@ export class CronService {
     //     this.logger.info('Claim Main Rewards');
     //     const txn = new TxnManagerService(new OnchainUtilsService(process.env.PRIVATE_KEY, SupportedChains.base));
     //     const rewards = new RewardsService(new OnchainUtilsService(process.env.PRIVATE_KEY, SupportedChains.base));
+    //     try {
 
-    //     await txn.pay({
-    //         tokenAddress: baseUSDC,
-    //         amount: 0.02,
-    //         txName: 'Airtime',
-    //         info: 'Airtime'
-    //     }).then((v) => {
-    //         console.log("txnManager")
-    //     })
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.02,
+    //             txName: 'Airtime',
+    //             info: 'Airtime'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - claim")
+    //         })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
     //     }).then(() => {
-    //         this.logger.info("Successful claim - claimb ")
+    //         this.logger.info("Successful CLAIM - claim")
     //     });
 
-
-
     // }
+
 
 
     // @Cron(CronExpression.EVERY_MINUTE)
@@ -65,76 +68,281 @@ export class CronService {
     //     const txn = new TxnManagerService(new OnchainUtilsService(process.env.PRIVATE_KEY2, SupportedChains.base));
     //     const rewards = new RewardsService(new OnchainUtilsService(process.env.PRIVATE_KEY2, SupportedChains.base));
 
-    //     await txn.pay({
-    //         tokenAddress: baseUSDC,
-    //         amount: 0.34,
-    //         txName: 'bot',
-    //         info: 'bot'
-    //     }).then((v) => {
-    //         console.log("txnManager")
-    //     })
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.34,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - claim2")
+    //         })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
     //     }).then(() => {
-    //         this.logger.info("Successful claim - claim2")
+    //         this.logger.info("Successful CLAIM - claim2")
     //     });
 
 
     // }
+
     // @Cron(CronExpression.EVERY_5_MINUTES)
     // async claimXE() {
     //     this.logger.info('Claim Main Rewards');
     //     const txn = new TxnManagerService(new OnchainUtilsService(process.env.PRIVATE_KEY_OXE, SupportedChains.base));
     //     const rewards = new RewardsService(new OnchainUtilsService(process.env.PRIVATE_KEY_OXE, SupportedChains.base));
 
-    //     await txn.pay({
-    //         tokenAddress: baseUSDC,
-    //         amount: 0.01,
-    //         txName: 'bot',
-    //         info: 'bot'
-    //     }).then((v) => {
-    //         console.log("txnManager")
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.01,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - claimXE")
+    //         })
+    //     } catch (error) {
 
-    //     })
+    //     }
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
     //     }).then(() => {
-
-    //         this.logger.info("Successful claim - claimXE")
+    //         this.logger.info("Successful CLAIM - claimXE")
     //     });
 
     // }
+
     // @Cron(CronExpression.EVERY_MINUTE)
     // async claimZ() {
     //     this.logger.info('Claim Main Rewards - GenZ');
     //     const txn = new TxnManagerService(new OnchainUtilsService(process.env.PRIVATE_KEY_Genz, SupportedChains.base));
     //     const rewards = new RewardsService(new OnchainUtilsService(process.env.PRIVATE_KEY_Genz, SupportedChains.base));
 
-    //     await txn.pay({
-    //         tokenAddress: baseUSDC,
-    //         amount: 0.01,
-    //         txName: 'bot',
-    //         info: 'bot'
-    //     }).then((v) => {
-    //         this.logger.info("Successful claim - claimZ")
-    //     })
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.01,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - claimZ")
+    //         })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
 
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
-    //     });
+    //     }).then((v) => {
+    //         this.logger.info("Successful CLAIM - claimZ")
+    //     })
 
     // }
-
-
 
     // @Cron(CronExpression.EVERY_MINUTE)
     // async claimGen2() {
     //     this.logger.info('Claim Main Rewards - Gen 2');
+    //     const txn = new TxnManagerService(new OnchainUtilsService(process.env.PRIVATE_KEY_Gen2, SupportedChains.base));
     //     const rewards = new RewardsService(new OnchainUtilsService(process.env.PRIVATE_KEY_Gen2, SupportedChains.base));
+    //     // try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.001,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - claimGen2")
+    //         })
+    //     // } catch (error) {
+
+    //     // }
     //     await rewards.claim({
     //         tokenAddress: baseUSDC,
-    //     });
-    //     this.logger.info("Successful claim - claimGen2")
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - claimGen2")
+    //     })
+
+
+    // }
+
+    // @Cron(CronExpression.EVERY_5_MINUTES)
+    // async account5() {
+    //     const key = process.env.ACCOUNT5_KEY
+    //     this.logger.info('Claim Main Rewards - Gen 2');
+
+    //     const txn = new TxnManagerService(new OnchainUtilsService(key, SupportedChains.base));
+    //     const rewards = new RewardsService(new OnchainUtilsService(key, SupportedChains.base));
+    //     try {
+    //         // await txn.pay({
+    //         //     tokenAddress: baseUSDC,
+    //         //     amount: 0.01,
+    //         //     txName: 'bot',
+    //         //     info: 'bot'
+    //         // }).then((v) => {
+    //         //     this.logger.info("Successful PAY - account5")
+    //         // })
+    //     } catch (error) {
+    //         this.logger.error("Error - account5")
+
+    //     }
+
+    //     await rewards.claim({
+    //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - account5")
+    //     })
+
+
+    // }
+
+    // @Cron(CronExpression.EVERY_5_MINUTES)
+    // async mobarter() {
+    //     const key = process.env.MOBARTER_KEY
+    //     this.logger.info('Claim Main Rewards - Gen 2');
+
+    //     const txn = new TxnManagerService(new OnchainUtilsService(key, SupportedChains.base));
+    //     const rewards = new RewardsService(new OnchainUtilsService(key, SupportedChains.base));
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.01,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - mobarter")
+    //         })
+    //     } catch (error) {
+    //         this.logger.error("Error - mobarter")
+
+    //     }
+
+    //     await rewards.claim({
+    //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - mobarter")
+    //     })
+
+
+    // }
+    // @Cron(CronExpression.EVERY_MINUTE)
+    // async farcaster() {
+    //     const key = process.env.FARCASTER_KEY
+    //     this.logger.info('Claim Main Rewards - Gen 2');
+
+    //     const txn = new TxnManagerService(new OnchainUtilsService(key, SupportedChains.base));
+    //     const rewards = new RewardsService(new OnchainUtilsService(key, SupportedChains.base));
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.001,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - farcaster")
+    //         })
+    //     } catch (error) {
+    //         this.logger.error("Error - farcaster")
+
+    //     }
+
+    //     await rewards.claim({
+    //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - farcaster")
+    //     })
+
+
+    // }
+
+    // @Cron(CronExpression.EVERY_MINUTE)
+    // async account4() {
+    //     const key = process.env.ACCOUNT4_KEY
+    //     this.logger.info('Claim Main Rewards - Gen 2');
+
+    //     const txn = new TxnManagerService(new OnchainUtilsService(key, SupportedChains.base));
+    //     const rewards = new RewardsService(new OnchainUtilsService(key, SupportedChains.base));
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.01,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - account4")
+    //         })
+    //     } catch (error) {
+    //         this.logger.error("Error - account4")
+
+    //     }
+
+    //     await rewards.claim({
+    //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - account4")
+    //     })
+
+
+    // }
+
+    // @Cron(CronExpression.EVERY_MINUTE)
+    // async account8() {
+    //     const key = process.env.ACCOUNT8_KEY
+    //     this.logger.info('Claim Main Rewards - Gen 2');
+
+    //     const txn = new TxnManagerService(new OnchainUtilsService(key, SupportedChains.base));
+    //     const rewards = new RewardsService(new OnchainUtilsService(key, SupportedChains.base));
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.01,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - account4")
+    //         })
+    //     } catch (error) {
+    //         this.logger.error("Error - account4")
+
+    //     }
+
+    //     await rewards.claim({
+    //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - account4")
+    //     })
+
+
+    // }
+    // @Cron(CronExpression.EVERY_MINUTE)
+    // async PRIVATE_KEY_Gen3() {
+    //     const key = process.env.PRIVATE_KEY_Gen3
+    //     this.logger.info('Claim Main Rewards - Gen 2');
+
+    //     const txn = new TxnManagerService(new OnchainUtilsService(key, SupportedChains.base));
+    //     const rewards = new RewardsService(new OnchainUtilsService(key, SupportedChains.base));
+    //     try {
+    //         await txn.pay({
+    //             tokenAddress: baseUSDC,
+    //             amount: 0.01,
+    //             txName: 'bot',
+    //             info: 'bot'
+    //         }).then((v) => {
+    //             this.logger.info("Successful PAY - account4")
+    //         })
+    //     } catch (error) {
+    //         this.logger.error("Error - account4")
+
+    //     }
+
+    //     await rewards.claim({
+    //         tokenAddress: baseUSDC,
+    //     }).then(() => {
+    //         this.logger.info("Successful claim - account4")
+    //     })
+
 
     // }
 

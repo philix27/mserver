@@ -8,6 +8,16 @@ import {
 } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
 
+export enum RequestFrom {
+    Farcaster = 'Farcaster',
+    Minipay = 'Minipay',
+}
+
+registerEnumType(RequestFrom, {
+    name: 'RequestFrom',
+});
+
+
 @InputType()
 export class PaymentInput {
     @Field()
@@ -25,6 +35,12 @@ export class PaymentInput {
     @Field()
     tokenChain: string;
 
+    @Field({ nullable: true })
+    txHash?: string;
+
+    @Field((returns) => RequestFrom, { nullable: true })
+    from?: RequestFrom;
+
     @Field((returns) => Float)
     amountCrypto: number;
 
@@ -36,6 +52,16 @@ export class PaymentInput {
 
 }
 
+
+@InputType()
+export class Utilities_LookUpNoInput {
+    @Field({ nullable: false })
+    phoneNo: string;
+
+
+    @Field((type) => $Enums.CountryCode)
+    countryCode: $Enums.CountryCode;
+}
 
 @InputType()
 export class Utilities_PurchaseAirtimeInput {
@@ -126,6 +152,12 @@ export class Utilities_BillingResponse {
 //     @Field((type) => Int)
 //     isAvaliable: boolean;
 // }
+
+@ObjectType()
+export class Utilities_LookUpNoResponse {
+    @Field({ nullable: false })
+    operator: string;
+}
 
 @ObjectType()
 export class Utilities_PurchaseTopUpResponse {

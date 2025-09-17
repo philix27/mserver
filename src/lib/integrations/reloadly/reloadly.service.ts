@@ -4,7 +4,6 @@ import axios from 'axios';
 import { LoggerService, secrets } from '../../../modules/common';
 import { ITopUpAirtime } from './t.topUpAirtime';
 import { $Enums } from '@prisma/client';
-import { GqlErr } from 'src/modules/common/errors/gqlErr';
 
 export type IReloadlyOperatorId = 'MTN' | 'AIRTEL' | 'GLO' | 'ETISALAT';
 // export const OperatorId: Record<IReloadlyOperatorId, string> = {
@@ -28,11 +27,51 @@ export class ReloadlyTopUpService {
             Authorization: `Bearer ${accessToken}`,
         };
     }
+
     getOperators(props: { iso: 'NG' | 'KE' | 'GH' }) {
         return localOperators.filter(
             (val) => val.country.isoName === props.iso,
         );
     }
+
+    async lookUpNumber(props: { phone: string; countryCode: string; }) {
+        console.log("Look up number called" + JSON.stringify(props))
+        const url = `https://topups.reloadly.com/operators/mnp-lookup/phone/${props.phone}/countries/${props.countryCode}`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/com.reloadly.topups-v1+json',
+                Authorization: `Bearer ${this.token}`,
+            }
+        };
+
+
+        try {
+            const result = await axios.get(url, this.header)
+            console.log("Look up response", JSON.stringify(result.data))
+        } catch (err) {
+            console.error('Look Up error:' + JSON.stringify(err))
+        }
+
+        // fetch(url, options)
+        //     .then(res => {
+        //         console.log("Look up response", res)
+        //         return res.json()
+        //     })
+        //     .then(json => {
+        //         this.logger.info(
+        //             'Look up...' + JSON.stringify(json),
+        //         );
+        //         return json
+        //     })
+        //     .catch(err => {
+        //         console.error('Look Up error:' + err)
+        //     });
+
+    }
+
+
     async topUpAirtime(props: {
         //  amount should have 2 place decimal number
         amount: string;

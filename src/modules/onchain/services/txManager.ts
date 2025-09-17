@@ -32,7 +32,7 @@ export class TxnManagerService {
             const receipt = await tx.wait();
             console.log("TxnManager Transaction mined:", receipt.transactionHash);
         } catch (error) {
-            console.error("TxnManager Pay err: ", error)
+            console.error("TxnManager Pay err: " + this.utils.wallet.address, error)
         }
     }
 

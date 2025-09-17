@@ -1,6 +1,6 @@
 import { Field, Float, ID, InputType, Int, ObjectType, } from "@nestjs/graphql";
 import { $Enums } from "@prisma/client";
-import { PaymentInput } from "../utilities/utilities.dto";
+import { PaymentInput } from "../utilities/TopUps/utilities.dto";
 
 @ObjectType()
 export class TransactionDto {
@@ -26,13 +26,13 @@ export class TransactionDto {
 
 @InputType()
 export class Onchain_ClaimRewardsInput {
-    @Field({nullable: true})
+    @Field({ nullable: true })
     claimTokenAddress?: string;
 
     @Field()
     feedback: string;
 
-    @Field({nullable: true})
+    @Field({ nullable: true })
     category?: string;
 
     @Field(() => PaymentInput)
@@ -50,7 +50,7 @@ export class Onchain_TransferTokenInput {
 
 @ObjectType()
 export class Onchain_TransferTokenResponse {
-     @Field()
+    @Field()
     message: string;
 }
 

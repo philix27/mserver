@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { LoggerService, secrets } from '../common';
 import {
     Utilities_PurchaseAirtimeInput,
     Utilities_PurchaseTopUpResponse,
     Utilities_PurchaseDataBundleInput,
     Utilities_GetOperatorsInput,
     Utilities_GetOperatorResponse,
+    Utilities_LookUpNoResponse,
+    Utilities_LookUpNoInput,
 } from './utilities.dto';
-import { UserInput } from '../../lib';
-import { ReloadlyTopUpService } from '../../lib/integrations/reloadly';
-import { TransactionsService } from '../transactions/transact.service';
-import { operatorsData } from './operatorData';
-import { GqlErr } from '../common/errors/gqlErr';
+import { TransactionsService } from '../../transactions/transact.service';
+import { UserInput } from '../../../lib/types/UserInput';
+import { GqlErr } from '../../common/errors/gqlErr';
+import { operatorsData } from '../operatorData';
+import { LoggerService } from '../../common/provider';
+import { secrets } from '../../common/model/secrets';
+import { ReloadlyTopUpService } from '../../../lib/integrations/reloadly';
 
 @Injectable()
 export class UtilitiesService {
@@ -78,6 +81,24 @@ export class UtilitiesService {
             throw GqlErr("Could not send airtime")
         }
     }
+    public async lookUpNo(
+        input: Utilities_LookUpNoInput & UserInput,
+    ): Promise<Utilities_LookUpNoResponse> {
+        this.logger.info('Look Up Number');
+
+        try {
+            const res = await this.reloadly.lookUpNumber({
+                countryCode: input.countryCode,
+                phone: input.phoneNo,
+            });
+
+
+            return { operator: 'Successful', };
+        } catch (error) {
+            throw GqlErr("Could find noy find num")
+        }
+    }
+
     public async purchaseDataBundle(
         input: Utilities_PurchaseDataBundleInput & UserInput,
     ): Promise<Utilities_PurchaseTopUpResponse> {
@@ -107,7 +128,7 @@ export class UtilitiesService {
         });
 
         // this.logger.info(res.customIdentifier);
-        return { title: 'Successful', subtitle: "Data plan sent successully" };
+        return { title: 'Successful', subtitle: "Data plan sent successfully" };
     }
 
     public async getOperators(

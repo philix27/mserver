@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { CommonModule } from '../common';
-import { UtilitiesService } from './utilities.service';
+import { UtilitiesService } from './TopUps/utilities.service';
 import { NotificationModule } from '../notification/notification.module';
-import { UtilitiesResolver } from './utilies.resolver';
+import { UtilitiesResolver } from './TopUps/utilies.resolver';
 import { TransactionsService } from '../transactions/transact.service';
 import { FundBettingWalletResolver } from './Betting/Betting.resolvers';
 import { FundBettingWalletService } from './Betting/Betting.service';

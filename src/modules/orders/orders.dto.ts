@@ -8,7 +8,7 @@ import {
     PartialType,
 } from '@nestjs/graphql';
 import { $Enums } from '@prisma/client';
-import { PaymentInput } from '../utilities/utilities.dto';
+import { PaymentInput } from '../utilities/TopUps/utilities.dto';
 
 
 
@@ -36,6 +36,55 @@ export class Order_CreteSellInput {
     status: $Enums.OrderStatus;
 }
 
+@InputType()
+export class Order_CreteBuyInput {
+
+    @Field()
+    accountName: string;
+
+    @Field()
+    accountNo: string;
+
+    @Field()
+    bankName: string;
+
+    @Field()
+    transaction_pin: string;
+
+    @Field()
+    user_uid: string;
+
+    @Field()
+    tokenAddress: string;
+
+    @Field()
+    tokenChain: string;
+
+    @Field((returns) => Float)
+    amountCrypto: number;
+
+    @Field((returns) => Float)
+    amountFiat: number;
+
+    @Field((type) => $Enums.CountryCode)
+    fiatCurrency: $Enums.CountryCode;
+
+}
+
+@ObjectType()
+export class Order_RecipientAccountDetailsResponse {
+    @Field()
+    accountName: string;
+
+    @Field()
+    accountNo: string;
+
+    @Field()
+    bankName: string;
+
+    @Field()
+    instructions: string;
+}
 
 
 @InputType()
@@ -93,6 +142,7 @@ class Order_Dto {
     // currency_network: string;
 
 }
+
 
 @ObjectType()
 export class Order_Response extends PartialType(Order_Dto, ObjectType) {
@@ -220,14 +270,13 @@ export class Order_CreteSellResponse {
     message: string;
 }
 
-@InputType()
-export class Order_CreteBuyInput extends Order_Dto { }
+
 
 @ObjectType()
 export class Order_CreteBuyResponse extends PartialType(
     Order_CreteBuyInput,
     ObjectType,
 ) {
-    @Field((type) => ID)
-    id: number;
+    @Field()
+    message: string;
 }
