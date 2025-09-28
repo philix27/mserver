@@ -2,6 +2,24 @@ import { Field, InputType, ObjectType } from "@nestjs/graphql";
 import { $Enums } from "@prisma/client";
 
 @ObjectType()
+export class WalletTwResponse {
+    @Field()
+    address: string;
+
+    @Field({ nullable: true })
+    label?: string;
+
+    @Field()
+    createdAt: string;
+
+    @Field({ nullable: true })
+    smartAccountAddress?: string;
+}
+
+
+
+
+@ObjectType()
 export class WalletCryptoResponse {
     @Field({ nullable: false })
     id: number;
@@ -41,6 +59,9 @@ export class Wallet_CreateInput {
 
     @Field()
     answer: string;
+
+    @Field()
+    email: string;
 
     @Field()
     pin: string;

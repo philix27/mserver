@@ -25,4 +25,5 @@ export interface Config {
     readonly SELF_APP_SCOPE: string;
     readonly SELF_API_ENDPOINT: string;
     readonly RESEND_API_KEY: string;
+    readonly THIRDWEB_SECRET_KEY: string;
 }

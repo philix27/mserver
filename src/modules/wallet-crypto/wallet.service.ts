@@ -7,6 +7,7 @@ import { Wallet_CreateInput, Wallet_CreateResponse, WalletCryptoResponse } from 
 import { IWallet, FirestoreWalletService } from '../firebase/fbWallet.service';
 import { CryptoService } from "../helper/crypto.service";
 import { WalletGeneratorService } from './walletGenerator.service';
+import { Para, } from "./para/createWallet";
 
 @Injectable()
 export class WalletCryptoService {
@@ -51,6 +52,33 @@ export class WalletCryptoService {
             }
 
             const result = await this.firestoreService.createWallet(params.user_uid, payload);
+
+            return { message: "Wallet created successfully" }
+        } catch (error) {
+            throw GqlErr("Could not create wallet for user: " + error);
+        }
+    }
+
+    async createParaWallet(params: Wallet_CreateInput & { userId: number }): Promise<Wallet_CreateResponse> {
+        const SALT_ITERATIONS = 12
+        try {
+            this.logger.info("Creating wallet for mobile app");
+            const wallet = await Para.createWallet(params.email);
+
+            if (!wallet.success) {
+                throw new Error(wallet.message)
+            }
+
+            const pin_hash = await this.crypto.hash(params.pin, SALT_ITERATIONS);
+
+            await this.firestoreService.createParaWallet(params.user_uid, {
+                encryptedKeyShare: wallet.encryptedKeyShare!,
+                pin_hash,
+                answer_hash: await this.crypto.hash(params.answer, SALT_ITERATIONS),
+                address: wallet.wallets ? wallet.wallets[0].address : "",
+                secret_question: params.question,
+                salt_iterations: SALT_ITERATIONS,
+            });
 
             return { message: "Wallet created successfully" }
         } catch (error) {
@@ -166,5 +194,20 @@ export class WalletCryptoService {
         const privateKey = this.walletGen.decrypt(doc.ecrypted_private_key, doc.ivBase64, params.pin);
 
         return privateKey;
+    }
+
+    public async getParaWallet(params: {
+        user_uid: string;
+    }): Promise<string> {
+        this.logger.info("Retrieve user wallet ...");
+        // const res = await Para.getWallet(params.email)
+
+        // if (!res.success || !res.wallets || res.wallets.length === 0) {
+        //     throw new Error("No pre-generated wallet found for this email")
+        // }
+
+        const doc = await this.firestoreService.getUserWallet(params.user_uid);
+
+        return doc.address;
     }
 }

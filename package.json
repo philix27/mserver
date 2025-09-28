@@ -39,11 +39,15 @@
     "start:migrate:prod": "prisma migrate deploy && npm run start:prod"
   },
   "dependencies": {
+    "@aa-sdk/core": "^4.65.0",
     "@apollo/gateway": "^2.10.2",
     "@apollo/server": "^4.11.3",
     "@as-integrations/fastify": "^2.1.1",
     "@fastify/helmet": "^11.1.1",
     "@fastify/static": "^6.12.0",
+    "@getpara/ethers-v6-integration": "^1.18.1",
+    "@getpara/server-sdk": "^1.18.1",
+    "@getpara/viem-v2-integration": "^1.18.1",
     "@nestjs/apollo": "^13.0.3",
     "@nestjs/common": "^10.3.0",
     "@nestjs/config": "^4.0.0",
@@ -88,8 +92,9 @@
     "reflect-metadata": "^0.1.12",
     "resend": "^4.8.0",
     "rxjs": "^7.8.1",
+    "thirdweb": "^5.108.1",
     "ts-morph": "^25.0.1",
-    "viem": "^2.23.11",
+    "viem": "^2.37.8",
     "winston": "^3.11.0",
     "ws": "^8.18.1"
   },

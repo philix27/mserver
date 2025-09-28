@@ -1,9 +1,10 @@
-import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql";
+ import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { WalletCryptoService } from "./wallet.service";
-import { Wallet_CreateInput, Wallet_CreateResponse, WalletCryptoResponse } from "./wallet.dto";
+import { Wallet_CreateInput, Wallet_CreateResponse, WalletCryptoResponse, WalletTwResponse } from "./wallet.dto";
 import { UseGuards } from "@nestjs/common";
 import { GqlAuthGuard } from "../common/guards";
 import { WalletGeneratorService } from "./walletGenerator.service";
+import { createWalletThirdweb } from "./thirdweb";
 
 
 @Resolver((of: any) => WalletCryptoResponse)
@@ -44,6 +45,17 @@ export class WalletCryptoResolver {
                 id: val.id,
             };
         });
+    }
+
+    @Mutation((returns) => WalletTwResponse)
+    // @UseGuards(GqlAuthGuard)
+    async walletCrypto_createThirdweb(
+        @Context() context: { req: { userId: string } }
+    ): Promise<WalletTwResponse> {
+        // const user = context.req;
+        const res = await createWalletThirdweb()
+
+        return res
     }
 
     // @Mutation((returns) => [WalletCryptoResponse])

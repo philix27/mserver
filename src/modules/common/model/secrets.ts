@@ -21,4 +21,5 @@ export const secrets: Record<keyof Config, string> = {
     SELF_APP_SCOPE: process.env.SELF_APP_SCOPE!,
     SELF_API_ENDPOINT: process.env.SELF_API_ENDPOINT!,
     RESEND_API_KEY: process.env.RESEND_API_KEY!,
+    THIRDWEB_SECRET_KEY: process.env.THIRDWEB_SECRET_KEY!,
 };
