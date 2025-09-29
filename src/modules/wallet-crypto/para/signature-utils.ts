@@ -1,8 +1,8 @@
 import { SuccessfulSignatureRes } from "@getpara/server-sdk";
 import type { Para } from "@getpara/server-sdk";
-import { hashMessage } from "viem";
+// import { hashMessage } from "viem";
 import type { AuthorizationRequest, SignAuthorizationReturnType, Hash, SignableMessage } from "viem";
-import { hashAuthorization } from "viem/utils";
+import { hashAuthorization, hashMessage } from "viem/utils";
 
 const SIGNATURE_LENGTH = 130;
 const V_OFFSET_FOR_ETHEREUM = 27;

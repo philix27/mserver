@@ -1,6 +1,6 @@
 import { Para as ParaServer, Wallet, WalletType } from "@getpara/server-sdk";
-import { encrypt } from "./utils/encryption-utils.js";
-import { PARA_API_KEY, PARA_ENVIRONMENT, setKeyShareInDB } from "./const.js";
+import { encrypt } from "./encryption-utils";
+import { PARA_API_KEY, PARA_ENVIRONMENT, } from "./const";
 
 
 async function getWallet(email: string) {

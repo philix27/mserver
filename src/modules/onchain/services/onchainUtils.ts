@@ -1,10 +1,12 @@
 import { ethers, } from "ethers";
-import { base, celo } from "viem/chains";
-import { Injectable, } from "@nestjs/common";
 import { baseContracts, celoContracts } from "../utils/const";
 
 export enum SupportedChains { celo, base }
-
+export const ChainRpc = {
+    celo: "https://forno.celo.org",
+    base: "https://mainnet.base.org"
+    // base: "https://base-mainnet.public.blastapi.io"
+}
 // @Injectable()
 export class OnchainUtilsService {
 
@@ -17,13 +19,13 @@ export class OnchainUtilsService {
     private getProvider() {
         switch (this.chain) {
             case SupportedChains.celo: {
-                return new ethers.JsonRpcProvider(celo.rpcUrls.default.http[0]);
+                return new ethers.JsonRpcProvider(ChainRpc.celo);
             }
             case SupportedChains.base: {
-                return new ethers.JsonRpcProvider(base.rpcUrls.default.http[0]);
+                return new ethers.JsonRpcProvider(ChainRpc.base);
             }
             default:
-                return new ethers.JsonRpcProvider(celo.rpcUrls.default.http[0]);
+                return new ethers.JsonRpcProvider(ChainRpc.celo);
         }
     }
 

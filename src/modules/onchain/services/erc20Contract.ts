@@ -1,14 +1,13 @@
 import { ethers, parseEther } from "ethers";
-import { Address, erc20Abi } from "viem";
-import { Injectable, } from "@nestjs/common";
+import { ERC20_ABI } from "../abi/erc20Abi";
 
-
+type Address = `0x${string}`
 // @Injectable()
 export class Erc20Service {
     contract: ethers.Contract = undefined
 
     constructor(private readonly wallet: ethers.Wallet, private readonly contractAddress: Address) {
-        this.contract = new ethers.Contract(this.contractAddress, erc20Abi, this.wallet);
+        this.contract = new ethers.Contract(this.contractAddress, ERC20_ABI, this.wallet);
     }
 
     async approve(amount: bigint, contractToApprove: Address): Promise<string> {

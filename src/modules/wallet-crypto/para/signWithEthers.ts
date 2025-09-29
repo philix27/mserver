@@ -1,8 +1,8 @@
 import { Para as ParaServer, } from "@getpara/server-sdk";
 import { ParaEthersSigner } from "@getpara/ethers-v6-integration";
 import { ethers } from "ethers";
-import { decrypt } from "./utils/encryption-utils.js";
-import { getKeyShareInDB, PARA_API_KEY, PARA_ENVIRONMENT } from "./const.js";
+import { decrypt } from "./encryption-utils"
+import { PARA_API_KEY, PARA_ENVIRONMENT } from "./const";
 
 export async function ethersPregenSigner(email: string, keyShare: string) {
 
@@ -26,10 +26,8 @@ export async function ethersPregenSigner(email: string, keyShare: string) {
   return { signer: paraEthersSigner, provider: ethersProvider }
 }
 
-export async function signHandler(email: string) {
-
+export async function signHandler(email: string, keyShare: string) {
   try {
-    const keyShare = await getKeyShareInDB(email);
     const { signer, provider } = await ethersPregenSigner(email, keyShare);
 
     const address = await signer.getAddress();

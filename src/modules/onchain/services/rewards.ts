@@ -1,10 +1,9 @@
 import { ethers, parseEther, } from "ethers";
-import { Address } from "viem";
 import { Injectable, } from "@nestjs/common";
 import { OnchainUtilsService, SupportedChains } from "./onchainUtils";
 import { rewardAbi } from "../abi/rewards";
 import { Erc20Service } from "./erc20Contract";
-
+type Address = `0x${string}`
 
 @Injectable()
 export class RewardsService {

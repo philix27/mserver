@@ -18,8 +18,6 @@ export class WalletCryptoService {
         private readonly crypto: CryptoService,
         private readonly walletGen: WalletGeneratorService,
         private readonly firestoreService: FirestoreWalletService,
-
-
     ) { }
 
 
