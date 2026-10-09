@@ -17,7 +17,7 @@ services:
       - 8080:${PORT}
 
   postgresDb:
-    image: docker.io/bitnami/postgresql:16
+    image: docker.io/soldevelo/postgresql:16
     ports:
       - "5432:5438"
     volumes:
